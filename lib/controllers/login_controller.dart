@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +23,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   String _dialCode;
   String phoneFieldError;
   String passwordFieldError;
+  bool obscureText = true;
 
   bool _rememberLogin = false;
 
@@ -33,6 +32,8 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   String get dialCode => _dialCode;
 
   bool get isRememberLogin => _rememberLogin;
+
+  bool get isObscureText => obscureText;
 
   @override
   void onInit() async {
@@ -51,7 +52,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     }
 
     update();
-    getPhoneNumber();
+    // getPhoneNumber();
     super.onInit();
   }
 
@@ -74,6 +75,11 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     update();
   }
 
+  void togglePassword() {
+    obscureText = !obscureText;
+    update();
+  }
+
   void getPhoneNumber() async {
     final SmsAutoFill _autoFill = SmsAutoFill();
     final completePhoneNumber = await _autoFill.hint;
@@ -87,82 +93,6 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   }
 
   void login() async {
-    // Loader().showLoading();
-    // Timer(Duration(seconds: 1), () {
-    //   Loader().hideLoading();
-    //   //Get.offAndToNamed(AppRouter.home);
-    //   //Get.toNamed(AppRouter.bottomNavigationScreen);
-    // });
-
-    // final response = await http.post(
-    //   'https://quality.libu.app/api/auth/login',
-    //   headers: <String, String>{
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //   },
-    //   body: jsonEncode(<String, String>{"phone": "+8974409367307", "password": "password"}),
-    // );
-    // print(response.statusCode);
-    //
-    // final response = await http.post(
-    //   'https://quality.libu.app/api/auth/login',
-    //   headers: <String, String>{
-    //     // 'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //   },
-    //   body: {"phone": "+8974409367307", "password": "password"},
-    // );
-    // print('${response.body} Printiititnitiejnitnnre');
-
-    // dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-    //   var customHeaders = {
-    //     'Accept': 'application/json'
-    //     // other headers
-    //   };
-    //   options.headers.addAll(customHeaders);
-    //   return options;
-    // }));
-    // try {
-    //   final response = await dio.post("https://quality.libu.app/api/auth/login", data: {"phone": "+8974409367307", "password": "password"});
-    //
-    //   // var response = await dio.get("https://quality.libu.app/api/auth/login");
-    //   print(response.data.toString());
-    // } on DioError catch (e) {
-    //   print('*******');
-    //   // The request was made and the server responded with a status code
-    //   // that falls out of the range of 2xx and is also not 304.
-    //   if (e.response != null) {
-    //     print(e.response.data);
-    //     // print(e.response.headers);
-    //     // print(e.response.request);
-    //   } else {
-    //     // Something happened in setting up or sending the request that triggered an Error
-    //     print(e.request.data);
-    //     print(e.message);
-    //   }
-    // }
-
-    // try {
-    //   //404
-    //   dio.options.headers['content-Type'] = 'application/json';
-    //
-    //   final response = await dio.post("https://quality.libu.app/api/auth/login", data: {"phone": "+8974409367307", "password": "password"});
-    //
-    //   print(response);
-    // } on DioError catch (e) {
-    //   print('*******');
-    //   // The request was made and the server responded with a status code
-    //   // that falls out of the range of 2xx and is also not 304.
-    //   if (e.response != null) {
-    //     // print(e.response.data);
-    //     print(e.response.headers);
-    //     // print(e.response.request);
-    //   } else {
-    //     // Something happened in setting up or sending the request that triggered an Error
-    //     print(e.request.data);
-    //     print(e.message);
-    //   }
-    // }
-
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -191,17 +121,12 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
             Get.offAndToNamed(AppRouter.home);
           } else if (res.StatusCode == 422) {
             final data = res.Data;
-            print("d");
-            print(data['errors']);
+
             final errors = data['errors'];
             phoneFieldError = errors['phone'] != null ? errors['phone'][0] : '';
             passwordFieldError = errors['password'] != null ? errors['password'][0] : '';
 
             update();
-            // setState(() {
-            //   list.clear();
-            //   isLoading = false;
-            // });
           }
         }, onError: (e) {
           Loader().hideLoading();
@@ -221,42 +146,6 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
       //   list.clear();
       //   isLoading = false;
       // });
-    }
-  }
-
-  getData() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        List formData = [];
-        // setState(() {
-        //   isLoading = true;
-        // });
-        Apis.postApi("GetOffice", formData).then((data) async {
-          if (data.IsSuccess == true && data.Data.length > 0) {
-            // setState(() {
-            //   list = data.Data;
-            //   isLoading = false;
-            // });
-          } else {
-            // setState(() {
-            //   list.clear();
-            //   isLoading = false;
-            // });
-          }
-        }, onError: (e) {
-          // setState(() {
-          //   list.clear();
-          //   isLoading = false;
-          //});
-        });
-      }
-    } on SocketException catch (_) {
-      // setState(() {
-      //   list.clear();
-      //   isLoading = false;
-      // });
-      //showMsg("अपने इंटरनेट की जाँच करें या कुछ समय बाद फिर से कोशिश करें !");
     }
   }
 }

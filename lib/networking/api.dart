@@ -119,15 +119,14 @@ class Apis {
         dio.options.headers['Accept'] = 'application/json';
         // dio.options.headers['Content-Type'] = 'application/json';
 
-        print("authToken &&&*** **----");
+        print("authToken----");
         print(authToken);
 
         final response = await dio.post(url, data: body);
 
-        if (response.statusCode == 200) {
+        if (response.statusCode == 200 || response.statusCode == 201) {
           //get response
           var responseData = response.data;
-          // print("$apiName Response: " + response.data.toString());
           //set data to class
 
           apiData.Message = responseData["Message"];
@@ -137,15 +136,17 @@ class Apis {
 
           return apiData;
         } else {
+          var responseData = response.data;
           apiData.Message = "No Internet Access";
           apiData.IsSuccess = false;
-          apiData.Data = 0;
+          apiData.Data = responseData;
           apiData.StatusCode = response.statusCode;
           return apiData;
         }
       } catch (e) {
+        print(e.response.toString());
         if (e.response != null) {
-          // print(e.response.data.toString());
+          print(e.response.data.toString());
           // print(e.response.headers);
           //print(e.response.request);
         } else {

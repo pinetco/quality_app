@@ -58,7 +58,7 @@ class CustomButton extends StatelessWidget {
                     ),
                   Text(
                     title,
-                    style: style ?? h4.copyWith(color: whiteColor),
+                    style: style ?? h3.copyWith(color: whiteColor),
                     textAlign: TextAlign.center,
                   ),
                 ],

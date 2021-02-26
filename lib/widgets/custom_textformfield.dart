@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final String labelText;
   final double radius;
   final Widget prefixIcon;
+  final Widget suffixIcon;
   final TextStyle style;
   final bool obscureText;
   final FormFieldValidator<String> validator;
@@ -35,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.enabled = true,
     this.maxLines = 1,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -47,6 +49,12 @@ class CustomTextFormField extends StatelessWidget {
             ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
                 child: prefixIcon,
+              )
+            : null,
+        suffixIcon: suffixIcon != null
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                child: suffixIcon,
               )
             : null,
 

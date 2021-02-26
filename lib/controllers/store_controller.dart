@@ -8,6 +8,8 @@ import 'package:sms_autofill/sms_autofill.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/networking/api_methods.dart';
 
+import 'common/loader_controller.dart';
+
 class StoreController extends GetxController with SingleGetTickerProviderMixin {
   TabController tabController;
   var formKey = GlobalKey<FormState>();
@@ -24,7 +26,11 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
   bool get isLoading => _isLoading.value;
   String get isoCode => _isoCode;
 
-  List itemList = [].obs;
+  // RxList<dynamic> _itemList = [].obs;
+  //
+  // List<dynamic> get items => _itemList.value;
+
+  List itemList = [];
 
   @override
   void onInit() {
@@ -32,7 +38,6 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
     tabController = new TabController(vsync: this, length: 2, initialIndex: 0);
     _loginOption = 'mobile';
     update();
-    print('GET DATA');
     getData();
     super.onInit();
   }
@@ -49,37 +54,21 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Loader().showLoading();
         Apis.getApi(employeesAPI, []).then((res) async {
-          print(res);
+          Loader().hideLoading();
           if (res.StatusCode == 200) {
             final data = res.Data['data'];
-            print(data);
             itemList = data;
-            print(itemList);
 
-            // setState(() {
-            //   list = data.Data;
-            //   isLoading = false;
-            // });
-          } else {
-            // setState(() {
-            //   list.clear();
-            //   isLoading = false;
-            // });
-          }
+            update();
+          } else {}
         }, onError: (e) {
-          // setState(() {
-          //   list.clear();
-          //   isLoading = false;
-          //});
+          print('e');
         });
       }
     } on SocketException catch (_) {
-      // setState(() {
-      //   list.clear();
-      //   isLoading = false;
-      // });
-      //showMsg("अपने इंटरनेट की जाँच करें या कुछ समय बाद फिर से कोशिश करें !");
+      print('Socket');
     }
   }
 

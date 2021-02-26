@@ -30,16 +30,16 @@ class PhoneNumberWithCountry extends StatelessWidget {
           selectorType: PhoneInputSelectorType.DIALOG,
         ),
         inputBorder: OutlineInputBorder(borderSide: BorderSide.none),
-        locale: 'de',
+        locale: 'en',
         ignoreBlank: true,
         autoValidateMode: AutovalidateMode.disabled,
         selectorTextStyle: TextStyle(color: Colors.black),
-        initialValue: PhoneNumber(isoCode: isoCode ?? 'DE'), //PhoneNumber(isoCode: Platform.localeName.split('_').last)
+        initialValue: PhoneNumber(isoCode: isoCode ?? 'en'), //PhoneNumber(isoCode: Platform.localeName.split('_').last)
         textFieldController: txtMobile,
         formatInput: false,
         // keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
         spaceBetweenSelectorAndTextField: 0.01,
-        textStyle: h4,
+        textStyle: h3,
         // inputBorder: OutlineInputBorder(),
         onSaved: (PhoneNumber number) {
           print('On Saved: $number');

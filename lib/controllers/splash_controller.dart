@@ -2,8 +2,7 @@ import 'package:get/get.dart';
 import 'package:quality_app/packages/config_package.dart';
 
 class SplashController extends GetxController {
-  final box = GetStorage();
-  bool get isDark => box.read('darkmode') ?? false;
+  final storage = GetStorage();
 
   @override
   void onInit() async {
@@ -17,18 +16,16 @@ class SplashController extends GetxController {
 
     // changeTheme(true);
 
-    print(box.read('darkmode'));
-    if (box.read('authToken') != null) {
+    // print(box.read('darkmode'));
+    if (storage.read('authToken') != null) {
       Get.offAndToNamed(AppRouter.home);
-      //checkLogin();
+
       // Get.offAndToNamed(AppRouter.bottomNavigationScreen);
     } else {
       checkLogin();
     }
     super.onInit();
   }
-
-  void changeTheme(bool val) => box.write('darkmode', val);
 
   void checkLogin() {
     Get.offAndToNamed(AppRouter.login);

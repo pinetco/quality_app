@@ -11,7 +11,7 @@ class Login extends StatelessWidget {
   Widget emailMobileWidget(String loginOption) {
     dynamic errorPhoneValidation = loginController.phoneFieldError ?? '';
     dynamic errorPasswordValidation = loginController.passwordFieldError ?? '';
-
+    print(loginController.isObscureText);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -51,8 +51,14 @@ class Login extends StatelessWidget {
             container: loginController.txtPassword,
             hintText: "Password",
             prefixIcon: Icon(MdiIcons.lock),
-            obscureText: true,
-            style: h4.merge(ls1),
+            suffixIcon: IconButton(
+              icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff),
+              onPressed: () {
+                loginController.togglePassword();
+              },
+            ),
+            obscureText: loginController.isObscureText,
+            style: h3.merge(ls1),
             keyboardType: TextInputType.text,
             padding: 20,
             validator: (val) {
@@ -95,14 +101,14 @@ class Login extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Quality App',
-                              style: h1.copyWith(fontSize: screenWidth(28)),
+                            Image.asset(
+                              appLogoGIF,
+                              width: screenWidth(100),
                             ),
                             SizedBox(height: screenHeight(10)),
                             Text(
-                              'Health Sector Quality checker',
-                              style: h4,
+                              'Health Sector Quality Control',
+                              style: h2,
                             ),
                             SizedBox(height: screenHeight(100)),
                             Form(
@@ -162,23 +168,23 @@ class Login extends StatelessWidget {
                                                     color: textPrimaryColor),
                                                 Text(
                                                   'Remember Login',
-                                                  style: h5.copyWith(color: textPrimaryColor),
+                                                  style: h4.copyWith(color: textPrimaryColor),
                                                 ),
                                               ],
                                             ),
                                             onTap: () {
                                               loginController.updateRememberLogin();
                                             }),
-                                        InkWell(
-                                          child: Text(
-                                            'Forgot Password?',
-                                            style: h5.copyWith(color: textPrimaryColor),
-                                          ),
-                                          onTap: () {
-                                            Get.toNamed(AppRouter.forgotPassword);
-                                            // Navigator.pushNamed(context, AppRouter.forgotPassword);
-                                          },
-                                        ),
+                                        // InkWell(
+                                        //   child: Text(
+                                        //     'Forgot Password?',
+                                        //     style: h5.copyWith(color: textPrimaryColor),
+                                        //   ),
+                                        //   onTap: () {
+                                        //     Get.toNamed(AppRouter.forgotPassword);
+                                        //     // Navigator.pushNamed(context, AppRouter.forgotPassword);
+                                        //   },
+                                        // ),
                                       ],
                                     ),
                                   ),

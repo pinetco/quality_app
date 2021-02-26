@@ -32,13 +32,6 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
     super.dispose();
   }
 
-  void _handleOnPressed() {
-    setState(() {
-      isPlaying = !isPlaying;
-      isPlaying ? _animationController.forward() : _animationController.reverse();
-    });
-  }
-
   List itemList = [
     {'title': 'Dr. Albert Cooper', 'image': user1, 'designation': 'Royal Londion Hospital', 'rating_image': badEmoji, 'rating_count': 10, 'star_rating': 1.5},
     {'title': 'Fabrizio', 'image': user1, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 14, 'star_rating': 1.5},
@@ -63,6 +56,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         //backgroundColor: Colors.transparent,
         //elevation: 0,
@@ -70,9 +64,10 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
         // automaticallyImplyLeading: false,
       ),
       body: LoadingComponent(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(screenWidth(20)),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: screenWidth(20)),
             child: Column(
               children: [
                 Padding(
@@ -113,31 +108,33 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Dr. Albert Cooper',
-                              style: h3.copyWith(color: textPrimaryColor),
+                              reviewSubmissionCtrl.name.toString(),
+                              style: h2.copyWith(color: textPrimaryColor),
                             ),
                             SizedBox(height: screenWidth(5)),
-                            Text('Royal London Hospital', style: h5.copyWith(color: darkGreyColor)),
+                            Text(reviewSubmissionCtrl.phone.toString(), style: h4.copyWith(color: darkGreyColor)),
                             SizedBox(height: screenWidth(5)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  veryGoodEmoji,
-                                  height: screenWidth(20),
-                                ),
-                                SizedBox(width: screenWidth(5)),
-                                Text(
-                                  '(5)',
-                                  style: bodyStyle5.copyWith(color: darkGreyColor),
-                                ),
-                                SizedBox(width: screenWidth(5)),
-                                Text(
-                                  '89 ratings',
-                                  style: bodyStyle5.copyWith(color: darkGreyColor),
-                                ),
-                              ],
-                            )
+                            Text(reviewSubmissionCtrl.email.toString(), style: h4.copyWith(color: darkGreyColor)),
+                            SizedBox(height: screenWidth(5)),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.start,
+                            //   children: [
+                            //     Image.asset(
+                            //       veryGoodEmoji,
+                            //       height: screenWidth(20),
+                            //     ),
+                            //     SizedBox(width: screenWidth(5)),
+                            //     Text(
+                            //       '(5)',
+                            //       style: bodyStyle5.copyWith(color: darkGreyColor),
+                            //     ),
+                            //     SizedBox(width: screenWidth(5)),
+                            //     Text(
+                            //       '89 ratings',
+                            //       style: bodyStyle5.copyWith(color: darkGreyColor),
+                            //     ),
+                            //   ],
+                            // )
                           ],
                         ),
                       ],
@@ -160,7 +157,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     hintText: "Select Date Time",
                     prefixIcon: Icon(MdiIcons.calendar),
                     obscureText: false,
-                    style: h4.merge(ls1),
+                    style: h3.merge(ls1),
                     keyboardType: TextInputType.text,
                     padding: 20,
                     validator: (val) {
@@ -177,7 +174,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     child: RichText(
                       text: TextSpan(
                         text: 'Give a rating :- ',
-                        style: h4.copyWith(color: Colors.black54),
+                        style: h3.copyWith(color: Colors.black54),
                         children: <TextSpan>[
                           TextSpan(text: reviewSubmissionCtrl.isRatingText, style: TextStyle(color: primaryColor)),
                         ],
@@ -286,7 +283,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Comment',
-                    style: h4.copyWith(color: Colors.black54),
+                    style: h3.copyWith(color: Colors.black54),
                   ),
                 ),
                 SizedBox(height: screenHeight(10)),
@@ -296,7 +293,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   hintText: "Write comment here...",
                   // prefixIcon: Icon(MdiIcons.commentOutline),
                   obscureText: false,
-                  style: h4.merge(ls1),
+                  style: h3.merge(ls1),
                   keyboardType: TextInputType.multiline,
                   padding: screenWidth(20),
                   validator: (val) {
@@ -311,7 +308,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Wish',
-                    style: h4.copyWith(color: Colors.black54),
+                    style: h3.copyWith(color: Colors.black54),
                   ),
                 ),
                 SizedBox(height: screenHeight(10)),
@@ -321,7 +318,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   hintText: "Write wish here...",
                   // prefixIcon: Icon(MdiIcons.commentOutline),
                   obscureText: false,
-                  style: h4.merge(ls1),
+                  style: h3.merge(ls1),
                   keyboardType: TextInputType.multiline,
                   padding: screenWidth(20),
                   validator: (val) {
@@ -331,23 +328,30 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                       return null;
                   },
                 ),
+                SizedBox(height: screenWidth(30)),
+                CustomButton(
+                  title: 'Save',
+                  onTap: () {
+                    reviewSubmissionCtrl.saveReview();
+                  },
+                ),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        maintainBottomViewPadding: true,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
-          child: CustomButton(
-            title: 'Save',
-            onTap: () {
-              reviewSubmissionCtrl.saveReview();
-            },
-          ),
-        ),
-      ),
+      // bottomNavigationBar: SafeArea(
+      //   maintainBottomViewPadding: true,
+      //   child: Padding(
+      //     padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+      //     child: CustomButton(
+      //       title: 'Save',
+      //       onTap: () {
+      //         reviewSubmissionCtrl.saveReview();
+      //       },
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
