@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:ui' as ui;
-
 import 'package:quality_app/controllers/login_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/packages/input_package.dart';
@@ -12,6 +9,9 @@ class Login extends StatelessWidget {
   var loginController = Get.put(LoginController());
 
   Widget emailMobileWidget(String loginOption) {
+    dynamic errorPhoneValidation = loginController.phoneFieldError ?? '';
+    dynamic errorPasswordValidation = loginController.passwordFieldError ?? '';
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -33,16 +33,19 @@ class Login extends StatelessWidget {
           //   ),
           if (loginOption == "mobile")
             PhoneNumberWithCountry(
-                onInputChanged: (val) async {
-                  print(val.phoneNumber);
-                  print(val.dialCode);
-                  print(val.isoCode);
+              onInputChanged: (val) async {
+                print(val.phoneNumber);
+                print(val.dialCode);
+                print(val.isoCode);
 
-                  print(loginController.txtMobile.text); // Text input value;
-                  loginController.updateIsoCode(val.isoCode);
-                },
-                txtMobile: loginController.txtMobile,
-                isoCode: loginController.isoCode),
+                print(loginController.txtMobile.text); // Text input value;
+                loginController.updateIsoCode(val.isoCode, val.dialCode);
+              },
+              txtMobile: loginController.txtMobile,
+              isoCode: loginController.isoCode,
+            ),
+          if (errorPhoneValidation != '') validationWidget(errorValidation: errorPhoneValidation),
+
           SizedBox(height: screenHeight(15)),
           CustomTextFormField(
             container: loginController.txtPassword,
@@ -59,6 +62,8 @@ class Login extends StatelessWidget {
                 return null;
             },
           ),
+          if (errorPasswordValidation != '') validationWidget(errorValidation: errorPasswordValidation),
+
           SizedBox(height: screenHeight(5)),
         ],
       ),
@@ -130,22 +135,19 @@ class Login extends StatelessWidget {
                                   //     ],
                                   //   ),
                                   // ),
-                                  SizedBox(
-                                    height: screenHeight(160),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: screenWidth(8.0)),
-                                      child: emailMobileWidget('mobile'),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: screenWidth(8.0)),
+                                    child: emailMobileWidget('mobile'),
 
-                                      // TabBarView(controller: loginController.tabController,
-                                      //     // Restrict scroll by user
-                                      //     // physics: const NeverScrollableScrollPhysics(),
-                                      //     children: [
-                                      //       // Sign In View
-                                      //       emailMobileWidget('mobile'),
-                                      //       // Sign Up View
-                                      //       emailMobileWidget('email'),
-                                      //     ]),
-                                    ),
+                                    // TabBarView(controller: loginController.tabController,
+                                    //     // Restrict scroll by user
+                                    //     // physics: const NeverScrollableScrollPhysics(),
+                                    //     children: [
+                                    //       // Sign In View
+                                    //       emailMobileWidget('mobile'),
+                                    //       // Sign Up View
+                                    //       emailMobileWidget('email'),
+                                    //     ]),
                                   ),
                                   Container(
                                     padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
@@ -206,5 +208,27 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class validationWidget extends StatelessWidget {
+  const validationWidget({
+    Key key,
+    @required this.errorValidation,
+  }) : super(key: key);
+
+  final String errorValidation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.only(top: screenWidth(8)),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            errorValidation,
+            style: validationTextStyle,
+          ),
+        ));
   }
 }

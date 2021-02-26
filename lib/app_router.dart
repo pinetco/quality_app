@@ -20,11 +20,13 @@ class AppRouter {
   static const bottomNavigationScreen = '/bottomNavigationScreen';
   static const cart = '/cart';
   static const contractDetails = '/contractDetails';
+  static const reviewSubmission = '/reviewSubmission';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
     GetPage(name: forgotPassword, page: () => ForgotPassword()),
     GetPage(name: home, page: () => Home()),
+    GetPage(name: reviewSubmission, page: () => ReviewSubmission()),
     GetPage(name: discount, page: () => Discount()),
     GetPage(name: settings, page: () => Settings()),
     GetPage(name: stylingScreen, page: () => StylingScreen()),

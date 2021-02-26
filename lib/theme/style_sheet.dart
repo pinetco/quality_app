@@ -83,6 +83,10 @@ TextStyle textLetterSpacing(double size) {
   );
 }
 
+TextStyle validationStyle(double size) {
+  return TextStyle(fontSize: fontSize(size), color: Colors.red, fontWeight: FontWeight.w500);
+}
+
 //Text Style
 
 TextStyle header = textHeader();
@@ -121,3 +125,7 @@ TextStyle ls3 = textLetterSpacing(3);
 TextStyle ls4 = textLetterSpacing(4);
 
 TextStyle ls5 = textLetterSpacing(5);
+
+//Validation
+
+TextStyle validationTextStyle = validationStyle(14);

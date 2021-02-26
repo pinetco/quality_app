@@ -16,6 +16,8 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final double padding;
   final Color fillColor;
+  final bool enabled;
+  final int maxLines;
 
   const CustomTextFormField({
     Key key,
@@ -31,12 +33,15 @@ class CustomTextFormField extends StatelessWidget {
     this.padding = 10,
     this.fillColor,
     this.keyboardType,
+    this.enabled = true,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: container,
+      textAlignVertical: TextAlignVertical.top,
       decoration: InputDecoration(
         prefixIcon: prefixIcon != null
             ? Padding(
@@ -44,6 +49,7 @@ class CustomTextFormField extends StatelessWidget {
                 child: prefixIcon,
               )
             : null,
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius(radius)),
           borderSide: BorderSide(width: 0, style: BorderStyle.none),
@@ -58,7 +64,9 @@ class CustomTextFormField extends StatelessWidget {
       style: style,
       obscureText: obscureText,
       validator: validator,
+      enabled: enabled,
       keyboardType: keyboardType,
+      maxLines: maxLines,
     );
   }
 }

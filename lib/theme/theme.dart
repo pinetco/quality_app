@@ -10,8 +10,8 @@ class AppTheme {
     scaffoldBackgroundColor: bgColor,
     primaryColor: primaryColor,
     canvasColor: bgColor,
-    appBarTheme: AppBarTheme(color: primaryColor, iconTheme: IconThemeData(color: primaryColor.withOpacity(0.8))),
-    iconTheme: IconThemeData(color: primaryColor.withOpacity(0.4)),
+    appBarTheme: AppBarTheme(color: primaryColor, iconTheme: IconThemeData(color: Colors.white)),
+    iconTheme: IconThemeData(color: Colors.white),
     cardColor: Colors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.red,

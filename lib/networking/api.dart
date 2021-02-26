@@ -1,9 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/models/api_data_class.dart';
 import '../packages/config_package.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 Dio dio = new Dio();
 final storage = GetStorage();
@@ -45,29 +47,32 @@ class Apis {
       print("$apiName URL: " + url);
 
       try {
-        // box.write('darkmode', false);
         String authToken = storage.read(Session.authToken);
-        // SharedPreferences pref = await SharedPreferences.getInstance();
-        // String authToken = pref.getString(Session.authToken);
+        print(authToken);
 
-        if (authToken == null || authToken == "") authToken = loginToken;
+        // if (authToken == null || authToken == "") authToken = loginToken;
 
         dio.options.headers["Authorization"] = "Bearer $authToken";
+        dio.options.headers['Accept'] = 'application/json';
+        // dio.options.headers['Content-Type'] = 'application/json';
         final response = await dio.get(url);
+
         if (response.statusCode == 200) {
           //get response
           var responseData = response.data;
           print("$apiName Response: " + response.data.toString());
-
+          print(responseData.toString());
           //set data to class
           apiData.Message = responseData["Message"];
           apiData.IsSuccess = responseData["IsSuccess"];
-          apiData.Data = responseData["Data"];
+          apiData.Data = responseData;
+          apiData.StatusCode = response.statusCode;
           return apiData;
         } else {
           apiData.Message = "No Internet Access";
           apiData.IsSuccess = false;
           apiData.Data = 0;
+          apiData.StatusCode = response.statusCode;
           return apiData;
         }
       } catch (e) {
@@ -75,6 +80,7 @@ class Apis {
         if (e.toString().contains("hostname")) message = "Server Error";
         apiData.Message = message;
         apiData.IsSuccess = false;
+        apiData.StatusCode = 0;
         apiData.Data = 0;
 
         return apiData;
@@ -91,6 +97,7 @@ class Apis {
     );
     //Check For Internet
     var connectivityResult = await (Connectivity().checkConnectivity());
+    print('$connectivityResult *********');
     if (connectivityResult == ConnectivityResult.none) {
       apiData.Message = "No Internet Access";
       apiData.IsSuccess = false;
@@ -102,38 +109,57 @@ class Apis {
 
       try {
         // SharedPreferences pref = await SharedPreferences.getInstance();
-        // String authToken = pref.getString(Session.authToken);
+        //String authToken = pref.getString(Session.authToken);
         String authToken = storage.read(Session.authToken);
 
-        if (authToken == null || authToken == "") authToken = loginToken;
-
-        print("authToken");
-        print(authToken);
+        // if (authToken == null || authToken == "") authToken = loginToken;
 
         dio.options.headers["Authorization"] = "Bearer $authToken";
+
+        dio.options.headers['Accept'] = 'application/json';
+        // dio.options.headers['Content-Type'] = 'application/json';
+
+        print("authToken &&&*** **----");
+        print(authToken);
+
         final response = await dio.post(url, data: body);
+
         if (response.statusCode == 200) {
           //get response
           var responseData = response.data;
-          print("$apiName Response: " + response.data.toString());
-
+          // print("$apiName Response: " + response.data.toString());
           //set data to class
+
           apiData.Message = responseData["Message"];
           apiData.IsSuccess = responseData["IsSuccess"];
-          apiData.Data = responseData["Data"];
+          apiData.Data = responseData;
+          apiData.StatusCode = response.statusCode;
+
           return apiData;
         } else {
           apiData.Message = "No Internet Access";
           apiData.IsSuccess = false;
           apiData.Data = 0;
+          apiData.StatusCode = response.statusCode;
           return apiData;
         }
       } catch (e) {
+        if (e.response != null) {
+          // print(e.response.data.toString());
+          // print(e.response.headers);
+          //print(e.response.request);
+        } else {
+          print("select");
+          // Something happened in setting up or sending the request that triggered an Error
+          // print(e.request);
+          // print(e.message);
+        }
         String message = e.toString();
         if (e.toString().contains("hostname")) message = "Server Error";
         apiData.Message = message;
         apiData.IsSuccess = false;
-        apiData.Data = 0;
+        apiData.Data = e.response.data;
+        apiData.StatusCode = e.response.statusCode;
 
         print(e.toString());
 

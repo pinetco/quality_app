@@ -10,9 +10,9 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text('Forgot Password', style: header.copyWith(color: primaryColor)),
+        // backgroundColor: Colors.transparent,
+        // elevation: 0,
+        title: Text('Forgot Password'), //style: header.copyWith(color: primaryColor)
       ),
       backgroundColor: bgColor,
       body: LoadingComponent(

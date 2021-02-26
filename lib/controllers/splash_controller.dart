@@ -9,16 +9,18 @@ class SplashController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     await Future.delayed(Duration(seconds: 2));
-    box.listen(() {
-      print('box changed');
-      print(box.read('darkmode'));
-    });
-    box.write('darkmode', false);
+    // box.listen(() {
+    //   print('box changed');
+    //   print(box.read('darkmode'));
+    // });
+    // box.write('darkmode', false);
+
     // changeTheme(true);
 
     print(box.read('darkmode'));
-    if (box.read('darkmode') == true) {
+    if (box.read('authToken') != null) {
       Get.offAndToNamed(AppRouter.home);
+      //checkLogin();
       // Get.offAndToNamed(AppRouter.bottomNavigationScreen);
     } else {
       checkLogin();
