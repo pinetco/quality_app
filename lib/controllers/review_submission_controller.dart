@@ -21,11 +21,13 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   String name;
   String email;
   String phone;
+  dynamic questions = [];
 
   int ratingCount = 5;
   RxString _ratingText = 'Very Good'.obs;
 
   String get isRatingText => _ratingText.value;
+  Map questionObj;
 
   @override
   void onInit() {
@@ -54,9 +56,34 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     update();
   }
 
-  void selectedReview(count, text) {
+  void selectedReview(count, text, id) {
     ratingCount = count;
     _ratingText.value = text ?? '';
+    print(id);
+    int index = questions.indexWhere((data) => data['id'] == id);
+    print(index);
+    if (index > -1) {
+      questions[index]['ratings'] = count;
+      print(questionObj);
+    } else {
+      questionObj = {"id": id, "ratings": count};
+      questions.add(questionObj);
+    }
+    update();
+    // saveReview();
+  }
+
+  bool getReviewEmoji(id, count) {
+    print('Q@@');
+    dynamic filterList = questions.where((data) => data['id'] == id).toList();
+    print('filterList: $filterList');
+    if (filterList.length > 0) {
+      final ratings = filterList[0]['ratings'];
+      if (ratings == count) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void saveReview() async {
@@ -68,15 +95,19 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
         final formData = {
           'employee_id': empId,
           'date': txtDateTime.text,
-          "ratings": ratingCount,
+          // "ratings": ratingCount,
+          'questions': questions,
           "comment": txtComment.text,
           "wish": txtWish.text,
         };
+        print(formData);
 
         Apis.postApi(reviewsAPI, formData).then((res) async {
           Loader().hideLoading();
+
           print(res.toString());
           if (res.StatusCode == 200 || res.StatusCode == 201) {
+            print(res.Data);
             Get.offAndToNamed(AppRouter.home);
           } else {}
         }, onError: (e) {

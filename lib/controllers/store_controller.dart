@@ -31,6 +31,7 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
   // List<dynamic> get items => _itemList.value;
 
   List itemList = [];
+  List questionList = [];
 
   @override
   void onInit() {
@@ -39,6 +40,8 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
     _loginOption = 'mobile';
     update();
     getData();
+
+    getAllQuestion();
     super.onInit();
   }
 
@@ -60,6 +63,29 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
           if (res.StatusCode == 200) {
             final data = res.Data['data'];
             itemList = data;
+
+            update();
+          } else {}
+        }, onError: (e) {
+          print('e');
+        });
+      }
+    } on SocketException catch (_) {
+      print('Socket');
+    }
+  }
+
+  getAllQuestion() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Loader().showLoading();
+        Apis.getApi(questionsAPI, []).then((res) async {
+          Loader().hideLoading();
+          if (res.StatusCode == 200) {
+            print(res);
+            final data = res.Data['data'];
+            questionList = data;
 
             update();
           } else {}

@@ -10,6 +10,7 @@ const String api_Version = "v2";
 const String loginAPI = "/auth/login";
 const String employeesAPI = "/employees";
 const String reviewsAPI = "/reviews";
+const String questionsAPI = "/questions";
 
 const int successCode = 200;
 const int authorizationCode = 401;

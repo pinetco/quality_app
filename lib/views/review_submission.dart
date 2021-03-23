@@ -1,5 +1,6 @@
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/review_submission_controller.dart';
+import 'package:quality_app/controllers/store_controller.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
@@ -13,11 +14,14 @@ class ReviewSubmission extends StatefulWidget {
 
 class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProviderStateMixin {
   var reviewSubmissionCtrl = Get.put(ReviewSubmissionController());
+  var storeCtrl = Get.find<StoreController>();
 
   AnimationController _animationController;
   bool isPlaying = false;
 
   final emojiWidth = 40;
+
+  final items = List<String>.generate(10000, (i) => "Item $i");
 
   @override
   void initState() {
@@ -31,27 +35,6 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
     _animationController.dispose();
     super.dispose();
   }
-
-  List itemList = [
-    {'title': 'Dr. Albert Cooper', 'image': user1, 'designation': 'Royal Londion Hospital', 'rating_image': badEmoji, 'rating_count': 10, 'star_rating': 1.5},
-    {'title': 'Fabrizio', 'image': user1, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 14, 'star_rating': 1.5},
-    {'title': 'Imam Tahir', 'image': user1, 'designation': 'Care taker', 'rating_image': veryGoodEmoji, 'rating_count': 50, 'star_rating': 1.5},
-    {'title': 'Dina', 'price': '120', 'image': user1, 'designation': 'Care taker', 'rating_image': okEmoji, 'rating_count': 3, 'star_rating': 1.5},
-    {'title': 'Kaja', 'image': user8, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 23, 'star_rating': 1.5},
-    {'title': 'Pascal Kramp', 'image': user1, 'designation': 'Care taker', 'rating_image': sadEmoji, 'rating_count': 2, 'star_rating': 1.5},
-    {'title': 'Patrick', 'image': user1, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 30, 'star_rating': 1.5},
-    {'title': 'Nitin Gadhiya', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Banana', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Mango', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Apple', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Banana', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Mango', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Apple', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-    {'title': 'Banana', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1.2, 'star_rating': 1.5},
-    {'title': 'Mango', 'image': user8, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 4.5, 'star_rating': 1.5},
-    {'title': 'Apple', 'image': user1, 'designation': 'Care taker', 'rating_image': veryGoodEmoji, 'rating_count': 5, 'star_rating': 1.5},
-    {'title': 'Orange', 'image': user8, 'designation': 'Care taker', 'rating_image': sadEmoji, 'rating_count': 2.1, 'star_rating': 1.5},
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +95,9 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                               style: h2.copyWith(color: textPrimaryColor),
                             ),
                             SizedBox(height: screenWidth(5)),
-                            Text(reviewSubmissionCtrl.phone.toString(), style: h4.copyWith(color: darkGreyColor)),
+                            Text(reviewSubmissionCtrl.phone.toString(), style: bodyStyle4.copyWith(color: darkGreyColor)),
                             SizedBox(height: screenWidth(5)),
-                            Text(reviewSubmissionCtrl.email.toString(), style: h4.copyWith(color: darkGreyColor)),
+                            Text(reviewSubmissionCtrl.email.toString(), style: bodyStyle4.copyWith(color: darkGreyColor)),
                             SizedBox(height: screenWidth(5)),
                             // Row(
                             //   mainAxisAlignment: MainAxisAlignment.start,
@@ -145,8 +128,8 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   onTap: () async {
                     DateTime date = await showDatePicker(
                       context: context,
-                      firstDate: DateTime(DateTime.now().year - 5),
-                      lastDate: DateTime(DateTime.now().year + 5),
+                      firstDate: DateTime(DateTime.now().year - 1),
+                      lastDate: DateTime.now(),
                       initialDate: DateTime.now(),
                     );
                     reviewSubmissionCtrl.updateDate(date);
@@ -168,122 +151,141 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     },
                   ),
                 ),
-                SizedBox(height: screenHeight(30)),
-                Obx(() => Align(
-                    alignment: Alignment.topLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Give a rating :- ',
-                        style: h3.copyWith(color: Colors.black54),
-                        children: <TextSpan>[
-                          TextSpan(text: reviewSubmissionCtrl.isRatingText, style: TextStyle(color: primaryColor)),
-                        ],
-                      ),
-                    ))),
-                SizedBox(height: screenHeight(10)),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          reviewSubmissionCtrl.selectedReview(5, 'Very Good');
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              veryGoodEmoji,
-                              width: screenWidth(emojiWidth),
-                            ),
-                            SizedBox(height: screenWidth(5)),
-                            // Container(
-                            //   color: primaryColor,
-                            //   height: 3,
-                            //   width: screenWidth(30),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          reviewSubmissionCtrl.selectedReview(4, 'Good');
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              goodEmoji,
-                              width: screenWidth(emojiWidth),
-                            ),
-                            SizedBox(height: screenWidth(5)),
-                            // Container(
-                            //   color: primaryColor,
-                            //   height: 3,
-                            //   width: screenWidth(30),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          reviewSubmissionCtrl.selectedReview(3, 'Ok');
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              okEmoji,
-                              width: screenWidth(emojiWidth),
-                            ),
-                            SizedBox(height: screenWidth(5)),
-                            // Container(
-                            //   color: primaryColor,
-                            //   height: 3,
-                            //   width: screenWidth(30),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          reviewSubmissionCtrl.selectedReview(2, 'Sad');
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              sadEmoji,
-                              width: screenWidth(emojiWidth),
-                            ),
-                            SizedBox(height: screenWidth(5)),
-                            // Container(
-                            //   color: primaryColor,
-                            //   height: 3,
-                            //   width: screenWidth(30),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          reviewSubmissionCtrl.selectedReview(1, 'Bad');
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              badEmoji,
-                              width: screenWidth(emojiWidth),
-                            ),
-                            SizedBox(height: screenWidth(5)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: screenHeight(30)),
+                SizedBox(height: screenHeight(20)),
+                // Obx(() => Align(
+                //     alignment: Alignment.topLeft,
+                //     child: RichText(
+                //       text: TextSpan(
+                //         text: 'Give a rating :- ',
+                //         style: h3.copyWith(color: Colors.black54),
+                //         children: <TextSpan>[
+                //           TextSpan(text: reviewSubmissionCtrl.isRatingText, style: TextStyle(color: primaryColor)),
+                //         ],
+                //       ),
+                //     ))),
+                // SizedBox(height: screenHeight(10)),
+                if (storeCtrl.questionList.length > 0)
+                  GetBuilder<ReviewSubmissionController>(
+                      builder: (_) => ListView.builder(
+                            itemCount: storeCtrl.questionList.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              dynamic item = storeCtrl.questionList[index];
+                              String title = item['title'] ?? '';
+                              int id = item['id'] ?? '';
+                              return Container(
+                                padding: EdgeInsets.symmetric(vertical: screenWidth(10)),
+                                decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(title, style: bodyStyle3.copyWith(color: Colors.black54)),
+                                    ),
+                                    SizedBox(height: screenHeight(10)),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            reviewSubmissionCtrl.selectedReview(5, 'Very Good', id);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              !reviewSubmissionCtrl.getReviewEmoji(id, 5)
+                                                  ? Image.asset(veryGoodEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
+                                                  : Image.asset(veryActiveGoodEmoji, width: screenWidth(emojiWidth)),
+                                              SizedBox(height: screenWidth(5)),
+                                              // Container(
+                                              //   color: primaryColor,
+                                              //   height: 3,
+                                              //   width: screenWidth(30),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            reviewSubmissionCtrl.selectedReview(4, 'Good', id);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              !reviewSubmissionCtrl.getReviewEmoji(id, 4)
+                                                  ? Image.asset(goodEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
+                                                  : Image.asset(goodActiveEmoji, width: screenWidth(emojiWidth)),
+                                              SizedBox(height: screenWidth(5)),
+                                              // Container(
+                                              //   color: primaryColor,
+                                              //   height: 3,
+                                              //   width: screenWidth(30),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            reviewSubmissionCtrl.selectedReview(3, 'Ok', id);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              !reviewSubmissionCtrl.getReviewEmoji(id, 3)
+                                                  ? Image.asset(okEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
+                                                  : Image.asset(okActiveEmoji, width: screenWidth(emojiWidth)),
+
+                                              SizedBox(height: screenWidth(5)),
+                                              // Container(
+                                              //   color: primaryColor,
+                                              //   height: 3,
+                                              //   width: screenWidth(30),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            reviewSubmissionCtrl.selectedReview(2, 'Sad', id);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              !reviewSubmissionCtrl.getReviewEmoji(id, 2)
+                                                  ? Image.asset(sadEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
+                                                  : Image.asset(sadActiveEmoji, width: screenWidth(emojiWidth)),
+                                              SizedBox(height: screenWidth(5)),
+                                              // Container(
+                                              //   color: primaryColor,
+                                              //   height: 3,
+                                              //   width: screenWidth(30),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            reviewSubmissionCtrl.selectedReview(1, 'Bad', id);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              !reviewSubmissionCtrl.getReviewEmoji(id, 1)
+                                                  ? Image.asset(badEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
+                                                  : Image.asset(badActiveEmoji, width: screenWidth(emojiWidth)),
+                                              SizedBox(height: screenWidth(5)),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          )),
+
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Comment',
-                    style: h3.copyWith(color: Colors.black54),
+                    style: bodyStyle3.copyWith(color: Colors.black54),
                   ),
                 ),
                 SizedBox(height: screenHeight(10)),
@@ -293,15 +295,9 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   hintText: "Write comment here...",
                   // prefixIcon: Icon(MdiIcons.commentOutline),
                   obscureText: false,
-                  style: h3.merge(ls1),
+                  style: bodyStyle3.merge(ls1),
                   keyboardType: TextInputType.multiline,
                   padding: screenWidth(20),
-                  validator: (val) {
-                    if (val.isEmpty)
-                      return 'Please enter some value';
-                    else
-                      return null;
-                  },
                 ),
                 SizedBox(height: screenHeight(30)),
                 Align(
@@ -318,15 +314,9 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   hintText: "Write wish here...",
                   // prefixIcon: Icon(MdiIcons.commentOutline),
                   obscureText: false,
-                  style: h3.merge(ls1),
+                  style: bodyStyle3.merge(ls1),
                   keyboardType: TextInputType.multiline,
                   padding: screenWidth(20),
-                  validator: (val) {
-                    if (val.isEmpty)
-                      return 'Please enter some value';
-                    else
-                      return null;
-                  },
                 ),
                 SizedBox(height: screenWidth(30)),
                 CustomButton(
