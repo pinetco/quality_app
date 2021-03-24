@@ -73,17 +73,17 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     // saveReview();
   }
 
-  bool getReviewEmoji(id, count) {
-    print('Q@@');
+  int getReviewEmoji(id, count) {
     dynamic filterList = questions.where((data) => data['id'] == id).toList();
     print('filterList: $filterList');
     if (filterList.length > 0) {
       final ratings = filterList[0]['ratings'];
-      if (ratings == count) {
-        return true;
-      }
+
+      // if (ratings == count) {
+      return ratings;
+      // }
     }
-    return false;
+    return 3;
   }
 
   void saveReview() async {

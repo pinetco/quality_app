@@ -1,11 +1,8 @@
-import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/review_submission_controller.dart';
 import 'package:quality_app/controllers/store_controller.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class ReviewSubmission extends StatefulWidget {
   @override
@@ -34,6 +31,33 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  manageColor(id, color, count) {
+    print(count);
+    dynamic rating = reviewSubmissionCtrl.getReviewEmoji(id, count);
+    if (rating >= count) {
+      return color;
+    }
+    return color.withOpacity(0.4);
+  }
+
+  Widget ratingWidget(icon, id, ratingCount, color) {
+    return Padding(
+      padding: EdgeInsets.only(right: screenWidth(10)),
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () {
+          reviewSubmissionCtrl.selectedReview(ratingCount, 'Good', id);
+        },
+        child: Icon(
+          icon,
+          size: screenWidth(40),
+          color: manageColor(id, color, ratingCount),
+        ),
+      ),
+    );
   }
 
   @override
@@ -92,7 +116,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                           children: [
                             Text(
                               reviewSubmissionCtrl.name.toString(),
-                              style: h2.copyWith(color: textPrimaryColor),
+                              style: h2.copyWith(color: primaryColor),
                             ),
                             SizedBox(height: screenWidth(5)),
                             Text(reviewSubmissionCtrl.phone.toString(), style: bodyStyle4.copyWith(color: darkGreyColor)),
@@ -140,7 +164,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     hintText: "Select Date Time",
                     prefixIcon: Icon(MdiIcons.calendar),
                     obscureText: false,
-                    style: h3.merge(ls1),
+                    style: bodyStyle3.merge(ls1),
                     keyboardType: TextInputType.text,
                     padding: 20,
                     validator: (val) {
@@ -181,98 +205,17 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      child: Text(title, style: bodyStyle3.copyWith(color: Colors.black54)),
+                                      child: Text(title, style: bodyStyle3.copyWith(color: Colors.black87)),
                                     ),
                                     SizedBox(height: screenHeight(10)),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        InkWell(
-                                          onTap: () {
-                                            reviewSubmissionCtrl.selectedReview(5, 'Very Good', id);
-                                          },
-                                          child: Column(
-                                            children: [
-                                              !reviewSubmissionCtrl.getReviewEmoji(id, 5)
-                                                  ? Image.asset(veryGoodEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
-                                                  : Image.asset(veryActiveGoodEmoji, width: screenWidth(emojiWidth)),
-                                              SizedBox(height: screenWidth(5)),
-                                              // Container(
-                                              //   color: primaryColor,
-                                              //   height: 3,
-                                              //   width: screenWidth(30),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            reviewSubmissionCtrl.selectedReview(4, 'Good', id);
-                                          },
-                                          child: Column(
-                                            children: [
-                                              !reviewSubmissionCtrl.getReviewEmoji(id, 4)
-                                                  ? Image.asset(goodEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
-                                                  : Image.asset(goodActiveEmoji, width: screenWidth(emojiWidth)),
-                                              SizedBox(height: screenWidth(5)),
-                                              // Container(
-                                              //   color: primaryColor,
-                                              //   height: 3,
-                                              //   width: screenWidth(30),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            reviewSubmissionCtrl.selectedReview(3, 'Ok', id);
-                                          },
-                                          child: Column(
-                                            children: [
-                                              !reviewSubmissionCtrl.getReviewEmoji(id, 3)
-                                                  ? Image.asset(okEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
-                                                  : Image.asset(okActiveEmoji, width: screenWidth(emojiWidth)),
-
-                                              SizedBox(height: screenWidth(5)),
-                                              // Container(
-                                              //   color: primaryColor,
-                                              //   height: 3,
-                                              //   width: screenWidth(30),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            reviewSubmissionCtrl.selectedReview(2, 'Sad', id);
-                                          },
-                                          child: Column(
-                                            children: [
-                                              !reviewSubmissionCtrl.getReviewEmoji(id, 2)
-                                                  ? Image.asset(sadEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
-                                                  : Image.asset(sadActiveEmoji, width: screenWidth(emojiWidth)),
-                                              SizedBox(height: screenWidth(5)),
-                                              // Container(
-                                              //   color: primaryColor,
-                                              //   height: 3,
-                                              //   width: screenWidth(30),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            reviewSubmissionCtrl.selectedReview(1, 'Bad', id);
-                                          },
-                                          child: Column(
-                                            children: [
-                                              !reviewSubmissionCtrl.getReviewEmoji(id, 1)
-                                                  ? Image.asset(badEmoji, width: screenWidth(emojiWidth), color: Colors.grey)
-                                                  : Image.asset(badActiveEmoji, width: screenWidth(emojiWidth)),
-                                              SizedBox(height: screenWidth(5)),
-                                            ],
-                                          ),
-                                        ),
+                                        ratingWidget(Icons.sentiment_very_dissatisfied, id, 1, Colors.red),
+                                        ratingWidget(Icons.sentiment_dissatisfied, id, 2, Colors.red[500]),
+                                        ratingWidget(Icons.sentiment_neutral, id, 3, Color(0XFFFFD70D)),
+                                        ratingWidget(Icons.sentiment_satisfied, id, 4, Colors.green[500]),
+                                        ratingWidget(Icons.sentiment_very_satisfied, id, 5, Colors.green),
                                       ],
                                     ),
                                   ],
@@ -281,13 +224,13 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                             },
                           )),
 
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Comment',
-                    style: bodyStyle3.copyWith(color: Colors.black54),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Text(
+                //     'Comment',
+                //     style: bodyStyle3.copyWith(color: Colors.black54),
+                //   ),
+                // ),
                 SizedBox(height: screenHeight(10)),
                 CustomTextFormField(
                   maxLines: 3,
@@ -300,13 +243,13 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   padding: screenWidth(20),
                 ),
                 SizedBox(height: screenHeight(30)),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Wish',
-                    style: h3.copyWith(color: Colors.black54),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Text(
+                //     'Wish',
+                //     style: bodyStyle3.copyWith(color: Colors.black54),
+                //   ),
+                // ),
                 SizedBox(height: screenHeight(10)),
                 CustomTextFormField(
                   maxLines: 3,
