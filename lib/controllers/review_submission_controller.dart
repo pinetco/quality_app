@@ -21,7 +21,9 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   String name;
   String email;
   String phone;
+  String userImage;
   dynamic questions = [];
+  DateTime selectedDate = DateTime.now();
 
   int ratingCount = 5;
   RxString _ratingText = 'Very Good'.obs;
@@ -36,6 +38,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     name = data['name'];
     email = data['email'];
     phone = data['phone'];
+    userImage = data['userImage'];
 
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
@@ -53,29 +56,26 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   updateDate(val) {
     var date = DateFormat('yyyy-MM-dd').format(val).toString();
     txtDateTime.text = date;
+    selectedDate = val;
     update();
   }
 
   void selectedReview(count, text, id) {
     ratingCount = count;
     _ratingText.value = text ?? '';
-    print(id);
     int index = questions.indexWhere((data) => data['id'] == id);
-    print(index);
     if (index > -1) {
       questions[index]['ratings'] = count;
-      print(questionObj);
     } else {
       questionObj = {"id": id, "ratings": count};
       questions.add(questionObj);
     }
     update();
-    // saveReview();
+    saveReview(false);
   }
 
   int getReviewEmoji(id, count) {
     dynamic filterList = questions.where((data) => data['id'] == id).toList();
-    print('filterList: $filterList');
     if (filterList.length > 0) {
       final ratings = filterList[0]['ratings'];
 
@@ -86,7 +86,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     return 3;
   }
 
-  void saveReview() async {
+  void saveReview(isNavigation) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -100,34 +100,17 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
           "comment": txtComment.text,
           "wish": txtWish.text,
         };
-        print(formData);
 
         Apis.postApi(reviewsAPI, formData).then((res) async {
           Loader().hideLoading();
 
-          print(res.toString());
           if (res.StatusCode == 200 || res.StatusCode == 201) {
-            print(res.Data);
-            Get.offAndToNamed(AppRouter.home);
+            if (isNavigation) Get.offAndToNamed(AppRouter.home);
           } else {}
         }, onError: (e) {
           Loader().hideLoading();
-          if (e.response != null) {
-            // print(e.response.data);
-            // print(e.response.headers);
-            // print(e.response.request);
-          } else {
-            // Something happened in setting up or sending the request that triggered an Error
-            // print(e.request.data);
-            // print(e.message);
-          }
         });
       }
-    } on SocketException catch (_) {
-      // setState(() {
-      //   list.clear();
-      //   isLoading = false;
-      // });
-    }
+    } on SocketException catch (_) {}
   }
 }

@@ -31,31 +31,71 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  // List itemList = [
-  //   {'title': 'Dr. Albert Cooper', 'image': user1, 'designation': 'Royal Londion Hospital', 'rating_image': badEmoji, 'rating_count': 10, 'star_rating': 1.5},
-  //   {'title': 'Fabrizio', 'image': user1, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 14, 'star_rating': 1.5},
-  //   {'title': 'Imam Tahir', 'image': user1, 'designation': 'Care taker', 'rating_image': veryGoodEmoji, 'rating_count': 50, 'star_rating': 1.5},
-  //   {'title': 'Dina', 'price': '120', 'image': user1, 'designation': 'Care taker', 'rating_image': okEmoji, 'rating_count': 3, 'star_rating': 1.5},
-  //   {'title': 'Kaja', 'image': user8, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 23, 'star_rating': 1.5},
-  //   {'title': 'Pascal Kramp', 'image': user1, 'designation': 'Care taker', 'rating_image': sadEmoji, 'rating_count': 2, 'star_rating': 1.5},
-  //   {'title': 'Patrick', 'image': user1, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 30, 'star_rating': 1.5},
-  //   {'title': 'Nitin Gadhiya', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Banana', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Mango', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Apple', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Banana', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Mango', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Apple', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1, 'star_rating': 1.5},
-  //   {'title': 'Banana', 'image': user8, 'designation': 'Care taker', 'rating_image': badEmoji, 'rating_count': 1.2, 'star_rating': 1.5},
-  //   {'title': 'Mango', 'image': user8, 'designation': 'Care taker', 'rating_image': goodEmoji, 'rating_count': 4.5, 'star_rating': 1.5},
-  //   {'title': 'Apple', 'image': user1, 'designation': 'Care taker', 'rating_image': veryGoodEmoji, 'rating_count': 5, 'star_rating': 1.5},
-  //   {'title': 'Orange', 'image': user8, 'designation': 'Care taker', 'rating_image': sadEmoji, 'rating_count': 2.1, 'star_rating': 1.5},
-  // ];
+  Widget personDetailCard(item) {
+    dynamic email = item['email'];
+    dynamic imageName = item['profile_photo_url'];
+    String name = item['name'].toString();
+    String phone = item['phone'].toString();
+    int empId = item['id'];
+    return InkWell(
+      onTap: () {
+        navigateReviewScreen(empId, name, email, phone, imageName);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: screenWidth(5.0)),
+        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: borderLineColor.withOpacity(0.2)))),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(20)),
+              child: Container(
+                  width: screenWidth(60.0),
+                  height: screenWidth(60.0),
+                  decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(
+                    name,
+                    style: h3.copyWith(color: Colors.black87),
+                  ),
+                  Text(
+                    phone,
+                    style: bodyStyle5.copyWith(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(right: screenWidth(10.0)),
+              child: CustomButton(
+                  title: 'Review',
+                  width: screenWidth(100),
+                  padding: screenWidth(10),
+                  radius: screenWidth(5),
+                  style: bodyStyle5.copyWith(color: Colors.white),
+                  onTap: () {
+                    navigateReviewScreen(empId, name, email, phone, imageName);
+                  }),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void navigateReviewScreen(empId, name, email, phone, userImage) {
+    Get.toNamed(AppRouter.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFF7F8FA),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         //backgroundColor: Colors.transparent,
         //elevation: 0,
@@ -64,13 +104,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         actions: [
           IconButton(
               icon: Icon(
-                MdiIcons.logout,
+                MdiIcons.logoutVariant,
                 color: Colors.white,
               ),
               onPressed: () {
-                final storage = GetStorage();
-                storage.remove(Session.authToken);
-                Get.offAndToNamed(AppRouter.login);
+                storeCtrl.logout();
               })
         ],
       ),
@@ -90,13 +128,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ),
                   Expanded(
                     child: Container(
-                        padding: EdgeInsets.only(
-                          left: screenWidth(10),
-                          right: screenWidth(10),
-                          // top: screenWidth(10),
-                        ),
                         child: GetBuilder<StoreController>(
-                          builder: (_dx) => StaggeredGridView.countBuilder(
+                      builder: (_dx) => ListView.builder(
+                        itemCount: _dx.itemList.length,
+                        itemBuilder: (context, index) {
+                          return personDetailCard(_dx.itemList[index]);
+                        },
+                      ),
+
+                      /*  StaggeredGridView.countBuilder(
                             crossAxisCount: 4,
                             itemCount: _dx.itemList.length,
                             padding: EdgeInsets.only(
@@ -201,8 +241,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
                             mainAxisSpacing: screenWidth(20),
                             crossAxisSpacing: screenWidth(20),
-                          ),
-                        )),
+                          ),*/
+                    )),
                   ),
                 ],
               ),

@@ -18,9 +18,3 @@ final String sadEmoji = 'assets/images/sad.png';
 final String okEmoji = 'assets/images/ok.png';
 final String goodEmoji = 'assets/images/good.png';
 final String veryGoodEmoji = 'assets/images/very_good.png';
-
-final String badActiveEmoji = 'assets/images/bad_active.png';
-final String sadActiveEmoji = 'assets/images/sad_active.png';
-final String okActiveEmoji = 'assets/images/ok_active.png';
-final String goodActiveEmoji = 'assets/images/good_active.png';
-final String veryActiveGoodEmoji = 'assets/images/very_good_active.png';

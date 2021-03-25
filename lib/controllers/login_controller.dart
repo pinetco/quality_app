@@ -37,7 +37,6 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
 
   @override
   void onInit() async {
-    storage.remove('loginCredential');
     // TODO: implement onInit
     tabController = new TabController(vsync: this, length: 2, initialIndex: 0);
     // Loader().showLoading();

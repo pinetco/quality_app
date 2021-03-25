@@ -24,6 +24,7 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
   String _isoCode;
 
   bool get isLoading => _isLoading.value;
+
   String get isoCode => _isoCode;
 
   // RxList<dynamic> _itemList = [].obs;
@@ -83,7 +84,6 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
         Apis.getApi(questionsAPI, []).then((res) async {
           Loader().hideLoading();
           if (res.StatusCode == 200) {
-            print(res);
             final data = res.Data['data'];
             questionList = data;
 
@@ -116,5 +116,10 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
       _isLoading.value = false;
       Get.toNamed(AppRouter.bottomNavigationScreen);
     });
+  }
+
+  void logout() async {
+    storage.remove(Session.authToken);
+    Get.offAndToNamed(AppRouter.login);
   }
 }

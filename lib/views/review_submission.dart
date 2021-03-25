@@ -34,7 +34,6 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
   }
 
   manageColor(id, color, count) {
-    print(count);
     dynamic rating = reviewSubmissionCtrl.getReviewEmoji(id, count);
     if (rating >= count) {
       return color;
@@ -77,6 +76,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
             padding: EdgeInsets.only(bottom: screenWidth(20)),
             child: Column(
               children: [
+                SizedBox(height: screenWidth(15)),
                 Padding(
                   padding: EdgeInsets.only(bottom: screenWidth(20)),
                   child: Container(
@@ -100,15 +100,16 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     child: Row(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(screenWidth(12)),
-                          child: Image.asset(
-                            user1,
-                            height: screenWidth(80),
-                            width: screenWidth(80),
-                            fit: BoxFit.cover,
+                        if (reviewSubmissionCtrl.userImage != null)
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(screenWidth(12)),
+                            child: Image.network(
+                              reviewSubmissionCtrl.userImage,
+                              height: screenWidth(80),
+                              width: screenWidth(80),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
                         SizedBox(width: screenWidth(15)),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -152,10 +153,18 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   onTap: () async {
                     DateTime date = await showDatePicker(
                       context: context,
-                      firstDate: DateTime(DateTime.now().year - 1),
+                      firstDate: DateTime.now().subtract(Duration(days: 365)),
                       lastDate: DateTime.now(),
-                      initialDate: DateTime.now(),
+                      initialDate: reviewSubmissionCtrl.selectedDate,
                     );
+
+                    // DateTime date = await showDatePicker(
+                    //   context: context,
+                    //   firstDate: DateTime(DateTime.now().year - 1),
+                    //   lastDate: DateTime.now(),
+                    //   initialDate: DateTime.now(),
+                    // );
+                    print('datte: $date');
                     reviewSubmissionCtrl.updateDate(date);
                   },
                   child: CustomTextFormField(
@@ -265,7 +274,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 CustomButton(
                   title: 'Save',
                   onTap: () {
-                    reviewSubmissionCtrl.saveReview();
+                    reviewSubmissionCtrl.saveReview(true);
                   },
                 ),
               ],

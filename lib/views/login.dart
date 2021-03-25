@@ -11,7 +11,6 @@ class Login extends StatelessWidget {
   Widget emailMobileWidget(String loginOption) {
     dynamic errorPhoneValidation = loginController.phoneFieldError ?? '';
     dynamic errorPasswordValidation = loginController.passwordFieldError ?? '';
-    print(loginController.isObscureText);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
