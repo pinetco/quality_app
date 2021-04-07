@@ -15,7 +15,7 @@ const FontWeight extraBold = FontWeight.w800;
 const FontWeight thick = FontWeight.w900;
 
 //font family
-String textFontFamily = "CeraPro";
+String textFontFamily = "Poppins";
 
 //App Theme
 ThemeData appTheme = new ThemeData(
@@ -29,7 +29,7 @@ ThemeData appTheme = new ThemeData(
   // Define the default colors.
   primaryColor: primaryColor,
   buttonColor: primaryColor,
-  accentColor: primaryColor,
+  accentColor: Colors.black,
   scaffoldBackgroundColor: bgColor,
   backgroundColor: bgColor,
   dividerColor: dividerColor,
@@ -56,18 +56,11 @@ TextStyle textExtraBold(double size) {
 }
 
 TextStyle textSemiBold(double size) {
-  return TextStyle(
-    fontSize: fontSize(size),
-    fontWeight: semiBold,
-    //color: textPrimaryColor,
-  );
+  return TextStyle(fontSize: fontSize(size), fontWeight: FontWeight.w600, color: black22Color);
 }
 
 TextStyle textRegular(double size) {
-  return TextStyle(
-    fontSize: fontSize(size),
-    //color: textPrimaryColor,
-  );
+  return TextStyle(fontSize: fontSize(size), color: grayColor);
 }
 
 TextStyle textHeader() {
@@ -91,29 +84,39 @@ TextStyle validationStyle(double size) {
 
 TextStyle header = textHeader();
 
-TextStyle h1 = textExtraBold(20);
+TextStyle h1 = textSemiBold(24);
 
-TextStyle h2 = textSemiBold(18);
+TextStyle h2 = textSemiBold(22);
 
-TextStyle h3 = textSemiBold(16);
+TextStyle h3 = textSemiBold(20);
 
-TextStyle h4 = textSemiBold(14);
+TextStyle h4 = textSemiBold(18);
 
-TextStyle h5 = textSemiBold(12);
+TextStyle h5 = textSemiBold(16);
 
-TextStyle bodyStyle1 = textRegular(20);
+TextStyle h6 = textSemiBold(14);
 
-TextStyle bodyStyle2 = textRegular(18);
+TextStyle h7 = textSemiBold(12);
 
-TextStyle bodyStyle3 = textRegular(16);
+TextStyle h8 = textSemiBold(10);
 
-TextStyle bodyStyle4 = textRegular(14);
+TextStyle bodyStyle1 = textRegular(24);
 
-TextStyle bodyStyle5 = textRegular(12);
+TextStyle bodyStyle2 = textRegular(22);
 
-TextStyle bodyStyle6 = textRegular(10);
+TextStyle bodyStyle3 = textRegular(20);
 
-TextStyle bodyStyle7 = textRegular(8);
+TextStyle bodyStyle4 = textRegular(18);
+
+TextStyle bodyStyle5 = textRegular(16);
+
+TextStyle bodyStyle6 = textRegular(14);
+
+TextStyle bodyStyle7 = textRegular(12);
+
+TextStyle bodyStyle8 = textRegular(10);
+
+TextStyle bodyStyle9 = textRegular(8);
 
 //Letter Spacing
 TextStyle ls1 = textLetterSpacing(1);

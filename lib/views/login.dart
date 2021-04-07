@@ -51,21 +51,15 @@ class Login extends StatelessWidget {
             hintText: "Password",
             prefixIcon: Icon(MdiIcons.lock),
             suffixIcon: IconButton(
-              icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff),
+              icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: deactivateColor),
               onPressed: () {
                 loginController.togglePassword();
               },
             ),
             obscureText: loginController.isObscureText,
-            style: h3.merge(ls1),
+            style: bodyStyle5,
             keyboardType: TextInputType.text,
             padding: 20,
-            validator: (val) {
-              if (val.isEmpty)
-                return 'Please enter some value';
-              else
-                return null;
-            },
           ),
           if (errorPasswordValidation != '') validationWidget(errorValidation: errorPasswordValidation),
 
@@ -82,134 +76,117 @@ class Login extends StatelessWidget {
         backgroundColor: bgColor,
         body: LoadingComponent(
           //loading: loginController.isLoading,
-          child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: viewportConstraints.maxHeight,
-                ),
-                child: Container(
-                  height: screenActualHeight(),
-                  width: screenActualWidth(),
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              appLogoGIF,
-                              width: screenWidth(100),
-                            ),
-                            SizedBox(height: screenHeight(10)),
-                            Text(
-                              'Health Sector Quality Control',
-                              style: h2,
-                            ),
-                            SizedBox(height: screenHeight(100)),
-                            Form(
-                              key: loginController.formKey,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  // Container(
-                                  //   padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
-                                  //   child: TabBar(
-                                  //     controller: loginController.tabController,
-                                  //     indicatorColor: primaryColor,
-                                  //     labelColor: primaryColor,
-                                  //     unselectedLabelColor: Colors.black54,
-                                  //     onTap: (val) {
-                                  //       FocusScopeNode currentFocus = FocusScope.of(context);
-                                  //
-                                  //       if (!currentFocus.hasPrimaryFocus) {
-                                  //         currentFocus.unfocus();
-                                  //       }
-                                  //     },
-                                  //     // isScrollable: true,
-                                  //     tabs: <Widget>[
-                                  //       Tab(
-                                  //         text: "Mobile",
-                                  //       ),
-                                  //       Tab(
-                                  //         text: "Email",
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: screenWidth(8.0)),
-                                    child: emailMobileWidget('mobile'),
-
-                                    // TabBarView(controller: loginController.tabController,
-                                    //     // Restrict scroll by user
-                                    //     // physics: const NeverScrollableScrollPhysics(),
-                                    //     children: [
-                                    //       // Sign In View
-                                    //       emailMobileWidget('mobile'),
-                                    //       // Sign Up View
-                                    //       emailMobileWidget('email'),
-                                    //     ]),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        InkWell(
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
-                                                    color: textPrimaryColor),
-                                                Text(
-                                                  'Remember Login',
-                                                  style: h4.copyWith(color: textPrimaryColor),
-                                                ),
-                                              ],
-                                            ),
-                                            onTap: () {
-                                              loginController.updateRememberLogin();
-                                            }),
-                                        // InkWell(
-                                        //   child: Text(
-                                        //     'Forgot Password?',
-                                        //     style: h5.copyWith(color: textPrimaryColor),
-                                        //   ),
-                                        //   onTap: () {
-                                        //     Get.toNamed(AppRouter.forgotPassword);
-                                        //     // Navigator.pushNamed(context, AppRouter.forgotPassword);
-                                        //   },
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: screenHeight(20)),
-                                  Padding(
-                                    padding: EdgeInsets.all(screenWidth(10)),
-                                    child: CustomButton(
-                                      title: "Login",
-                                      padding: screenWidth(20),
-                                      onTap: () {
-                                        loginController.login();
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+          child: SingleChildScrollView(
+            child: Container(
+              height: screenActualHeight(),
+              width: screenActualWidth(),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Welcome to', style: bodyStyle3.copyWith(color: grayColor)),
+                  SizedBox(height: screenHeight(5)),
+                  Text(
+                    'Quality Control!',
+                    style: h1,
                   ),
-                ),
+                  SizedBox(height: screenHeight(60)),
+                  Form(
+                    key: loginController.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // Container(
+                        //   padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                        //   child: TabBar(
+                        //     controller: loginController.tabController,
+                        //     indicatorColor: primaryColor,
+                        //     labelColor: primaryColor,
+                        //     unselectedLabelColor: Colors.black54,
+                        //     onTap: (val) {
+                        //       FocusScopeNode currentFocus = FocusScope.of(context);
+                        //
+                        //       if (!currentFocus.hasPrimaryFocus) {
+                        //         currentFocus.unfocus();
+                        //       }
+                        //     },
+                        //     // isScrollable: true,
+                        //     tabs: <Widget>[
+                        //       Tab(
+                        //         text: "Mobile",
+                        //       ),
+                        //       Tab(
+                        //         text: "Email",
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.only(top: screenWidth(8.0)),
+                          child: emailMobileWidget('mobile'),
+
+                          // TabBarView(controller: loginController.tabController,
+                          //     // Restrict scroll by user
+                          //     // physics: const NeverScrollableScrollPhysics(),
+                          //     children: [
+                          //       // Sign In View
+                          //       emailMobileWidget('mobile'),
+                          //       // Sign Up View
+                          //       emailMobileWidget('email'),
+                          //     ]),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
+                                          color: black22Color),
+                                      Text(
+                                        'Remember Login',
+                                        style: bodyStyle5.copyWith(color: black22Color),
+                                      ),
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    loginController.updateRememberLogin();
+                                  }),
+                              // InkWell(
+                              //   child: Text(
+                              //     'Forgot Password?',
+                              //     style: h5.copyWith(color: textPrimaryColor),
+                              //   ),
+                              //   onTap: () {
+                              //     Get.toNamed(AppRouter.forgotPassword);
+                              //     // Navigator.pushNamed(context, AppRouter.forgotPassword);
+                              //   },
+                              // ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: screenHeight(20)),
+                        Padding(
+                          padding: EdgeInsets.all(screenWidth(10)),
+                          child: CustomButton(
+                            title: "Login",
+                            padding: screenWidth(20),
+                            onTap: () {
+                              loginController.login();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            );
-          }),
+            ),
+          ),
         ),
       ),
     );

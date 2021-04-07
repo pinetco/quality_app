@@ -38,7 +38,7 @@ class PhoneNumberWithCountry extends StatelessWidget {
         formatInput: false,
         // keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
         spaceBetweenSelectorAndTextField: 0.01,
-        textStyle: h3,
+        textStyle: bodyStyle5.copyWith(color: black22Color),
         // inputBorder: OutlineInputBorder(),
         onSaved: (PhoneNumber number) {
           print('On Saved: $number');

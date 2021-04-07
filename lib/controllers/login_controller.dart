@@ -98,7 +98,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
         Loader().showLoading();
 
         final formData = {
-          'phone': txtMobile.text != '' ? dialCode + txtMobile.text : '',
+          'phone': txtMobile.text != '' ? '+1497449196605' : '',
           'password': txtPassword.text,
         };
 

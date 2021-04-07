@@ -18,3 +18,5 @@ final String sadEmoji = 'assets/images/sad.png';
 final String okEmoji = 'assets/images/ok.png';
 final String goodEmoji = 'assets/images/good.png';
 final String veryGoodEmoji = 'assets/images/very_good.png';
+final String notificationIcon = 'assets/images/notification.png';
+final String userIcon = 'assets/images/user.png';

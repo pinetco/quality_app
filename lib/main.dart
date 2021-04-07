@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(428, 926),
+      designSize: Size(375, 812),
       allowFontScaling: false,
       builder: () => GetMaterialApp(
         builder: (context, widget) {
@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
         title: "My App",
         home: AppInit(),
         getPages: AppRouter.getPages,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
+        theme: appTheme,
+        // darkTheme: AppTheme.darkTheme,
         themeMode: ThemeService().getThemeMode(),
       ),
     );

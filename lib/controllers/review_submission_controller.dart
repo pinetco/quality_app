@@ -10,7 +10,7 @@ import 'common/loader_controller.dart';
 class ReviewSubmissionController extends GetxController with SingleGetTickerProviderMixin {
   var formKey = GlobalKey<FormState>();
 
-  TextEditingController txtDateTime = TextEditingController();
+  // TextEditingController txtDateTime = TextEditingController();
   TextEditingController txtComment = TextEditingController();
   TextEditingController txtWish = TextEditingController();
 
@@ -30,6 +30,9 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
   String get isRatingText => _ratingText.value;
   Map questionObj;
+  String txtDateTime;
+
+  dynamic selectedDateArray = ['2021-03-03', '2021-03-06', '2021-03-10', '2021-03-12', '2021-03-15'];
 
   @override
   void onInit() {
@@ -42,7 +45,8 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-    txtDateTime.text = formattedDate;
+    // txtDateTime.text = formattedDate;
+    txtDateTime = formattedDate;
 
     update();
     super.onInit();
@@ -55,7 +59,8 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
   updateDate(val) {
     var date = DateFormat('yyyy-MM-dd').format(val).toString();
-    txtDateTime.text = date;
+    // txtDateTime.text = date;
+    txtDateTime = date;
     selectedDate = val;
     update();
   }
@@ -86,6 +91,33 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     return 3;
   }
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: Get.context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Thank You'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Your review has been successfully submitted'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Get.offAndToNamed(AppRouter.home);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void saveReview(isNavigation) async {
     try {
       final result = await InternetAddress.lookup('google.com');
@@ -94,7 +126,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
         final formData = {
           'employee_id': empId,
-          'date': txtDateTime.text,
+          'date': txtDateTime,
           // "ratings": ratingCount,
           'questions': questions,
           "comment": txtComment.text,
@@ -105,7 +137,10 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
           Loader().hideLoading();
 
           if (res.StatusCode == 200 || res.StatusCode == 201) {
-            if (isNavigation) Get.offAndToNamed(AppRouter.home);
+            if (isNavigation) {
+              _showMyDialog();
+              //  Get.offAndToNamed(AppRouter.home);
+            }
           } else {}
         }, onError: (e) {
           Loader().hideLoading();

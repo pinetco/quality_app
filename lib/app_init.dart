@@ -8,11 +8,6 @@ class AppInit extends StatefulWidget {
 
 class _AppInitState extends State<AppInit> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SplashScreen();
   }

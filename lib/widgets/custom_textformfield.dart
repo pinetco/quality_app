@@ -57,16 +57,15 @@ class CustomTextFormField extends StatelessWidget {
                 child: suffixIcon,
               )
             : null,
-
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius(radius)),
           borderSide: BorderSide(width: 0, style: BorderStyle.none),
         ),
         filled: true,
-        fillColor: fillColor ?? Color(0xFFF5F6FA),
+        fillColor: fillColor ?? Colors.white,
         contentPadding: EdgeInsets.all(screenWidth(padding)),
         hintText: hintText,
-        // hintStyle: TextStyle(color: Colors.black38, fontWeight: FontWeight.w300),
+        hintStyle: bodyStyle5.copyWith(color: deactivateColor),
         labelText: labelText,
       ),
       style: style,

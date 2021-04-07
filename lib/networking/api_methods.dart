@@ -11,6 +11,7 @@ const String loginAPI = "/auth/login";
 const String employeesAPI = "/employees";
 const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";
+const String appInformationAPI = "/app-information";
 
 const int successCode = 200;
 const int authorizationCode = 401;

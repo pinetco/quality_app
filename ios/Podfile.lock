@@ -7,6 +7,10 @@ PODS:
     - Flutter
     - libPhoneNumber-iOS
   - libPhoneNumber-iOS (0.9.15)
+  - open_appstore (0.0.1):
+    - Flutter
+  - package_info (0.0.1):
+    - Flutter
   - path_provider (0.0.1):
     - Flutter
   - Reachability (3.2)
@@ -17,6 +21,8 @@ DEPENDENCIES:
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `Flutter`)
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
+  - open_appstore (from `.symlinks/plugins/open_appstore/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sms_autofill (from `.symlinks/plugins/sms_autofill/ios`)
 
@@ -32,6 +38,10 @@ EXTERNAL SOURCES:
     :path: Flutter
   libphonenumber:
     :path: ".symlinks/plugins/libphonenumber/ios"
+  open_appstore:
+    :path: ".symlinks/plugins/open_appstore/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   sms_autofill:
@@ -42,6 +52,8 @@ SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  open_appstore: 4eddfae38848002fdde8d42e1734d16cb34439de
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   sms_autofill: c461043483362c3f1709ee76eaae6eb570b31686

@@ -8,6 +8,7 @@ class SplashController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     await Future.delayed(Duration(seconds: 2));
+
     // box.listen(() {
     //   print('box changed');
     //   print(box.read('darkmode'));
