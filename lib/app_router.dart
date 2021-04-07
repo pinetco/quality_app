@@ -8,7 +8,7 @@ class AppRouter {
 
   static const home = '/home';
   static const discount = '/discount';
-  static const settings = '/settings';
+  static const profile = '/profile';
 
   static const stylingScreen = '/stylingScreen';
   static const pagingScreen = '/pagingScreen';
@@ -28,7 +28,7 @@ class AppRouter {
     GetPage(name: home, page: () => Home()),
     GetPage(name: reviewSubmission, page: () => ReviewSubmission()),
     GetPage(name: discount, page: () => Discount()),
-    GetPage(name: settings, page: () => Settings()),
+    GetPage(name: profile, page: () => Profile()),
     GetPage(name: stylingScreen, page: () => StylingScreen()),
     GetPage(name: pagingScreen, page: () => PagingScreen()),
     GetPage(name: controllerScreen, page: () => ControllerScreen()),

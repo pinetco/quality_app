@@ -14,7 +14,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   var bottomCtrl = Get.put(BottomNavigationController());
 
-  List<Widget> _widgetOptions = <Widget>[Home(), Discount(), Settings()];
+  List<Widget> _widgetOptions = <Widget>[Home(), Discount(), Profile()];
 
   @override
   Widget build(BuildContext context) {

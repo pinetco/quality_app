@@ -10,6 +10,6 @@ export 'package:quality_app/views/bottom_navigation_screen.dart';
 export 'package:quality_app/views/login.dart';
 export 'package:quality_app/views/forgot_password.dart';
 export 'package:quality_app/views/discount.dart';
-export 'package:quality_app/views/settings.dart';
+export 'package:quality_app/views/profile.dart';
 export 'package:quality_app/views/home.dart';
 export 'package:quality_app/views/review_submission.dart';

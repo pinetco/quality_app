@@ -1,62 +1,48 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
+import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 
 class SettingController extends GetxController with SingleGetTickerProviderMixin {
-  TabController tabController;
-  var formKey = GlobalKey<FormState>();
-
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtMobile = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
-
-  RxBool _isLoading = false.obs;
-  String _loginOption;
-  int _currentIndex = 0;
-  String _isoCode;
-
-  bool get isLoading => _isLoading.value;
-  String get isoCode => _isoCode;
+  dynamic userInfo;
 
   @override
   void onInit() {
-    // TODO: implement onInit
-    tabController = new TabController(vsync: this, length: 2, initialIndex: 0);
-    _loginOption = 'mobile';
-    update();
-    getPhoneNumber();
+    getData();
     super.onInit();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    tabController.dispose();
-    txtMobile?.dispose();
     super.dispose();
   }
 
-  void getPhoneNumber() async {
-    final SmsAutoFill _autoFill = SmsAutoFill();
-    final completePhoneNumber = await _autoFill.hint;
-
-    if (completePhoneNumber != null) {
-      PhoneNumber numberRegionInfo = await PhoneNumber.getRegionInfoFromPhoneNumber(completePhoneNumber);
-      txtMobile.text = int.parse(numberRegionInfo.parseNumber()).toString();
-      _isoCode = numberRegionInfo.isoCode;
-      update();
-    }
+  navigationBack() {
+    Get.back();
+    //Get.offAll(AppRouter.home);
+    // Navigator.pop(Get.context);
   }
 
-  void login() {
-    _isLoading.value = true;
-    Timer(Duration(seconds: 1), () {
-      _isLoading.value = false;
-      Get.toNamed(AppRouter.bottomNavigationScreen);
-    });
+  getData() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Loader().showLoading();
+        Apis.getApi(userAPI, []).then((res) async {
+          Loader().hideLoading();
+          if (res.StatusCode == 200) {
+            final data = res.Data['data'];
+            print(data);
+            userInfo = data;
+
+            update();
+          } else {}
+        }, onError: (e) {
+          print('e');
+        });
+      }
+    } on SocketException catch (_) {
+      print('Socket');
+    }
   }
 }

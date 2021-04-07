@@ -12,6 +12,7 @@ const String employeesAPI = "/employees";
 const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";
 const String appInformationAPI = "/app-information";
+const String userAPI = "/user";
 
 const int successCode = 200;
 const int authorizationCode = 401;

@@ -155,9 +155,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               SizedBox(
                                 width: screenWidth(15),
                               ),
-                              Image.asset(
-                                userIcon,
-                                width: screenWidth(20),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(AppRouter.profile);
+                                },
+                                child: Image.asset(
+                                  userIcon,
+                                  width: screenWidth(20),
+                                ),
                               ),
                             ],
                           ),
