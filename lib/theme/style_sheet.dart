@@ -35,6 +35,7 @@ ThemeData appTheme = new ThemeData(
   dividerColor: dividerColor,
   cardColor: whiteColor,
   dialogBackgroundColor: whiteColor,
+  unselectedWidgetColor: deactivateColor,
 
   //Define the default font family
   fontFamily: textFontFamily,

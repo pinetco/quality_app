@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 
 class SettingController extends GetxController with SingleGetTickerProviderMixin {
   dynamic userInfo;
+  final _storageSettingCtrl = GetStorage();
 
   @override
   void onInit() {
@@ -21,6 +23,10 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
     Get.back();
     //Get.offAll(AppRouter.home);
     // Navigator.pop(Get.context);
+  }
+
+  logout() {
+    _showMyDialog();
   }
 
   // getData() async {
@@ -45,4 +51,32 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
   //     print('Socket');
   //   }
   // }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: Get.context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.pop(Get.context);
+              },
+            ),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                _storageSettingCtrl.remove(Session.authToken);
+                Navigator.pop(Get.context);
+                Get.offAndToNamed(AppRouter.login);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

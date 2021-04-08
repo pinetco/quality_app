@@ -23,18 +23,9 @@ class SplashScreen extends StatelessWidget {
                     width: screenWidth(150),
                   ),
                   SizedBox(height: 20),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Splash ',
-                      style: h1.merge(ls5),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Screen',
-                          style: h1.merge(ls5),
-                        ),
-                      ],
-                    ),
-                  ),
+                  Text('Health Sector', style: bodyStyle2.merge(ls5)),
+                  SizedBox(height: 10),
+                  Text('Quality Control', style: h1),
                 ],
               ),
             ),

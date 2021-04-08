@@ -46,20 +46,23 @@ class Login extends StatelessWidget {
           if (errorPhoneValidation != '') validationWidget(errorValidation: errorPhoneValidation),
 
           SizedBox(height: screenHeight(15)),
-          CustomTextFormField(
-            container: loginController.txtPassword,
-            hintText: "Password",
-            prefixIcon: Icon(MdiIcons.lock),
-            suffixIcon: IconButton(
-              icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: deactivateColor),
-              onPressed: () {
-                loginController.togglePassword();
-              },
+          Container(
+            decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(10))),
+            child: CustomTextFormField(
+              container: loginController.txtPassword,
+              hintText: "Password",
+              prefixIcon: Icon(MdiIcons.lock),
+              suffixIcon: IconButton(
+                icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: deactivateColor),
+                onPressed: () {
+                  loginController.togglePassword();
+                },
+              ),
+              obscureText: loginController.isObscureText,
+              style: bodyStyle5,
+              keyboardType: TextInputType.text,
+              padding: 18,
             ),
-            obscureText: loginController.isObscureText,
-            style: bodyStyle5,
-            keyboardType: TextInputType.text,
-            padding: 20,
           ),
           if (errorPasswordValidation != '') validationWidget(errorValidation: errorPasswordValidation),
 
@@ -148,7 +151,7 @@ class Login extends StatelessWidget {
                                       Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
                                           color: black22Color),
                                       Text(
-                                        'Remember Login',
+                                        'Remember me',
                                         style: bodyStyle5.copyWith(color: black22Color),
                                       ),
                                     ],

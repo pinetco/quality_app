@@ -19,11 +19,11 @@ class SplashController extends GetxController {
 
     // print(box.read('darkmode'));
     if (storage.read('authToken') != null) {
-      Get.offAndToNamed(AppRouter.home);
+      //Get.offAndToNamed(AppRouter.home);
 
       // Get.offAndToNamed(AppRouter.bottomNavigationScreen);
     } else {
-      checkLogin();
+      // checkLogin();
     }
     super.onInit();
   }

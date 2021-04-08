@@ -71,12 +71,9 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
         Apis.getApi(visitDateAPI(empId), []).then((res) async {
           Loader().hideLoading();
-          print('date');
           if (res.StatusCode == 200) {
             final data = res.Data;
-            print('data $data');
             dateList = data['data'] ?? [];
-            print('data*** $dateList');
             if (dateList.length > 0) {
               final date = dateList[0];
               pickDate = "${date['year']}-${date['month']}-${date['day']}";
@@ -143,8 +140,6 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
             TextButton(
               child: Text('Ok'),
               onPressed: () {
-                print('press Okay');
-
                 Navigator.pop(Get.context);
               },
             ),
@@ -188,7 +183,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
   tapToSelectDate(text) {
     pickDate = text;
-    update();
+    getReview();
   }
 
   getReview() async {
@@ -199,12 +194,8 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
         Apis.getApi(reviewDateWise(empId, pickDate), []).then((res) async {
           Loader().hideLoading();
-          print('res');
-          print(res.StatusCode);
           if (res.StatusCode == 200) {
-            print('res');
             final data = res.Data;
-            print(data['data']);
             existingReview = data['data'] ?? null;
             txtComment.text = existingReview['comment'] ?? '';
             txtWish.text = existingReview['wish'] ?? '';

@@ -1,14 +1,179 @@
 import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/survey_step_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/packages/input_package.dart';
 
-enum SingingCharacter { lafayette, jefferson }
-
 class SurveyStep extends StatelessWidget {
+  var surveyCtrl = Get.put(SurveyStepController());
+
+  Widget myRadioButton(title, value, group) {
+    return SizedBox(
+      height: screenHeight(40),
+      child: RadioListTile(
+          contentPadding: EdgeInsets.all(0),
+          title: Text(title, style: bodyStyle5.copyWith(color: grayColor)),
+          value: value,
+          groupValue: group,
+          activeColor: primaryDarkColor,
+          onChanged: (value) {
+            surveyCtrl.tapOnquestions(value);
+          }),
+    );
+    // return ListTile(
+    //   visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+    //   title: Text(title, style: bodyStyle5.copyWith(color: grayColor)),
+    //   contentPadding: EdgeInsets.all(0),
+    //   leading: Radio<int>(
+    //     activeColor: primaryDarkColor,
+    //     value: value,
+    //     groupValue: group,
+    //     onChanged: (value) {
+    //       surveyCtrl.tapOnquestions(value);
+    //     },
+    //   ),
+    // );
+  }
+
+  Widget step1() {
+    if (surveyCtrl.activeStep == 1)
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+          SizedBox(
+            height: screenHeight(30),
+          ),
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+          SizedBox(
+            height: screenHeight(30),
+          ),
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+        ],
+      );
+    return Container();
+  }
+
+  Widget step2() {
+    if (surveyCtrl.activeStep == 2)
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              child: Text(
+            'Test step 2',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+          SizedBox(
+            height: screenHeight(30),
+          ),
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+          SizedBox(
+            height: screenHeight(30),
+          ),
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+        ],
+      );
+    return Container();
+  }
+
+  Widget step3() {
+    if (surveyCtrl.activeStep == 3)
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              child: Text(
+            'Test step 3',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+          SizedBox(
+            height: screenHeight(30),
+          ),
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+          SizedBox(
+            height: screenHeight(30),
+          ),
+          Container(
+              child: Text(
+            'The service I receive from FirstLight Home Care meets my expectations.',
+            style: h5.copyWith(fontWeight: FontWeight.w500),
+          )),
+          myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+          myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+          myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+          myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+          myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+        ],
+      );
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
-    SingingCharacter _character = SingingCharacter.lafayette;
-
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
       appBar: AppBar(
@@ -54,10 +219,11 @@ class SurveyStep extends StatelessWidget {
                     children: [
                       Padding(
                         padding: EdgeInsets.all(screenWidth(3)),
-                        child: Container(
-                          width: (screenActualWidth() - screenWidth(48)),
-                          decoration: BoxDecoration(color: primaryDarkColor, borderRadius: BorderRadius.circular(screenWidth(10))),
-                        ),
+                        child: GetBuilder<SurveyStepController>(
+                            builder: (_) => Container(
+                                  width: surveyCtrl.manageProgressBar(),
+                                  decoration: BoxDecoration(color: primaryDarkColor, borderRadius: BorderRadius.circular(screenWidth(10))),
+                                )),
                       ),
                     ],
                   ),
@@ -65,41 +231,56 @@ class SurveyStep extends StatelessWidget {
                 SizedBox(
                   height: screenHeight(20),
                 ),
-                Column(
-                  children: [
-                    Container(
-                        child: Text(
-                      'The service I receive from FirstLight Home Care meets my expectations.',
-                      style: h5.copyWith(fontWeight: FontWeight.w500),
-                    )),
-                    ListTile(
-                      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: const Text('Lafayette'),
-                      contentPadding: EdgeInsets.all(0),
-                      leading: Radio<SingingCharacter>(
-                        activeColor: primaryDarkColor,
-                        value: SingingCharacter.lafayette,
-                        groupValue: _character,
-                        onChanged: (value) {},
-                      ),
+                Expanded(
+                  child: SizedBox(
+                    child: SingleChildScrollView(
+                      child: GetBuilder<SurveyStepController>(builder: (_) {
+                        return Column(
+                          children: [step1(), step2(), step3()],
+                        );
+                      }),
                     ),
-                    ListTile(
-                      title: const Text('Thomas Jefferson'),
-                      contentPadding: EdgeInsets.all(0),
-                      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      leading: Radio<SingingCharacter>(
-                        value: SingingCharacter.jefferson,
-                        groupValue: _character,
-                        onChanged: (value) {},
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(screenWidth(10)),
-                  child: CustomButton(
-                    title: "Start",
-                    onTap: () {},
+
+                /*   GetBuilder<SurveyStepController>(builder: (_) {
+                  return Column(
+                    children: [
+                      Container(
+                          child: Text(
+                        'The service I receive from FirstLight Home Care meets my expectations.',
+                        style: h5.copyWith(fontWeight: FontWeight.w500),
+                      )),
+                      myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+                      myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+                      myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+                      myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+                      myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+                      SizedBox(
+                        height: screenHeight(30),
+                      ),
+                      Container(
+                          child: Text(
+                        'The service I receive from FirstLight Home Care meets my expectations.',
+                        style: h5.copyWith(fontWeight: FontWeight.w500),
+                      )),
+                      myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
+                      myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
+                      myRadioButton('Not sure', 3, surveyCtrl.groupVal),
+                      myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
+                      myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
+                    ],
+                  );
+                }),*/
+                GetBuilder<SurveyStepController>(
+                  builder: (_) => Padding(
+                    padding: EdgeInsets.all(screenWidth(10)),
+                    child: CustomButton(
+                      title: surveyCtrl.activeStep == surveyCtrl.totalStep ? 'Submit' : "Next",
+                      onTap: () {
+                        surveyCtrl.nextStep();
+                      },
+                    ),
                   ),
                 ),
               ],

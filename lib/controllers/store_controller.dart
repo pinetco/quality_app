@@ -61,7 +61,7 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
           Loader().hideLoading();
           if (res.StatusCode == 200) {
             final data = res.Data['data'];
-            print(data);
+
             userInfo = data;
 
             update();

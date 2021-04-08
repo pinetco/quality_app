@@ -14,14 +14,16 @@ class PhoneNumberWithCountry extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        border: Border.all(width: 1, color: deactivateColor),
         borderRadius: BorderRadius.circular(10),
-        color: Color(0xFFF5F6FA),
+        color: Colors.white,
       ),
       child: InternationalPhoneNumberInput(
         onInputChanged: onInputChanged,
         //     (PhoneNumber number) {
         //   print(number.phoneNumber);
         // },
+
         onInputValidated: (bool value) {
           print(value);
         },

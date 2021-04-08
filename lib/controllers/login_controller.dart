@@ -48,6 +48,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
       _isoCode = jsonDecode['iso_code'];
       txtMobile.text = jsonDecode['mobile'];
       txtPassword.text = jsonDecode['password'];
+      _rememberLogin = true;
     }
 
     update();

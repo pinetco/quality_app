@@ -13,6 +13,7 @@ const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";
 const String appInformationAPI = "/app-information";
 const String userAPI = "/user";
+const String surveyQueAPI = "/survey-questions";
 String visitDateAPI(id) => "/options/employees/$id/visit-dates";
 String reviewDateWise(id, date) => "/employees/$id/review?date=$date";
 

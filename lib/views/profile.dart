@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               highlightColor: Colors.white,
               splashColor: Colors.transparent,
               onTap: () {
-                Get.offAndToNamed(AppRouter.login);
+                settingCtrl.logout();
                 //bottomCtrl.updateCurrentTab(2);
               },
               child: Padding(
@@ -91,10 +91,14 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(screenWidth(90)),
                           ),
                           child: Center(
-                            child: Image.network(
-                              _dx.userInfo['profile_photo_url'],
-                              width: screenWidth(90),
-                              height: screenWidth(90),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(screenWidth(90)),
+                              child: Image.network(
+                                _dx.userInfo['profile_photo_url'],
+                                width: screenWidth(90),
+                                height: screenWidth(90),
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ))
                       : Container(),

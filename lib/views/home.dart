@@ -31,7 +31,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Widget personDetailCard(item) {
+  Widget personDetailCard(item, index) {
     dynamic email = item['email'];
     dynamic imageName = item['profile_photo_url'];
     String name = item['name'].toString();
@@ -72,18 +72,39 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(right: screenWidth(10.0)),
-                child: CustomButton(
-                    title: 'Rate',
-                    width: screenWidth(80),
-                    padding: screenWidth(5),
-                    radius: screenWidth(5),
-                    style: bodyStyle7.copyWith(color: Colors.white),
-                    onTap: () {
-                      navigateReviewScreen(empId, name, email, phone, imageName);
-                    }),
-              ),
+              if (index != 2 && index != 4)
+                Container(
+                  padding: EdgeInsets.only(right: screenWidth(10.0)),
+                  child: CustomButton(
+                      title: 'Rate',
+                      width: screenWidth(80),
+                      padding: screenWidth(5),
+                      radius: screenWidth(5),
+                      style: bodyStyle7.copyWith(color: Colors.white),
+                      onTap: () {
+                        navigateReviewScreen(empId, name, email, phone, imageName);
+                      }),
+                ),
+              if (index == 4)
+                Container(
+                  padding: EdgeInsets.only(right: screenWidth(10.0)),
+                  child: CustomButton(
+                      title: 'Rated',
+                      color: Colors.white,
+                      border: Border.all(width: 1, color: primaryDarkColor),
+                      width: screenWidth(80),
+                      padding: screenWidth(5),
+                      radius: screenWidth(5),
+                      style: bodyStyle7.copyWith(color: primaryDarkColor),
+                      onTap: () {
+                        navigateReviewScreen(empId, name, email, phone, imageName);
+                      }),
+                ),
+              if (index == 2)
+                Container(
+                  padding: EdgeInsets.only(right: screenWidth(10.0)),
+                  child: Text('Working', style: bodyStyle7.copyWith(color: Colors.green)),
+                ),
             ],
           ),
         ),
@@ -200,7 +221,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         builder: (_dx) => ListView.builder(
                           itemCount: _dx.itemList.length,
                           itemBuilder: (context, index) {
-                            return personDetailCard(_dx.itemList[index]);
+                            return personDetailCard(_dx.itemList[index], index);
                           },
                         ),
 
