@@ -18,6 +18,19 @@ final String sadEmoji = 'assets/images/sad.png';
 final String okEmoji = 'assets/images/ok.png';
 final String goodEmoji = 'assets/images/good.png';
 final String veryGoodEmoji = 'assets/images/very_good.png';
+
+final String happy = 'assets/images/happy-1.png';
+final String smile = 'assets/images/smile-1.png';
+final String ok = 'assets/images/meh-1.png';
+final String sad = 'assets/images/sad-1.png';
+final String bad = 'assets/images/sad-2.png';
+
+final String happyY = 'assets/images/happy.png';
+final String smileY = 'assets/images/smile.png';
+final String okY = 'assets/images/meh.png';
+final String sadY = 'assets/images/sad1.png';
+final String badY = 'assets/images/sad2.png';
+
 final String notificationIcon = 'assets/images/notification.png';
 final String userIcon = 'assets/images/user.png';
 final String emailIcon = 'assets/images/email.png';
@@ -25,3 +38,4 @@ final String phoneIcon = 'assets/images/phone.png';
 final String backIcon = 'assets/images/back.png';
 final String logoutIcon = 'assets/images/logout.png';
 final String rightArrowIcon = 'assets/images/right_arrow.png';
+final String closeIcon = 'assets/images/close.png';

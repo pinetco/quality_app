@@ -174,7 +174,6 @@ class Login extends StatelessWidget {
                           padding: EdgeInsets.all(screenWidth(10)),
                           child: CustomButton(
                             title: "Login",
-                            padding: screenWidth(20),
                             onTap: () {
                               loginController.login();
                             },

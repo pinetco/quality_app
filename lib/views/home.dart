@@ -143,10 +143,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                'Quality Control',
-                                style: h1,
-                              ),
+                              GetBuilder<StoreController>(builder: (_dx) {
+                                if (storeCtrl.userInfo != null &&
+                                    storeCtrl.userInfo['franchisee'] != null &&
+                                    storeCtrl.userInfo['franchisee']['logo_url'] != null)
+                                  return Image.network(
+                                    storeCtrl.userInfo['franchisee']['logo_url'],
+                                    height: screenHeight(50),
+                                  );
+                                return Text(
+                                  'Quality Control',
+                                  style: h1,
+                                );
+                              }),
                               Spacer(),
                               Image.asset(
                                 notificationIcon,

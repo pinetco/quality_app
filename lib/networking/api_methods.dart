@@ -13,6 +13,8 @@ const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";
 const String appInformationAPI = "/app-information";
 const String userAPI = "/user";
+String visitDateAPI(id) => "/options/employees/$id/visit-dates";
+String reviewDateWise(id, date) => "/employees/$id/review?date=$date";
 
 const int successCode = 200;
 const int authorizationCode = 401;

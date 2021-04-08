@@ -8,7 +8,7 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
 
   @override
   void onInit() {
-    getData();
+    //getData();
     super.onInit();
   }
 
@@ -23,26 +23,26 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
     // Navigator.pop(Get.context);
   }
 
-  getData() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        Apis.getApi(userAPI, []).then((res) async {
-          Loader().hideLoading();
-          if (res.StatusCode == 200) {
-            final data = res.Data['data'];
-            print(data);
-            userInfo = data;
-
-            update();
-          } else {}
-        }, onError: (e) {
-          print('e');
-        });
-      }
-    } on SocketException catch (_) {
-      print('Socket');
-    }
-  }
+  // getData() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       Loader().showLoading();
+  //       Apis.getApi(userAPI, []).then((res) async {
+  //         Loader().hideLoading();
+  //         if (res.StatusCode == 200) {
+  //           final data = res.Data['data'];
+  //           print(data);
+  //           userInfo = data;
+  //
+  //           update();
+  //         } else {}
+  //       }, onError: (e) {
+  //         print('e');
+  //       });
+  //     }
+  //   } on SocketException catch (_) {
+  //     print('Socket');
+  //   }
+  // }
 }

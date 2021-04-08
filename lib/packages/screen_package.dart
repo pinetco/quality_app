@@ -13,3 +13,5 @@ export 'package:quality_app/views/discount.dart';
 export 'package:quality_app/views/profile.dart';
 export 'package:quality_app/views/home.dart';
 export 'package:quality_app/views/review_submission.dart';
+export 'package:quality_app/views/survey_info.dart';
+export 'package:quality_app/views/survey_step.dart';

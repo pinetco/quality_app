@@ -1,6 +1,8 @@
 import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/store_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/packages/input_package.dart';
 import 'package:quality_app/theme/theme_service.dart';
 import 'package:lottie/lottie.dart';
 
@@ -13,6 +15,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   AnimationController _animationController;
   bool isPlaying = false;
   var settingCtrl = Get.put(SettingController());
+  var storeCtrl = Get.find<StoreController>();
 
   @override
   void initState() {
@@ -78,7 +81,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
             child: Column(
               children: [
                 Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
-                GetBuilder<SettingController>(
+                GetBuilder<StoreController>(
                   builder: (_dx) => _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
                       ? Container(
                           height: screenWidth(90),
@@ -99,7 +102,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 SizedBox(
                   height: screenHeight(30),
                 ),
-                GetBuilder<SettingController>(
+                GetBuilder<StoreController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? Container(
                             width: screenActualWidth(),
@@ -120,7 +123,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 SizedBox(
                   height: screenHeight(10),
                 ),
-                GetBuilder<SettingController>(
+                GetBuilder<StoreController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? Container(
                             width: screenActualWidth(),
@@ -144,7 +147,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 SizedBox(
                   height: screenHeight(10),
                 ),
-                GetBuilder<SettingController>(
+                GetBuilder<StoreController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? Container(
                             width: screenActualWidth(),
@@ -166,23 +169,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           )
                         : Container()),
                 Spacer(),
-                Container(
-                  height: screenHeight(50),
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth(15)),
-                  decoration: BoxDecoration(color: primaryDarkColor, borderRadius: BorderRadius.circular(screenWidth(5))),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Quarterly Survey',
-                        style: bodyStyle5.copyWith(color: Colors.white),
-                      ),
-                      Spacer(),
-                      Image.asset(
-                        rightArrowIcon,
-                        width: screenWidth(20),
-                      ),
-                    ],
+                CustomButton(
+                  title: "Quarterly Survey",
+                  suffixIcon: Image.asset(
+                    rightArrowIcon,
+                    width: screenWidth(20),
                   ),
+                  onTap: () {
+                    Get.toNamed(AppRouter.surveyInfo);
+                  },
                 ),
               ],
             ),

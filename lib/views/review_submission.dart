@@ -31,28 +31,52 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
     super.dispose();
   }
 
-  manageColor(id, color, count) {
+  // manageColor(id, color, count) {
+  //   dynamic rating = reviewSubmissionCtrl.getReviewEmoji(id, count);
+  //   if (rating >= count) {
+  //     return color;
+  //   }
+  //   return color.withOpacity(0.4);
+  // }
+
+  mangeImage(count, bool) {
+    if (count == 1) return bool ? badY : bad;
+    if (count == 2) return bool ? sadY : sad;
+    if (count == 3) return bool ? okY : ok;
+    if (count == 4) return bool ? smileY : smile;
+    if (count == 5) return bool ? happyY : happy;
+  }
+
+  manageReview(id, color, count) {
     dynamic rating = reviewSubmissionCtrl.getReviewEmoji(id, count);
     if (rating >= count) {
-      return color;
+      return Image.asset(
+        mangeImage(count, true),
+        width: screenHeight(28),
+      );
     }
-    return color.withOpacity(0.4);
+    return Image.asset(
+      mangeImage(count, false),
+      width: screenHeight(28),
+    );
   }
 
   Widget ratingWidget(icon, id, ratingCount, color) {
     return Padding(
-      padding: EdgeInsets.only(right: screenWidth(10)),
+      padding: EdgeInsets.only(right: screenWidth(13)),
       child: InkWell(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-          reviewSubmissionCtrl.selectedReview(ratingCount, 'Good', id);
+          if (reviewSubmissionCtrl.existingReview == null) reviewSubmissionCtrl.selectedReview(ratingCount, 'Good', id);
         },
-        child: Icon(
-          icon,
-          size: screenWidth(40),
-          color: manageColor(id, color, ratingCount),
-        ),
+        child: manageReview(id, color, ratingCount),
+
+        // Icon(
+        //   icon,
+        //   size: screenWidth(40),
+        //   color: manageColor(id, color, ratingCount),
+        // ),
       ),
     );
   }
@@ -161,44 +185,64 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     ),
                   ),
                 ),
-                Align(alignment: Alignment.topLeft, child: Text('Date', style: bodyStyle5.copyWith(color: black22Color))),
-                SizedBox(height: screenHeight(10)),
-                Container(
-                  width: screenActualWidth(),
-                  padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                  decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
-                  child: Text(
-                    reviewSubmissionCtrl.txtDateTime,
-                    style: bodyStyle5.copyWith(color: black22Color),
-                  ),
-                ),
-                Container(
-                  width: screenActualWidth(),
-                  height: screenHeight(50),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: reviewSubmissionCtrl.selectedDateArray.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final item = reviewSubmissionCtrl.selectedDateArray;
-                        return Padding(
-                          padding: EdgeInsets.only(right: screenWidth(10)),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: screenWidth(15)),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(screenWidth(25)),
-                              color: primaryDarkColor,
-                            ),
-                            child: Center(
+                GetBuilder<ReviewSubmissionController>(builder: (_) {
+                  final dateList = reviewSubmissionCtrl.dateList;
+                  return Column(
+                    children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(dateList.length > 0 ? 'Selecte Date' : 'Date', style: bodyStyle5.copyWith(color: black22Color))),
+                      SizedBox(height: screenHeight(10)),
+                      dateList.length == 0
+                          ? Container(
+                              width: screenActualWidth(),
+                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
                               child: Text(
-                                '${item[index]}',
-                                style: bodyStyle5.copyWith(color: Colors.white),
+                                reviewSubmissionCtrl.txtDateTime,
+                                style: bodyStyle5.copyWith(color: black22Color),
                               ),
+                            )
+                          : Container(
+                              width: screenActualWidth(),
+                              height: screenHeight(50),
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: dateList.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    final item = dateList[index];
+                                    final year = item['year'] ?? '';
+                                    final month = item['month'] ?? '';
+                                    final day = item['day'] ?? '';
+
+                                    final date = year != null ? "$year-$month-$day" : null;
+                                    return Padding(
+                                      padding: EdgeInsets.only(right: screenWidth(10)),
+                                      child: InkWell(
+                                        onTap: () {
+                                          reviewSubmissionCtrl.tapToSelectDate(date);
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(horizontal: screenWidth(15)),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(screenWidth(25)),
+                                            color: reviewSubmissionCtrl.pickDate == date ? primaryDarkColor : Colors.grey[100],
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '$date',
+                                              style: bodyStyle5.copyWith(color: reviewSubmissionCtrl.pickDate == date ? Colors.white : black22Color),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
                             ),
-                          ),
-                        );
-                      }),
-                ),
+                    ],
+                  );
+                }),
 
                 /*  InkWell(
                   onTap: () async {
@@ -258,6 +302,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                             itemBuilder: (context, index) {
                               dynamic item = storeCtrl.questionList[index];
                               String title = item['title'] ?? '';
+
                               int id = item['id'] ?? '';
                               return Container(
                                 padding: EdgeInsets.symmetric(vertical: screenWidth(10)),
@@ -329,12 +374,16 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   ),
                 ),
                 SizedBox(height: screenWidth(30)),
-                CustomButton(
-                  title: 'Submit',
-                  onTap: () {
-                    reviewSubmissionCtrl.saveReview(true);
-                  },
-                ),
+                GetBuilder<ReviewSubmissionController>(builder: (_) {
+                  if (reviewSubmissionCtrl.existingReview == null)
+                    return CustomButton(
+                      title: 'Submit',
+                      onTap: () {
+                        reviewSubmissionCtrl.saveReview(true);
+                      },
+                    );
+                  return Container();
+                }),
               ],
             ),
           ),

@@ -13,6 +13,7 @@ class CustomButton extends StatelessWidget {
   final IconData icon;
   final double width;
   final Border border;
+  final Widget suffixIcon;
 
   const CustomButton(
       {Key key,
@@ -26,6 +27,7 @@ class CustomButton extends StatelessWidget {
       this.iconColor,
       this.iconSize = 25,
       this.width,
+      this.suffixIcon,
       this.border})
       : super(key: key);
 
@@ -61,6 +63,15 @@ class CustomButton extends StatelessWidget {
                     style: style ?? bodyStyle4.copyWith(color: whiteColor),
                     textAlign: TextAlign.center,
                   ),
+                  if (suffixIcon != null)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Spacer(),
+                          suffixIcon,
+                        ],
+                      ),
+                    )
                 ],
               ),
             ),

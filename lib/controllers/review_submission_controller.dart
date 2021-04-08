@@ -31,6 +31,10 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   String get isRatingText => _ratingText.value;
   Map questionObj;
   String txtDateTime;
+  List dateList = [];
+
+  String pickDate;
+  dynamic existingReview;
 
   dynamic selectedDateArray = ['2021-03-03', '2021-03-06', '2021-03-10', '2021-03-12', '2021-03-15'];
 
@@ -48,6 +52,8 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     // txtDateTime.text = formattedDate;
     txtDateTime = formattedDate;
 
+    getReviewDateList();
+
     update();
     super.onInit();
   }
@@ -55,6 +61,34 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   @override
   void dispose() {
     super.dispose();
+  }
+
+  getReviewDateList() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Loader().showLoading();
+
+        Apis.getApi(visitDateAPI(empId), []).then((res) async {
+          Loader().hideLoading();
+          print('date');
+          if (res.StatusCode == 200) {
+            final data = res.Data;
+            print('data $data');
+            dateList = data['data'] ?? [];
+            print('data*** $dateList');
+            if (dateList.length > 0) {
+              final date = dateList[0];
+              pickDate = "${date['year']}-${date['month']}-${date['day']}";
+            }
+            getReview();
+            update();
+          } else {}
+        }, onError: (e) {
+          Loader().hideLoading();
+        });
+      }
+    } on SocketException catch (_) {}
   }
 
   updateDate(val) {
@@ -88,7 +122,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       return ratings;
       // }
     }
-    return 3;
+    return 0;
   }
 
   Future<void> _showMyDialog() async {
@@ -109,7 +143,9 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
             TextButton(
               child: Text('Ok'),
               onPressed: () {
-                Get.offAndToNamed(AppRouter.home);
+                print('press Okay');
+
+                Navigator.pop(Get.context);
               },
             ),
           ],
@@ -138,9 +174,42 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
           if (res.StatusCode == 200 || res.StatusCode == 201) {
             if (isNavigation) {
+              Get.back();
               _showMyDialog();
               //  Get.offAndToNamed(AppRouter.home);
             }
+          } else {}
+        }, onError: (e) {
+          Loader().hideLoading();
+        });
+      }
+    } on SocketException catch (_) {}
+  }
+
+  tapToSelectDate(text) {
+    pickDate = text;
+    update();
+  }
+
+  getReview() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Loader().showLoading();
+
+        Apis.getApi(reviewDateWise(empId, pickDate), []).then((res) async {
+          Loader().hideLoading();
+          print('res');
+          print(res.StatusCode);
+          if (res.StatusCode == 200) {
+            print('res');
+            final data = res.Data;
+            print(data['data']);
+            existingReview = data['data'] ?? null;
+            txtComment.text = existingReview['comment'] ?? '';
+            txtWish.text = existingReview['wish'] ?? '';
+            questions = existingReview['questions'];
+            update();
           } else {}
         }, onError: (e) {
           Loader().hideLoading();

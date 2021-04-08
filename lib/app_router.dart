@@ -21,12 +21,16 @@ class AppRouter {
   static const cart = '/cart';
   static const contractDetails = '/contractDetails';
   static const reviewSubmission = '/reviewSubmission';
+  static const surveyInfo = '/surveyInfo';
+  static const surveyStep = '/surveyStep';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
     GetPage(name: forgotPassword, page: () => ForgotPassword()),
     GetPage(name: home, page: () => Home()),
     GetPage(name: reviewSubmission, page: () => ReviewSubmission()),
+    GetPage(name: surveyInfo, page: () => SurveyInfo()),
+    GetPage(name: surveyStep, page: () => SurveyStep()),
     GetPage(name: discount, page: () => Discount()),
     GetPage(name: profile, page: () => Profile()),
     GetPage(name: stylingScreen, page: () => StylingScreen()),

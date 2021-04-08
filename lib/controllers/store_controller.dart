@@ -35,12 +35,14 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
   List itemList = [];
   List questionList = [];
   bool updateAlert = false;
+  dynamic userInfo;
 
   @override
   void onInit() {
     // TODO: implement onInit
     // wait untill widget load
     // WidgetsBinding.instance.addPostFrameCallback((_) {
+    getUserInfo();
     getData();
     // checkVersion();
     getAllQuestion();
@@ -48,6 +50,29 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
     // });
 
     super.onInit();
+  }
+
+  getUserInfo() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Loader().showLoading();
+        Apis.getApi(userAPI, []).then((res) async {
+          Loader().hideLoading();
+          if (res.StatusCode == 200) {
+            final data = res.Data['data'];
+            print(data);
+            userInfo = data;
+
+            update();
+          } else {}
+        }, onError: (e) {
+          print('e');
+        });
+      }
+    } on SocketException catch (_) {
+      print('Socket');
+    }
   }
 
   checkVersion() async {
