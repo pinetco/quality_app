@@ -68,7 +68,6 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         Loader().showLoading();
-
         Apis.getApi(visitDateAPI(empId), []).then((res) async {
           Loader().hideLoading();
           if (res.StatusCode == 200) {
@@ -191,7 +190,6 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         Loader().showLoading();
-
         Apis.getApi(reviewDateWise(empId, pickDate), []).then((res) async {
           Loader().hideLoading();
           if (res.StatusCode == 200) {
@@ -200,8 +198,10 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
             txtComment.text = existingReview['comment'] ?? '';
             txtWish.text = existingReview['wish'] ?? '';
             questions = existingReview['questions'];
-            update();
-          } else {}
+          } else {
+            questions = [];
+          }
+          update();
         }, onError: (e) {
           Loader().hideLoading();
         });

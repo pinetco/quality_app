@@ -375,7 +375,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 ),
                 SizedBox(height: screenWidth(30)),
                 GetBuilder<ReviewSubmissionController>(builder: (_) {
-                  if (reviewSubmissionCtrl.existingReview == null)
+                  if (reviewSubmissionCtrl.existingReview == null || reviewSubmissionCtrl.questions.length == 0)
                     return CustomButton(
                       title: 'Submit',
                       onTap: () {
