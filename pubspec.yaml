@@ -45,6 +45,7 @@ dependencies:
   http: ^0.12.2
   forceupdate: ^0.0.6
   open_appstore: ^1.0.2
+  url_launcher: ^6.0.3
 
 
 flutter_native_splash:

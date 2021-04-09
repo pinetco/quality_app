@@ -34,53 +34,82 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        // automaticallyImplyLeading: false,
-        actions: [
-          Center(
-            child: InkWell(
-              highlightColor: Colors.white,
-              splashColor: Colors.transparent,
-              onTap: () {
-                settingCtrl.navigationBack();
-                //bottomCtrl.updateCurrentTab(2);
-              },
-              child: Padding(
-                  padding: EdgeInsets.only(left: screenWidth(20.0)),
-                  child: Image.asset(
-                    backIcon,
-                    width: screenWidth(20),
-                  )),
-            ),
-          ),
-          Spacer(),
-          Center(
-            child: InkWell(
-              highlightColor: Colors.white,
-              splashColor: Colors.transparent,
-              onTap: () {
-                settingCtrl.logout();
-                //bottomCtrl.updateCurrentTab(2);
-              },
-              child: Padding(
-                  padding: EdgeInsets.only(right: screenWidth(20.0)),
-                  child: Image.asset(
-                    logoutIcon,
-                    width: screenWidth(16),
-                  )),
-            ),
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   automaticallyImplyLeading: false,
+      //   actions: [
+      //     Center(
+      //       child: Padding(padding: EdgeInsets.only(left: screenWidth(20.0)), child: Text('Profile', style: h1)),
+      //     ),
+      //     // Center(
+      //     //   child: InkWell(
+      //     //     highlightColor: Colors.white,
+      //     //     splashColor: Colors.transparent,
+      //     //     onTap: () {
+      //     //       settingCtrl.navigationBack();
+      //     //       //bottomCtrl.updateCurrentTab(2);
+      //     //     },
+      //     //     child: Padding(
+      //     //         padding: EdgeInsets.only(left: screenWidth(20.0)),
+      //     //         child: Image.asset(
+      //     //           backIcon,
+      //     //           width: screenWidth(20),
+      //     //         )),
+      //     //   ),
+      //     // ),
+      //     Spacer(),
+      //     Padding(
+      //       padding: EdgeInsets.only(right: screenWidth(20.0)),
+      //       child: Image.asset(
+      //         notificationIcon,
+      //         width: screenWidth(20),
+      //       ),
+      //     ),
+      //     // Center(
+      //     //   child: InkWell(
+      //     //     highlightColor: Colors.white,
+      //     //     splashColor: Colors.transparent,
+      //     //     onTap: () {
+      //     //       settingCtrl.logout();
+      //     //       //bottomCtrl.updateCurrentTab(2);
+      //     //     },
+      //     //     child: Padding(
+      //     //         padding: EdgeInsets.only(right: screenWidth(20.0)),
+      //     //         child: Image.asset(
+      //     //           notificationIcon,
+      //     //           width: screenWidth(16),
+      //     //         )),
+      //     //   ),
+      //     // )
+      //   ],
+      // ),
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
             child: Column(
               children: [
-                Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
+                // Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
+                Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text(
+                          'Profile',
+                          style: h1,
+                        ),
+                        Spacer(),
+                        Image.asset(
+                          notificationIcon,
+                          width: screenWidth(20),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: screenHeight(30)),
                 GetBuilder<StoreController>(
                   builder: (_dx) => _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
                       ? Container(
@@ -129,22 +158,28 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 ),
                 GetBuilder<StoreController>(
                     builder: (_dx) => _dx.userInfo != null
-                        ? Container(
-                            width: screenActualWidth(),
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  emailIcon,
-                                  width: screenWidth(20),
-                                ),
-                                SizedBox(width: screenWidth(10)),
-                                Text(
-                                  _dx.userInfo['email'].toString(),
-                                  style: bodyStyle5.copyWith(color: black22Color),
-                                )
-                              ],
+                        ? InkWell(
+                            onTap: () {
+                              final email = _dx.userInfo['email'].toString();
+                              settingCtrl.openURL(email, 'email');
+                            },
+                            child: Container(
+                              width: screenActualWidth(),
+                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    emailIcon,
+                                    width: screenWidth(20),
+                                  ),
+                                  SizedBox(width: screenWidth(10)),
+                                  Text(
+                                    _dx.userInfo['email'].toString(),
+                                    style: bodyStyle5.copyWith(color: black22Color),
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         : Container()),
@@ -153,35 +188,40 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 ),
                 GetBuilder<StoreController>(
                     builder: (_dx) => _dx.userInfo != null
-                        ? Container(
-                            width: screenActualWidth(),
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  phoneIcon,
-                                  width: screenWidth(20),
-                                ),
-                                SizedBox(width: screenWidth(10)),
-                                Text(
-                                  _dx.userInfo['phone'].toString(),
-                                  style: bodyStyle5.copyWith(color: black22Color),
-                                ),
-                              ],
+                        ? InkWell(
+                            onTap: () {
+                              final phone = _dx.userInfo['phone'].toString();
+                              settingCtrl.openURL(phone, 'phone');
+                            },
+                            child: Container(
+                              width: screenActualWidth(),
+                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    phoneIcon,
+                                    width: screenWidth(20),
+                                  ),
+                                  SizedBox(width: screenWidth(10)),
+                                  Text(
+                                    _dx.userInfo['phone'].toString(),
+                                    style: bodyStyle5.copyWith(color: black22Color),
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         : Container()),
                 Spacer(),
-                CustomButton(
-                  title: "Quarterly Survey",
-                  suffixIcon: Image.asset(
-                    rightArrowIcon,
-                    width: screenWidth(20),
+                Padding(
+                  padding: EdgeInsets.all(screenWidth(10)),
+                  child: CustomButton(
+                    title: "Logout",
+                    onTap: () {
+                      settingCtrl.logout();
+                    },
                   ),
-                  onTap: () {
-                    Get.toNamed(AppRouter.surveyInfo);
-                  },
                 ),
               ],
             ),

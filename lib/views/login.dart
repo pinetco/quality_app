@@ -33,11 +33,11 @@ class Login extends StatelessWidget {
           if (loginOption == "mobile")
             PhoneNumberWithCountry(
               onInputChanged: (val) async {
-                print(val.phoneNumber);
-                print(val.dialCode);
-                print(val.isoCode);
+                // print(val.phoneNumber);
+                // print(val.dialCode);
+                // print(val.isoCode);
 
-                print(loginController.txtMobile.text); // Text input value;
+                // print(loginController.txtMobile.text); // Text input value;
                 loginController.updateIsoCode(val.isoCode, val.dialCode);
               },
               txtMobile: loginController.txtMobile,
@@ -59,7 +59,7 @@ class Login extends StatelessWidget {
                 },
               ),
               obscureText: loginController.isObscureText,
-              style: bodyStyle5,
+              style: bodyStyle5.copyWith(color: black22Color),
               keyboardType: TextInputType.text,
               padding: 18,
             ),

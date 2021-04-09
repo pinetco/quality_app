@@ -42,6 +42,11 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     // Loader().showLoading();
     // await Future.delayed(Duration(seconds: 5));
     // Loader().hideLoading();
+    _isoCode = 'US';
+    _dialCode = '+1';
+    txtMobile.text = '497449196605';
+    txtPassword.text = 'password';
+
     final loginCRD = storage.read('loginCredential');
     if (loginCRD != null) {
       final jsonDecode = json.decode(loginCRD);
@@ -99,16 +104,12 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
         Loader().showLoading();
 
         final formData = {
-          'phone': txtMobile.text != '' ? '+1497449196605' : '',
+          'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
           'password': txtPassword.text,
         };
 
         if (isRememberLogin) {
-          final loginDetails = {
-            'iso_code': isoCode,
-            "mobile": txtMobile.text,
-            "password": txtPassword.text,
-          };
+          final loginDetails = {'iso_code': isoCode, "mobile": txtMobile.text, "password": txtPassword.text, "dialCode": dialCode};
           storage.write("loginCredential", json.encode(loginDetails));
         }
 
@@ -118,7 +119,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
             final data = res.Data['data'];
 
             storage.write(Session.authToken, data['token']);
-            Get.offAndToNamed(AppRouter.home);
+            Get.offAndToNamed(AppRouter.bottomNavigationScreen);
           } else if (res.StatusCode == 422) {
             final data = res.Data;
 

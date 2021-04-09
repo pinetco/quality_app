@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingController extends GetxController with SingleGetTickerProviderMixin {
   dynamic userInfo;
@@ -27,6 +27,30 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
 
   logout() {
     _showMyDialog();
+  }
+
+  openURL(val, type) {
+    if (type == 'phone') {
+      launch("tel://$val");
+    }
+    if (type == 'email') {
+      final Uri _emailLaunchUri = Uri(scheme: 'mailto', path: val, queryParameters: {'subject': 'Example Subject & Symbols are allowed!'});
+      launch(_emailLaunchUri.toString());
+    }
+  }
+
+  openURLContactInfo(val, type) async {
+    if (type == 'phone') {
+      launch("tel://$val");
+    }
+    if (type == 'email') {
+      final Uri _emailLaunchUri = Uri(scheme: 'mailto', path: val, queryParameters: {'subject': 'Example Subject & Symbols are allowed!'});
+      launch(_emailLaunchUri.toString());
+    }
+
+    if (type == 'website') {
+      await launch(val);
+    }
   }
 
   // getData() async {

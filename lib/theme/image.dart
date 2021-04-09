@@ -39,3 +39,16 @@ final String backIcon = 'assets/images/back.png';
 final String logoutIcon = 'assets/images/logout.png';
 final String rightArrowIcon = 'assets/images/right_arrow.png';
 final String closeIcon = 'assets/images/close.png';
+
+final String logoCont = 'assets/images/logo1.png';
+
+final String tab1 = 'assets/images/tab1.png';
+final String tab1A = 'assets/images/tab-active1.png';
+final String tab2 = 'assets/images/tab2.png';
+final String tab2A = 'assets/images/tab-active2.png';
+final String tab3 = 'assets/images/tab3.png';
+final String tab3A = 'assets/images/tab-active3.png';
+final String tab4 = 'assets/images/tab4.png';
+final String tab4A = 'assets/images/tab-active4.png';
+final String tab5 = 'assets/images/tab5.png';
+final String tab5A = 'assets/images/tab-active5.png';

@@ -12,7 +12,22 @@ import 'package:quality_app/networking/api_methods.dart';
 import 'common/loader_controller.dart';
 
 class SurveyStepController extends GetxController with SingleGetTickerProviderMixin {
-  int groupVal = 1;
+  Map selected = new Map();
+
+  int step1groupVal1 = 1;
+  int step1groupVal2 = 1;
+  int step1groupVal3 = 1;
+
+  int step2groupVal1 = 1;
+  int step2groupVal2 = 1;
+  int step2groupVal3 = 1;
+
+  int step3groupVal1 = 1;
+  int step3groupVal2 = 1;
+  int step3groupVal3 = 1;
+
+  int groupVal2 = 2;
+  int groupVal3 = 3;
   int totalStep = 3;
   int activeStep = 1;
   dynamic progressBarWidth;
@@ -24,8 +39,18 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
     super.onInit();
   }
 
-  tapOnquestions(val) {
-    groupVal = val;
+  tapOnquestions(groupName, val) {
+    if (groupName == 'step1groupVal1') step1groupVal1 = val;
+    if (groupName == 'step1groupVal2') step1groupVal2 = val;
+    if (groupName == 'step1groupVal3') step1groupVal3 = val;
+
+    if (groupName == 'step2groupVal1') step2groupVal1 = val;
+    if (groupName == 'step2groupVal2') step2groupVal2 = val;
+    if (groupName == 'step2groupVal3') step2groupVal3 = val;
+
+    if (groupName == 'step3groupVal1') step3groupVal1 = val;
+    if (groupName == 'step3groupVal2') step3groupVal2 = val;
+    if (groupName == 'step3groupVal3') step3groupVal3 = val;
 
     update();
   }

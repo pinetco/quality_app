@@ -31,82 +31,77 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Widget personDetailCard(item, index) {
+  Widget personDetailCard(item, index, status) {
     dynamic email = item['email'];
     dynamic imageName = item['profile_photo_url'];
     String name = item['name'].toString();
     String phone = item['phone'].toString();
     int empId = item['id'];
-    return InkWell(
-      onTap: () {
-        navigateReviewScreen(empId, name, email, phone, imageName);
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(20)),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: screenWidth(5.0)),
-          decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(10))),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(10)),
-                child: Container(
-                    width: screenWidth(60.0),
-                    height: screenWidth(60.0),
-                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(20)),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: screenWidth(5.0)),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(10))),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(10)),
+              child: Container(
+                  width: screenWidth(60.0),
+                  height: screenWidth(60.0),
+                  decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(
+                    name,
+                    style: bodyStyle5.copyWith(color: black22Color),
+                  ),
+                  Text(
+                    status == '' ? '2014-02-23' : '2020-03-04',
+                    style: bodyStyle6.copyWith(color: grayColor),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Text(
-                      name,
-                      style: bodyStyle5.copyWith(color: black22Color),
-                    ),
-                    Text(
-                      phone,
-                      style: bodyStyle6.copyWith(color: grayColor),
-                    ),
-                  ],
-                ),
+            ),
+            if (status == '')
+              Container(
+                padding: EdgeInsets.only(right: screenWidth(10.0)),
+                child: CustomButton(
+                    title: 'Rate',
+                    width: screenWidth(80),
+                    padding: screenWidth(5),
+                    radius: screenWidth(5),
+                    style: bodyStyle6.copyWith(color: Colors.white),
+                    onTap: () {
+                      navigateReviewScreen(empId, name, email, phone, imageName);
+                    }),
               ),
-              if (index != 2 && index != 4)
-                Container(
-                  padding: EdgeInsets.only(right: screenWidth(10.0)),
-                  child: CustomButton(
-                      title: 'Rate',
-                      width: screenWidth(80),
-                      padding: screenWidth(5),
-                      radius: screenWidth(5),
-                      style: bodyStyle7.copyWith(color: Colors.white),
-                      onTap: () {
-                        navigateReviewScreen(empId, name, email, phone, imageName);
-                      }),
-                ),
-              if (index == 4)
-                Container(
-                  padding: EdgeInsets.only(right: screenWidth(10.0)),
-                  child: CustomButton(
-                      title: 'Rated',
-                      color: Colors.white,
-                      border: Border.all(width: 1, color: primaryDarkColor),
-                      width: screenWidth(80),
-                      padding: screenWidth(5),
-                      radius: screenWidth(5),
-                      style: bodyStyle7.copyWith(color: primaryDarkColor),
-                      onTap: () {
-                        navigateReviewScreen(empId, name, email, phone, imageName);
-                      }),
-                ),
-              if (index == 2)
-                Container(
-                  padding: EdgeInsets.only(right: screenWidth(10.0)),
-                  child: Text('Working', style: bodyStyle7.copyWith(color: Colors.green)),
-                ),
-            ],
-          ),
+            /* if (index == 2)
+              Container(
+                padding: EdgeInsets.only(right: screenWidth(10.0)),
+                child: CustomButton(
+                    title: 'Rated',
+                    color: Colors.white,
+                    border: Border.all(width: 1, color: primaryDarkColor),
+                    width: screenWidth(80),
+                    padding: screenWidth(5),
+                    radius: screenWidth(5),
+                    style: bodyStyle6.copyWith(color: primaryDarkColor),
+                    onTap: () {
+                      navigateReviewScreen(empId, name, email, phone, imageName);
+                    }),
+              ),*/
+            if (status == 'working')
+              Container(
+                padding: EdgeInsets.only(right: screenWidth(10.0)),
+                child: Text('Working', style: bodyStyle6.copyWith(color: Colors.green)),
+              ),
+          ],
         ),
       ),
     );
@@ -157,6 +152,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
@@ -185,154 +181,145 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               SizedBox(
                                 width: screenWidth(15),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  Get.toNamed(AppRouter.profile);
-                                },
-                                child: Image.asset(
-                                  userIcon,
-                                  width: screenWidth(20),
+                              // InkWell(
+                              //   onTap: () {
+                              //     Get.toNamed(AppRouter.profile);
+                              //   },
+                              //   child: Image.asset(
+                              //     userIcon,
+                              //     width: screenWidth(20),
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Expanded(
+                      child: SizedBox(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: screenHeight(20)),
+                                    Align(alignment: Alignment.topLeft, child: Text('Survey', style: h4)),
+                                    SizedBox(height: screenHeight(4)),
+                                    Text(
+                                      'Thank you for being our loyal customer. As you know quality and customer satisfaction is our top priority. It would be awesome if you could fill out our quarterly survey.',
+                                      style: bodyStyle6.copyWith(color: grayColor),
+                                    ),
+                                    SizedBox(height: screenHeight(15)),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                                child: CustomButton(
+                                  title: "Quarterly Survey",
+                                  suffixIcon: Image.asset(
+                                    rightArrowIcon,
+                                    width: screenWidth(20),
+                                  ),
+                                  onTap: () {
+                                    Get.toNamed(AppRouter.surveyInfo);
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: screenHeight(25)),
+                              Divider(
+                                height: screenHeight(5),
+                                color: dividerColor,
+                                thickness: 5,
+                              ),
+                              SizedBox(height: screenHeight(25)),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                                child: Text(
+                                  'Working Care Giver',
+                                  style: h5,
+                                ),
+                              ),
+                              GetBuilder<StoreController>(
+                                builder: (_dx) => ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: _dx.itemList.length,
+                                  itemBuilder: (context, index) {
+                                    if (index == 0) return personDetailCard(_dx.itemList[index], index, 'working');
+                                    return Container();
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: screenHeight(25)),
+                              Divider(
+                                height: screenHeight(5),
+                                color: dividerColor,
+                                thickness: 5,
+                              ),
+                              SizedBox(height: screenHeight(25)),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                                child: Text(
+                                  'Finished Visit',
+                                  style: h5,
+                                ),
+                              ),
+                              GetBuilder<StoreController>(
+                                builder: (_dx) => ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: _dx.itemList.length,
+                                  itemBuilder: (context, index) {
+                                    if (index == 0 || index == 1 || index == 2) return personDetailCard(_dx.itemList[index], index, '');
+                                    return Container();
+                                  },
                                 ),
                               ),
                             ],
                           ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Your review is making a difference!',
-                              style: bodyStyle4,
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Padding(
+                    /* Padding(
                       padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
-                      // child: CustomTextFormField(
-                      //   hintText: 'Search Contact',
-                      //   prefixIcon: Icon(MdiIcons.magnify),
-                      //   fillColor: Colors.grey.withOpacity(0.1),
-                      // ),
-                    ),
-                    Expanded(
+                      child: Text(
+                        'Working Vist',
+                        style: h6,
+                      ),
+                    ),*/
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                    //   // child: CustomTextFormField(
+                    //   //   hintText: 'Search Contact',
+                    //   //   prefixIcon: Icon(MdiIcons.magnify),
+                    //   //   fillColor: Colors.grey.withOpacity(0.1),
+                    //   // ),
+                    // ),
+                    /*Expanded(
                       child: Container(
                           child: GetBuilder<StoreController>(
                         builder: (_dx) => ListView.builder(
                           itemCount: _dx.itemList.length,
                           itemBuilder: (context, index) {
-                            return personDetailCard(_dx.itemList[index], index);
+                            if (index == 0 || index == 1 || index == 2) return personDetailCard(_dx.itemList[index], index);
+                            return Container();
                           },
                         ),
-
-                        /*  StaggeredGridView.countBuilder(
-                              crossAxisCount: 4,
-                              itemCount: _dx.itemList.length,
-                              padding: EdgeInsets.only(
-                                top: screenWidth(20),
-                                bottom: screenHeight(20),
-                                left: screenHeight(10),
-                                right: screenHeight(10),
-                              ),
-                              itemBuilder: (BuildContext context, int index) {
-                                dynamic item = _dx.itemList[index];
-                                dynamic email = item['email'];
-                                dynamic imageName = item['profile_photo_url'];
-                                String name = item['name'];
-                                String phone = item['phone'];
-                                int empId = item['id'];
-                                // String ratingImage = item['rating_image'];
-                                // dynamic ratingCount = item['rating_count'];
-                                // dynamic ratingStar = item['star_rating'];
-
-                                return InkWell(
-                                  onTap: () {
-                                    Get.toNamed(AppRouter.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone});
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      // border: Border.all(color: Colors.grey[300]),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 1,
-                                          offset: Offset(
-                                            5.0, // Move to right 10  horizontally
-                                            5.0, // Move to bottom 10 Vertically
-                                          ),
-                                        ),
-                                      ],
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                    ),
-                                    // padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: screenWidth(20.0),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(screenWidth(190)),
-                                            child: Image.network(
-                                              imageName,
-                                              height: screenWidth(90),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: screenHeight(10),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
-                                          child: Text(
-                                            name.toString(),
-                                            style: h3,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-
-                                        // Text(
-                                        //   email.toString(),
-                                        //   style: bodyStyle5.copyWith(color: Colors.black54),
-                                        // ),
-                                        Text(
-                                          phone.toString(),
-                                          style: bodyStyle5.copyWith(color: Colors.black54),
-                                        ),
-                                        SizedBox(height: screenWidth(20)),
-                                        // SizedBox(height: screenWidth(5)),
-                                        // Row(
-                                        //   mainAxisAlignment: MainAxisAlignment.center,
-                                        //   children: [
-                                        //     Image.asset(
-                                        //       ratingImage,
-                                        //       height: screenWidth(20),
-                                        //     ),
-                                        //     SizedBox(width: screenWidth(5)),
-                                        //     Text(
-                                        //       '($ratingStar)',
-                                        //       style: bodyStyle5,
-                                        //     ),
-                                        //     SizedBox(width: screenWidth(5)),
-                                        //     Text(
-                                        //       '$ratingCount ratings',
-                                        //       style: bodyStyle5,
-                                        //     ),
-                                        //   ],
-                                        // )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                              staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-                              mainAxisSpacing: screenWidth(20),
-                              crossAxisSpacing: screenWidth(20),
-                            ),*/
                       )),
-                    ),
+                    ),*/
+
+                    /*Padding(
+                      padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                      child: Text(
+                        'Unrated Vist',
+                        style: h6,
+                      ),
+                    ),*/
                   ],
                 ),
               ],

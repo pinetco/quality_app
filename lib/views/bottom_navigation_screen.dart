@@ -14,7 +14,13 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   var bottomCtrl = Get.put(BottomNavigationController());
 
-  List<Widget> _widgetOptions = <Widget>[Home(), Discount(), Profile()];
+  List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    CareGiversList(),
+    WishMessage(),
+    FrenchiserInfo(),
+    Profile(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,45 +29,57 @@ class _BottomNavigationState extends State<BottomNavigation> {
         body: GetBuilder<BottomNavigationController>(builder: (controller) => _widgetOptions.elementAt(bottomCtrl.currentTab)),
         bottomNavigationBar: GetBuilder<BottomNavigationController>(
           builder: (controller) => CustomNavigationBar(
-            borderRadius: Radius.circular(screenWidth(30)),
+            // borderRadius: Radius.circular(screenWidth(30)),
             items: [
               CustomNavigationBarItem(
-                icon: Icon(MdiIcons.formatListBulleted),
+                selectedIcon: Image.asset(
+                  tab4A,
+                  height: screenWidth(20),
+                ),
+                icon: Image.asset(
+                  tab4,
+                  height: screenWidth(20),
+                ),
               ),
               CustomNavigationBarItem(
-                icon: Icon(MdiIcons.tagOutline),
+                selectedIcon: Image.asset(
+                  tab5A,
+                  height: screenWidth(20),
+                ),
+                icon: Image.asset(
+                  tab5,
+                  height: screenWidth(20),
+                ),
               ),
-              // CustomNavigationBarItem(
-              //   icon: Stack(
-              //     overflow: Overflow.visible,
-              //     children: <Widget>[
-              //       new Icon(MdiIcons.shoppingOutline),
-              //       new Positioned(
-              //         right: -5,
-              //         top: -5,
-              //         child: new Container(
-              //           padding: EdgeInsets.all(1),
-              //           decoration: new BoxDecoration(
-              //             color: Colors.red,
-              //             borderRadius: BorderRadius.circular(15),
-              //           ),
-              //           constraints: BoxConstraints(
-              //             minWidth: screenWidth(15),
-              //             minHeight: screenWidth(15),
-              //           ),
-              //           child: Center(
-              //             child: Text(
-              //               '10',
-              //               style: bodyStyle7.copyWith(color: Colors.white),
-              //             ),
-              //           ),
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
               CustomNavigationBarItem(
-                icon: Icon(MdiIcons.cogOutline),
+                selectedIcon: Image.asset(
+                  tab3A,
+                  height: screenWidth(20),
+                ),
+                icon: Image.asset(
+                  tab3,
+                  height: screenWidth(20),
+                ),
+              ),
+              CustomNavigationBarItem(
+                selectedIcon: Image.asset(
+                  tab1A,
+                  height: screenWidth(20),
+                ),
+                icon: Image.asset(
+                  tab1,
+                  height: screenWidth(20),
+                ),
+              ),
+              CustomNavigationBarItem(
+                selectedIcon: Image.asset(
+                  tab2A,
+                  height: screenWidth(20),
+                ),
+                icon: Image.asset(
+                  tab2,
+                  height: screenWidth(20),
+                ),
               ),
             ],
             currentIndex: bottomCtrl.currentTab,

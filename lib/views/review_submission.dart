@@ -68,7 +68,8 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-          if (reviewSubmissionCtrl.existingReview == null) reviewSubmissionCtrl.selectedReview(ratingCount, 'Good', id);
+          //if (reviewSubmissionCtrl.existingReview == null)
+          reviewSubmissionCtrl.selectedReview(ratingCount, 'Good', id);
         },
         child: manageReview(id, color, ratingCount),
 
@@ -103,12 +104,24 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
             padding: EdgeInsets.only(bottom: screenWidth(20)),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Rate your Caregiver',
-                    style: h1,
-                  ),
+                Row(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Rate the visit',
+                        style: h1,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        '(2014-04-23)',
+                        style: bodyStyle6.copyWith(color: grayColor),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: screenWidth(15)),
                 Container(
@@ -185,7 +198,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     ),
                   ),
                 ),
-                GetBuilder<ReviewSubmissionController>(builder: (_) {
+                /*  GetBuilder<ReviewSubmissionController>(builder: (_) {
                   final dateList = reviewSubmissionCtrl.dateList;
                   return Column(
                     children: [
@@ -242,7 +255,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                             ),
                     ],
                   );
-                }),
+                }),*/
 
                 /*  InkWell(
                   onTap: () async {
@@ -259,7 +272,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     //   lastDate: DateTime.now(),
                     //   initialDate: DateTime.now(),
                     // );
-                    print('datte: $date');
+
                     if (date != null) reviewSubmissionCtrl.updateDate(date);
                   },
                   child: CustomTextFormField(
@@ -279,7 +292,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     },
                   ),
                 ),*/
-                SizedBox(height: screenHeight(20)),
+                // SizedBox(height: screenHeight(20)),
                 // Obx(() => Align(
                 //     alignment: Alignment.topLeft,
                 //     child: RichText(
@@ -375,14 +388,14 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 ),
                 SizedBox(height: screenWidth(30)),
                 GetBuilder<ReviewSubmissionController>(builder: (_) {
-                  if (reviewSubmissionCtrl.existingReview == null || reviewSubmissionCtrl.questions.length == 0)
-                    return CustomButton(
-                      title: 'Submit',
-                      onTap: () {
-                        reviewSubmissionCtrl.saveReview(true);
-                      },
-                    );
-                  return Container();
+                  // if (reviewSubmissionCtrl.existingReview == null || reviewSubmissionCtrl.questions.length == 0)
+                  return CustomButton(
+                    title: 'Submit',
+                    onTap: () {
+                      reviewSubmissionCtrl.saveReview(true);
+                    },
+                  );
+                  // return Container();
                 }),
               ],
             ),

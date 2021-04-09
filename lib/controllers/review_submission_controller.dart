@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'common/loader_controller.dart';
 
@@ -85,6 +86,16 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
         });
       }
     } on SocketException catch (_) {}
+  }
+
+  openURL(val, type) {
+    if (type == 'phone') {
+      launch("tel://$val");
+    }
+    if (type == 'email') {
+      final Uri _emailLaunchUri = Uri(scheme: 'mailto', path: val, queryParameters: {'subject': 'Example Subject & Symbols are allowed!'});
+      launch(_emailLaunchUri.toString());
+    }
   }
 
   updateDate(val) {

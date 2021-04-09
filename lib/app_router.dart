@@ -23,11 +23,19 @@ class AppRouter {
   static const reviewSubmission = '/reviewSubmission';
   static const surveyInfo = '/surveyInfo';
   static const surveyStep = '/surveyStep';
+  static const careGiversList = '/careGiversList';
+  static const careGiverProfile = '/careGiverProfile';
+  static const frenchiserInfo = '/frenchiserInfo';
+  static const wishMessage = '/wishMessage';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
     GetPage(name: forgotPassword, page: () => ForgotPassword()),
     GetPage(name: home, page: () => Home()),
+    GetPage(name: careGiversList, page: () => CareGiversList()),
+    GetPage(name: careGiverProfile, page: () => CareGiverProfile()),
+    GetPage(name: frenchiserInfo, page: () => FrenchiserInfo()),
+    GetPage(name: wishMessage, page: () => WishMessage()),
     GetPage(name: reviewSubmission, page: () => ReviewSubmission()),
     GetPage(name: surveyInfo, page: () => SurveyInfo()),
     GetPage(name: surveyStep, page: () => SurveyStep()),
