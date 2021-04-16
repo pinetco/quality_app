@@ -138,22 +138,46 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Thank You'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Your review has been successfully submitted'),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(Get.context);
+                  },
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(
+                      MdiIcons.close,
+                      size: screenWidth(30),
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      checkMark,
+                      width: 50,
+                      height: 50,
+                    ),
+                    SizedBox(height: screenWidth(20)),
+                    Text('Thank You', style: bodyStyle3.copyWith(color: black22Color)),
+                    Container(
+                      width: screenActualWidth() - screenWidth(50),
+                      padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                      child: Text(
+                        'Your review has been successfully submitted',
+                        style: bodyStyle6.copyWith(color: grayColor),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Ok'),
-              onPressed: () {
-                Navigator.pop(Get.context);
-              },
-            ),
-          ],
         );
       },
     );

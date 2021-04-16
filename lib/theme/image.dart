@@ -52,3 +52,5 @@ final String tab4 = 'assets/images/tab4.png';
 final String tab4A = 'assets/images/tab-active4.png';
 final String tab5 = 'assets/images/tab5.png';
 final String tab5A = 'assets/images/tab-active5.png';
+
+final String checkMark = 'assets/images/checkmark.png';

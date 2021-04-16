@@ -42,9 +42,9 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     // Loader().showLoading();
     // await Future.delayed(Duration(seconds: 5));
     // Loader().hideLoading();
-    _isoCode = 'US';
-    _dialCode = '+1';
-    txtMobile.text = '497449196605';
+    _isoCode = 'PR';
+    _dialCode = '+51';
+    txtMobile.text = '54021928690';
     txtPassword.text = 'password';
 
     final loginCRD = storage.read('loginCredential');

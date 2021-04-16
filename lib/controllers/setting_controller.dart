@@ -82,16 +82,16 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Are you sure you want to logout?'),
+          title: Text('Are you sure you want to logout?', style: bodyStyle4.copyWith(color: black22Color)),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: Text('Cancel', style: bodyStyle6.copyWith(color: deactivateColor)),
               onPressed: () {
                 Navigator.pop(Get.context);
               },
             ),
             TextButton(
-              child: Text('Ok'),
+              child: Text('Logout', style: bodyStyle6.copyWith(color: primaryDarkColor)),
               onPressed: () {
                 _storageSettingCtrl.remove(Session.authToken);
                 Navigator.pop(Get.context);
