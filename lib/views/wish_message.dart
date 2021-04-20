@@ -26,10 +26,7 @@ class WishMessage extends StatelessWidget {
                         style: h1,
                       ),
                       Spacer(),
-                      Image.asset(
-                        notificationIcon,
-                        width: screenWidth(20),
-                      ),
+                      NotificationHeaderIcon()
                     ],
                   ),
                   SizedBox(

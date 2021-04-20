@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/store_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/packages/input_package.dart';
-import 'package:quality_app/theme/theme_service.dart';
-import 'package:lottie/lottie.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -34,56 +32,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   automaticallyImplyLeading: false,
-      //   actions: [
-      //     Center(
-      //       child: Padding(padding: EdgeInsets.only(left: screenWidth(20.0)), child: Text('Profile', style: h1)),
-      //     ),
-      //     // Center(
-      //     //   child: InkWell(
-      //     //     highlightColor: Colors.white,
-      //     //     splashColor: Colors.transparent,
-      //     //     onTap: () {
-      //     //       settingCtrl.navigationBack();
-      //     //       //bottomCtrl.updateCurrentTab(2);
-      //     //     },
-      //     //     child: Padding(
-      //     //         padding: EdgeInsets.only(left: screenWidth(20.0)),
-      //     //         child: Image.asset(
-      //     //           backIcon,
-      //     //           width: screenWidth(20),
-      //     //         )),
-      //     //   ),
-      //     // ),
-      //     Spacer(),
-      //     Padding(
-      //       padding: EdgeInsets.only(right: screenWidth(20.0)),
-      //       child: Image.asset(
-      //         notificationIcon,
-      //         width: screenWidth(20),
-      //       ),
-      //     ),
-      //     // Center(
-      //     //   child: InkWell(
-      //     //     highlightColor: Colors.white,
-      //     //     splashColor: Colors.transparent,
-      //     //     onTap: () {
-      //     //       settingCtrl.logout();
-      //     //       //bottomCtrl.updateCurrentTab(2);
-      //     //     },
-      //     //     child: Padding(
-      //     //         padding: EdgeInsets.only(right: screenWidth(20.0)),
-      //     //         child: Image.asset(
-      //     //           notificationIcon,
-      //     //           width: screenWidth(16),
-      //     //         )),
-      //     //   ),
-      //     // )
-      //   ],
-      // ),
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
@@ -101,10 +49,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           style: h1,
                         ),
                         Spacer(),
-                        Image.asset(
-                          notificationIcon,
-                          width: screenWidth(20),
-                        ),
+                        NotificationHeaderIcon(),
                       ],
                     ),
                   ],

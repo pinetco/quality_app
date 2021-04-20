@@ -48,13 +48,7 @@ class _FrenchiserInfoState extends State<FrenchiserInfo> with TickerProviderStat
                       style: h1,
                     ),
                     Spacer(),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Image.asset(
-                        notificationIcon,
-                        width: screenWidth(20),
-                      ),
-                    ),
+                    NotificationHeaderIcon(),
                   ],
                 ),
                 SizedBox(

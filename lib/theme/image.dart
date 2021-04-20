@@ -54,3 +54,4 @@ final String tab5 = 'assets/images/tab5.png';
 final String tab5A = 'assets/images/tab-active5.png';
 
 final String checkMark = 'assets/images/checkmark.png';
+final String notificationBellIcon = 'assets/images/notification-bell-icon.png';

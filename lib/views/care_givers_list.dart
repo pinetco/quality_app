@@ -145,7 +145,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                   children: [
                     SizedBox(height: 10),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10)),
                       child: Column(
                         children: [
                           Row(
@@ -155,10 +155,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                                 style: h1,
                               ),
                               Spacer(),
-                              Image.asset(
-                                notificationIcon,
-                                width: screenWidth(20),
-                              ),
+                              NotificationHeaderIcon(),
                               SizedBox(
                                 width: screenWidth(15),
                               ),

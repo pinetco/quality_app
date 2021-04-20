@@ -3,8 +3,6 @@ import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/controllers/store_controller.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -155,7 +153,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10)),
                       child: Column(
                         children: [
                           Row(
@@ -174,10 +172,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 );
                               }),
                               Spacer(),
-                              Image.asset(
-                                notificationIcon,
-                                width: screenWidth(20),
-                              ),
+                              NotificationHeaderIcon(),
                               SizedBox(
                                 width: screenWidth(15),
                               ),

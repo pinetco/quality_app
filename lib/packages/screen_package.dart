@@ -19,3 +19,4 @@ export 'package:quality_app/views/care_givers_list.dart';
 export 'package:quality_app/views/care_giver_profile.dart';
 export 'package:quality_app/views/frenchiser_info.dart';
 export 'package:quality_app/views/wish_message.dart';
+export 'package:quality_app/views/notification.dart';

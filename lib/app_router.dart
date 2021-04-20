@@ -27,6 +27,7 @@ class AppRouter {
   static const careGiverProfile = '/careGiverProfile';
   static const frenchiserInfo = '/frenchiserInfo';
   static const wishMessage = '/wishMessage';
+  static const notification = '/notification';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
@@ -37,6 +38,7 @@ class AppRouter {
     GetPage(name: frenchiserInfo, page: () => FrenchiserInfo()),
     GetPage(name: wishMessage, page: () => WishMessage()),
     GetPage(name: reviewSubmission, page: () => ReviewSubmission()),
+    GetPage(name: notification, page: () => Notification()),
     GetPage(name: surveyInfo, page: () => SurveyInfo()),
     GetPage(name: surveyStep, page: () => SurveyStep()),
     GetPage(name: discount, page: () => Discount()),
