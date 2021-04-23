@@ -2,10 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:forceupdate/forceupdate.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/networking/api_methods.dart';
 
@@ -78,12 +75,12 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         Loader().showLoading();
 
-        Apis.getApi(surveyQueAPI, []).then((res) async {
+        apis.getApi(surveyQueAPI, []).then((res) async {
           Loader().hideLoading();
-          if (res.StatusCode == 200) {
-            final data = res.Data;
+          if (res.data != null && res.validation == false) {
+            final data = res.data['data'];
 
-            questions = data['data'];
+            questions = data;
 
             update();
           } else {}

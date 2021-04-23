@@ -10,8 +10,6 @@ import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/networking/api_methods.dart';
 
 class WishController extends GetxController with SingleGetTickerProviderMixin {
-  var formKey = GlobalKey<FormState>();
-
   TextEditingController txtwishComment = TextEditingController();
 
   @override

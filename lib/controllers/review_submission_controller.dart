@@ -1,15 +1,15 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/common/loader_controller.dart';
+import 'package:quality_app/controllers/store_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'common/loader_controller.dart';
+import 'package:quality_app/networking/api_methods.dart';
 
 class ReviewSubmissionController extends GetxController with SingleGetTickerProviderMixin {
-  var formKey = GlobalKey<FormState>();
+  var storeCtrl = Get.find<StoreController>();
 
   // TextEditingController txtDateTime = TextEditingController();
   TextEditingController txtComment = TextEditingController();
@@ -18,11 +18,13 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   RxBool _isLoading = false.obs;
 
   bool get isLoading => _isLoading.value;
-  int empId;
+  dynamic empId;
   String name;
   String email;
   String phone;
   String userImage;
+  String date;
+  dynamic visitId;
   dynamic questions = [];
   DateTime selectedDate = DateTime.now();
 
@@ -47,13 +49,15 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     email = data['email'];
     phone = data['phone'];
     userImage = data['userImage'];
+    visitId = data['visitId'];
+    date = data['date'];
 
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
     // txtDateTime.text = formattedDate;
     txtDateTime = formattedDate;
 
-    getReviewDateList();
+    // getReviewDateList();
 
     update();
     super.onInit();
@@ -64,29 +68,24 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     super.dispose();
   }
 
-  getReviewDateList() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        Apis.getApi(visitDateAPI(empId), []).then((res) async {
-          Loader().hideLoading();
-          if (res.StatusCode == 200) {
-            final data = res.Data;
-            dateList = data['data'] ?? [];
-            if (dateList.length > 0) {
-              final date = dateList[0];
-              pickDate = "${date['year']}-${date['month']}-${date['day']}";
-            }
-            getReview();
-            update();
-          } else {}
-        }, onError: (e) {
-          Loader().hideLoading();
-        });
-      }
-    } on SocketException catch (_) {}
-  }
+/*  getReviewDateList() async {
+    Loader().showLoading();
+    apis.getApi(visitDateAPI(visitId), []).then((res) async {
+      Loader().hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        dateList = data ?? [];
+        if (dateList.length > 0) {
+          final date = dateList[0];
+          pickDate = "${date['year']}-${date['month']}-${date['day']}";
+        }
+        getReview();
+        update();
+      } else {}
+    }, onError: (e) {
+      Loader().hideLoading();
+    });
+  }*/
 
   openURL(val, type) {
     if (type == 'phone') {
@@ -143,6 +142,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
               children: <Widget>[
                 InkWell(
                   onTap: () {
+                    storeCtrl.getData();
                     Navigator.pop(Get.context);
                   },
                   child: Align(
@@ -192,16 +192,18 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
         final formData = {
           'employee_id': empId,
           'date': txtDateTime,
+          'visit_id': visitId,
           // "ratings": ratingCount,
           'questions': questions,
           "comment": txtComment.text,
           "wish": txtWish.text,
         };
-
-        Apis.postApi(reviewsAPI, formData).then((res) async {
+        print(formData);
+        print('formData');
+        apis.postApi(reviewsAPI, formData).then((res) async {
           Loader().hideLoading();
 
-          if (res.StatusCode == 200 || res.StatusCode == 201) {
+          if (res.data != null && res.validation == false) {
             if (isNavigation) {
               Get.back();
               _showMyDialog();
@@ -225,11 +227,11 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         Loader().showLoading();
-        Apis.getApi(reviewDateWise(empId, pickDate), []).then((res) async {
+        apis.getApi(reviewDateWise(visitId, pickDate), []).then((res) async {
           Loader().hideLoading();
-          if (res.StatusCode == 200) {
-            final data = res.Data;
-            existingReview = data['data'] ?? null;
+          if (res.data != null && res.validation == false) {
+            final data = res.data['data'];
+            existingReview = data ?? null;
             txtComment.text = existingReview['comment'] ?? '';
             txtWish.text = existingReview['wish'] ?? '';
             questions = existingReview['questions'];

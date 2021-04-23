@@ -28,7 +28,7 @@ class ForgotPassword extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Form(
-                        key: forgotPasswordController.formKey,
+                        key: forgotPasswordController.formForgotKey,
                         child: Column(
                           children: [
                             SizedBox(height: screenHeight(50)),

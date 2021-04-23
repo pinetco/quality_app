@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,7 @@ import 'package:sms_autofill/sms_autofill.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/networking/api_methods.dart';
 
-final storage = GetStorage();
-
 class LoginController extends GetxController with SingleGetTickerProviderMixin {
-  TabController tabController;
   var formKey = GlobalKey<FormState>();
 
   TextEditingController txtEmail = TextEditingController();
@@ -38,19 +34,19 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   @override
   void onInit() async {
     // TODO: implement onInit
-    tabController = new TabController(vsync: this, length: 2, initialIndex: 0);
     // Loader().showLoading();
     // await Future.delayed(Duration(seconds: 5));
     // Loader().hideLoading();
-    _isoCode = 'PR';
-    _dialCode = '+51';
-    txtMobile.text = '54021928690';
-    txtPassword.text = 'password';
+    // _isoCode = 'PR';
+    // _dialCode = '+51';
+    // txtMobile.text = '54021928690';
+    // txtPassword.text = 'password';
 
-    final loginCRD = storage.read('loginCredential');
-    if (loginCRD != null) {
-      final jsonDecode = json.decode(loginCRD);
+    final jsonDecode = helper.getStorage(Session.loginCredential);
+    if (!helper.isNullOrBlank(jsonDecode)) {
+      print(jsonDecode);
       _isoCode = jsonDecode['iso_code'];
+      _dialCode = jsonDecode['dial_code'];
       txtMobile.text = jsonDecode['mobile'];
       txtPassword.text = jsonDecode['password'];
       _rememberLogin = true;
@@ -64,7 +60,6 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   @override
   void dispose() {
     // TODO: implement dispose
-    tabController.dispose();
     txtMobile?.dispose();
     super.dispose();
   }
@@ -98,55 +93,56 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   }
 
   void login() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
+    final formData = {
+      'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
+      'password': txtPassword.text,
+    };
 
-        final formData = {
-          'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
-          'password': txtPassword.text,
-        };
+    print(formData);
 
-        if (isRememberLogin) {
-          final loginDetails = {'iso_code': isoCode, "mobile": txtMobile.text, "password": txtPassword.text, "dialCode": dialCode};
-          storage.write("loginCredential", json.encode(loginDetails));
-        }
-
-        Apis.postApi(loginAPI, formData).then((res) async {
-          Loader().hideLoading();
-          if (res.StatusCode == 200) {
-            final data = res.Data['data'];
-
-            storage.write(Session.authToken, data['token']);
-            Get.offAndToNamed(AppRouter.bottomNavigationScreen);
-          } else if (res.StatusCode == 422) {
-            final data = res.Data;
-
-            final errors = data['errors'];
-            phoneFieldError = errors['phone'] != null ? errors['phone'][0] : '';
-            passwordFieldError = errors['password'] != null ? errors['password'][0] : '';
-
-            update();
-          }
-        }, onError: (e) {
-          Loader().hideLoading();
-          if (e.response != null) {
-            // print(e.response.data);
-            // print(e.response.headers);
-            // print(e.response.request);
-          } else {
-            // Something happened in setting up or sending the request that triggered an Error
-            // print(e.request.data);
-            // print(e.message);
-          }
-        });
-      }
-    } on SocketException catch (_) {
-      // setState(() {
-      //   list.clear();
-      //   isLoading = false;
-      // });
+    if (isRememberLogin) {
+      final loginDetails = {
+        'iso_code': isoCode,
+        "mobile": txtMobile.text,
+        "password": txtPassword.text,
+        "dial_code": dialCode,
+      };
+      helper.writeStorage(Session.loginCredential, loginDetails);
     }
+    Loader().showLoading();
+
+    apis.postApi(loginAPI, formData).then((res) async {
+      Loader().hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        helper.writeStorage(Session.authToken, data['token']);
+
+        getUserInfo();
+      } else if (res.validation == true) {
+        final data = res.data;
+        final errors = data['errors'];
+        phoneFieldError = errors['phone'] != null ? errors['phone'][0] : '';
+        passwordFieldError = errors['password'] != null ? errors['password'][0] : '';
+        update();
+      }
+    }, onError: (e) {
+      Loader().hideLoading();
+    });
+  }
+
+  getUserInfo() async {
+    Loader().showLoading();
+    apis.getApi(userAPI, []).then((res) async {
+      Loader().hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+
+        await helper.writeStorage(Session.userInfo, data);
+        update();
+        Get.offAndToNamed(AppRouter.bottomNavigationScreen);
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
   }
 }

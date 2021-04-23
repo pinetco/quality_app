@@ -114,13 +114,14 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                       ),
                     ),
                     SizedBox(width: 5),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        '(2014-04-23)',
-                        style: bodyStyle6.copyWith(color: grayColor),
+                    if (reviewSubmissionCtrl.date != null)
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          '(${reviewSubmissionCtrl.date})',
+                          style: bodyStyle6.copyWith(color: grayColor),
+                        ),
                       ),
-                    ),
                   ],
                 ),
                 SizedBox(height: screenWidth(15)),

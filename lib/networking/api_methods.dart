@@ -8,14 +8,22 @@ const String api_Version = "v2";
 //Methods
 // const String loginAPI = "/auth/login";
 const String loginAPI = "/auth/login";
+const String clientHomeAPI = '/client-home';
 const String employeesAPI = "/employees";
 const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";
 const String appInformationAPI = "/app-information";
 const String userAPI = "/user";
 const String surveyQueAPI = "/survey-questions";
+const String employeeHomeAPI = "/employee-home";
+const String checkInAPI = "/check-in";
+String checkOutAPI(id) => "/visits/$id/check-out";
+
 String visitDateAPI(id) => "/options/employees/$id/visit-dates";
 String reviewDateWise(id, date) => "/employees/$id/review?date=$date";
+
+const String patientsAPI = '/clients';
+const String careGiverListAPI = '/employees';
 
 const int successCode = 200;
 const int authorizationCode = 401;

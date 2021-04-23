@@ -11,7 +11,7 @@ import 'package:quality_app/networking/api_methods.dart';
 
 import 'common/loader_controller.dart';
 
-class StoreController extends GetxController with SingleGetTickerProviderMixin {
+class HomeEmpController extends GetxController with SingleGetTickerProviderMixin {
   TabController tabController;
 
   TextEditingController txtEmail = TextEditingController();
@@ -27,7 +27,7 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
 
   String get isoCode => _isoCode;
 
-  List workingList = [];
+  List pendingList = [];
   List finishedList = [];
 
   List questionList = [];
@@ -56,10 +56,9 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
       Loader().hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        print('data');
-        print(data);
-        print('data *** ');
         userInfo = data;
+        print(data);
+        await helper.writeStorage(Session.userInfo, data);
         update();
       } else {}
     }, onError: (e) {
@@ -67,19 +66,19 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
     });
   }
 
-  // checkVersion() async {
-  //   final checkVersion = CheckVersion(context: Get.context);
-  //   final appStatus = await checkVersion.getVersionStatus();
-  //   print("appStatus :");
-  //   print(appStatus);
-  //   if (appStatus.canUpdate) {
-  //     checkVersion.showUpdateDialog("com.quality_app", 'com.quality_app');
-  //   }
-  //   print("canUpdate ${appStatus.canUpdate}");
-  //   print("localVersion ${appStatus.localVersion}");
-  //   print("appStoreLink ${appStatus.appStoreUrl}");
-  //   print("storeVersion ${appStatus.storeVersion}");
-  // }
+  checkVersion() async {
+    final checkVersion = CheckVersion(context: Get.context);
+    final appStatus = await checkVersion.getVersionStatus();
+    print("appStatus :");
+    print(appStatus);
+    if (appStatus.canUpdate) {
+      checkVersion.showUpdateDialog("com.quality_app", 'com.quality_app');
+    }
+    print("canUpdate ${appStatus.canUpdate}");
+    print("localVersion ${appStatus.localVersion}");
+    print("appStoreLink ${appStatus.appStoreUrl}");
+    print("storeVersion ${appStatus.storeVersion}");
+  }
 
   @override
   void dispose() {
@@ -119,15 +118,15 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
 
   getData() async {
     if (!isRefreshing) Loader().showLoading();
-    apis.getApi(clientHomeAPI, []).then((res) async {
+    apis.getApi(employeeHomeAPI, []).then((res) async {
       if (!isRefreshing) Loader().hideLoading();
       isRefreshing = false;
 
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        final working = data['working'] ?? [];
+        final pending = data['pending'] ?? [];
         final finished = data['finished'] ?? [];
-        workingList = working;
+        pendingList = pending;
         finishedList = finished;
         updateAlert = true;
 
@@ -213,5 +212,38 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
   void logout() async {
     helper.removeSpecificKeyStorage(Session.authToken);
     Get.offAndToNamed(AppRouter.login);
+  }
+
+  checkIn(id) {
+    final formData = {'client_id': id};
+
+    Loader().showLoading();
+    apis.postApi(checkInAPI, formData).then((res) async {
+      Loader().hideLoading();
+
+      if (res.data != null && res.validation == false) {
+        print(res.data);
+        //  final data = res.data['data'];
+        getData();
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
+  }
+
+  checkOut(id) {
+    Loader().showLoading();
+    apis.putApi(checkOutAPI(id), []).then((res) async {
+      Loader().hideLoading();
+
+      if (res.data != null && res.validation == false) {
+        print(res.data);
+        //  final data = res.data['data'];
+        getData();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
   }
 }

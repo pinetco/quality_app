@@ -138,7 +138,7 @@ void showBottomFlash({String title, String message, BuildContext context}) {
             message: Text(message, style: _text16White),
             icon: Icon(Icons.notifications, color: Colors.white),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => controller.dismiss(),
                 child: Text(
                   'DISMISS',

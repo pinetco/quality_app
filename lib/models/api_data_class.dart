@@ -1,18 +1,21 @@
 class APIDataClass {
-  String Message;
-  bool IsSuccess;
-  dynamic Data;
-  int StatusCode;
+  String message;
+  bool isSuccess;
+  dynamic data;
+  int statusCode;
+  bool validation;
+  bool isInternetConnected;
 
-  APIDataClass({this.Message, this.IsSuccess, this.Data, this.StatusCode});
+  APIDataClass({this.message, this.isSuccess, this.data, this.statusCode, this.validation = false, this.isInternetConnected});
 
   factory APIDataClass.fromJson(Map<String, dynamic> json) {
-    print(json);
     return APIDataClass(
-      Message: json['Message'] as String,
-      IsSuccess: json['IsSuccess'] as bool,
-      Data: json['Data'] as String,
-      StatusCode: json['statusCode'] as int,
+      message: json['Message'] as String,
+      isSuccess: json['IsSuccess'] as bool,
+      data: json['Data'] as String,
+      statusCode: json['StatusCode'] as int,
+      validation: json['Validation'] as bool,
+      isInternetConnected: json['isInternetConnected'] as bool,
     );
   }
 }

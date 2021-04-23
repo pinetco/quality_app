@@ -6,8 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SettingController extends GetxController with SingleGetTickerProviderMixin {
   dynamic userInfo;
-  final _storageSettingCtrl = GetStorage();
-
   @override
   void onInit() {
     //getData();
@@ -93,7 +91,7 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
             TextButton(
               child: Text('Logout', style: bodyStyle6.copyWith(color: primaryDarkColor)),
               onPressed: () {
-                _storageSettingCtrl.remove(Session.authToken);
+                helper.removeSpecificKeyStorage(Session.authToken);
                 Navigator.pop(Get.context);
                 Get.offAndToNamed(AppRouter.login);
               },

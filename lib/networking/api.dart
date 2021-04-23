@@ -1,16 +1,103 @@
-import 'dart:convert';
 import 'dart:io';
-
+import 'package:quality_app/models/api_data_class.dart';
+import 'package:quality_app/networking/server_config.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
-import 'package:quality_app/models/api_data_class.dart';
-import '../packages/config_package.dart';
+//app package
+import 'package:quality_app/packages/config_package.dart';
 
 Dio dio = new Dio();
-final storage = GetStorage();
+ServerConfig _serverConfig = ServerConfig();
 
 class Apis {
+  //this is compulsory. do not delete
+  Apis() {
+    String authToken = helper.getStorage('authToken');
+    print(authToken);
+    //options
+    dio.options
+      ..baseUrl = _serverConfig.apiUrl
+      ..validateStatus = (int status) {
+        //this will always redirect to onResponse method
+        return status > 0;
+      }
+      ..headers = {
+        'Authorization': "Bearer $authToken",
+        'Accept': 'application/json',
+      };
+    //interceptors
+    /*dio.interceptors
+      ..add(
+        InterceptorsWrapper(onRequest: (options) {
+          print("interceptors onRequest");
+          print(options.uri);
+          return options;
+        }, onResponse: (response) {
+          print("interceptors onResponse");
+          print(response.statusCode);
+          return response;
+        }, onError: (error) {
+          print("interceptors onError");
+          print(error.toString());
+        }),
+      );*/
+  }
+  Future<APIDataClass> checkStatus(response) async {
+    // print("statusCode : ${response.statusCode}");
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return APIDataClass(
+        isSuccess: true,
+        validation: false,
+        message: 'Success',
+        data: response.data,
+      );
+    } else if (response.statusCode == 422)
+      return APIDataClass(
+        isSuccess: false,
+        validation: true,
+        message: 'validation failed',
+        data: response.data,
+      );
+    else if (response.statusCode == 401) {
+      helper.errorMessage('Something went wrong. Try again after some time ${response.statusCode}');
+      helper.removeSpecificKeyStorage(Session.authToken);
+      Get.offAndToNamed(AppRouter.login);
+      return APIDataClass(
+        isSuccess: false,
+        validation: false,
+        message: response.statusMessage,
+        data: null,
+      );
+    } else {
+      apiFailedResponse(response);
+      helper.errorMessage('Something went wrong. Try again after some time ${response.statusCode}');
+      return APIDataClass(
+        isSuccess: false,
+        validation: false,
+        message: response.statusMessage,
+        data: null,
+      );
+    }
+  }
+
+  apiFailedResponse(response) {
+    List apiFailedArr = [];
+    dynamic getData = helper.getStorage(Session.queueApiFailed) ?? [];
+
+    Map apiRequest = {
+      'uri': '${response.request.uri}',
+      'data': "${response.request.data ?? ''}",
+      'method': "${response.request.method ?? ''}",
+      'statusCode': "${response.statusCode ?? ''}",
+    };
+    if (getData.length > 0) {
+      apiFailedArr = getData;
+    }
+
+    apiFailedArr.add(apiRequest);
+    helper.writeStorage(Session.queueApiFailed, apiFailedArr);
+  }
+
   //to get full path with paramiters
   static Future<String> getFullUrl(String apiName, List params) async {
     String _url = "";
@@ -22,150 +109,129 @@ class Apis {
       }
     } else
       _url = apiName;
-
-    String url = apiUrl + '$_url';
-
-    return url;
+    //String url = _serverConfig.apiUrl + '$_url';
+    return _url;
   }
 
-  static Future<APIDataClass> getApi(String apiName, List params) async {
+  // ignore: missing_return
+  Future<APIDataClass> getApi(String apiName, List params) async {
     //default data to class
-    APIDataClass apiData = new APIDataClass(
-      Message: 'No Data',
-      IsSuccess: false,
-      Data: '0',
-    );
-    //Check For Internet
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      apiData.Message = "No Internet Access";
-      apiData.IsSuccess = false;
-      apiData.Data = 0;
-      return apiData;
-    } else {
-      String url = await getFullUrl(apiName, params);
-      print("$apiName URL: " + url);
+    APIDataClass apiData = new APIDataClass(message: 'No Data', isSuccess: false, validation: false, data: null, isInternetConnected: true);
+    try {
+      print("API : start"); //do not delete
+      var connectivityResult = await Connectivity().checkConnectivity(); //Check For Wifi or Mobile data is ON/OFF
+      if (connectivityResult == ConnectivityResult.none) {
+        print("API : ${Session.noInternet}"); // do not delete
+        // helper.alertMessage(Session.noInternet);
+        apiData.isInternetConnected = false;
+        print("No inter");
+        return apiData;
+      } else {
+        final result = await InternetAddress.lookup('google.com'); //Check For Internet Connection
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          print("API : internet connected"); //do not delete
+          String url = await getFullUrl(apiName, params);
+          print("$apiName URL: " + url);
 
-      try {
-        String authToken = storage.read(Session.authToken);
-        print(authToken);
+          String authToken = helper.getStorage('authToken');
+          dio.options.headers["Authorization"] = "Bearer $authToken";
 
-        // if (authToken == null || authToken == "") authToken = loginToken;
-
-        dio.options.headers["Authorization"] = "Bearer $authToken";
-        dio.options.headers['Accept'] = 'application/json';
-        // dio.options.headers['Content-Type'] = 'application/json';
-        final response = await dio.get(url);
-
-        if (response.statusCode == 200) {
-          //get response
-          var responseData = response.data;
-          print("$apiName Response: " + response.data.toString());
-          print(responseData.toString());
-          //set data to class
-          apiData.Message = responseData["Message"];
-          apiData.IsSuccess = responseData["IsSuccess"];
-          apiData.Data = responseData;
-          apiData.StatusCode = response.statusCode;
+          final response = await dio.get(url); //dio request
+          apiData = await checkStatus(response);
+          // get data base on status code
           return apiData;
         } else {
-          apiData.Message = "No Internet Access";
-          apiData.IsSuccess = false;
-          apiData.Data = 0;
-          apiData.StatusCode = response.statusCode;
+          apiData.isInternetConnected = false;
           return apiData;
         }
-      } catch (e) {
-        String message = e.toString();
-        if (e.toString().contains("hostname")) message = "Server Error";
-        apiData.Message = message;
-        apiData.IsSuccess = false;
-        apiData.StatusCode = 0;
-        apiData.Data = 0;
-
-        return apiData;
       }
+    } on SocketException catch (e) {
+      print("API : SocketException - ${e.toString()}"); //do not delete
+      helper.alertMessage(Session.noInternet);
+      return apiData;
+    } on Exception catch (e) {
+      print("API : Exception - ${e.toString()}"); //do not delete
+      helper.alertMessage(Session.wentWrong);
+      return apiData;
     }
   }
 
-  static Future<APIDataClass> postApi(String apiName, body) async {
+  // ignore: missing_return
+  Future<APIDataClass> postApi(String apiName, body) async {
     //default data to class
-    APIDataClass apiData = new APIDataClass(
-      Message: 'No Data',
-      IsSuccess: false,
-      Data: '0',
-    );
-    //Check For Internet
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    print('$connectivityResult *********');
-    if (connectivityResult == ConnectivityResult.none) {
-      apiData.Message = "No Internet Access";
-      apiData.IsSuccess = false;
-      apiData.Data = 0;
-      return apiData;
-    } else {
-      String url = apiUrl + '$apiName';
-      print("$apiName : " + url);
-
-      try {
-        // SharedPreferences pref = await SharedPreferences.getInstance();
-        //String authToken = pref.getString(Session.authToken);
-        String authToken = storage.read(Session.authToken);
-
-        // if (authToken == null || authToken == "") authToken = loginToken;
-
-        dio.options.headers["Authorization"] = "Bearer $authToken";
-
-        dio.options.headers['Accept'] = 'application/json';
-        // dio.options.headers['Content-Type'] = 'application/json';
-
-        print("authToken----");
-        print(authToken);
-
-        final response = await dio.post(url, data: body);
-
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          //get response
-          var responseData = response.data;
-          //set data to class
-
-          apiData.Message = responseData["Message"];
-          apiData.IsSuccess = responseData["IsSuccess"];
-          apiData.Data = responseData;
-          apiData.StatusCode = response.statusCode;
-
-          return apiData;
-        } else {
-          var responseData = response.data;
-          apiData.Message = "No Internet Access";
-          apiData.IsSuccess = false;
-          apiData.Data = responseData;
-          apiData.StatusCode = response.statusCode;
-          return apiData;
-        }
-      } catch (e) {
-        print(e.response.toString());
-        if (e.response != null) {
-          print(e.response.data.toString());
-          // print(e.response.headers);
-          //print(e.response.request);
-        } else {
-          print("select");
-          // Something happened in setting up or sending the request that triggered an Error
-          // print(e.request);
-          // print(e.message);
-        }
-        String message = e.toString();
-        if (e.toString().contains("hostname")) message = "Server Error";
-        apiData.Message = message;
-        apiData.IsSuccess = false;
-        apiData.Data = e.response.data;
-        apiData.StatusCode = e.response.statusCode;
-
-        print(e.toString());
-
+    APIDataClass apiData = new APIDataClass(message: 'No Data', isSuccess: false, validation: false, data: null);
+    try {
+      print("API : start"); //do not delete
+      var connectivityResult = await Connectivity().checkConnectivity(); //Check For Wifi or Mobile data is ON/OFF
+      if (connectivityResult == ConnectivityResult.none) {
+        print("API : ${Session.noInternet}"); // do not delete
+        // helper.alertMessage(Session.noInternet);
+        apiData.isInternetConnected = false;
         return apiData;
+      } else {
+        final result = await InternetAddress.lookup('google.com'); //Check For Internet Connection
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          print("API : internet connected"); //do not delete
+
+          String authToken = helper.getStorage('authToken');
+          dio.options.headers["Authorization"] = "Bearer $authToken";
+          print(apiName);
+          print(body);
+          final response = await dio.post(apiName, data: body); //dio request
+          print(response);
+          // print(json.decode(response.data));
+
+          apiData = await checkStatus(response); // get data base on status code
+          return apiData;
+        }
       }
+    } on SocketException catch (e) {
+      print("API : SocketException - ${e.toString()}"); //do not delete
+      helper.alertMessage(Session.noInternet);
+      apiData.isInternetConnected = false;
+      return apiData;
+    } on Exception catch (e) {
+      print("API : Exception - ${e.toString()}"); //do not delete
+      helper.alertMessage('${Session.wentWrong} $apiName');
+      return apiData;
+    }
+  }
+
+  Future<APIDataClass> putApi(String apiName, body) async {
+    //default data to class
+    APIDataClass apiData = new APIDataClass(message: 'No Data', isSuccess: false, validation: false, data: null);
+    try {
+      print("API : start"); //do not delete
+      var connectivityResult = await Connectivity().checkConnectivity(); //Check For Wifi or Mobile data is ON/OFF
+      if (connectivityResult == ConnectivityResult.none) {
+        print("API : ${Session.noInternet}"); // do not delete
+        // helper.alertMessage(Session.noInternet);
+        apiData.isInternetConnected = false;
+        return apiData;
+      } else {
+        final result = await InternetAddress.lookup('google.com'); //Check For Internet Connection
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          print("API : internet connected"); //do not delete
+
+          String authToken = helper.getStorage('authToken');
+          dio.options.headers["Authorization"] = "Bearer $authToken";
+          print(apiName);
+          print(body);
+          final response = await dio.put(apiName, data: body); //dio request
+
+          apiData = await checkStatus(response); // get data base on status code
+          return apiData;
+        }
+      }
+    } on SocketException catch (e) {
+      print("API : SocketException - ${e.toString()}"); //do not delete
+      helper.alertMessage(Session.noInternet);
+      apiData.isInternetConnected = false;
+      return apiData;
+    } on Exception catch (e) {
+      print("API : Exception - ${e.toString()}"); //do not delete
+      helper.alertMessage('${Session.wentWrong} $apiName');
+      return apiData;
     }
   }
 }

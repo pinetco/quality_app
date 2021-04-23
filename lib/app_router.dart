@@ -25,9 +25,11 @@ class AppRouter {
   static const surveyStep = '/surveyStep';
   static const careGiversList = '/careGiversList';
   static const careGiverProfile = '/careGiverProfile';
-  static const frenchiserInfo = '/frenchiserInfo';
+  static const contactInfo = '/contactInfo';
   static const wishMessage = '/wishMessage';
   static const notification = '/notification';
+  static const employeeHome = '/employeeHome';
+  static const patientsList = '/PatientsList';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
@@ -35,10 +37,11 @@ class AppRouter {
     GetPage(name: home, page: () => Home()),
     GetPage(name: careGiversList, page: () => CareGiversList()),
     GetPage(name: careGiverProfile, page: () => CareGiverProfile()),
-    GetPage(name: frenchiserInfo, page: () => FrenchiserInfo()),
+    GetPage(name: contactInfo, page: () => ContactInfo()),
     GetPage(name: wishMessage, page: () => WishMessage()),
     GetPage(name: reviewSubmission, page: () => ReviewSubmission()),
     GetPage(name: notification, page: () => Notification()),
+    GetPage(name: employeeHome, page: () => EmployeeHome()),
     GetPage(name: surveyInfo, page: () => SurveyInfo()),
     GetPage(name: surveyStep, page: () => SurveyStep()),
     GetPage(name: discount, page: () => Discount()),
@@ -51,5 +54,6 @@ class AppRouter {
     GetPage(name: obxGtxScreen, page: () => ObxGtxScreen()),
     GetPage(name: language, page: () => Language()),
     GetPage(name: bottomNavigationScreen, page: () => BottomNavigation()),
+    GetPage(name: patientsList, page: () => PatientsList()),
   ];
 }
