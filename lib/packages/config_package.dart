@@ -18,6 +18,7 @@ export 'package:quality_app/theme/image.dart';
 export 'package:quality_app/utility/loading_component.dart';
 export 'package:quality_app/config.dart';
 export 'package:url_launcher/url_launcher.dart';
+export 'package:maps_launcher/maps_launcher.dart';
 
 export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 export 'package:intl_phone_number_input/intl_phone_number_input.dart';

@@ -42,5 +42,9 @@ class OtherUserProfileController extends GetxController with SingleGetTickerProv
     if (type == 'website') {
       await launch(val);
     }
+
+    if (type == 'location.full_address') {
+      MapsLauncher.launchQuery(val);
+    }
   }
 }
