@@ -97,6 +97,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                 padding: EdgeInsets.only(right: screenWidth(10.0)),
                 child: CustomButton(
                     title: 'Check in',
+                    disabled: homeEmpCtrl.checkInDisabled,
                     width: screenWidth(80),
                     padding: screenWidth(5),
                     radius: screenWidth(5),

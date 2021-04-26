@@ -11,7 +11,7 @@ import 'package:quality_app/networking/api_methods.dart';
 
 import 'common/loader_controller.dart';
 
-class StoreController extends GetxController with SingleGetTickerProviderMixin {
+class HomeClientController extends GetxController with SingleGetTickerProviderMixin {
   TabController tabController;
 
   TextEditingController txtEmail = TextEditingController();
@@ -56,9 +56,6 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
       Loader().hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        print('data');
-        print(data);
-        print('data *** ');
         userInfo = data;
         update();
       } else {}
@@ -122,9 +119,9 @@ class StoreController extends GetxController with SingleGetTickerProviderMixin {
     apis.getApi(clientHomeAPI, []).then((res) async {
       if (!isRefreshing) Loader().hideLoading();
       isRefreshing = false;
-
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
+        print(data);
         final working = data['working'] ?? [];
         final finished = data['finished'] ?? [];
         workingList = working;

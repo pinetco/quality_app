@@ -20,6 +20,7 @@ class OtherUserProfileController extends GetxController with SingleGetTickerProv
     // TODO: implement onInit
     var data = Get.arguments;
     userDetails = data;
+    print(userDetails);
     super.onInit();
   }
 

@@ -8,7 +8,7 @@ const String api_Version = "v2";
 //Methods
 // const String loginAPI = "/auth/login";
 const String loginAPI = "/auth/login";
-const String clientHomeAPI = '/client-home';
+const String clientHomeAPI = '/new-client-home'; //'/client-home';
 const String employeesAPI = "/employees";
 const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";

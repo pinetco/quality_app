@@ -53,7 +53,7 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
     return null;
   }
 
-  navigateOtherProfile(id, name, email, phone, userImage) {
-    Get.toNamed(AppRouter.careGiverProfile, arguments: {'id': id, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+  navigateOtherProfile(item) {
+    Get.toNamed(AppRouter.careGiverProfile, arguments: item);
   }
 }

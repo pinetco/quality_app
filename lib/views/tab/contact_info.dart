@@ -1,6 +1,6 @@
 import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/store_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:quality_app/theme/theme_service.dart';
@@ -13,7 +13,7 @@ class ContactInfo extends StatefulWidget {
 
 class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin {
   var settingCtrl = Get.put(SettingController());
-  var storeCtrl = Get.find<StoreController>();
+  var storeCtrl = Get.find<HomeClientController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
         child: LoadingComponent(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
-            child: GetBuilder<StoreController>(builder: (_dx) {
+            child: GetBuilder<HomeClientController>(builder: (_dx) {
               final phone = helper.jsonGet(_dx.userInfo, 'franchisee.phone', '');
               final contactName = helper.jsonGet(_dx.userInfo, 'franchisee.name', '');
               final email = helper.jsonGet(_dx.userInfo, 'franchisee.email', '');

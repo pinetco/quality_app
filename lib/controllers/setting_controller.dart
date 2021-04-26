@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/networking/server_config.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -93,7 +94,11 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
               onPressed: () {
                 helper.removeSpecificKeyStorage(Session.authToken);
                 Navigator.pop(Get.context);
-                Get.offAndToNamed(AppRouter.login);
+                if (ServerConfig().apiType == 'development') {
+                  Get.offAndToNamed(AppRouter.loginTest);
+                } else {
+                  Get.offAndToNamed(AppRouter.login);
+                }
               },
             ),
           ],

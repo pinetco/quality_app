@@ -2,14 +2,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/controllers/common/loader_controller.dart';
-import 'package:quality_app/controllers/store_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:quality_app/networking/api_methods.dart';
 
 class ReviewSubmissionController extends GetxController with SingleGetTickerProviderMixin {
-  var storeCtrl = Get.find<StoreController>();
+  var storeCtrl = Get.find<HomeClientController>();
 
   // TextEditingController txtDateTime = TextEditingController();
   TextEditingController txtComment = TextEditingController();

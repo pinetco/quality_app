@@ -34,6 +34,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   bool updateAlert = false;
   dynamic userInfo;
   bool isRefreshing = false;
+  bool checkInDisabled = false;
 
   @override
   void onInit() {
@@ -129,12 +130,27 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
         pendingList = pending;
         finishedList = finished;
         updateAlert = true;
-
-        update();
+        checkButtonDisable(pending);
       } else {}
     }, onError: (e) {
       print('e');
     });
+  }
+
+  checkButtonDisable(pending) {
+    final contain = pending.indexWhere((element) {
+      final clientVisit = element['client_visit'];
+      if (clientVisit != null && clientVisit['is_running'] == true) {
+        return clientVisit['is_running'] == true;
+      }
+      return false;
+    });
+    if (contain > -1) {
+      checkInDisabled = true;
+    } else {
+      checkInDisabled = false;
+    }
+    update();
   }
 
   Future<Null> refreshList() async {

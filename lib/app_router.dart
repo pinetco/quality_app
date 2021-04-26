@@ -30,6 +30,7 @@ class AppRouter {
   static const notification = '/notification';
   static const employeeHome = '/employeeHome';
   static const patientsList = '/PatientsList';
+  static const loginTest = '/LoginTest';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
@@ -55,5 +56,6 @@ class AppRouter {
     GetPage(name: language, page: () => Language()),
     GetPage(name: bottomNavigationScreen, page: () => BottomNavigation()),
     GetPage(name: patientsList, page: () => PatientsList()),
+    GetPage(name: loginTest, page: () => LoginTest()),
   ];
 }

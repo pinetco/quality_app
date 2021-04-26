@@ -14,15 +14,17 @@ class CustomButton extends StatelessWidget {
   final double width;
   final Border border;
   final Widget suffixIcon;
+  final bool disabled;
 
   const CustomButton(
       {Key key,
       @required this.title,
+      this.disabled = false,
       this.padding = 15,
       this.radius = 10,
       this.onTap,
       this.style,
-      this.color,
+      this.color = primaryColor,
       this.icon,
       this.iconColor,
       this.iconSize = 25,
@@ -33,14 +35,15 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(disabled);
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius(radius)),
       child: Container(
-        color: color ?? primaryColor,
+        color: disabled ? color.withOpacity(0.2) : color,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: onTap,
+            onTap: disabled ? null : onTap,
             child: Container(
               padding: EdgeInsets.all(screenWidth(padding)),
               width: width != null ? screenWidth(width) : MediaQuery.of(context).size.width,

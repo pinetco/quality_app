@@ -31,6 +31,6 @@ class SplashController extends GetxController {
   }
 
   void checkLogin() {
-    Get.offAndToNamed(AppRouter.login);
+    Get.offAndToNamed(AppRouter.loginTest);
   }
 }

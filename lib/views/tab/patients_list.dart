@@ -4,7 +4,7 @@ import 'package:quality_app/controllers/patients_controller.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/controllers/store_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 
 class PatientsList extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
     int id = item['id'];
     return InkWell(
       onTap: () {
-        patientsCtrl.navigateOtherProfile(id, name, email, phone, imageName);
+        patientsCtrl.navigateOtherProfile(item);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(20)),

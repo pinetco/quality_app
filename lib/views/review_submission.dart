@@ -1,5 +1,5 @@
 import 'package:quality_app/controllers/review_submission_controller.dart';
-import 'package:quality_app/controllers/store_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
@@ -11,7 +11,7 @@ class ReviewSubmission extends StatefulWidget {
 
 class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProviderStateMixin {
   var reviewSubmissionCtrl = Get.put(ReviewSubmissionController());
-  var storeCtrl = Get.find<StoreController>();
+  var storeCtrl = Get.find<HomeClientController>();
 
   AnimationController _animationController;
   bool isPlaying = false;

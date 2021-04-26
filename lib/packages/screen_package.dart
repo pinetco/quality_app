@@ -22,3 +22,4 @@ export 'package:quality_app/views/tab/wish_message.dart';
 export 'package:quality_app/views/notification.dart';
 export 'package:quality_app/views/tab/employee_home.dart';
 export 'package:quality_app/views/tab/patients_list.dart';
+export 'package:quality_app/views/login_test.dart';

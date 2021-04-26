@@ -1,5 +1,4 @@
 import 'package:quality_app/controllers/other_user_profile_controller.dart';
-import 'package:quality_app/controllers/store_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
 
@@ -9,11 +8,40 @@ class CareGiverProfile extends StatefulWidget {
 }
 
 class _CareGiverProfileState extends State<CareGiverProfile> with TickerProviderStateMixin {
-  var OtherUserProfileCtrl = Get.put(OtherUserProfileController());
+  var otherUserProfileCtrl = Get.put(OtherUserProfileController());
 
-  @override
-  void dispose() {
-    super.dispose();
+  Widget renderComponent(_dx, type, icon, disabled) {
+    final value = helper.jsonGet(_dx.userDetails, type, ''); //helper.jsonGet(_dx, 'userDetails.name', '');
+    print(value);
+    return InkWell(
+      onTap: disabled
+          ? null
+          : () {
+              //_dx.userDetails[type].toString();
+              otherUserProfileCtrl.openURLContactInfo(value, type);
+            },
+      child: Container(
+        width: screenActualWidth(),
+        padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+        child: Row(
+          children: [
+            Image.asset(
+              icon,
+              width: screenWidth(20),
+              color: primaryDarkColor,
+            ),
+            SizedBox(width: screenWidth(10)),
+            Expanded(
+              child: Text(
+                value.toString(),
+                style: bodyStyle5.copyWith(color: black22Color),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -50,7 +78,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
                 ),
                 SizedBox(height: screenHeight(30)),
                 GetBuilder<OtherUserProfileController>(
-                  builder: (_dx) => _dx.userDetails != null && _dx.userDetails['userImage'] != null
+                  builder: (_dx) => _dx.userDetails != null && _dx.userDetails['profile_photo_url'] != null
                       ? Container(
                           height: screenWidth(90),
                           width: screenWidth(90),
@@ -62,7 +90,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(screenWidth(90)),
                               child: Image.network(
-                                _dx.userDetails['userImage'],
+                                _dx.userDetails['profile_photo_url'],
                                 width: screenWidth(90),
                                 height: screenWidth(90),
                                 fit: BoxFit.fill,
@@ -71,87 +99,17 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
                           ))
                       : Container(),
                 ),
-                SizedBox(
-                  height: screenHeight(30),
-                ),
+                SizedBox(height: screenHeight(30)),
+                GetBuilder<OtherUserProfileController>(builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'name', userIcon, true) : Container()),
+                SizedBox(height: screenHeight(10)),
                 GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null
-                        ? Container(
-                            width: screenActualWidth(),
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              children: [
-                                Image.asset(userIcon, width: screenWidth(20), color: primaryDarkColor),
-                                SizedBox(width: screenWidth(10)),
-                                Text(
-                                  _dx.userDetails['name'].toString(),
-                                  style: bodyStyle5.copyWith(color: black22Color),
-                                )
-                              ],
-                            ),
-                          )
-                        : Container()),
-                SizedBox(
-                  height: screenHeight(10),
-                ),
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'email', emailIcon, false) : Container()),
+                SizedBox(height: screenHeight(10)),
                 GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null
-                        ? InkWell(
-                            onTap: () {
-                              final email = _dx.userDetails['email'].toString();
-                              //   settingCtrl.openURL(email, 'email');
-                            },
-                            child: Container(
-                              width: screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    emailIcon,
-                                    width: screenWidth(20),
-                                  ),
-                                  SizedBox(width: screenWidth(10)),
-                                  Text(
-                                    _dx.userDetails['email'].toString(),
-                                    style: bodyStyle5.copyWith(color: black22Color),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        : Container()),
-                SizedBox(
-                  height: screenHeight(10),
-                ),
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'phone', phoneIcon, false) : Container()),
+                SizedBox(height: screenHeight(10)),
                 GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null
-                        ? InkWell(
-                            onTap: () {
-                              final phone = _dx.userDetails['phone'].toString();
-                              // settingCtrl.openURL(phone, 'phone');
-                            },
-                            child: Container(
-                              width: screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    phoneIcon,
-                                    width: screenWidth(20),
-                                  ),
-                                  SizedBox(width: screenWidth(10)),
-                                  Text(
-                                    _dx.userDetails['phone'].toString(),
-                                    style: bodyStyle5.copyWith(color: black22Color),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        : Container()),
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'location.full_address', locationIcon, false) : Container()),
               ],
             ),
           ),

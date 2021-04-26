@@ -58,3 +58,6 @@ final String tabPatientsA = 'assets/images/tab-patients-active.png';
 
 final String checkMark = 'assets/images/checkmark.png';
 final String notificationBellIcon = 'assets/images/notification-bell-icon.png';
+final String carePatient = 'assets/images/care-patient.png';
+final String careGiver = 'assets/images/care-giver.png';
+final String locationIcon = 'assets/images/location-icon.png';

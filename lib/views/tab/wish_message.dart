@@ -1,5 +1,5 @@
 import 'package:quality_app/controllers/review_submission_controller.dart';
-import 'package:quality_app/controllers/store_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/controllers/wish_controller.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';

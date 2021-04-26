@@ -2,7 +2,7 @@ import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/controllers/store_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   var bottomCtrl = Get.put(BottomNavigationController());
-  var storeCtrl = Get.put(StoreController());
+  var storeCtrl = Get.put(HomeClientController());
 
   AnimationController _animationController;
   bool isPlaying = false;
@@ -30,13 +30,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   Widget personDetailCard(item, index, status) {
-    dynamic email = item['email'];
-    dynamic imageName = item['profile_photo_url'];
-    String name = item['name'].toString();
-    String phone = item['phone'].toString();
-    dynamic visitId = helper.jsonGet(item, 'employee_visit.id', '');
-    String date = helper.jsonGet(item, 'employee_visit.date', '');
-    int empId = item['id'];
+    dynamic employee = item['employee'];
+    dynamic email = employee['email'];
+    dynamic imageName = employee['profile_photo_url'];
+    String name = employee['name'].toString();
+    String phone = employee['phone'].toString();
+    dynamic visitId = helper.jsonGet(item, 'id', '');
+    String date = helper.jsonGet(item, 'date', '');
+    int empId = employee['id'];
     return Padding(
       padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(20)),
       child: Container(
@@ -81,21 +82,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       navigateReviewScreen(empId, name, email, phone, imageName, visitId, date);
                     }),
               ),
-            /* if (index == 2)
-              Container(
-                padding: EdgeInsets.only(right: screenWidth(10.0)),
-                child: CustomButton(
-                    title: 'Rated',
-                    color: Colors.white,
-                    border: Border.all(width: 1, color: primaryDarkColor),
-                    width: screenWidth(80),
-                    padding: screenWidth(5),
-                    radius: screenWidth(5),
-                    style: bodyStyle6.copyWith(color: primaryDarkColor),
-                    onTap: () {
-                      navigateReviewScreen(empId, name, email, phone, imageName);
-                    }),
-              ),*/
             if (status == 'working')
               Container(
                 padding: EdgeInsets.only(right: screenWidth(10.0)),
@@ -130,7 +116,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         children: [
                           Row(
                             children: [
-                              GetBuilder<StoreController>(builder: (_dx) {
+                              GetBuilder<HomeClientController>(builder: (_dx) {
                                 if (storeCtrl.userInfo != null &&
                                     storeCtrl.userInfo['franchisee'] != null &&
                                     storeCtrl.userInfo['franchisee']['logo_url'] != null)
@@ -200,7 +186,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     },
                                   ),
                                 ),
-                                GetBuilder<StoreController>(builder: (_dx) {
+                                GetBuilder<HomeClientController>(builder: (_dx) {
                                   if (_dx.workingList.length > 0)
                                     return Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,7 +217,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     );
                                   return Container();
                                 }),
-                                GetBuilder<StoreController>(builder: (_dx) {
+                                GetBuilder<HomeClientController>(builder: (_dx) {
                                   if (_dx.finishedList.length > 0)
                                     return Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
