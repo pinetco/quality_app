@@ -262,4 +262,8 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
       print('e');
     });
   }
+
+  navigateRateYourDay() {
+    Get.toNamed(AppRouter.rateYourDay);
+  }
 }

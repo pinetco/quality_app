@@ -15,6 +15,7 @@ class Session {
   static const String todayContract = 'todayContract';
   static const String contractVisitList = 'contractVisitList';
   static const String todayContractVisit = 'todayContractVisit';
+  static const String fcmToken = 'fcmToken';
 
   static const String contractList = 'contractList';
 

@@ -103,4 +103,11 @@ class Helper {
     }
     return true;
   }
+
+  getErrorKey(array, path, index, key) {
+    if (array['$path.$index.$key'] != null) {
+      return array['$path.$index.$key'][0] ?? '';
+    }
+    return '';
+  }
 }

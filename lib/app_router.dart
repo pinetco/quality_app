@@ -29,8 +29,9 @@ class AppRouter {
   static const wishMessage = '/wishMessage';
   static const notification = '/notification';
   static const employeeHome = '/employeeHome';
-  static const patientsList = '/PatientsList';
-  static const loginTest = '/LoginTest';
+  static const patientsList = '/patientsList';
+  static const loginTest = '/loginTest';
+  static const rateYourDay = '/rateYourDay';
 
   static List<GetPage> getPages = [
     GetPage(name: login, page: () => Login()),
@@ -57,5 +58,6 @@ class AppRouter {
     GetPage(name: bottomNavigationScreen, page: () => BottomNavigation()),
     GetPage(name: patientsList, page: () => PatientsList()),
     GetPage(name: loginTest, page: () => LoginTest()),
+    GetPage(name: rateYourDay, page: () => RateYourDay()),
   ];
 }

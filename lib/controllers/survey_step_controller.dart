@@ -28,7 +28,12 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   int totalStep = 3;
   int activeStep = 1;
   dynamic progressBarWidth;
-  dynamic questions;
+  List questions = [];
+  int lastIndex = 0;
+
+  dynamic radioGroup = {};
+  dynamic errors = [];
+  dynamic surveyAnswers = [];
 
   @override
   void onInit() {
@@ -36,59 +41,88 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
     super.onInit();
   }
 
-  tapOnquestions(groupName, val) {
-    if (groupName == 'step1groupVal1') step1groupVal1 = val;
-    if (groupName == 'step1groupVal2') step1groupVal2 = val;
-    if (groupName == 'step1groupVal3') step1groupVal3 = val;
-
-    if (groupName == 'step2groupVal1') step2groupVal1 = val;
-    if (groupName == 'step2groupVal2') step2groupVal2 = val;
-    if (groupName == 'step2groupVal3') step2groupVal3 = val;
-
-    if (groupName == 'step3groupVal1') step3groupVal1 = val;
-    if (groupName == 'step3groupVal2') step3groupVal2 = val;
-    if (groupName == 'step3groupVal3') step3groupVal3 = val;
-
+  tapOnquestions(val, questionId, index) {
+    questions[index]['survey_answer'] = val;
     update();
   }
 
   manageProgressBar() {
     final actualWidth = screenActualWidth() - screenWidth(48);
     final pWidth = actualWidth / totalStep;
-
     final activeWidth = activeStep * pWidth;
     return activeWidth;
   }
 
   nextStep() {
-    if (activeStep < totalStep) {
-      activeStep = activeStep + 1;
-      update();
-    } else {
-      _showMyDialog();
+    validationQuestion();
+  }
+
+  validationQuestion() async {
+    var currentStepQuestion = [];
+    for (var i = 0; i < questions.length; i++) {
+      currentStepQuestion.add({
+        "survey_question_id": helper.jsonGet(questions[i], 'id', ''),
+        "ratings": helper.jsonGet(questions[i], 'survey_answer', ''),
+      });
     }
+    var useQuestion = new List.from(surveyAnswers)..addAll(currentStepQuestion);
+
+    final formData = {"page": activeStep, "survey_id": questions[0]['survey_id'], "survey_answers": useQuestion};
+
+    Loader().showLoading();
+    apis.postApi(validationAPI, formData).then((res) async {
+      Loader().hideLoading();
+      if (res.data != null && res.validation == false) {
+        errors = [];
+        if (activeStep < totalStep) {
+          activeStep = activeStep + 1;
+        } else {
+          submitAnswers();
+          _showMyDialog();
+        }
+
+        surveyAnswers = new List.from(surveyAnswers)..addAll(currentStepQuestion);
+        lastIndex = surveyAnswers.length;
+        getQuestions();
+      } else if (res.validation == true) {
+        errors = res.data['errors'];
+      }
+      update();
+    });
+  }
+
+  submitAnswers() {
+    final formData = {"page": activeStep, "survey_id": questions[0]['survey_id'], "survey_answers": surveyAnswers};
+    Loader().showLoading();
+    apis.postApi(surveyAnswerAPI, formData).then((res) async {
+      Loader().hideLoading();
+      if (res.data != null && res.validation == false) {
+        errors = [];
+        _showMyDialog();
+      }
+      update();
+    });
   }
 
   getQuestions() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
+    Loader().showLoading();
+    apis.getApi(surveyQueAPI(activeStep), []).then((res) async {
+      Loader().hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        totalStep = res.data['meta']['last_page'];
+        // if (questions.length > 0) {
+        //   var list = new List.from(questions)..addAll(data);
+        //   questions = list;
+        // } else {
+        questions = data;
+        //}
 
-        apis.getApi(surveyQueAPI, []).then((res) async {
-          Loader().hideLoading();
-          if (res.data != null && res.validation == false) {
-            final data = res.data['data'];
-
-            questions = data;
-
-            update();
-          } else {}
-        }, onError: (e) {
-          Loader().hideLoading();
-        });
-      }
-    } on SocketException catch (_) {}
+        update();
+      } else {}
+    }, onError: (e) {
+      Loader().hideLoading();
+    });
   }
 
   Future<void> _showMyDialog() async {

@@ -34,6 +34,7 @@ class FirebaseNotification {
 
   getToken() {
     FirebaseMessaging.instance.getToken().then((token) {
+      helper.writeStorage(Session.fcmToken, token);
       print(token);
     });
 

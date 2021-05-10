@@ -111,7 +111,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10)),
+                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10), top: screenWidth(10)),
                       child: Column(
                         children: [
                           Row(

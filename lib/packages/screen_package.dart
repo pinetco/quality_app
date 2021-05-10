@@ -23,3 +23,4 @@ export 'package:quality_app/views/notification.dart';
 export 'package:quality_app/views/tab/employee_home.dart';
 export 'package:quality_app/views/tab/patients_list.dart';
 export 'package:quality_app/views/login_test.dart';
+export 'package:quality_app/views/rate_your_day.dart';

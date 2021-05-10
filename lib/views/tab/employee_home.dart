@@ -43,7 +43,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                   radius: screenWidth(5),
                   style: bodyStyle6.copyWith(color: Colors.white),
                   onTap: () {
-                    //navigateReviewScreen(empId, name, email, phone, imageName);
+                    homeEmpCtrl.navigateRateYourDay();
                   }),
             ],
           ),
@@ -142,7 +142,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10)),
+                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10), top: screenWidth(10)),
                       child: Column(
                         children: [
                           Row(
@@ -179,7 +179,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // rateYourDay(),
+                                rateYourDay(),
                                 GetBuilder<HomeEmpController>(builder: (_dx) {
                                   if (_dx.pendingList.length > 0)
                                     return Column(
@@ -205,7 +205,6 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                     );
                                   return Container();
                                 }),
-
                                 GetBuilder<HomeEmpController>(builder: (_dx) {
                                   if (_dx.finishedList.length > 0)
                                     return Column(
@@ -233,7 +232,6 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                     );
                                   return Container();
                                 }),
-
                                 GetBuilder<HomeEmpController>(
                                   builder: (_dx) => ListView.builder(
                                     shrinkWrap: true,

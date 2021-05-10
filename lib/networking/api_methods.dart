@@ -14,16 +14,19 @@ const String reviewsAPI = "/reviews";
 const String questionsAPI = "/questions";
 const String appInformationAPI = "/app-information";
 const String userAPI = "/user";
-const String surveyQueAPI = "/survey-questions";
+String surveyQueAPI(page) => "/survey-questions?page=$page";
 const String employeeHomeAPI = "/employee-home";
 const String checkInAPI = "/check-in";
 String checkOutAPI(id) => "/visits/$id/check-out";
+const String validationAPI = "/survey-answers/validation";
+const String surveyAnswerAPI = "/survey-answers";
 
 String visitDateAPI(id) => "/options/employees/$id/visit-dates";
 String reviewDateWise(id, date) => "/employees/$id/review?date=$date";
 
 const String patientsAPI = '/clients';
 const String careGiverListAPI = '/employees';
+const String registerTokenAPI = '/devices';
 
 const int successCode = 200;
 const int authorizationCode = 401;
