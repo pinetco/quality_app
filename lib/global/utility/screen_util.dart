@@ -17,7 +17,7 @@ double borderRadius(num size) {
 }
 
 double screenActualWidth() {
-  return ScreenUtil().appScreenUtil.size;
+  return ScreenUtil().screenWidth;
 }
 
 double screenActualHeight() {

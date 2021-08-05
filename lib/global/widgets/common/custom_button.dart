@@ -15,6 +15,7 @@ class CustomButton extends StatelessWidget {
   final double width;
   final Border border;
   final bool enable;
+  final Widget suffixIcon;
 
   const CustomButton({
     Key key,
@@ -30,6 +31,7 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.border,
     this.enable = true,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -65,6 +67,15 @@ class CustomButton extends StatelessWidget {
                     style: style ?? appCss.h4,
                     textAlign: TextAlign.center,
                   ),
+                  if (suffixIcon != null)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Spacer(),
+                          suffixIcon,
+                        ],
+                      ),
+                    )
                 ],
               ),
             ),

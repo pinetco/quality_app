@@ -1,10 +1,8 @@
 import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/packages/input_package.dart';
-import 'package:quality_app/theme/theme_service.dart';
-import 'package:lottie/lottie.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/notification_icon_header.dart';
 
 class ContactInfo extends StatefulWidget {
   @override
@@ -39,7 +37,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                     children: [
                       Text(
                         'Contact Info',
-                        style: h1,
+                        style: appCss.h1,
                       ),
                       Spacer(),
                       NotificationHeaderIcon(),
@@ -51,9 +49,9 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                   Container(
                       padding: EdgeInsets.all(8),
                       height: appScreenUtil.size(150),
-                      width: screenActualHeight(),
+                      width: appScreenUtil.screenActualHeight(),
                       decoration: BoxDecoration(
-                        border: Border.all(color: deactivateColor, width: 1),
+                        border: Border.all(color: appColor.deactivateColor, width: 1),
                         borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                       ),
                       child: Center(
@@ -64,9 +62,9 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                   ),
                   Container(
                     padding: EdgeInsets.all(appScreenUtil.size(15)),
-                    width: screenActualHeight(),
+                    width: appScreenUtil.screenActualHeight(),
                     decoration: BoxDecoration(
-                      border: Border.all(color: deactivateColor, width: 1),
+                      border: Border.all(color: appColor.deactivateColor, width: 1),
                       borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                     ),
                     child: Column(
@@ -76,10 +74,10 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                             padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                             child: Row(
                               children: [
-                                Icon(MdiIcons.officeBuildingOutline, size: appScreenUtil.size(20), color: primaryDarkColor),
+                                Icon(MdiIcons.officeBuildingOutline, size: appScreenUtil.size(20), color: appColor.primaryDarkColor),
                                 SizedBox(width: appScreenUtil.size(10)),
                                 Expanded(
-                                  child: Text(contactName, style: bodyStyle5.copyWith(color: black22Color)),
+                                  child: Text(contactName, style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                                 ),
                               ],
                             ),
@@ -93,10 +91,10 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                               child: Row(
                                 children: [
-                                  Image.asset(emailIcon, width: appScreenUtil.size(20), color: primaryDarkColor),
+                                  Image.asset(imageAssets.emailIcon, width: appScreenUtil.size(20), color: appColor.primaryDarkColor),
                                   SizedBox(width: appScreenUtil.size(10)),
                                   Expanded(
-                                    child: Text(_dx.userInfo['franchisee']['email'] ?? '', style: bodyStyle5.copyWith(color: black22Color)),
+                                    child: Text(_dx.userInfo['franchisee']['email'] ?? '', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                                   ),
                                 ],
                               ),
@@ -111,10 +109,10 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                               },
                               child: Row(
                                 children: [
-                                  Image.asset(phoneIcon, width: appScreenUtil.size(20), color: primaryDarkColor),
+                                  Image.asset(imageAssets.phoneIcon, width: appScreenUtil.size(20), color: appColor.primaryDarkColor),
                                   SizedBox(width: appScreenUtil.size(10)),
                                   Expanded(
-                                    child: Text(phone ?? '', style: bodyStyle5.copyWith(color: black22Color)),
+                                    child: Text(phone ?? '', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                                   ),
                                 ],
                               ),
@@ -129,10 +127,10 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                               },
                               child: Row(
                                 children: [
-                                  Icon(MdiIcons.web, size: appScreenUtil.size(20), color: primaryDarkColor),
+                                  Icon(MdiIcons.web, size: appScreenUtil.size(20), color: appColor.primaryDarkColor),
                                   SizedBox(width: appScreenUtil.size(10)),
                                   Expanded(
-                                    child: Text(websiteLink, style: bodyStyle5.copyWith(color: primaryDarkColor)),
+                                    child: Text(websiteLink, style: appCss.bodyStyle5.copyWith(color: appColor.primaryDarkColor)),
                                   ),
                                 ],
                               ),
@@ -146,9 +144,9 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                   ),
                   Container(
                     padding: EdgeInsets.all(appScreenUtil.size(15)),
-                    width: screenActualHeight(),
+                    width: appScreenUtil.screenActualHeight(),
                     decoration: BoxDecoration(
-                      border: Border.all(color: deactivateColor, width: 1),
+                      border: Border.all(color: appColor.deactivateColor, width: 1),
                       borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                     ),
                     child: Column(

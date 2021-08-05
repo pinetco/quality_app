@@ -1,7 +1,8 @@
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/notification_icon_header.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/controllers/home_employee_controller.dart';
 
 class EmployeeHome extends StatefulWidget {
@@ -18,7 +19,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(20), horizontal: appScreenUtil.size(20)),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
-        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
         child: Padding(
           padding: EdgeInsets.all(appScreenUtil.size(10)),
           child: Row(
@@ -31,7 +32,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                   children: <Widget>[
                     Text(
                       'Rate your day',
-                      style: bodyStyle5.copyWith(color: black22Color),
+                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     ),
                   ],
                 ),
@@ -41,7 +42,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                   width: appScreenUtil.size(80),
                   padding: appScreenUtil.size(5),
                   radius: appScreenUtil.size(5),
-                  style: bodyStyle6.copyWith(color: Colors.white),
+                  style: appCss.bodyStyle6.copyWith(color: Colors.white),
                   onTap: () {
                     homeEmpCtrl.navigateRateYourDay();
                   }),
@@ -64,7 +65,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
-        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -82,12 +83,12 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                 children: <Widget>[
                   Text(
                     name,
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                   if (date != '')
                     Text(
                       date,
-                      style: bodyStyle6.copyWith(color: grayColor),
+                      style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                     ),
                 ],
               ),
@@ -97,11 +98,11 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
                 child: CustomButton(
                     title: 'Check in',
-                    disabled: homeEmpCtrl.checkInDisabled,
+                    enable: homeEmpCtrl.checkInDisabled,
                     width: appScreenUtil.size(80),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
-                    style: bodyStyle6.copyWith(color: Colors.white),
+                    style: appCss.bodyStyle6.copyWith(color: Colors.white),
                     onTap: () {
                       homeEmpCtrl.checkIn(id);
                     }),
@@ -114,7 +115,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                     width: appScreenUtil.size(80),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
-                    style: bodyStyle6.copyWith(color: Colors.white),
+                    style: appCss.bodyStyle6.copyWith(color: Colors.white),
                     onTap: () {
                       homeEmpCtrl.checkOut(clientVisitId);
                     }),
@@ -126,7 +127,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage) {
-    Get.toNamed(AppRouter.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+    Get.toNamed(routeName.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
   }
 
   @override
@@ -157,7 +158,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                   );
                                 return Text(
                                   'Quality Control',
-                                  style: h1,
+                                  style: appCss.h1,
                                 );
                               }),
                               Spacer(),
@@ -190,7 +191,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
                                             'Care Patient',
-                                            style: h5,
+                                            style: appCss.h5,
                                           ),
                                         ),
                                         ListView.builder(
@@ -213,7 +214,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                         SizedBox(height: appScreenUtil.size(25)),
                                         Divider(
                                           height: appScreenUtil.size(5),
-                                          color: dividerColor,
+                                          color: appColor.dividerColor,
                                           thickness: 5,
                                         ),
                                         SizedBox(height: appScreenUtil.size(25)),
@@ -223,7 +224,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                               padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                               child: Text(
                                                 'Finished Visit',
-                                                style: h5,
+                                                style: appCss.h5,
                                               ),
                                             );
                                           return Container();

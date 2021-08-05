@@ -1,9 +1,8 @@
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/care_giver_controller.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/notification_icon_header.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
 
 class CareGiversList extends StatefulWidget {
   @override
@@ -28,7 +27,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
-          decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+          decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
@@ -46,7 +45,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                   children: <Widget>[
                     Text(
                       name,
-                      style: bodyStyle5.copyWith(color: black22Color),
+                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     ),
                     // Text(
                     //   phone,
@@ -63,7 +62,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage) {
-    Get.toNamed(AppRouter.careGiverProfile, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+    Get.toNamed(routeName.careGiverProfile, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
   }
 
   @override
@@ -87,7 +86,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                             children: [
                               Text(
                                 'Care Givers',
-                                style: h1,
+                                style: appCss.h1,
                               ),
                               Spacer(),
                               NotificationHeaderIcon(),
@@ -117,14 +116,14 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                                     child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text('No Care Givers Found.', style: bodyStyle5),
+                                      Text('No Care Givers Found.', style: appCss.bodyStyle5),
                                       TextButton(
                                           onPressed: () {
                                             careGiverCtrl.getCareGivers();
                                           },
                                           child: Text(
                                             'Refresh',
-                                            style: bodyStyle5,
+                                            style: appCss.bodyStyle5,
                                           ))
                                     ],
                                   )),

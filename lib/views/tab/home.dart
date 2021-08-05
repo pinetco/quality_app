@@ -1,7 +1,8 @@
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/notification_icon_header.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
 
 class Home extends StatefulWidget {
@@ -42,7 +43,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
-        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -60,11 +61,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 children: <Widget>[
                   Text(
                     name,
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                   Text(
                     date,
-                    style: bodyStyle6.copyWith(color: grayColor),
+                    style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                   ),
                 ],
               ),
@@ -77,7 +78,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     width: appScreenUtil.size(80),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
-                    style: bodyStyle6.copyWith(color: Colors.white),
+                    style: appCss.bodyStyle6.copyWith(color: Colors.white),
                     onTap: () {
                       navigateReviewScreen(empId, name, email, phone, imageName, visitId, date);
                     }),
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             if (status == 'working')
               Container(
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-                child: Text('Working', style: bodyStyle6.copyWith(color: Colors.green)),
+                child: Text('Working', style: appCss.bodyStyle6.copyWith(color: Colors.green)),
               ),
           ],
         ),
@@ -94,7 +95,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage, visitId, date) {
-    Get.toNamed(AppRouter.reviewSubmission,
+    Get.toNamed(routeName.reviewSubmission,
         arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
   }
 
@@ -126,7 +127,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   );
                                 return Text(
                                   'Quality Control',
-                                  style: h1,
+                                  style: appCss.h1,
                                 );
                               }),
                               Spacer(),
@@ -163,11 +164,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   child: Column(
                                     children: [
                                       SizedBox(height: appScreenUtil.size(20)),
-                                      Align(alignment: Alignment.topLeft, child: Text('Survey', style: h4)),
+                                      Align(alignment: Alignment.topLeft, child: Text('Survey', style: appCss.h4)),
                                       SizedBox(height: appScreenUtil.size(4)),
                                       Text(
                                         'Thank you for being our loyal customer. As you know quality and customer satisfaction is our top priority. It would be awesome if you could fill out our quarterly survey.',
-                                        style: bodyStyle6.copyWith(color: grayColor),
+                                        style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                                       ),
                                       SizedBox(height: appScreenUtil.size(15)),
                                     ],
@@ -178,11 +179,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   child: CustomButton(
                                     title: "Quarterly Survey",
                                     suffixIcon: Image.asset(
-                                      rightArrowIcon,
+                                      imageAssets.rightArrowIcon,
                                       width: appScreenUtil.size(20),
                                     ),
                                     onTap: () {
-                                      Get.toNamed(AppRouter.surveyInfo);
+                                      Get.toNamed(routeName.surveyInfo);
                                     },
                                   ),
                                 ),
@@ -194,7 +195,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         SizedBox(height: appScreenUtil.size(25)),
                                         Divider(
                                           height: appScreenUtil.size(5),
-                                          color: dividerColor,
+                                          color: appColor.dividerColor,
                                           thickness: 5,
                                         ),
                                         SizedBox(height: appScreenUtil.size(25)),
@@ -202,7 +203,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
                                             'Working Care Giver',
-                                            style: h5,
+                                            style: appCss.h5,
                                           ),
                                         ),
                                         ListView.builder(
@@ -225,7 +226,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         SizedBox(height: appScreenUtil.size(25)),
                                         Divider(
                                           height: appScreenUtil.size(5),
-                                          color: dividerColor,
+                                          color: appColor.dividerColor,
                                           thickness: 5,
                                         ),
                                         SizedBox(height: appScreenUtil.size(25)),
@@ -233,7 +234,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
                                             'Finished Visit',
-                                            style: h5,
+                                            style: appCss.h5,
                                           ),
                                         ),
                                         ListView.builder(

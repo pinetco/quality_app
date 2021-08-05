@@ -2,8 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:leistbar24/global/assets/index.dart';
-import 'package:leistbar24/global/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class NoInternetScreen extends StatelessWidget {
   void onRetry() async {
@@ -12,7 +11,7 @@ class NoInternetScreen extends StatelessWidget {
       String authToken = helper.getStorage(session.authToken);
 
       if (!helper.isNullOrBlank(authToken)) {
-        Get.offAllNamed(routeName.documentsList);
+        Get.offAllNamed(routeName.login);
       } else {
         Get.offAllNamed(routeName.login);
       }
@@ -68,7 +67,7 @@ class NoInternetScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Image.asset(imageAssets.noInternet),
+                  // Image.asset(imageAssets.noInternet),
                 ],
               ),
             ],
