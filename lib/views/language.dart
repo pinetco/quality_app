@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class Language extends StatelessWidget {
   @override
@@ -10,11 +10,11 @@ class Language extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(screenWidth(20)),
+          padding: EdgeInsets.all(appScreenUtil.size(20)),
           child: Column(
             children: [
-              Text("hello".tr, style: bodyStyle1),
-              SizedBox(height: screenWidth(20)),
+              Text("hello".tr, style: appCss.bodyStyle1),
+              SizedBox(height: appScreenUtil.size(20)),
               Row(
                 children: [
                   InkWell(
@@ -25,11 +25,11 @@ class Language extends StatelessWidget {
                     child: Card(
                       elevation: 5,
                       child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
+                        padding: EdgeInsets.all(appScreenUtil.size(15)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("English", style: h2),
+                            Text("English", style: appCss.h2),
                           ],
                         ),
                       ),
@@ -43,11 +43,11 @@ class Language extends StatelessWidget {
                     child: Card(
                       elevation: 5,
                       child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
+                        padding: EdgeInsets.all(appScreenUtil.size(15)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("German", style: h2),
+                            Text("German", style: appCss.h2),
                           ],
                         ),
                       ),

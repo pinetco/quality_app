@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
 
 class SurveyInfo extends StatelessWidget {
   @override
@@ -21,10 +21,10 @@ class SurveyInfo extends StatelessWidget {
                 //bottomCtrl.updateCurrentTab(2);
               },
               child: Padding(
-                  padding: EdgeInsets.only(left: screenWidth(20.0)),
+                  padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),
                   child: Image.asset(
-                    backIcon,
-                    width: screenWidth(20),
+                    imageAssets.backIcon,
+                    width: appScreenUtil.size(20),
                   )),
             ),
           ),
@@ -34,28 +34,28 @@ class SurveyInfo extends StatelessWidget {
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+            padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
-                Align(alignment: Alignment.topLeft, child: Text('Survey', style: h1)),
+                Align(alignment: Alignment.topLeft, child: Text('Survey', style: appCss.h1)),
                 Expanded(
                   child: Center(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                      padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
                       child: Text(
                         'The following questions relate to specific aspects of the in-home services you receive from FirstLight Home Care.',
-                        style: bodyStyle5.copyWith(color: black22Color),
+                        style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(screenWidth(10)),
+                  padding: EdgeInsets.all(appScreenUtil.size(10)),
                   child: CustomButton(
                     title: "Start",
                     onTap: () {
-                      Get.toNamed(AppRouter.surveyStep);
+                      Get.toNamed(routeName.surveyStep);
                     },
                   ),
                 ),

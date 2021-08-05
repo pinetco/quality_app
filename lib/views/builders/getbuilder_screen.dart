@@ -14,7 +14,7 @@ class GetBuilderScreen extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(screenWidth(20)),
+          padding: EdgeInsets.all(appScreenUtil.size(20)),
           child: Column(
             children: [
               GetBuilder<GetBuilderController>(

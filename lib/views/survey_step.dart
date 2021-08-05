@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/survey_step_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
 
 class SurveyStep extends StatelessWidget {
   var surveyCtrl = Get.put(SurveyStepController());
 
   Widget myRadioButton(label, value, group, index) {
     return SizedBox(
-      height: screenHeight(40),
+      height: appScreenUtil.size(40),
       child: RadioListTile(
           contentPadding: EdgeInsets.all(0),
-          title: Text(label, style: bodyStyle5.copyWith(color: grayColor)),
+          title: Text(label, style: appCss.bodyStyle5.copyWith(color: appColor.grayColor)),
           value: value,
           groupValue: group,
-          activeColor: primaryDarkColor,
+          activeColor: appColor.primaryDarkColor,
           onChanged: (value) {
             surveyCtrl.tapOnquestions(value, group, index);
           }),
@@ -33,7 +33,7 @@ class SurveyStep extends StatelessWidget {
         Container(
             child: Text(
           title,
-          style: h5.copyWith(fontWeight: FontWeight.w500),
+          style: appCss.h5.copyWith(fontWeight: FontWeight.w500),
         )),
         myRadioButton('Disagree strongly', 1, group, index),
         myRadioButton('Disagree somewhat', 2, group, index),
@@ -41,11 +41,11 @@ class SurveyStep extends StatelessWidget {
         myRadioButton('Agree somewhat', 4, group, index),
         myRadioButton('Agree strongly', 5, group, index),
         SizedBox(
-          height: screenHeight(10),
+          height: appScreenUtil.size(10),
         ),
-        if (error != '') Text('$error', style: bodyStyle6.copyWith(color: Colors.red)),
+        if (error != '') Text('$error', style: appCss.bodyStyle6.copyWith(color: Colors.red)),
         SizedBox(
-          height: screenHeight(20),
+          height: appScreenUtil.size(20),
         ),
       ],
     );
@@ -62,7 +62,7 @@ class SurveyStep extends StatelessWidget {
         centerTitle: false,
         title: Text(
           'Survey',
-          style: h1,
+          style: appCss.h1,
         ),
         automaticallyImplyLeading: false,
         actions: [
@@ -75,10 +75,10 @@ class SurveyStep extends StatelessWidget {
                 //bottomCtrl.updateCurrentTab(2);
               },
               child: Padding(
-                  padding: EdgeInsets.only(right: screenWidth(20.0)),
+                  padding: EdgeInsets.only(right: appScreenUtil.size(20.0)),
                   child: Image.asset(
-                    closeIcon,
-                    width: screenWidth(16),
+                    imageAssets.closeIcon,
+                    width: appScreenUtil.size(16),
                   )),
             ),
           ),
@@ -87,29 +87,30 @@ class SurveyStep extends StatelessWidget {
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+            padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
                 // Align(alignment: Alignment.topLeft, child: Text('Survey', style: h1)),
                 Container(
-                  decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(10))),
-                  height: screenHeight(16),
-                  width: screenActualWidth(),
+                  decoration:
+                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+                  height: appScreenUtil.size(16),
+                  width: appScreenUtil.screenActualWidth(),
                   child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(screenWidth(3)),
+                        padding: EdgeInsets.all(appScreenUtil.size(3)),
                         child: GetBuilder<SurveyStepController>(
                             builder: (_) => Container(
                                   width: surveyCtrl.manageProgressBar(),
-                                  decoration: BoxDecoration(color: primaryDarkColor, borderRadius: BorderRadius.circular(screenWidth(10))),
+                                  decoration: BoxDecoration(color: appColor.primaryDarkColor, borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
                                 )),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: screenHeight(20),
+                  height: appScreenUtil.size(20),
                 ),
                 GetBuilder<SurveyStepController>(builder: (_) {
                   if (surveyCtrl.questions != null && surveyCtrl.questions.length > 0)
@@ -150,7 +151,7 @@ class SurveyStep extends StatelessWidget {
                       myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
                       myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
                       SizedBox(
-                        height: screenHeight(30),
+                        height: appScreenUtil.size(size)(30),
                       ),
                       Container(
                           child: Text(
@@ -167,7 +168,7 @@ class SurveyStep extends StatelessWidget {
                 }),*/
                 GetBuilder<SurveyStepController>(
                   builder: (_) => Padding(
-                    padding: EdgeInsets.all(screenWidth(10)),
+                    padding: EdgeInsets.all(appScreenUtil.size(10)),
                     child: CustomButton(
                       title: surveyCtrl.activeStep == surveyCtrl.totalStep ? 'Submit' : "Next",
                       onTap: () {

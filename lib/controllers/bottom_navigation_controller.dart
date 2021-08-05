@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/common/loader_controller.dart';
-import 'package:quality_app/networking/api_methods.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/packages/screen_package.dart';
+import 'package:quality_app/controllers/common/loading_controller.dart';
+import 'package:quality_app/global/networking/api_methods.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/route/route_list.dart';
 
 DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
@@ -25,7 +25,7 @@ class BottomNavigationController extends GetxController {
 
   @override
   void onInit() async {
-    userInfo = await helper.getStorage(Session.userInfo);
+    userInfo = await helper.getStorage(session.userInfo);
     if (userInfo != null) {
       if (userInfo['role'] == 'client') {
         widgetOptions = <Widget>[
@@ -59,14 +59,13 @@ class BottomNavigationController extends GetxController {
     }
 
     final formData = {
-      'token': helper.getStorage(Session.fcmToken),
+      'token': helper.getStorage(session.fcmToken),
       'type': Platform.isAndroid ? 'android' : 'ios',
       'os_version': Platform.operatingSystemVersion,
       'name': name,
     };
-
-    apis.postApi(registerTokenAPI, formData).then((res) async {
-      Loader().hideLoading();
+    apis.call(apiMethods.registerTokenAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
       print(res.data);
       if (res.data != null && res.validation == false) {
         update();

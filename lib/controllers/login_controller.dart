@@ -1,12 +1,8 @@
-import 'dart:convert';
-
-import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
 
 class LoginController extends GetxController with SingleGetTickerProviderMixin {
   var formKey = GlobalKey<FormState>();
@@ -34,15 +30,15 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   @override
   void onInit() async {
     // TODO: implement onInit
-    // Loader().showLoading();
+    //helper.showLoading();
     // await Future.delayed(Duration(seconds: 5));
-    // Loader().hideLoading();
+    //helper.hideLoading();
     // _isoCode = 'PR';
     // _dialCode = '+51';
     // txtMobile.text = '54021928690';
     // txtPassword.text = 'password';
 
-    final jsonDecode = helper.getStorage(Session.loginCredential);
+    final jsonDecode = helper.getStorage(session.loginCredential);
     if (!helper.isNullOrBlank(jsonDecode)) {
       print(jsonDecode);
       _isoCode = jsonDecode['iso_code'];
@@ -107,15 +103,15 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
         "password": txtPassword.text,
         "dial_code": dialCode,
       };
-      helper.writeStorage(Session.loginCredential, loginDetails);
+      helper.writeStorage(session.loginCredential, loginDetails);
     }
-    Loader().showLoading();
+    helper.showLoading();
 
-    apis.postApi(loginAPI, formData).then((res) async {
-      Loader().hideLoading();
+    apis.call(apiMethods.loginAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        helper.writeStorage(Session.authToken, data['token']);
+        helper.writeStorage(session.authToken, data['token']);
 
         getUserInfo();
       } else if (res.validation == true) {
@@ -126,20 +122,20 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
         update();
       }
     }, onError: (e) {
-      Loader().hideLoading();
+      helper.hideLoading();
     });
   }
 
   getUserInfo() async {
-    Loader().showLoading();
-    apis.getApi(userAPI, []).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
 
-        await helper.writeStorage(Session.userInfo, data);
+        await helper.writeStorage(session.userInfo, data);
         update();
-        Get.offAndToNamed(AppRouter.bottomNavigationScreen);
+        Get.offAndToNamed(routeName.bottomNavigationScreen);
       } else {}
     }, onError: (e) {
       print('e');

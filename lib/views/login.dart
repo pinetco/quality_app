@@ -1,8 +1,8 @@
 import 'package:quality_app/controllers/login_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/packages/input_package.dart';
-import 'package:quality_app/utility/loading_component.dart';
-import 'package:quality_app/widgets/phone_number_with_country.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
+import 'package:quality_app/global/widgets/phone_number_with_country.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -45,28 +45,29 @@ class Login extends StatelessWidget {
             ),
           if (errorPhoneValidation != '') validationWidget(errorValidation: errorPhoneValidation),
 
-          SizedBox(height: screenHeight(15)),
+          SizedBox(height: appScreenUtil.size(15)),
           Container(
-            decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(10))),
+            decoration:
+                BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
             child: CustomTextFormField(
               container: loginController.txtPassword,
               hintText: "Password",
               prefixIcon: Icon(MdiIcons.lock),
               suffixIcon: IconButton(
-                icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: deactivateColor),
+                icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: appColor.deactivateColor),
                 onPressed: () {
                   loginController.togglePassword();
                 },
               ),
               obscureText: loginController.isObscureText,
-              style: bodyStyle5.copyWith(color: black22Color),
+              style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
               keyboardType: TextInputType.text,
               padding: 18,
             ),
           ),
           if (errorPasswordValidation != '') validationWidget(errorValidation: errorPasswordValidation),
 
-          SizedBox(height: screenHeight(5)),
+          SizedBox(height: appScreenUtil.size(5)),
         ],
       ),
     );
@@ -76,32 +77,32 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
       builder: (_) => Scaffold(
-        backgroundColor: bgColor,
+        backgroundColor: appColor.bgColor,
         body: LoadingComponent(
           //loading: loginController.isLoading,
           child: SingleChildScrollView(
             child: Container(
-              height: screenActualHeight(),
-              width: screenActualWidth(),
-              padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+              height: appScreenUtil.screenActualHeight(),
+              width: appScreenUtil.screenActualWidth(),
+              padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Welcome to', style: bodyStyle3.copyWith(color: grayColor)),
-                  SizedBox(height: screenHeight(5)),
+                  Text('Welcome to', style: appCss.bodyStyle3.copyWith(color: appColor.grayColor)),
+                  SizedBox(height: appScreenUtil.size(5)),
                   Text(
                     'Quality Control!',
-                    style: h1,
+                    style: appCss.h1,
                   ),
-                  SizedBox(height: screenHeight(60)),
+                  SizedBox(height: appScreenUtil.size(60)),
                   Form(
                     key: loginController.formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // Container(
-                        //   padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                        //   padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(size)(10)),
                         //   child: TabBar(
                         //     controller: loginController.tabController,
                         //     indicatorColor: primaryColor,
@@ -126,7 +127,7 @@ class Login extends StatelessWidget {
                         //   ),
                         // ),
                         Padding(
-                          padding: EdgeInsets.only(top: screenWidth(8.0)),
+                          padding: EdgeInsets.only(top: appScreenUtil.size(8.0)),
                           child: emailMobileWidget('mobile'),
 
                           // TabBarView(controller: loginController.tabController,
@@ -140,7 +141,7 @@ class Login extends StatelessWidget {
                           //     ]),
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                          padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -149,10 +150,10 @@ class Login extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
-                                          color: black22Color),
+                                          color: appColor.black22Color),
                                       Text(
                                         'Remember me',
-                                        style: bodyStyle5.copyWith(color: black22Color),
+                                        style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                                       ),
                                     ],
                                   ),
@@ -172,9 +173,9 @@ class Login extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: screenHeight(20)),
+                        SizedBox(height: appScreenUtil.size(20)),
                         Padding(
-                          padding: EdgeInsets.all(screenWidth(10)),
+                          padding: EdgeInsets.all(appScreenUtil.size(10)),
                           child: CustomButton(
                             title: "Login",
                             onTap: () {
@@ -206,12 +207,12 @@ class validationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(top: screenWidth(8)),
+        padding: EdgeInsets.only(top: appScreenUtil.size(8)),
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
             errorValidation,
-            style: validationTextStyle,
+            style: appCss.validationTextStyle,
           ),
         ));
   }

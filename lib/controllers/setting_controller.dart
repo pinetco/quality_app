@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/networking/server_config.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/networking/server_config.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingController extends GetxController with SingleGetTickerProviderMixin {
@@ -56,9 +56,9 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
   //   try {
   //     final result = await InternetAddress.lookup('google.com');
   //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //       Loader().showLoading();
+  //      helper.showLoading();
   //       Apis.getApi(userAPI, []).then((res) async {
-  //         Loader().hideLoading();
+  //        helper.hideLoading();
   //         if (res.StatusCode == 200) {
   //           final data = res.Data['data'];
   //           print(data);
@@ -81,23 +81,23 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Are you sure you want to logout?', style: bodyStyle4.copyWith(color: black22Color)),
+          title: Text('Are you sure you want to logout?', style: appCss.bodyStyle4.copyWith(color: appColor.black22Color)),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel', style: bodyStyle6.copyWith(color: deactivateColor)),
+              child: Text('Cancel', style: appCss.bodyStyle6.copyWith(color: appColor.deactivateColor)),
               onPressed: () {
                 Navigator.pop(Get.context);
               },
             ),
             TextButton(
-              child: Text('Logout', style: bodyStyle6.copyWith(color: primaryDarkColor)),
+              child: Text('Logout', style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor)),
               onPressed: () {
-                helper.removeSpecificKeyStorage(Session.authToken);
+                helper.removeSpecificKeyStorage(session.authToken);
                 Navigator.pop(Get.context);
                 if (ServerConfig().apiType == 'development') {
-                  Get.offAndToNamed(AppRouter.loginTest);
+                  Get.offAndToNamed(routeName.loginTest);
                 } else {
-                  Get.offAndToNamed(AppRouter.login);
+                  Get.offAndToNamed(routeName.login);
                 }
               },
             ),

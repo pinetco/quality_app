@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class SplashController extends GetxController {
   @override
@@ -23,7 +23,7 @@ class SplashController extends GetxController {
       print("Check");
       // Get.offAndToNamed(AppRouter.home);
 
-      Get.offAndToNamed(AppRouter.bottomNavigationScreen);
+      Get.offAndToNamed(routeName.bottomNavigationScreen);
     } else {
       checkLogin();
     }
@@ -31,6 +31,6 @@ class SplashController extends GetxController {
   }
 
   void checkLogin() {
-    Get.offAndToNamed(AppRouter.loginTest);
+    Get.offAndToNamed(routeName.loginTest);
   }
 }

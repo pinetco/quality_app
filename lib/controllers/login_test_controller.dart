@@ -1,12 +1,5 @@
-import 'dart:convert';
-
-import 'package:quality_app/controllers/common/loader_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class LoginTestController extends GetxController with SingleGetTickerProviderMixin {
   void login(type) async {
@@ -14,34 +7,31 @@ class LoginTestController extends GetxController with SingleGetTickerProviderMix
       'phone': type == 'careGiver' ? '+4213125824948' : '+3792716066206',
       'password': 'password',
     };
-
     print(formData);
-
-    Loader().showLoading();
-
-    apis.postApi(loginAPI, formData).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.loginAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        helper.writeStorage(Session.authToken, data['token']);
+        helper.writeStorage(session.authToken, data['token']);
 
         getUserInfo();
       }
     }, onError: (e) {
-      Loader().hideLoading();
+      helper.hideLoading();
     });
   }
 
   getUserInfo() async {
-    Loader().showLoading();
-    apis.getApi(userAPI, []).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
 
-        await helper.writeStorage(Session.userInfo, data);
+        await helper.writeStorage(session.userInfo, data);
         update();
-        Get.offAndToNamed(AppRouter.bottomNavigationScreen);
+        Get.offAndToNamed(routeName.bottomNavigationScreen);
       } else {}
     }, onError: (e) {
       print('e');

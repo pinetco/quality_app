@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/networking/api_methods.dart';
 
-import 'common/loader_controller.dart';
+import 'common/loading_controller.dart';
 
 class SurveyStepController extends GetxController with SingleGetTickerProviderMixin {
   Map selected = new Map();
@@ -47,7 +47,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   }
 
   manageProgressBar() {
-    final actualWidth = screenActualWidth() - screenWidth(48);
+    final actualWidth = appScreenUtil.screenActualWidth() - appScreenUtil.size(48);
     final pWidth = actualWidth / totalStep;
     final activeWidth = activeStep * pWidth;
     return activeWidth;
@@ -69,9 +69,9 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
 
     final formData = {"page": activeStep, "survey_id": questions[0]['survey_id'], "survey_answers": useQuestion};
 
-    Loader().showLoading();
-    apis.postApi(validationAPI, formData).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.validationAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         errors = [];
         if (activeStep < totalStep) {
@@ -93,9 +93,9 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
 
   submitAnswers() {
     final formData = {"page": activeStep, "survey_id": questions[0]['survey_id'], "survey_answers": surveyAnswers};
-    Loader().showLoading();
-    apis.postApi(surveyAnswerAPI, formData).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.surveyAnswerAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         errors = [];
         _showMyDialog();
@@ -105,9 +105,9 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   }
 
   getQuestions() async {
-    Loader().showLoading();
-    apis.getApi(surveyQueAPI(activeStep), []).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.surveyQueAPI(activeStep), null, apiType.get).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         totalStep = res.data['meta']['last_page'];
@@ -121,7 +121,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
         update();
       } else {}
     }, onError: (e) {
-      Loader().hideLoading();
+      helper.hideLoading();
     });
   }
 
@@ -144,7 +144,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
               child: Text('Ok'),
               onPressed: () {
                 Navigator.pop(Get.context);
-                Get.offAndToNamed(AppRouter.home);
+                Get.offAndToNamed(routeName.home);
               },
             ),
           ],

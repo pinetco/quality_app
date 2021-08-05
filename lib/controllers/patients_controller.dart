@@ -1,15 +1,7 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:forceupdate/forceupdate.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
-
-import 'common/loader_controller.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class PatientsController extends GetxController with SingleGetTickerProviderMixin {
   List patientsList = [];
@@ -30,9 +22,9 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   }
 
   getPatientsList() async {
-    if (!isRefreshing) Loader().showLoading();
-    apis.getApi(patientsAPI, []).then((res) async {
-      if (!isRefreshing) Loader().hideLoading();
+    if (!isRefreshing) helper.showLoading();
+    apis.call(apiMethods.patientsAPI, null, apiType.get).then((res) async {
+      if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;
 
       if (res.data != null && res.validation == false) {
@@ -54,6 +46,6 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   }
 
   navigateOtherProfile(item) {
-    Get.toNamed(AppRouter.careGiverProfile, arguments: item);
+    Get.toNamed(routeName.careGiverProfile, arguments: item);
   }
 }

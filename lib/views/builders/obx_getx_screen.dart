@@ -13,7 +13,7 @@ class ObxGtxScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(screenWidth(20)),
+          padding: EdgeInsets.all(appScreenUtil.size(20)),
           child: Column(
             children: [
               Row(
@@ -39,7 +39,7 @@ class ObxGtxScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: screenWidth(20)),
+              SizedBox(height: appScreenUtil.size(20)),
               RaisedButton(
                 child: Text("Update Counter"),
                 onPressed: () => obxGetxController.increment(),

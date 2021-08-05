@@ -1,8 +1,9 @@
 import 'package:quality_app/controllers/rate_your_day_controller.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
 
 class RateYourDay extends StatefulWidget {
   @override
@@ -32,11 +33,11 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
   }
 
   mangeImage(count, bool) {
-    if (count == 1) return bool ? badY : bad;
-    if (count == 2) return bool ? sadY : sad;
-    if (count == 3) return bool ? okY : ok;
-    if (count == 4) return bool ? smileY : smile;
-    if (count == 5) return bool ? happyY : happy;
+    if (count == 1) return bool ? imageAssets.badY : imageAssets.bad;
+    if (count == 2) return bool ? imageAssets.sadY : imageAssets.sad;
+    if (count == 3) return bool ? imageAssets.okY : imageAssets.ok;
+    if (count == 4) return bool ? imageAssets.smileY : imageAssets.smile;
+    if (count == 5) return bool ? imageAssets.happyY : imageAssets.happy;
   }
 
   manageReview(id, color, count) {
@@ -44,18 +45,18 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
     if (rating >= count) {
       return Image.asset(
         mangeImage(count, true),
-        width: screenHeight(28),
+        width: appScreenUtil.size(28),
       );
     }
     return Image.asset(
       mangeImage(count, false),
-      width: screenHeight(28),
+      width: appScreenUtil.size(28),
     );
   }
 
   Widget ratingWidget(icon, id, ratingCount, color) {
     return Padding(
-      padding: EdgeInsets.only(right: screenWidth(13)),
+      padding: EdgeInsets.only(right: appScreenUtil.size(13)),
       child: InkWell(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
@@ -75,16 +76,16 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: InkWell(
-            child: Icon(MdiIcons.arrowLeft, color: black22Color),
+            child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
             onTap: () {
               Navigator.pop(context);
             }),
       ),
       body: LoadingComponent(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+          padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: screenWidth(20)),
+            padding: EdgeInsets.only(bottom: appScreenUtil.size(20)),
             child: Column(
               children: [
                 Row(
@@ -93,23 +94,23 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                       alignment: Alignment.topLeft,
                       child: Text(
                         'Rate your Day',
-                        style: h1,
+                        style: appCss.h1,
                       ),
                     ),
                     SizedBox(width: 5),
                   ],
                 ),
-                SizedBox(height: screenWidth(15)),
+                SizedBox(height: appScreenUtil.size(15)),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: screenWidth(10)),
+                  padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                   // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child: Text('How was your day?', style: bodyStyle5.copyWith(color: black22Color)),
+                        child: Text('How was your day?', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                       ),
-                      SizedBox(height: screenHeight(10)),
+                      SizedBox(height: appScreenUtil.size(10)),
                       GetBuilder<RateYourDayController>(builder: (_) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -129,24 +130,25 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                   alignment: Alignment.topLeft,
                   child: Text(
                     'What can we do for you to feel better?',
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                 ),
-                SizedBox(height: screenHeight(10)),
+                SizedBox(height: appScreenUtil.size(10)),
                 Container(
-                  decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(5))),
+                  decoration:
+                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: rateYourDayCtrl.txtComment,
                     hintText: "Write here...",
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     keyboardType: TextInputType.multiline,
-                    padding: screenWidth(20),
+                    padding: appScreenUtil.size(20),
                   ),
                 ),
-                SizedBox(height: screenHeight(30)),
+                SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<RateYourDayController>(
                     builder: (_) => InkWell(
                           onTap: () {
@@ -156,13 +158,13 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                             children: [
                               Icon(
                                 rateYourDayCtrl.anonymousUser ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
-                                color: rateYourDayCtrl.anonymousUser ? primaryColor : borderLineColor,
+                                color: rateYourDayCtrl.anonymousUser ? appColor.primaryColor : appColor.borderLineColor,
                               ),
-                              Text('Send anonymous feedback', style: bodyStyle5),
+                              Text('Send anonymous feedback', style: appCss.bodyStyle5),
                             ],
                           ),
                         )),
-                SizedBox(height: screenWidth(30)),
+                SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<RateYourDayController>(builder: (_) {
                   return CustomButton(
                     title: 'Submit',

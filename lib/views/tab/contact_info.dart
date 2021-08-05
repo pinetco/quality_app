@@ -22,7 +22,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+            padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: GetBuilder<HomeClientController>(builder: (_dx) {
               final phone = helper.jsonGet(_dx.userInfo, 'franchisee.phone', '');
               final contactName = helper.jsonGet(_dx.userInfo, 'franchisee.name', '');
@@ -46,38 +46,38 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                     ],
                   ),
                   SizedBox(
-                    height: screenWidth(30),
+                    height: appScreenUtil.size(30),
                   ),
                   Container(
                       padding: EdgeInsets.all(8),
-                      height: screenHeight(150),
+                      height: appScreenUtil.size(150),
                       width: screenActualHeight(),
                       decoration: BoxDecoration(
                         border: Border.all(color: deactivateColor, width: 1),
-                        borderRadius: BorderRadius.circular(screenWidth(10)),
+                        borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                       ),
                       child: Center(
-                        child: Image.network(logoUrl, height: screenHeight(150)),
+                        child: Image.network(logoUrl, height: appScreenUtil.size(150)),
                       )),
                   SizedBox(
-                    height: screenHeight(30),
+                    height: appScreenUtil.size(30),
                   ),
                   Container(
-                    padding: EdgeInsets.all(screenWidth(15)),
+                    padding: EdgeInsets.all(appScreenUtil.size(15)),
                     width: screenActualHeight(),
                     decoration: BoxDecoration(
                       border: Border.all(color: deactivateColor, width: 1),
-                      borderRadius: BorderRadius.circular(screenWidth(10)),
+                      borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                     ),
                     child: Column(
                       children: [
                         if (contactName != null)
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(10)),
+                            padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                             child: Row(
                               children: [
-                                Icon(MdiIcons.officeBuildingOutline, size: screenWidth(20), color: primaryDarkColor),
-                                SizedBox(width: screenWidth(10)),
+                                Icon(MdiIcons.officeBuildingOutline, size: appScreenUtil.size(20), color: primaryDarkColor),
+                                SizedBox(width: appScreenUtil.size(10)),
                                 Expanded(
                                   child: Text(contactName, style: bodyStyle5.copyWith(color: black22Color)),
                                 ),
@@ -90,11 +90,11 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                               settingCtrl.openURLContactInfo(email, 'email');
                             },
                             child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: screenHeight(10)),
+                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                               child: Row(
                                 children: [
-                                  Image.asset(emailIcon, width: screenWidth(20), color: primaryDarkColor),
-                                  SizedBox(width: screenWidth(10)),
+                                  Image.asset(emailIcon, width: appScreenUtil.size(20), color: primaryDarkColor),
+                                  SizedBox(width: appScreenUtil.size(10)),
                                   Expanded(
                                     child: Text(_dx.userInfo['franchisee']['email'] ?? '', style: bodyStyle5.copyWith(color: black22Color)),
                                   ),
@@ -104,15 +104,15 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                           ),
                         if (phone != '')
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(10)),
+                            padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                             child: InkWell(
                               onTap: () {
                                 settingCtrl.openURLContactInfo(phone, 'phone');
                               },
                               child: Row(
                                 children: [
-                                  Image.asset(phoneIcon, width: screenWidth(20), color: primaryDarkColor),
-                                  SizedBox(width: screenWidth(10)),
+                                  Image.asset(phoneIcon, width: appScreenUtil.size(20), color: primaryDarkColor),
+                                  SizedBox(width: appScreenUtil.size(10)),
                                   Expanded(
                                     child: Text(phone ?? '', style: bodyStyle5.copyWith(color: black22Color)),
                                   ),
@@ -122,15 +122,15 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                           ),
                         if (websiteLink != '')
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(10)),
+                            padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                             child: InkWell(
                               onTap: () {
                                 settingCtrl.openURLContactInfo(websiteLink, 'website');
                               },
                               child: Row(
                                 children: [
-                                  Icon(MdiIcons.web, size: screenWidth(20), color: primaryDarkColor),
-                                  SizedBox(width: screenWidth(10)),
+                                  Icon(MdiIcons.web, size: appScreenUtil.size(20), color: primaryDarkColor),
+                                  SizedBox(width: appScreenUtil.size(10)),
                                   Expanded(
                                     child: Text(websiteLink, style: bodyStyle5.copyWith(color: primaryDarkColor)),
                                   ),
@@ -142,14 +142,14 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                     ),
                   ),
                   SizedBox(
-                    height: screenHeight(30),
+                    height: appScreenUtil.size(30),
                   ),
                   Container(
-                    padding: EdgeInsets.all(screenWidth(15)),
+                    padding: EdgeInsets.all(appScreenUtil.size(15)),
                     width: screenActualHeight(),
                     decoration: BoxDecoration(
                       border: Border.all(color: deactivateColor, width: 1),
-                      borderRadius: BorderRadius.circular(screenWidth(10)),
+                      borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                     ),
                     child: Column(
                       children: [
@@ -157,44 +157,44 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                           children: [
                             if (fbLink != '')
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: screenHeight(5)),
+                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5)),
                                 child: InkWell(
                                   onTap: () {
                                     settingCtrl.openURLContactInfo(fbLink, 'website');
                                   },
                                   child: Row(
                                     children: [
-                                      Icon(MdiIcons.facebook, size: screenWidth(30), color: Color(0XFF4267B2)),
+                                      Icon(MdiIcons.facebook, size: appScreenUtil.size(30), color: Color(0XFF4267B2)),
                                     ],
                                   ),
                                 ),
                               ),
-                            SizedBox(width: screenWidth(10)),
+                            SizedBox(width: appScreenUtil.size(10)),
                             if (twitterLink != '')
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: screenHeight(5)),
+                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5)),
                                 child: InkWell(
                                   onTap: () {
                                     settingCtrl.openURLContactInfo(twitterLink, 'website');
                                   },
                                   child: Row(
                                     children: [
-                                      Icon(MdiIcons.twitter, size: screenWidth(30), color: Color(0XFF00ACEE)),
+                                      Icon(MdiIcons.twitter, size: appScreenUtil.size(30), color: Color(0XFF00ACEE)),
                                     ],
                                   ),
                                 ),
                               ),
-                            SizedBox(width: screenWidth(10)),
+                            SizedBox(width: appScreenUtil.size(10)),
                             if (linkedinLink != '')
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: screenHeight(5)),
+                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5)),
                                 child: InkWell(
                                   onTap: () {
                                     settingCtrl.openURLContactInfo(linkedinLink, 'website');
                                   },
                                   child: Row(
                                     children: [
-                                      Icon(MdiIcons.linkedin, size: screenWidth(30), color: Color(0XFF0077b5)),
+                                      Icon(MdiIcons.linkedin, size: appScreenUtil.size(30), color: Color(0XFF0077b5)),
                                     ],
                                   ),
                                 ),

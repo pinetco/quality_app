@@ -1,7 +1,6 @@
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 
@@ -23,31 +22,31 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   CustomNavigationBarItem renderCustomTab(selected, unselected, title) {
     return CustomNavigationBarItem(
-      selectedIcon: Image.asset(selected, height: screenHeight(20)),
+      selectedIcon: Image.asset(selected, height: appScreenUtil.size(20)),
       icon: Image.asset(
         unselected,
-        height: screenHeight(20),
+        height: appScreenUtil.size(20),
       ),
-      title: Text(title, style: bodyStyle7.copyWith(color: black22Color)),
-      selectedTitle: Text(title, style: bodyStyle7.copyWith(color: primaryDarkColor)),
+      title: Text(title, style: appCss.bodyStyle7.copyWith(color: appColor.black22Color)),
+      selectedTitle: Text(title, style: appCss.bodyStyle7.copyWith(color: appColor.primaryDarkColor)),
     );
   }
 
   renderTab() {
     if (bottomCtrl.userInfo != null && bottomCtrl.userInfo['role'] != 'client') {
       return [
-        renderCustomTab(tab4A, tab4, 'Home'),
-        renderCustomTab(tabPatientsA, tabPatients, 'Patients'),
-        renderCustomTab(tab1A, tab1, 'Contacts'),
-        renderCustomTab(tab2A, tab2, 'Profile'),
+        renderCustomTab(imageAssets.tab4A, imageAssets.tab4, 'Home'),
+        renderCustomTab(imageAssets.tabPatientsA, imageAssets.tabPatients, 'Patients'),
+        renderCustomTab(imageAssets.tab1A, imageAssets.tab1, 'Contacts'),
+        renderCustomTab(imageAssets.tab2A, imageAssets.tab2, 'Profile'),
       ];
     }
     return [
-      renderCustomTab(tab4A, tab4, 'Home'),
-      renderCustomTab(tab5A, tab5, 'Care Givers'),
-      renderCustomTab(tab3A, tab3, 'Request'),
-      renderCustomTab(tab1A, tab1, 'Contacts'),
-      renderCustomTab(tab2A, tab2, 'Profile'),
+      renderCustomTab(imageAssets.tab4A, imageAssets.tab4, 'Home'),
+      renderCustomTab(imageAssets.tab5A, imageAssets.tab5, 'Care Givers'),
+      renderCustomTab(imageAssets.tab3A, imageAssets.tab3, 'Request'),
+      renderCustomTab(imageAssets.tab1A, imageAssets.tab1, 'Contacts'),
+      renderCustomTab(imageAssets.tab2A, imageAssets.tab2, 'Profile'),
     ];
   }
 
@@ -58,12 +57,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
         body: GetBuilder<BottomNavigationController>(builder: (controller) => bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab)),
         bottomNavigationBar: GetBuilder<BottomNavigationController>(
           builder: (controller) => CustomNavigationBar(
-            // borderRadius: Radius.circular(screenWidth(30)),
+            // borderRadius: Radius.circular(appScreenUtil.size(30)),
             items: renderTab(),
             currentIndex: bottomCtrl.currentTab,
-            selectedColor: primaryColor,
+            selectedColor: appColor.primaryColor,
             unSelectedColor: Color(0XFFCCCCCC),
-            strokeColor: primaryColor,
+            strokeColor: appColor.primaryColor,
             onTap: (index) {
               bottomCtrl.updateCurrentTab(index);
             },

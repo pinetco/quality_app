@@ -1,8 +1,9 @@
 import 'package:quality_app/controllers/review_submission_controller.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
 
 class ReviewSubmission extends StatefulWidget {
   @override
@@ -40,11 +41,11 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
   // }
 
   mangeImage(count, bool) {
-    if (count == 1) return bool ? badY : bad;
-    if (count == 2) return bool ? sadY : sad;
-    if (count == 3) return bool ? okY : ok;
-    if (count == 4) return bool ? smileY : smile;
-    if (count == 5) return bool ? happyY : happy;
+    if (count == 1) return bool ? imageAssets.badY : imageAssets.bad;
+    if (count == 2) return bool ? imageAssets.sadY : imageAssets.sad;
+    if (count == 3) return bool ? imageAssets.okY : imageAssets.ok;
+    if (count == 4) return bool ? imageAssets.smileY : imageAssets.smile;
+    if (count == 5) return bool ? imageAssets.happyY : imageAssets.happy;
   }
 
   manageReview(id, color, count) {
@@ -52,18 +53,18 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
     if (rating >= count) {
       return Image.asset(
         mangeImage(count, true),
-        width: screenHeight(28),
+        width: appScreenUtil.size(28),
       );
     }
     return Image.asset(
       mangeImage(count, false),
-      width: screenHeight(28),
+      width: appScreenUtil.size(28),
     );
   }
 
   Widget ratingWidget(icon, id, ratingCount, color) {
     return Padding(
-      padding: EdgeInsets.only(right: screenWidth(13)),
+      padding: EdgeInsets.only(right: appScreenUtil.size(13)),
       child: InkWell(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
@@ -75,7 +76,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
 
         // Icon(
         //   icon,
-        //   size: screenWidth(40),
+        //   size: appScreenUtil.size(size)(40),
         //   color: manageColor(id, color, ratingCount),
         // ),
       ),
@@ -92,16 +93,16 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
         //title: Text("Review"),
         //automaticallyImplyLeading: false,
         leading: InkWell(
-            child: Icon(MdiIcons.arrowLeft, color: black22Color),
+            child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
             onTap: () {
               Navigator.pop(context);
             }),
       ),
       body: LoadingComponent(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+          padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: screenWidth(20)),
+            padding: EdgeInsets.only(bottom: appScreenUtil.size(20)),
             child: Column(
               children: [
                 Row(
@@ -110,7 +111,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                       alignment: Alignment.topLeft,
                       child: Text(
                         'Rate the visit',
-                        style: h1,
+                        style: appCss.h1,
                       ),
                     ),
                     SizedBox(width: 5),
@@ -119,21 +120,21 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                         alignment: Alignment.topLeft,
                         child: Text(
                           '(${reviewSubmissionCtrl.date})',
-                          style: bodyStyle6.copyWith(color: grayColor),
+                          style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                         ),
                       ),
                   ],
                 ),
-                SizedBox(height: screenWidth(15)),
+                SizedBox(height: appScreenUtil.size(15)),
                 Container(
-                  width: screenActualWidth(),
-                  padding: EdgeInsets.only(bottom: screenWidth(20)),
+                  width: appScreenUtil.screenActualWidth(),
+                  padding: EdgeInsets.only(bottom: appScreenUtil.size(20)),
                   child: Container(
                     decoration: BoxDecoration(
                       // border: Border.all(color: Colors.grey[300]),
                       border: Border.all(
                         width: 1,
-                        color: deactivateColor,
+                        color: appColor.deactivateColor,
                       ),
                       // boxShadow: [
                       //   BoxShadow(
@@ -149,44 +150,44 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
                     ),
-                    padding: EdgeInsets.all(screenWidth(15)),
+                    padding: EdgeInsets.all(appScreenUtil.size(15)),
                     child: Column(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (reviewSubmissionCtrl.userImage != null)
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(screenWidth(80)),
+                            borderRadius: BorderRadius.circular(appScreenUtil.size(80)),
                             child: Image.network(
                               reviewSubmissionCtrl.userImage,
-                              height: screenWidth(80),
-                              width: screenWidth(80),
+                              height: appScreenUtil.size(80),
+                              width: appScreenUtil.size(80),
                               fit: BoxFit.cover,
                             ),
                           ),
-                        SizedBox(height: screenWidth(15)),
+                        SizedBox(height: appScreenUtil.size(15)),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               reviewSubmissionCtrl.name.toString(),
-                              style: bodyStyle4.copyWith(color: black22Color),
+                              style: appCss.bodyStyle4.copyWith(color: appColor.black22Color),
                             ),
-                            SizedBox(height: screenWidth(5)),
-                            Text(reviewSubmissionCtrl.phone.toString(), style: bodyStyle5),
-                            SizedBox(height: screenWidth(5)),
+                            SizedBox(height: appScreenUtil.size(5)),
+                            Text(reviewSubmissionCtrl.phone.toString(), style: appCss.bodyStyle5),
+                            SizedBox(height: appScreenUtil.size(5)),
                             // Row(
                             //   mainAxisAlignment: MainAxisAlignment.start,
                             //   children: [
                             //     Image.asset(
                             //       veryGoodEmoji,
-                            //       height: screenWidth(20),
+                            //       height: appScreenUtil.size(size)(20),
                             //     ),
-                            //     SizedBox(width: screenWidth(5)),
+                            //     SizedBox(width: appScreenUtil.size(size)(5)),
                             //     Text(
                             //       '(5)',
                             //       style: bodyStyle5.copyWith(color: darkGreyColor),
                             //     ),
-                            //     SizedBox(width: screenWidth(5)),
+                            //     SizedBox(width: appScreenUtil.size(size)(5)),
                             //     Text(
                             //       '89 ratings',
                             //       style: bodyStyle5.copyWith(color: darkGreyColor),
@@ -206,11 +207,11 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                       Align(
                           alignment: Alignment.topLeft,
                           child: Text(dateList.length > 0 ? 'Selecte Date' : 'Date', style: bodyStyle5.copyWith(color: black22Color))),
-                      SizedBox(height: screenHeight(10)),
+                      SizedBox(height: appScreenUtil.size(size)(10)),
                       dateList.length == 0
                           ? Container(
-                              width: screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
+                              width: appScreenUtil.screenActualWidth(),
+                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(size)(15), horizontal: appScreenUtil.size(size)(15)),
                               decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
                               child: Text(
                                 reviewSubmissionCtrl.txtDateTime,
@@ -218,8 +219,8 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                               ),
                             )
                           : Container(
-                              width: screenActualWidth(),
-                              height: screenHeight(50),
+                              width: appScreenUtil.screenActualWidth(),
+                              height: appScreenUtil.size(size)(50),
                               child: ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -232,15 +233,15 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
 
                                     final date = year != null ? "$year-$month-$day" : null;
                                     return Padding(
-                                      padding: EdgeInsets.only(right: screenWidth(10)),
+                                      padding: EdgeInsets.only(right: appScreenUtil.size(size)(10)),
                                       child: InkWell(
                                         onTap: () {
                                           reviewSubmissionCtrl.tapToSelectDate(date);
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: screenWidth(15)),
+                                          padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(size)(15)),
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(screenWidth(25)),
+                                            borderRadius: BorderRadius.circular(appScreenUtil.size(size)(25)),
                                             color: reviewSubmissionCtrl.pickDate == date ? primaryDarkColor : Colors.grey[100],
                                           ),
                                           child: Center(
@@ -293,7 +294,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     },
                   ),
                 ),*/
-                // SizedBox(height: screenHeight(20)),
+                // SizedBox(height: appScreenUtil.size(size)(20)),
                 // Obx(() => Align(
                 //     alignment: Alignment.topLeft,
                 //     child: RichText(
@@ -305,7 +306,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 //         ],
                 //       ),
                 //     ))),
-                // SizedBox(height: screenHeight(10)),
+                // SizedBox(height: appScreenUtil.size(size)(10)),
                 if (storeCtrl.questionList.length > 0)
                   GetBuilder<ReviewSubmissionController>(
                       builder: (_) => ListView.builder(
@@ -319,15 +320,15 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
 
                               int id = item['id'] ?? '';
                               return Container(
-                                padding: EdgeInsets.symmetric(vertical: screenWidth(10)),
+                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                                 // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      child: Text(title, style: bodyStyle5.copyWith(color: black22Color)),
+                                      child: Text(title, style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                                     ),
-                                    SizedBox(height: screenHeight(10)),
+                                    SizedBox(height: appScreenUtil.size(10)),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
@@ -348,46 +349,48 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Do you have any comments?',
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                 ),
-                SizedBox(height: screenHeight(10)),
+                SizedBox(height: appScreenUtil.size(10)),
                 Container(
-                  decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(5))),
+                  decoration:
+                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtComment,
                     hintText: "Write comment here...",
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     keyboardType: TextInputType.multiline,
-                    padding: screenWidth(20),
+                    padding: appScreenUtil.size(20),
                   ),
                 ),
-                SizedBox(height: screenHeight(30)),
+                SizedBox(height: appScreenUtil.size(30)),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Do you have any wishes?',
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                 ),
-                SizedBox(height: screenHeight(10)),
+                SizedBox(height: appScreenUtil.size(10)),
                 Container(
-                  decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(5))),
+                  decoration:
+                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtWish,
                     hintText: "Write wish here...",
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
-                    style: bodyStyle5.copyWith(color: black22Color),
+                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     keyboardType: TextInputType.multiline,
-                    padding: screenWidth(20),
+                    padding: appScreenUtil.size(20),
                   ),
                 ),
-                SizedBox(height: screenWidth(30)),
+                SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<ReviewSubmissionController>(builder: (_) {
                   // if (reviewSubmissionCtrl.existingReview == null || reviewSubmissionCtrl.questions.length == 0)
                   return CustomButton(
@@ -406,7 +409,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
       // bottomNavigationBar: SafeArea(
       //   maintainBottomViewPadding: true,
       //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+      //     padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(size)(20)),
       //     child: CustomButton(
       //       title: 'Save',
       //       onTap: () {

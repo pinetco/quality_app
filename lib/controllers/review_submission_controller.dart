@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/common/loader_controller.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:quality_app/networking/api_methods.dart';
+import 'package:quality_app/global/networking/api_methods.dart';
 
 class ReviewSubmissionController extends GetxController with SingleGetTickerProviderMixin {
   var storeCtrl = Get.find<HomeClientController>();
@@ -69,9 +68,9 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   }
 
 /*  getReviewDateList() async {
-    Loader().showLoading();
+   helper.showLoading();
     apis.getApi(visitDateAPI(visitId), []).then((res) async {
-      Loader().hideLoading();
+     helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         dateList = data ?? [];
@@ -83,7 +82,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
         update();
       } else {}
     }, onError: (e) {
-      Loader().hideLoading();
+     helper.hideLoading();
     });
   }*/
 
@@ -149,7 +148,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
                     alignment: Alignment.topRight,
                     child: Icon(
                       MdiIcons.close,
-                      size: screenWidth(30),
+                      size: appScreenUtil.size(30),
                       color: Colors.black54,
                     ),
                   ),
@@ -158,18 +157,18 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      checkMark,
+                      imageAssets.checkMark,
                       width: 50,
                       height: 50,
                     ),
-                    SizedBox(height: screenWidth(20)),
-                    Text('Thank You', style: bodyStyle3.copyWith(color: black22Color)),
+                    SizedBox(height: appScreenUtil.size(20)),
+                    Text('Thank You', style: appCss.bodyStyle3.copyWith(color: appColor.black22Color)),
                     Container(
-                      width: screenActualWidth() - screenWidth(50),
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
+                      width: appScreenUtil.screenActualWidth() - appScreenUtil.size(50),
+                      padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
                       child: Text(
                         'Your review has been successfully submitted',
-                        style: bodyStyle6.copyWith(color: grayColor),
+                        style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -187,7 +186,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
+        helper.showLoading();
 
         final formData = {
           'employee_id': empId,
@@ -200,8 +199,8 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
         };
         print(formData);
         print('formData');
-        apis.postApi(reviewsAPI, formData).then((res) async {
-          Loader().hideLoading();
+        apis.call(apiMethods.reviewsAPI, formData, apiType.post).then((res) async {
+          helper.hideLoading();
 
           if (res.data != null && res.validation == false) {
             if (isNavigation) {
@@ -211,7 +210,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
             }
           } else {}
         }, onError: (e) {
-          Loader().hideLoading();
+          helper.hideLoading();
         });
       }
     } on SocketException catch (_) {}
@@ -226,9 +225,9 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        apis.getApi(reviewDateWise(visitId, pickDate), []).then((res) async {
-          Loader().hideLoading();
+        helper.showLoading();
+        apis.call(apiMethods.reviewDateWise(visitId, pickDate), null, apiType.get).then((res) async {
+          helper.hideLoading();
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
             existingReview = data ?? null;
@@ -240,7 +239,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
           }
           update();
         }, onError: (e) {
-          Loader().hideLoading();
+          helper.hideLoading();
         });
       }
     } on SocketException catch (_) {}

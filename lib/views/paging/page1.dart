@@ -33,7 +33,7 @@ class _Page1State extends State<Page1> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(screenWidth(20)),
+          padding: EdgeInsets.all(appScreenUtil.size(20)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,10 +48,10 @@ class _Page1State extends State<Page1> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: screenWidth(50)),
+                    SizedBox(height: appScreenUtil.size(50)),
                     Text("Argument Data", style: h3),
                     Text("$data", style: bodyStyle4),
-                    SizedBox(height: screenWidth(10)),
+                    SizedBox(height: appScreenUtil.size(10)),
                     RaisedButton(
                       child: Text("Pass Data Back"),
                       onPressed: () {

@@ -1,15 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:forceupdate/forceupdate.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
-
-import 'common/loader_controller.dart';
 
 class HomeEmpController extends GetxController with SingleGetTickerProviderMixin {
   TabController tabController;
@@ -19,8 +14,6 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   TextEditingController txtPassword = TextEditingController();
 
   RxBool _isLoading = false.obs;
-  String _loginOption;
-  int _currentIndex = 0;
   String _isoCode;
 
   bool get isLoading => _isLoading.value;
@@ -52,14 +45,14 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   getUserInfo() async {
-    Loader().showLoading();
-    apis.getApi(userAPI, []).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         userInfo = data;
         print(data);
-        await helper.writeStorage(Session.userInfo, data);
+        await helper.writeStorage(session.userInfo, data);
         update();
       } else {}
     }, onError: (e) {
@@ -68,17 +61,17 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   checkVersion() async {
-    final checkVersion = CheckVersion(context: Get.context);
-    final appStatus = await checkVersion.getVersionStatus();
-    print("appStatus :");
-    print(appStatus);
-    if (appStatus.canUpdate) {
-      checkVersion.showUpdateDialog("com.quality_app", 'com.quality_app');
-    }
-    print("canUpdate ${appStatus.canUpdate}");
-    print("localVersion ${appStatus.localVersion}");
-    print("appStoreLink ${appStatus.appStoreUrl}");
-    print("storeVersion ${appStatus.storeVersion}");
+    // final checkVersion = CheckVersion(context: Get.context);
+    // final appStatus = await checkVersion.getVersionStatus();
+    // print("appStatus :");
+    // print(appStatus);
+    // if (appStatus.canUpdate) {
+    //   checkVersion.showUpdateDialog("com.quality_app", 'com.quality_app');
+    // }
+    // print("canUpdate ${appStatus.canUpdate}");
+    // print("localVersion ${appStatus.localVersion}");
+    // print("appStoreLink ${appStatus.appStoreUrl}");
+    // print("storeVersion ${appStatus.storeVersion}");
   }
 
   @override
@@ -118,9 +111,9 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   getData() async {
-    if (!isRefreshing) Loader().showLoading();
-    apis.getApi(employeeHomeAPI, []).then((res) async {
-      if (!isRefreshing) Loader().hideLoading();
+    if (!isRefreshing) helper.showLoading();
+    apis.call(apiMethods.employeeHomeAPI, null, apiType.get).then((res) async {
+      if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;
 
       if (res.data != null && res.validation == false) {
@@ -165,9 +158,9 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        apis.getApi(appInformationAPI, []).then((res) async {
-          Loader().hideLoading();
+        helper.showLoading();
+        apis.call(apiMethods.appInformationAPI, null, apiType.get).then((res) async {
+          helper.hideLoading();
 
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
@@ -187,9 +180,9 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        apis.getApi(questionsAPI, []).then((res) async {
-          Loader().hideLoading();
+        helper.showLoading();
+        apis.call(apiMethods.questionsAPI, null, apiType.get).then((res) async {
+          helper.hideLoading();
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
             questionList = data;
@@ -221,21 +214,21 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     _isLoading.value = true;
     Timer(Duration(seconds: 1), () {
       _isLoading.value = false;
-      Get.toNamed(AppRouter.bottomNavigationScreen);
+      Get.toNamed(routeName.bottomNavigationScreen);
     });
   }
 
   void logout() async {
-    helper.removeSpecificKeyStorage(Session.authToken);
-    Get.offAndToNamed(AppRouter.login);
+    helper.removeSpecificKeyStorage(session.authToken);
+    Get.offAndToNamed(routeName.login);
   }
 
   checkIn(id) {
     final formData = {'client_id': id};
 
-    Loader().showLoading();
-    apis.postApi(checkInAPI, formData).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.checkInAPI, null, apiType.post).then((res) async {
+      helper.hideLoading();
 
       if (res.data != null && res.validation == false) {
         print(res.data);
@@ -249,9 +242,9 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   checkOut(id) {
-    Loader().showLoading();
-    apis.putApi(checkOutAPI(id), []).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.checkOutAPI(id), null, apiType.put).then((res) async {
+      helper.hideLoading();
 
       if (res.data != null && res.validation == false) {
         print(res.data);
@@ -264,6 +257,6 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   navigateRateYourDay() {
-    Get.toNamed(AppRouter.rateYourDay);
+    Get.toNamed(routeName.rateYourDay);
   }
 }

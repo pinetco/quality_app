@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:forceupdate/forceupdate.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
 
-import 'common/loader_controller.dart';
+import 'common/loading_controller.dart';
 
 class HomeClientController extends GetxController with SingleGetTickerProviderMixin {
   TabController tabController;
@@ -51,9 +49,9 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   }
 
   getUserInfo() async {
-    Loader().showLoading();
-    apis.getApi(userAPI, []).then((res) async {
-      Loader().hideLoading();
+    helper.showLoading();
+    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         userInfo = data;
@@ -115,9 +113,9 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   }
 
   getData() async {
-    if (!isRefreshing) Loader().showLoading();
-    apis.getApi(clientHomeAPI, []).then((res) async {
-      if (!isRefreshing) Loader().hideLoading();
+    if (!isRefreshing) helper.showLoading();
+    apis.call(apiMethods.clientHomeAPI, null, apiType.get).then((res) async {
+      if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
@@ -147,9 +145,9 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        apis.getApi(appInformationAPI, []).then((res) async {
-          Loader().hideLoading();
+        helper.showLoading();
+        apis.call(apiMethods.appInformationAPI, null, apiType.get).then((res) async {
+          helper.hideLoading();
 
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
@@ -169,9 +167,9 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Loader().showLoading();
-        apis.getApi(questionsAPI, []).then((res) async {
-          Loader().hideLoading();
+        helper.showLoading();
+        apis.call(apiMethods.questionsAPI, null, apiType.get).then((res) async {
+          helper.hideLoading();
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
             questionList = data;
@@ -203,12 +201,12 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     _isLoading.value = true;
     Timer(Duration(seconds: 1), () {
       _isLoading.value = false;
-      Get.toNamed(AppRouter.bottomNavigationScreen);
+      Get.toNamed(routeName.bottomNavigationScreen);
     });
   }
 
   void logout() async {
-    helper.removeSpecificKeyStorage(Session.authToken);
-    Get.offAndToNamed(AppRouter.login);
+    helper.removeSpecificKeyStorage(session.authToken);
+    Get.offAndToNamed(routeName.login);
   }
 }

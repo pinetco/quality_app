@@ -1,7 +1,8 @@
 import 'package:quality_app/controllers/forgot_password_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/input_package.dart';
 
 class ForgotPassword extends StatelessWidget {
   var forgotPasswordController = Get.put(ForgotPasswordController());
@@ -14,7 +15,7 @@ class ForgotPassword extends StatelessWidget {
         // elevation: 0,
         title: Text('Forgot Password'), //style: header.copyWith(color: primaryColor)
       ),
-      backgroundColor: bgColor,
+      backgroundColor: appColor.bgColor,
       body: LoadingComponent(
         child: SingleChildScrollView(
           child: Stack(
@@ -22,7 +23,7 @@ class ForgotPassword extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.all(screenWidth(20)),
+                padding: EdgeInsets.all(appScreenUtil.size(20)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -31,12 +32,12 @@ class ForgotPassword extends StatelessWidget {
                         key: forgotPasswordController.formForgotKey,
                         child: Column(
                           children: [
-                            SizedBox(height: screenHeight(50)),
+                            SizedBox(height: appScreenUtil.size(50)),
                             CustomTextFormField(
                               container: forgotPasswordController.txtEmail,
                               hintText: "Email address",
                               prefixIcon: Icon(MdiIcons.email),
-                              style: h4.copyWith(color: textSecondaryColor),
+                              style: appCss.h4.copyWith(color: appColor.textSecondaryColor),
                               keyboardType: TextInputType.emailAddress,
                               padding: 20,
                               validator: (val) {
@@ -46,7 +47,7 @@ class ForgotPassword extends StatelessWidget {
                                   return null;
                               },
                             ),
-                            SizedBox(height: screenWidth(15)),
+                            SizedBox(height: appScreenUtil.size(15)),
                             CustomButton(
                               title: "Submit",
                               onTap: () {},

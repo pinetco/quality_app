@@ -25,18 +25,18 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
         navigateReviewScreen(empId, name, email, phone, imageName);
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(20)),
+        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: screenWidth(5.0)),
-          decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(10))),
+          padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
+          decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(10)),
+                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
                 child: Container(
-                    width: screenWidth(60.0),
-                    height: screenWidth(60.0),
+                    width: appScreenUtil.size(60.0),
+                    height: appScreenUtil.size(60.0),
                     decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
               Expanded(
@@ -80,7 +80,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                   children: [
                     SizedBox(height: 10),
                     Padding(
-                      padding: EdgeInsets.only(left: screenWidth(20), right: screenWidth(10)),
+                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(10)),
                       child: Column(
                         children: [
                           Row(
@@ -92,7 +92,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                               Spacer(),
                               NotificationHeaderIcon(),
                               SizedBox(
-                                width: screenWidth(15),
+                                width: appScreenUtil.size(15),
                               ),
                             ],
                           ),

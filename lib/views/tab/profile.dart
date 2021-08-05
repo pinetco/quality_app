@@ -1,8 +1,9 @@
 import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/packages/input_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_button.dart';
+import 'package:quality_app/global/widgets/notification_icon_header.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+            padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
                 // Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
@@ -46,7 +47,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       children: [
                         Text(
                           'Profile',
-                          style: h1,
+                          style: appCss.h1,
                         ),
                         Spacer(),
                         NotificationHeaderIcon(),
@@ -54,23 +55,23 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                SizedBox(height: screenHeight(30)),
+                SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<HomeClientController>(
                   builder: (_dx) => _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
                       ? Container(
-                          height: screenWidth(90),
-                          width: screenWidth(90),
+                          height: appScreenUtil.size(90),
+                          width: appScreenUtil.size(90),
                           decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.circular(screenWidth(90)),
+                            color: appColor.primaryColor,
+                            borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                           ),
                           child: Center(
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(screenWidth(90)),
+                              borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                               child: Image.network(
                                 _dx.userInfo['profile_photo_url'],
-                                width: screenWidth(90),
-                                height: screenWidth(90),
+                                width: appScreenUtil.size(90),
+                                height: appScreenUtil.size(90),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -78,28 +79,28 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       : Container(),
                 ),
                 SizedBox(
-                  height: screenHeight(30),
+                  height: appScreenUtil.size(30),
                 ),
                 GetBuilder<HomeClientController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? Container(
-                            width: screenActualWidth(),
-                            padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+                            width: appScreenUtil.screenActualWidth(),
+                            padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
                             child: Row(
                               children: [
-                                Image.asset(userIcon, width: screenWidth(20), color: primaryDarkColor),
-                                SizedBox(width: screenWidth(10)),
+                                Image.asset(imageAssets.userIcon, width: appScreenUtil.size(20), color: appColor.primaryDarkColor),
+                                SizedBox(width: appScreenUtil.size(10)),
                                 Text(
                                   _dx.userInfo['name'].toString(),
-                                  style: bodyStyle5.copyWith(color: black22Color),
+                                  style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                                 )
                               ],
                             ),
                           )
                         : Container()),
                 SizedBox(
-                  height: screenHeight(10),
+                  height: appScreenUtil.size(10),
                 ),
                 GetBuilder<HomeClientController>(
                     builder: (_dx) => _dx.userInfo != null
@@ -109,19 +110,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                               settingCtrl.openURL(email, 'email');
                             },
                             child: Container(
-                              width: screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+                              width: appScreenUtil.screenActualWidth(),
+                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
                               child: Row(
                                 children: [
                                   Image.asset(
-                                    emailIcon,
-                                    width: screenWidth(20),
+                                    imageAssets.emailIcon,
+                                    width: appScreenUtil.size(20),
                                   ),
-                                  SizedBox(width: screenWidth(10)),
+                                  SizedBox(width: appScreenUtil.size(10)),
                                   Text(
                                     _dx.userInfo['email'].toString(),
-                                    style: bodyStyle5.copyWith(color: black22Color),
+                                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                                   )
                                 ],
                               ),
@@ -129,7 +130,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           )
                         : Container()),
                 SizedBox(
-                  height: screenHeight(10),
+                  height: appScreenUtil.size(10),
                 ),
                 GetBuilder<HomeClientController>(
                     builder: (_dx) => _dx.userInfo != null
@@ -139,19 +140,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                               settingCtrl.openURL(phone, 'phone');
                             },
                             child: Container(
-                              width: screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+                              width: appScreenUtil.screenActualWidth(),
+                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
                               child: Row(
                                 children: [
                                   Image.asset(
-                                    phoneIcon,
-                                    width: screenWidth(20),
+                                    imageAssets.phoneIcon,
+                                    width: appScreenUtil.size(20),
                                   ),
-                                  SizedBox(width: screenWidth(10)),
+                                  SizedBox(width: appScreenUtil.size(10)),
                                   Text(
                                     _dx.userInfo['phone'].toString(),
-                                    style: bodyStyle5.copyWith(color: black22Color),
+                                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                                   ),
                                 ],
                               ),
@@ -160,7 +161,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         : Container()),
                 Spacer(),
                 Padding(
-                  padding: EdgeInsets.all(screenWidth(10)),
+                  padding: EdgeInsets.all(appScreenUtil.size(10)),
                   child: CustomButton(
                     title: "Logout",
                     onTap: () {

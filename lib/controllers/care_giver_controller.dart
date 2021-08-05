@@ -1,15 +1,8 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:forceupdate/forceupdate.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:sms_autofill/sms_autofill.dart';
-import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/networking/api_methods.dart';
-
-import 'common/loader_controller.dart';
+import 'package:quality_app/global/networking/index.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class CareGiverController extends GetxController with SingleGetTickerProviderMixin {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
@@ -34,9 +27,9 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
   }
 
   getCareGivers() async {
-    if (!isRefreshing) Loader().showLoading();
-    apis.getApi(careGiverListAPI, []).then((res) async {
-      if (!isRefreshing) Loader().hideLoading();
+    if (!isRefreshing) helper.showLoading();
+    apis.call(apiMethods.careGiverListAPI, null, apiType.get).then((res) async {
+      if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;
 
       if (res.data != null && res.validation == false) {

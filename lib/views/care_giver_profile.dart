@@ -1,6 +1,6 @@
 import 'package:quality_app/controllers/other_user_profile_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_app/packages/config_package.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class CareGiverProfile extends StatefulWidget {
   @override
@@ -21,21 +21,21 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
               otherUserProfileCtrl.openURLContactInfo(value, type);
             },
       child: Container(
-        width: screenActualWidth(),
-        padding: EdgeInsets.symmetric(vertical: screenHeight(15), horizontal: screenWidth(15)),
-        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(5)),
+        width: appScreenUtil.screenActualWidth(),
+        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
         child: Row(
           children: [
             Image.asset(
               icon,
-              width: screenWidth(20),
-              color: primaryDarkColor,
+              width: appScreenUtil.size(20),
+              color: appColor.primaryDarkColor,
             ),
-            SizedBox(width: screenWidth(10)),
+            SizedBox(width: appScreenUtil.size(10)),
             Expanded(
               child: Text(
                 value.toString(),
-                style: bodyStyle5.copyWith(color: black22Color),
+                style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
               ),
             ),
           ],
@@ -52,7 +52,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: InkWell(
-            child: Icon(MdiIcons.arrowLeft, color: black22Color),
+            child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
             onTap: () {
               Navigator.pop(context);
             }),
@@ -60,7 +60,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+            padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
                 // Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
@@ -70,46 +70,47 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
                       children: [
                         Text(
                           'Profile',
-                          style: h1,
+                          style: appCss.h1,
                         ),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(height: screenHeight(30)),
+                SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<OtherUserProfileController>(
                   builder: (_dx) => _dx.userDetails != null && _dx.userDetails['profile_photo_url'] != null
                       ? Container(
-                          height: screenWidth(90),
-                          width: screenWidth(90),
+                          height: appScreenUtil.size(90),
+                          width: appScreenUtil.size(90),
                           decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.circular(screenWidth(90)),
+                            color: appColor.primaryColor,
+                            borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                           ),
                           child: Center(
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(screenWidth(90)),
+                              borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                               child: Image.network(
                                 _dx.userDetails['profile_photo_url'],
-                                width: screenWidth(90),
-                                height: screenWidth(90),
+                                width: appScreenUtil.size(90),
+                                height: appScreenUtil.size(90),
                                 fit: BoxFit.fill,
                               ),
                             ),
                           ))
                       : Container(),
                 ),
-                SizedBox(height: screenHeight(30)),
-                GetBuilder<OtherUserProfileController>(builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'name', userIcon, true) : Container()),
-                SizedBox(height: screenHeight(10)),
+                SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'email', emailIcon, false) : Container()),
-                SizedBox(height: screenHeight(10)),
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'name', imageAssets.userIcon, true) : Container()),
+                SizedBox(height: appScreenUtil.size(10)),
                 GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'phone', phoneIcon, false) : Container()),
-                SizedBox(height: screenHeight(10)),
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'email', imageAssets.emailIcon, false) : Container()),
+                SizedBox(height: appScreenUtil.size(10)),
                 GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'location.full_address', locationIcon, false) : Container()),
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'phone', imageAssets.phoneIcon, false) : Container()),
+                SizedBox(height: appScreenUtil.size(10)),
+                GetBuilder<OtherUserProfileController>(
+                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'location.full_address', imageAssets.locationIcon, false) : Container()),
               ],
             ),
           ),
