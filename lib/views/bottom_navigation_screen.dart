@@ -12,6 +12,12 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   var bottomCtrl = Get.put(BottomNavigationController());
 
+  @override
+  void initState() {
+    firebaseNotificationService.init(context);
+
+    super.initState();
+  }
   // List<Widget> _widgetOptions = <Widget>[
   //   Home(),
   //   CareGiversList(),

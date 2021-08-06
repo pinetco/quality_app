@@ -5,11 +5,13 @@ import 'package:quality_app/app_init.dart';
 import 'package:quality_app/controllers/common/loading_controller.dart';
 import 'package:quality_app/controllers/splash_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   await GetStorage.init();
   Get.put(LoadingController());
   Get.put(SplashController());
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
