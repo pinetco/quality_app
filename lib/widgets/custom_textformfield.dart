@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
-import 'package:quality_app/packages/config_package.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/packages/config_package.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController container;
@@ -19,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color fillColor;
   final bool enabled;
   final int maxLines;
+  final ValueChanged onChanged;
 
   const CustomTextFormField({
     Key key,
@@ -36,6 +35,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.enabled = true,
     this.maxLines = 1,
+    this.onChanged,
     this.suffixIcon,
   }) : super(key: key);
 
@@ -74,6 +74,7 @@ class CustomTextFormField extends StatelessWidget {
       enabled: enabled,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      onChanged: onChanged,
     );
   }
 }

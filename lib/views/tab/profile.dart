@@ -1,6 +1,6 @@
-import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
+import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
 import 'package:quality_app/packages/input_package.dart';
 
@@ -31,7 +31,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFF7F8FA),
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
@@ -49,6 +48,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           style: h1,
                         ),
                         Spacer(),
+                        ProfileEditIcon(),
+                        SizedBox(width: 15),
                         NotificationHeaderIcon(),
                       ],
                     ),
@@ -170,6 +171,36 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileEditIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Get.toNamed(AppRouter.notification);
+      },
+      child: Container(
+        height: screenWidth(20),
+        width: screenWidth(20),
+        decoration: BoxDecoration(
+          // color: primaryColor,
+          border: Border.all(
+            color: black22Color,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(screenWidth(30)),
+        ),
+        child: Center(
+          child: Icon(
+            MdiIcons.accountEditOutline,
+            size: screenWidth(20),
+            color: black22Color,
           ),
         ),
       ),

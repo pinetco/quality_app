@@ -1,10 +1,8 @@
-import 'package:quality_app/controllers/bottom_navigation_controller.dart';
-import 'package:quality_app/controllers/care_giver_controller.dart';
-import 'package:quality_app/controllers/patients_controller.dart';
-import 'package:quality_app/packages/input_package.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
+import 'package:quality_app/controllers/patients_controller.dart';
 import 'package:quality_app/packages/config_package.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
+import 'package:quality_app/packages/input_package.dart';
 
 class PatientsList extends StatefulWidget {
   @override
@@ -35,10 +33,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(vertical: screenWidth(8), horizontal: screenWidth(10)),
-                child: Container(
-                    width: screenWidth(60.0),
-                    height: screenWidth(60.0),
-                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                child: Container(width: screenWidth(60.0), height: screenWidth(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
               Expanded(
                 child: Column(
@@ -118,6 +113,25 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                       ),
                     ),
                     SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: screenWidth(0), horizontal: screenWidth(20)),
+                      child: Container(
+                        decoration: BoxDecoration(border: Border.all(width: 1, color: deactivateColor), borderRadius: BorderRadius.circular(screenWidth(5))),
+                        child: CustomTextFormField(
+                          container: patientsCtrl.searchPatients,
+                          hintText: "What do you like to search patients",
+                          prefixIcon: Icon(MdiIcons.magnify),
+                          style: bodyStyle5.copyWith(color: black22Color),
+                          keyboardType: TextInputType.multiline,
+                          padding: screenWidth(13),
+                          onChanged: (text) {
+                            patientsCtrl.onChangeText(text);
+                          },
+                          fillColor: Colors.grey.withOpacity(0.1),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
                     GetBuilder<PatientsController>(
                       builder: (_dx) => Expanded(
                         child: RefreshIndicator(

@@ -32,3 +32,7 @@ const int successCode = 200;
 const int authorizationCode = 401;
 const int internalServerError = 500;
 const int userCreated = 201;
+
+// Last include
+const String careGiversSearchAPI = '/employees';
+const String patientsSearchAPI = '/employees';
