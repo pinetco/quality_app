@@ -14,7 +14,7 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   @override
   void onInit() {
     // TODO: implement onInit
-    getPatientsList();
+    getPatientsList('');
     super.onInit();
   }
 
@@ -28,19 +28,15 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   onChangeText(query) async {
     const duration = Duration(milliseconds: 400); // set the duration that you want call search() after that.
     if (searchOnStoppedTyping != null) {
-      print('Cancel');
       searchOnStoppedTyping.cancel();
       update(); // clear timer
     }
-    if (query.isEmpty) return null;
     searchOnStoppedTyping = new Timer(duration, () {
-      print('Timer');
-      String name;
-      print('####### Search data for care giver  ######## $name');
+      String name = '';
       if (!isNumericUsingRegularExpression(query)) {
         name = query;
       }
-      searchResultFromCareGiverAPI(name);
+      getPatientsList(name);
     });
   }
 
@@ -50,19 +46,9 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
     return numericRegex.hasMatch(string);
   }
 
-  // search function for CareGivers api
-  searchResultFromCareGiverAPI(name) async {
-    if (name == null) {
-      name = '';
-    }
-    // Api code
-    //getPatientsList();
-  }
-/* End a search part functionality in controllers */
-
-  getPatientsList() async {
+  getPatientsList(name) async {
     if (!isRefreshing) helper.showLoading();
-    apis.call(apiMethods.patientsAPI, null, apiType.get).then((res) async {
+    apis.call(apiMethods.patientsAPI(name), null, apiType.get).then((res) async {
       if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;
 
@@ -80,7 +66,7 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
 
   Future<Null> refreshList() async {
     isRefreshing = true;
-    getPatientsList();
+    getPatientsList('');
     return null;
   }
 

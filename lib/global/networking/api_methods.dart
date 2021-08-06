@@ -16,7 +16,7 @@ class ApiMethods {
   String visitDateAPI(id) => "/options/employees/$id/visit-dates";
   String reviewDateWise(id, date) => "/employees/$id/review?date=$date";
 
-  final String patientsAPI = '/clients';
+  String patientsAPI(name) => '/clients?search=$name';
   final String careGiverListAPI = '/employees';
   final String registerTokenAPI = '/devices';
 

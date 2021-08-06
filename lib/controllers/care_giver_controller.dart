@@ -20,7 +20,7 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
     // TODO: implement onInit
     // wait untill widget load
     // WidgetsBinding.instance.addPostFrameCallback((_) {
-    getCareGivers();
+    getCareGivers('');
     // });
     super.onInit();
   }
@@ -31,23 +31,18 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
     super.dispose();
   }
 
-  /* Start a search part functionality in controllers */
   onChangeText(query) async {
     const duration = Duration(milliseconds: 400); // set the duration that you want call search() after that.
     if (searchOnStoppedTyping != null) {
-      print('Cancel');
       searchOnStoppedTyping.cancel();
       update(); // clear timer
     }
-    if (query.isEmpty) return null;
     searchOnStoppedTyping = new Timer(duration, () {
-      print('Timer');
-      String name;
-      print('####### Search data for care giver  ######## $name');
+      String name = '';
       if (!isNumericUsingRegularExpression(query)) {
         name = query;
       }
-      searchResultFromCareGiverAPI(name);
+      getCareGivers(name);
     });
   }
 
@@ -57,17 +52,7 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
     return numericRegex.hasMatch(string);
   }
 
-// search function for CareGivers api
-  searchResultFromCareGiverAPI(name) async {
-    if (name == null) {
-      name = '';
-    }
-    // Api code
-    //getCareGivers();
-  }
-/* End a search part functionality in controllers */
-
-  getCareGivers() async {
+  getCareGivers(name) async {
     if (!isRefreshing) helper.showLoading();
     apis.call(apiMethods.careGiverListAPI, null, apiType.get).then((res) async {
       if (!isRefreshing) helper.hideLoading();
@@ -86,7 +71,7 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
 
   Future<Null> refreshList() async {
     isRefreshing = true;
-    getCareGivers();
+    getCareGivers('');
     return null;
   }
 }

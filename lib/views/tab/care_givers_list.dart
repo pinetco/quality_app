@@ -139,7 +139,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                                       Text('No Care Givers Found.', style: appCss.bodyStyle5),
                                       TextButton(
                                           onPressed: () {
-                                            careGiverCtrl.getCareGivers();
+                                            careGiverCtrl.getCareGivers('');
                                           },
                                           child: Text(
                                             'Refresh',

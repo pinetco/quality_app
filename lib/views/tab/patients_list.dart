@@ -154,7 +154,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                                     Text('No Patients Found.', style: appCss.bodyStyle5),
                                     TextButton(
                                         onPressed: () {
-                                          patientsCtrl.getPatientsList();
+                                          patientsCtrl.getPatientsList('');
                                         },
                                         child: Text(
                                           'Refresh',
