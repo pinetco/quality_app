@@ -7,6 +7,9 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   List patientsList = [];
   bool isRefreshing = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
+  // TextEditingController
+  TextEditingController searchPatients = TextEditingController();
+  Timer searchOnStoppedTyping;
 
   @override
   void onInit() {
@@ -20,6 +23,42 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
     // TODO: implement dispose
     super.dispose();
   }
+
+/* Start a search part functionality in controllers */
+  onChangeText(query) async {
+    const duration = Duration(milliseconds: 400); // set the duration that you want call search() after that.
+    if (searchOnStoppedTyping != null) {
+      print('Cancel');
+      searchOnStoppedTyping.cancel();
+      update(); // clear timer
+    }
+    if (query.isEmpty) return null;
+    searchOnStoppedTyping = new Timer(duration, () {
+      print('Timer');
+      String name;
+      print('####### Search data for care giver  ######## $name');
+      if (!isNumericUsingRegularExpression(query)) {
+        name = query;
+      }
+      searchResultFromCareGiverAPI(name);
+    });
+  }
+
+  // Create isNumericUsingRegularExpression functions
+  bool isNumericUsingRegularExpression(String string) {
+    final numericRegex = RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$');
+    return numericRegex.hasMatch(string);
+  }
+
+  // search function for CareGivers api
+  searchResultFromCareGiverAPI(name) async {
+    if (name == null) {
+      name = '';
+    }
+    // Api code
+    //getPatientsList();
+  }
+/* End a search part functionality in controllers */
 
   getPatientsList() async {
     if (!isRefreshing) helper.showLoading();

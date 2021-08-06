@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color fillColor;
   final bool enabled;
   final int maxLines;
+  final ValueChanged onChanged;
 
   const CustomTextFormField({
     Key key,
@@ -37,6 +38,7 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled = true,
     this.maxLines = 1,
     this.suffixIcon,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -74,6 +76,7 @@ class CustomTextFormField extends StatelessWidget {
       enabled: enabled,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      onChanged: onChanged,
     );
   }
 }

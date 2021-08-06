@@ -20,13 +20,13 @@ class AppTheme {
     scaffoldBackgroundColor: _color.bgColor,
     primaryColor: _color.primaryColor,
     buttonColor: _color.primaryColor,
-    accentColor: _color.primaryColor,
+    accentColor: Colors.black,
     backgroundColor: _color.bgColor,
     dividerColor: _color.dividerColor,
     dialogBackgroundColor: _color.whiteColor,
     canvasColor: _color.bgColor,
-    //appBarTheme: AppBarTheme(color: _color.primaryColor, iconTheme: IconThemeData(color: Colors.white)),
-    appBarTheme: AppBarTheme(color: _color.primaryColor),
+    unselectedWidgetColor: _color.deactivateColor,
+    appBarTheme: AppBarTheme(color: _color.primaryColor, iconTheme: IconThemeData(color: Colors.white)),
     //iconTheme: IconThemeData(color: _color.primaryColor),
     iconTheme: IconThemeData(color: _color.textPrimaryColor),
     cardColor: Colors.white,
@@ -45,10 +45,10 @@ class AppTheme {
       subtitle1: TextStyle(color: _color.textPrimaryColor),
       subtitle2: TextStyle(color: _color.textPrimaryColor),
       //body
-      bodyText1: TextStyle(color: _color.textPrimaryColor),
-      bodyText2: TextStyle(color: _color.textPrimaryColor),
+      // bodyText1: TextStyle(color: _color.textPrimaryColor),
+      // bodyText2: TextStyle(color: _color.textPrimaryColor),
       //button
-      button: TextStyle(color: _color.buttonTextColor),
+      button: TextStyle(color: _color.whiteColor),
     ),
   );
 
@@ -89,7 +89,7 @@ class AppTheme {
       bodyText1: TextStyle(color: Colors.white),
       bodyText2: TextStyle(color: Colors.white),
       //button
-      button: TextStyle(color: _color.buttonTextColor),
+      button: TextStyle(color: _color.whiteColor),
     ),
   );
 }

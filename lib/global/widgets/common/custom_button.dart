@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     Key key,
     this.title,
-    this.padding = 15,
+    this.padding = 20,
     this.radius = 10,
     this.onTap,
     this.style,
@@ -64,7 +64,7 @@ class CustomButton extends StatelessWidget {
                     ),
                   Text(
                     title,
-                    style: style ?? appCss.h4,
+                    style: style ?? appCss.bodyStyle4.copyWith(color: appColor.whiteColor),
                     textAlign: TextAlign.center,
                   ),
                   if (suffixIcon != null)

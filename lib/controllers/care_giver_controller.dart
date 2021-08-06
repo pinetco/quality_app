@@ -7,6 +7,11 @@ import 'package:quality_app/global/packages/config_package.dart';
 class CareGiverController extends GetxController with SingleGetTickerProviderMixin {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
+  // TextEditingController
+  TextEditingController searchCareGiver = TextEditingController();
+  // Stop search typing
+  Timer searchOnStoppedTyping;
+
   List careGiverList = [];
   bool isRefreshing = false;
 
@@ -25,6 +30,42 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
     // TODO: implement dispose
     super.dispose();
   }
+
+  /* Start a search part functionality in controllers */
+  onChangeText(query) async {
+    const duration = Duration(milliseconds: 400); // set the duration that you want call search() after that.
+    if (searchOnStoppedTyping != null) {
+      print('Cancel');
+      searchOnStoppedTyping.cancel();
+      update(); // clear timer
+    }
+    if (query.isEmpty) return null;
+    searchOnStoppedTyping = new Timer(duration, () {
+      print('Timer');
+      String name;
+      print('####### Search data for care giver  ######## $name');
+      if (!isNumericUsingRegularExpression(query)) {
+        name = query;
+      }
+      searchResultFromCareGiverAPI(name);
+    });
+  }
+
+// Create isNumericUsingRegularExpression functions
+  bool isNumericUsingRegularExpression(String string) {
+    final numericRegex = RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$');
+    return numericRegex.hasMatch(string);
+  }
+
+// search function for CareGivers api
+  searchResultFromCareGiverAPI(name) async {
+    if (name == null) {
+      name = '';
+    }
+    // Api code
+    //getCareGivers();
+  }
+/* End a search part functionality in controllers */
 
   getCareGivers() async {
     if (!isRefreshing) helper.showLoading();

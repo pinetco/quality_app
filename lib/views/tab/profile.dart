@@ -16,17 +16,31 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   var settingCtrl = Get.put(SettingController());
   var storeCtrl = Get.find<HomeClientController>();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
+  Widget profileEditIcon() {
+    return InkWell(
+      onTap: () {
+        //Get.toNamed(routeName.editProfile);
+      },
+      child: Container(
+        height: appScreenUtil.size(20),
+        width: appScreenUtil.size(20),
+        decoration: BoxDecoration(
+          // color: primaryColor,
+          border: Border.all(
+            color: appColor.black22Color,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(appScreenUtil.size(30)),
+        ),
+        child: Center(
+          child: Icon(
+            MdiIcons.accountEditOutline,
+            size: appScreenUtil.size(20),
+            color: appColor.black22Color,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -50,6 +64,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           style: appCss.h1,
                         ),
                         Spacer(),
+                        profileEditIcon(),
+                        SizedBox(width: 15),
                         NotificationHeaderIcon(),
                       ],
                     ),

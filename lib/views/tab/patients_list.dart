@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/patients_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
 
 class PatientsList extends StatefulWidget {
@@ -116,6 +117,24 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                       ),
                     ),
                     SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                        child: CustomTextFormField(
+                          container: patientsCtrl.searchPatients,
+                          hintText: "What do you like to search patients",
+                          prefixIcon: Icon(MdiIcons.magnify),
+                          style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                          keyboardType: TextInputType.multiline,
+                          padding: appScreenUtil.size(13),
+                          onChanged: (text) {
+                            patientsCtrl.onChangeText(text);
+                          },
+                        ),
+                      ),
+                    ),
                     GetBuilder<PatientsController>(
                       builder: (_dx) => Expanded(
                         child: RefreshIndicator(

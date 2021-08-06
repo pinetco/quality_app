@@ -19,4 +19,8 @@ class ApiMethods {
   final String patientsAPI = '/clients';
   final String careGiverListAPI = '/employees';
   final String registerTokenAPI = '/devices';
+
+  // Last include
+  final String careGiversSearchAPI = '/employees';
+  final String patientsSearchAPI = '/employees';
 }

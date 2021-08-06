@@ -1,6 +1,7 @@
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/care_giver_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
 import 'package:flutter/material.dart';
 
@@ -99,6 +100,25 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                       ),
                     ),
                     SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                        child: CustomTextFormField(
+                          container: careGiverCtrl.searchCareGiver,
+                          hintText: "What do you like to search care giver",
+                          prefixIcon: Icon(MdiIcons.magnify),
+                          style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                          keyboardType: TextInputType.multiline,
+                          padding: appScreenUtil.size(13),
+                          onChanged: (text) {
+                            careGiverCtrl.onChangeText(text);
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
                     Expanded(
                       child: SizedBox(
                         child: GetBuilder<CareGiverController>(
