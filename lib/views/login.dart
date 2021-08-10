@@ -1,5 +1,6 @@
 import 'package:quality_app/controllers/login_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/route/route_name.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/phone_number_with_country.dart';
@@ -150,26 +151,26 @@ class Login extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
-                                          color: appColor.black22Color),
+                                          color: appColor.grayColor),
                                       Text(
                                         'Remember me',
-                                        style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                                        style: appCss.bodyStyle6,
                                       ),
                                     ],
                                   ),
                                   onTap: () {
                                     loginController.updateRememberLogin();
                                   }),
-                              // InkWell(
-                              //   child: Text(
-                              //     'Forgot Password?',
-                              //     style: h5.copyWith(color: textPrimaryColor),
-                              //   ),
-                              //   onTap: () {
-                              //     Get.toNamed(AppRouter.forgotPassword);
-                              //     // Navigator.pushNamed(context, AppRouter.forgotPassword);
-                              //   },
-                              // ),
+                              InkWell(
+                                child: Text(
+                                  'Forgot Password?',
+                                  style: appCss.bodyStyle6,
+                                ),
+                                onTap: () {
+                                  Get.toNamed(routeName.forgotPassword);
+                                  // Navigator.pushNamed(context, AppRouter.forgotPassword);
+                                },
+                              ),
                             ],
                           ),
                         ),

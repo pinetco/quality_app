@@ -60,7 +60,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0XFFF7F8FA),
-        body: GetBuilder<BottomNavigationController>(builder: (controller) => bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab)),
+        body: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: GetBuilder<BottomNavigationController>(builder: (controller) => bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab))),
         bottomNavigationBar: GetBuilder<BottomNavigationController>(
           builder: (controller) => CustomNavigationBar(
             // borderRadius: Radius.circular(appScreenUtil.size(30)),

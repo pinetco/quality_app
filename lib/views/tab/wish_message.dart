@@ -5,6 +5,7 @@ import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class WishMessage extends StatelessWidget {
   var wishCtrl = Get.put(WishController());
   @override
@@ -14,6 +15,7 @@ class WishMessage extends StatelessWidget {
       body: SafeArea(
         child: LoadingComponent(
           child: Container(
+            height: double.infinity,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
               child: Column(

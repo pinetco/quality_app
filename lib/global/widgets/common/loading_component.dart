@@ -11,6 +11,7 @@ class LoadingComponent extends StatelessWidget {
     //GestureDetector is for unFocus text controller when click on screen
     return GestureDetector(
       onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();

@@ -19,23 +19,53 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
   String date;
   dynamic visitId;
   dynamic questions = [];
+  Map questionObj;
   DateTime selectedDate = DateTime.now();
 
-  int ratingCount = 5;
   RxString _ratingText = 'Very Good'.obs;
 
   String get isRatingText => _ratingText.value;
 
   bool anonymousUser = false;
 
+  dynamic questionListRateYourDay = [];
+
   @override
   void onInit() {
+    getQuestionRateYourDay();
     super.onInit();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  getQuestionRateYourDay() {
+    helper.showLoading();
+    apis.call(apiMethods.rateYourDayAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        questionListRateYourDay = data;
+        print('data, $data');
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
+  }
+
+  int getReviewEmoji(id, count) {
+    dynamic filterList = questions.where((data) => data['id'] == id).toList();
+    if (filterList.length > 0) {
+      final ratings = filterList[0]['ratings'];
+
+      // if (ratings == count) {
+      return ratings;
+      // }
+    }
+    return 0;
   }
 
   Future<void> _showMyDialog() async {
@@ -99,7 +129,6 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
         final formData = {
           'employee_id': empId,
           'visit_id': visitId,
-          // "ratings": ratingCount,
           'questions': questions,
           "comment": txtComment.text,
           "wish": txtWish.text,
@@ -124,9 +153,16 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
   }
 
   void selectedReview(count, text, id) {
-    ratingCount = count;
     _ratingText.value = text ?? '';
+    int index = questions.indexWhere((data) => data['id'] == id);
+    if (index > -1) {
+      questions[index]['ratings'] = count;
+    } else {
+      questionObj = {"id": id, "ratings": count};
+      questions.add(questionObj);
+    }
     update();
+    saveReview(false);
   }
 
   anonymousFeedback() {

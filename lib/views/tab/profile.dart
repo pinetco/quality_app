@@ -179,6 +179,18 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 Padding(
                   padding: EdgeInsets.all(appScreenUtil.size(10)),
                   child: CustomButton(
+                    title: "Change Password",
+                    style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+                    border: Border.all(width: 1, color: appColor.primaryColor),
+                    onTap: () {
+                      settingCtrl.changePassword();
+                    },
+                    color: Colors.transparent,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(appScreenUtil.size(10)),
+                  child: CustomButton(
                     title: "Logout",
                     onTap: () {
                       settingCtrl.logout();

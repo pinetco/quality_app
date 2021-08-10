@@ -1,68 +1,90 @@
 import 'package:quality_app/controllers/forgot_password_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
-import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/global/widgets/phone_number_with_country.dart';
 
+// ignore: must_be_immutable
 class ForgotPassword extends StatelessWidget {
-  var forgotPasswordController = Get.put(ForgotPasswordController());
+  var forgotPasswordCtrl = Get.put(ForgotPasswordController());
+
+  Widget validationWidget(errorValidation) {
+    return Container(
+        padding: EdgeInsets.only(top: appScreenUtil.size(8)),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            errorValidation,
+            style: appCss.validationTextStyle,
+          ),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.transparent,
-        // elevation: 0,
-        title: Text('Forgot Password'), //style: header.copyWith(color: primaryColor)
-      ),
-      backgroundColor: appColor.bgColor,
-      body: LoadingComponent(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.all(appScreenUtil.size(20)),
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: InkWell(
+              child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
+              onTap: () {
+                Navigator.pop(context);
+              }),
+        ),
+        body: GetBuilder<ForgotPasswordController>(builder: (_) {
+          dynamic errorPhoneValidation = forgotPasswordCtrl.phoneFieldError ?? '';
+          print('errorPhoneValidation, $errorPhoneValidation');
+          return LoadingComponent(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(bottom: appScreenUtil.size(20)),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Form(
-                        key: forgotPasswordController.formForgotKey,
-                        child: Column(
-                          children: [
-                            SizedBox(height: appScreenUtil.size(50)),
-                            CustomTextFormField(
-                              container: forgotPasswordController.txtEmail,
-                              hintText: "Email address",
-                              prefixIcon: Icon(MdiIcons.email),
-                              style: appCss.h4.copyWith(color: appColor.textSecondaryColor),
-                              keyboardType: TextInputType.emailAddress,
-                              padding: 20,
-                              validator: (val) {
-                                if (val.isEmpty)
-                                  return 'Please enter some value';
-                                else
-                                  return null;
-                              },
-                            ),
-                            SizedBox(height: appScreenUtil.size(15)),
-                            CustomButton(
-                              title: "Submit",
-                              onTap: () {},
-                            ),
-                          ],
+                    Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Forgot Password',
+                            style: appCss.h1,
+                          ),
                         ),
+                        SizedBox(width: 5),
+                      ],
+                    ),
+                    SizedBox(height: appScreenUtil.size(15)),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
+                      // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          PhoneNumberWithCountry(
+                            onInputChanged: (val) async {
+                              forgotPasswordCtrl.updateIsoCode(val.isoCode, val.dialCode);
+                            },
+                            txtMobile: forgotPasswordCtrl.txtMobile,
+                            isoCode: forgotPasswordCtrl.isoCode,
+                          ),
+                          if (errorPhoneValidation != '') validationWidget(errorPhoneValidation),
+                        ],
                       ),
+                    ),
+                    SizedBox(height: appScreenUtil.size(30)),
+                    CustomButton(
+                      title: 'Submit',
+                      onTap: () {
+                        forgotPasswordCtrl.forgotPasssword();
+                      },
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        }));
   }
 }

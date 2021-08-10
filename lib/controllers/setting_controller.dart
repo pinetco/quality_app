@@ -52,6 +52,10 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
     }
   }
 
+  changePassword() {
+    Get.toNamed(routeName.changePassword);
+  }
+
   // getData() async {
   //   try {
   //     final result = await InternetAddress.lookup('google.com');

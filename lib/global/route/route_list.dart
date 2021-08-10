@@ -9,7 +9,6 @@
 
 export 'package:quality_app/views/login.dart';
 export 'package:quality_app/views/forgot_password.dart';
-// export 'package:quality_app/views/discount.dart';
 export 'package:quality_app/views/tab/profile.dart';
 export 'package:quality_app/views/tab/home.dart';
 export 'package:quality_app/views/review_submission.dart';
@@ -25,3 +24,4 @@ export 'package:quality_app/views/tab/patients_list.dart';
 export 'package:quality_app/views/login_test.dart';
 export 'package:quality_app/views/rate_your_day.dart';
 export 'package:quality_app/views/bottom_navigation_screen.dart';
+export 'package:quality_app/views/change_password.dart';

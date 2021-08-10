@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     Key key,
     this.title,
-    this.padding = 20,
+    this.padding = 15,
     this.radius = 10,
     this.onTap,
     this.style,

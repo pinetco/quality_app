@@ -41,7 +41,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
   }
 
   manageReview(id, color, count) {
-    dynamic rating = rateYourDayCtrl.ratingCount;
+    dynamic rating = rateYourDayCtrl.getReviewEmoji(id, count);
     if (rating >= count) {
       return Image.asset(
         mangeImage(count, true),
@@ -107,7 +107,46 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      GetBuilder<RateYourDayController>(builder: (_) {
+                        if (rateYourDayCtrl.questionListRateYourDay.length == 0) return Container();
+                        return ListView.builder(
+                          itemCount: _.questionListRateYourDay.length,
+                          padding: EdgeInsets.all(0),
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            dynamic item = _.questionListRateYourDay[index];
+                            print('item, $item');
+                            String title = item['title'] ?? '';
+
+                            int id = item['id'] ?? '';
+                            return Container(
+                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
+                              // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    child: Text(title, style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
+                                  ),
+                                  SizedBox(height: appScreenUtil.size(10)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ratingWidget(Icons.sentiment_very_dissatisfied, id, 1, Colors.red),
+                                      ratingWidget(Icons.sentiment_dissatisfied, id, 2, Colors.red[500]),
+                                      ratingWidget(Icons.sentiment_neutral, id, 3, Color(0XFFFFD70D)),
+                                      ratingWidget(Icons.sentiment_satisfied, id, 4, Colors.green[500]),
+                                      ratingWidget(Icons.sentiment_very_satisfied, id, 5, Colors.green),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }),
+                      /*Container(
                         child: Text('How was your day?', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                       ),
                       SizedBox(height: appScreenUtil.size(10)),
@@ -122,7 +161,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                             ratingWidget(Icons.sentiment_very_satisfied, 1, 5, Colors.green),
                           ],
                         );
-                      }),
+                      }),*/
                     ],
                   ),
                 ),

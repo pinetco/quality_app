@@ -18,33 +18,36 @@ class PhoneNumberWithCountry extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: InternationalPhoneNumberInput(
-        onInputChanged: onInputChanged,
-        //     (PhoneNumber number) {
-        //   print(number.phoneNumber);
-        // },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
+        child: InternationalPhoneNumberInput(
+          onInputChanged: onInputChanged,
+          //     (PhoneNumber number) {
+          //   print(number.phoneNumber);
+          // },
 
-        onInputValidated: (bool value) {
-          print(value);
-        },
-        selectorConfig: SelectorConfig(
-          selectorType: PhoneInputSelectorType.DIALOG,
+          onInputValidated: (bool value) {
+            print(value);
+          },
+          selectorConfig: SelectorConfig(
+            selectorType: PhoneInputSelectorType.DIALOG,
+          ),
+          inputBorder: OutlineInputBorder(borderSide: BorderSide.none),
+          locale: 'en',
+          ignoreBlank: true,
+          autoValidateMode: AutovalidateMode.disabled,
+          selectorTextStyle: TextStyle(color: Colors.black),
+          initialValue: PhoneNumber(isoCode: isoCode ?? 'en'), //PhoneNumber(isoCode: Platform.localeName.split('_').last)
+          textFieldController: txtMobile,
+          formatInput: false,
+          // keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+          spaceBetweenSelectorAndTextField: 0.01,
+          textStyle: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+          // inputBorder: OutlineInputBorder(),
+          onSaved: (PhoneNumber number) {
+            print('On Saved: $number');
+          },
         ),
-        inputBorder: OutlineInputBorder(borderSide: BorderSide.none),
-        locale: 'en',
-        ignoreBlank: true,
-        autoValidateMode: AutovalidateMode.disabled,
-        selectorTextStyle: TextStyle(color: Colors.black),
-        initialValue: PhoneNumber(isoCode: isoCode ?? 'en'), //PhoneNumber(isoCode: Platform.localeName.split('_').last)
-        textFieldController: txtMobile,
-        formatInput: false,
-        // keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
-        spaceBetweenSelectorAndTextField: 0.01,
-        textStyle: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-        // inputBorder: OutlineInputBorder(),
-        onSaved: (PhoneNumber number) {
-          print('On Saved: $number');
-        },
       ),
     );
   }

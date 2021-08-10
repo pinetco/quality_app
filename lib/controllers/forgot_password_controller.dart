@@ -1,10 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class ForgotPasswordController extends GetxController {
   var formForgotKey = GlobalKey<FormState>();
-  bool isLoading = false;
 
-  TextEditingController txtEmail = TextEditingController();
   TextEditingController txtMobile = TextEditingController();
+  String _isoCode;
+  String _dialCode;
+
+  String get isoCode => _isoCode;
+  String get dialCode => _dialCode;
+
+  String phoneFieldError;
+
+  void updateIsoCode(String isoCode, String dialCode) {
+    _isoCode = isoCode;
+    _dialCode = dialCode;
+    update();
+  }
+
+  void forgotPasssword() async {
+    final formData = {
+      'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
+    };
+
+    helper.showLoading();
+
+    apis.call(apiMethods.forgotPasswordAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        helper.writeStorage(session.authToken, data['token']);
+      } else if (res.validation == true) {
+        final data = res.data;
+        final errors = data['errors'];
+        phoneFieldError = errors['phone'] != null ? errors['phone'][0] : '';
+        update();
+      }
+    }, onError: (e) {
+      helper.hideLoading();
+    });
+  }
 }
