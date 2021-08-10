@@ -1,9 +1,10 @@
 class ApiMethods {
   final String loginAPI = "/auth/login";
-  final String forgotPasswordAPI = "/auth/forgotPassword";
+  final String forgotPasswordAPI = "/auth/token";
   final String clientHomeAPI = '/client-home'; //'/client-home';
   final String employeesAPI = "/employees";
   final String reviewsAPI = "/reviews";
+  final String rateDaysAPI = "/rate-days";
   final String questionsAPI = "/questions";
   final String appInformationAPI = "/app-information";
   final String userAPI = "/user";

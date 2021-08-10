@@ -24,14 +24,15 @@ class ForgotPasswordController extends GetxController {
     final formData = {
       'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
     };
-
+    print('formData, $formData');
     helper.showLoading();
 
     apis.call(apiMethods.forgotPasswordAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        helper.writeStorage(session.authToken, data['token']);
+        print('DATT');
+        //helper.writeStorage(session.authToken, data['token']);
       } else if (res.validation == true) {
         final data = res.data;
         final errors = data['errors'];

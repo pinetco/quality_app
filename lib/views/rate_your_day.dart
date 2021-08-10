@@ -178,7 +178,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                       BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
-                    container: rateYourDayCtrl.txtComment,
+                    container: rateYourDayCtrl.txtSuggestion,
                     hintText: "Write here...",
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,

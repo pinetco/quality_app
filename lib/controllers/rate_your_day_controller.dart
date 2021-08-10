@@ -7,7 +7,7 @@ import 'package:quality_app/global/packages/config_package.dart';
 class RateYourDayController extends GetxController with SingleGetTickerProviderMixin {
   var storeCtrl = Get.find<HomeClientController>();
 
-  TextEditingController txtComment = TextEditingController();
+  TextEditingController txtSuggestion = TextEditingController();
   TextEditingController txtWish = TextEditingController();
   RxBool _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
@@ -121,35 +121,25 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
   }
 
   void saveReview(isNavigation) async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        helper.showLoading();
+    // helper.showLoading();
 
-        final formData = {
-          'employee_id': empId,
-          'visit_id': visitId,
-          'questions': questions,
-          "comment": txtComment.text,
-          "wish": txtWish.text,
-        };
-        print(formData);
-        print('formData');
-        apis.call(apiMethods.reviewsAPI, formData, apiType.post).then((res) async {
-          helper.hideLoading();
+    final formData = {
+      'questions': questions,
+      "suggestion": txtSuggestion.text,
+      "is_anonymous": anonymousUser,
+    };
+    print(formData);
 
-          if (res.data != null && res.validation == false) {
-            if (isNavigation) {
-              Get.back();
-              _showMyDialog();
-              //  Get.offAndToNamed(AppRouter.home);
-            }
-          } else {}
-        }, onError: (e) {
-          helper.hideLoading();
-        });
-      }
-    } on SocketException catch (_) {}
+    apis.call(apiMethods.rateDaysAPI, formData, apiType.post).then((res) async {
+      helper.hideLoading();
+
+      if (res.data != null && res.validation == false) {
+        Get.back();
+        _showMyDialog();
+      } else {}
+    }, onError: (e) {
+      helper.hideLoading();
+    });
   }
 
   void selectedReview(count, text, id) {
@@ -162,7 +152,7 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
       questions.add(questionObj);
     }
     update();
-    saveReview(false);
+    // saveReview(false);
   }
 
   anonymousFeedback() {
