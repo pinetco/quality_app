@@ -31,6 +31,6 @@ class SplashController extends GetxController {
   }
 
   void checkLogin() {
-    Get.offAndToNamed(routeName.loginTest);
+    Get.offAndToNamed(routeName.otpVerification);
   }
 }

@@ -19,4 +19,5 @@ class RouteName {
   final String bottomNavigationScreen = '/bottomNavigationScreen';
   final String loginTest = '/loginTest';
   final String changePassword = '/changePassword';
+  final String otpVerification = '/otpVerification';
 }

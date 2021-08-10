@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
-class ForgotPasswordController extends GetxController {
+class OTPVerificationController extends GetxController {
   var formForgotKey = GlobalKey<FormState>();
 
   TextEditingController txtMobile = TextEditingController();

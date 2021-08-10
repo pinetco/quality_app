@@ -25,3 +25,4 @@ export 'package:quality_app/views/login_test.dart';
 export 'package:quality_app/views/rate_your_day.dart';
 export 'package:quality_app/views/bottom_navigation_screen.dart';
 export 'package:quality_app/views/change_password.dart';
+export 'package:quality_app/views/otp_verification.dart';
