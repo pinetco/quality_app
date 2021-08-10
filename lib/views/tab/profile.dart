@@ -89,6 +89,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                 width: appScreenUtil.size(90),
                                 height: appScreenUtil.size(90),
                                 fit: BoxFit.fill,
+                                errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
+                                  return Image.asset(imageAssets.userIcon);
+                                },
                               ),
                             ),
                           ))

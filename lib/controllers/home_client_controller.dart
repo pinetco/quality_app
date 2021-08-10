@@ -27,10 +27,10 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
 
   List workingList = [];
   List finishedList = [];
-
   List questionList = [];
-  bool updateAlert = false;
+  dynamic surveysList = [];
   dynamic userInfo;
+  bool updateAlert = false;
   bool isRefreshing = false;
 
   @override
@@ -40,9 +40,10 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     getUserInfo();
     getData();
+    getSurveyList();
     // checkVersion();
     getAllQuestion();
-    //getAppInformation(); // Add Your Code here.
+    // getAppInformation(); // Add Your Code here.
     // });
 
     super.onInit();
@@ -140,28 +141,20 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   }
 
   // showAlertDialog(Get.context);
-  getAppInformation() async {
-    print('info');
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        helper.showLoading();
-        apis.call(apiMethods.appInformationAPI, null, apiType.get).then((res) async {
-          helper.hideLoading();
+  /*getAppInformation() async {
+    helper.showLoading();
+    apis.call(apiMethods.appInformationAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
 
-          if (res.data != null && res.validation == false) {
-            final data = res.data['data'];
-            print('data: $data');
-            update();
-          } else {}
-        }, onError: (e) {
-          print('e');
-        });
-      }
-    } on SocketException catch (_) {
-      print('Socket');
-    }
-  }
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        print('data: $data');
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
+  }*/
 
   getAllQuestion() async {
     try {
@@ -208,5 +201,22 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   void logout() async {
     helper.removeSpecificKeyStorage(session.authToken);
     Get.offAndToNamed(routeName.login);
+  }
+
+  getSurveyList() async {
+    helper.showLoading();
+    print(apiMethods.surveysAPI);
+    apis.call(apiMethods.surveysAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
+
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        print('data: $data');
+        surveysList = data;
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
   }
 }

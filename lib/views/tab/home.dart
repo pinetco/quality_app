@@ -174,19 +174,31 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
-                                  child: CustomButton(
-                                    title: "Quarterly Survey",
-                                    suffixIcon: Image.asset(
-                                      imageAssets.rightArrowIcon,
-                                      width: appScreenUtil.size(20),
-                                    ),
-                                    onTap: () {
-                                      Get.toNamed(routeName.surveyInfo);
+                                GetBuilder<HomeClientController>(builder: (_dx) {
+                                  print(_dx.surveysList.length);
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: _dx.surveysList.length,
+                                    itemBuilder: (context, index) {
+                                      final data = _dx.surveysList[index];
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
+                                        child: CustomButton(
+                                          title: data['name'],
+                                          suffixIcon: Image.asset(
+                                            imageAssets.rightArrowIcon,
+                                            width: appScreenUtil.size(20),
+                                          ),
+                                          onTap: () {
+                                            print(data['id']);
+                                            Get.toNamed(routeName.surveyInfo, arguments: {'id': data['id']});
+                                          },
+                                        ),
+                                      );
                                     },
-                                  ),
-                                ),
+                                  );
+                                }),
                                 GetBuilder<HomeClientController>(builder: (_dx) {
                                   if (_dx.workingList.length > 0)
                                     return Column(

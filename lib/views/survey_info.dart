@@ -55,7 +55,8 @@ class SurveyInfo extends StatelessWidget {
                   child: CustomButton(
                     title: "Start",
                     onTap: () {
-                      Get.toNamed(routeName.surveyStep);
+                      final data = Get.arguments;
+                      Get.toNamed(routeName.surveyStep, arguments: {'id': data['id']});
                     },
                   ),
                 ),

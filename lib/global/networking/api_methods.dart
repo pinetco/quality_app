@@ -7,7 +7,7 @@ class ApiMethods {
   final String questionsAPI = "/questions";
   final String appInformationAPI = "/app-information";
   final String userAPI = "/user";
-  String surveyQueAPI(page) => "/survey-questions?page=$page";
+  String surveyQueAPI(id, page) => "/surveys/$id/survey-questions?page=$page";
   final String employeeHomeAPI = "/employee-home";
   final String checkInAPI = "/check-in";
   String checkOutAPI(id) => "/visits/$id/check-out";
@@ -24,4 +24,5 @@ class ApiMethods {
   final String rateYourDayAPI = "/questions?type=rate_day";
   final String changePasswordAPI = "/change-password";
   final String createRequestAPI = "/requests";
+  final String surveysAPI = "/surveys";
 }

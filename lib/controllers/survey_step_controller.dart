@@ -105,8 +105,10 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   }
 
   getQuestions() async {
+    var data = Get.arguments;
+    print(data);
     helper.showLoading();
-    apis.call(apiMethods.surveyQueAPI(activeStep), null, apiType.get).then((res) async {
+    apis.call(apiMethods.surveyQueAPI(activeStep, data['id']), null, apiType.get).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];

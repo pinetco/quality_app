@@ -62,7 +62,7 @@ class SurveyStep extends StatelessWidget {
         centerTitle: false,
         title: Text(
           'Survey',
-          style: appCss.h1,
+          style: appCss.h1.copyWith(color: appColor.textPrimaryColor),
         ),
         automaticallyImplyLeading: false,
         actions: [

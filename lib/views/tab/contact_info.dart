@@ -55,7 +55,16 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                         borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                       ),
                       child: Center(
-                        child: Image.network(logoUrl, height: appScreenUtil.size(150)),
+                        child: Image.network(
+                          logoUrl,
+                          height: appScreenUtil.size(150),
+                          errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
+                            return Image.asset(
+                              imageAssets.noImageBanner,
+                              fit: BoxFit.fill,
+                            );
+                          },
+                        ),
                       )),
                   SizedBox(
                     height: appScreenUtil.size(30),
