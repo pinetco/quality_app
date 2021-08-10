@@ -1,7 +1,7 @@
 class ApiMethods {
   final String loginAPI = "/auth/login";
   final String forgotPasswordAPI = "/auth/forgotPassword";
-  final String clientHomeAPI = '/new-client-home'; //'/client-home';
+  final String clientHomeAPI = '/client-home'; //'/client-home';
   final String employeesAPI = "/employees";
   final String reviewsAPI = "/reviews";
   final String questionsAPI = "/questions";
@@ -23,4 +23,5 @@ class ApiMethods {
 
   final String rateYourDayAPI = "/questions?type=rate_day";
   final String changePasswordAPI = "/change-password";
+  final String createRequestAPI = "/requests";
 }

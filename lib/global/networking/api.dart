@@ -70,6 +70,7 @@ class Apis {
         }
 
         apiData = await checkStatus(response);
+
         return apiData;
       } else {
         helper.goToNoInternetScreen();

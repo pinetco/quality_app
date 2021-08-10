@@ -181,11 +181,63 @@ class Helper {
 
     //ex : helper.hideLoading();
   }
+
   //#endregion
 
-  successMessage(message) => Get.snackbar('Success', message, backgroundColor: Colors.green, colorText: Colors.white);
-  errorMessage(message) => Get.snackbar('Error', message, backgroundColor: Colors.red, colorText: Colors.white);
-  alertMessage(message) => Get.snackbar('Alert', message, backgroundColor: Colors.yellow, colorText: Colors.black);
+  //#region Success, Alert, Error Message
+
+  messageContainer(message, icon) => Row(children: [
+        Icon(
+          icon,
+          color: Colors.white,
+          size: appScreenUtil.size(22),
+        ),
+        SizedBox(width: appScreenUtil.size(10)),
+        Text(
+          message,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ]);
+
+  actionButton() => TextButton(
+        child: Icon(
+          Icons.close_outlined,
+          color: Colors.white,
+          size: appScreenUtil.size(22),
+        ),
+        onPressed: () {},
+      );
+
+  flashMessage({
+    String message,
+    Color bgColor,
+    SnackPosition position,
+    IconData icon,
+  }) =>
+      Get.snackbar(
+        '',
+        '',
+        snackPosition: position ?? SnackPosition.TOP,
+        snackStyle: SnackStyle.FLOATING,
+        messageText: messageContainer(message, icon),
+        titleText: Container(),
+        margin: EdgeInsets.only(bottom: kBottomNavigationBarHeight, left: appScreenUtil.size(8), right: appScreenUtil.size(8)),
+        padding: EdgeInsets.only(bottom: appScreenUtil.size(4), left: appScreenUtil.size(16), right: appScreenUtil.size(16)),
+        borderRadius: appScreenUtil.borderRadius(4),
+        backgroundColor: bgColor,
+        colorText: Colors.white,
+        mainButton: actionButton(),
+      );
+
+  successMessage(message, {position}) => flashMessage(message: message, bgColor: Colors.green, position: position, icon: Icons.check_circle);
+  errorMessage(message, {position}) => flashMessage(message: message, bgColor: Colors.red, position: position, icon: Icons.cancel);
+  alertMessage(message, {position}) => flashMessage(message: message, bgColor: Colors.orange, position: position, icon: Icons.info);
+
+  //#endregion
 
   jsonGet(json, String path, defaultValue) {
     try {
