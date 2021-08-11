@@ -62,4 +62,5 @@ class ImageAssets {
   final String carePatient = 'assets/images/care-patient.png';
   final String careGiver = 'assets/images/care-giver.png';
   final String locationIcon = 'assets/images/location-icon.png';
+  final String otpImage = 'assets/images/otp.gif';
 }

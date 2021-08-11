@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/notification_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 
 class Notification extends StatelessWidget {
+  var notificationsCtrl = Get.put(NotificationController());
   List notificationItem = [
     {
       'title': 'has started work just now',

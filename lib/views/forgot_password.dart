@@ -77,7 +77,7 @@ class ForgotPassword extends StatelessWidget {
                     CustomButton(
                       title: 'Submit',
                       onTap: () {
-                        forgotPasswordCtrl.forgotPasssword();
+                        forgotPasswordCtrl.otpSent();
                       },
                     ),
                   ],

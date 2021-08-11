@@ -139,9 +139,11 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     width: appScreenUtil.size(20),
                                   ),
                                   SizedBox(width: appScreenUtil.size(10)),
-                                  Text(
-                                    _dx.userInfo['email'].toString(),
-                                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                                  Expanded(
+                                    child: Text(
+                                      _dx.userInfo['email'].toString(),
+                                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                                    ),
                                   )
                                 ],
                               ),
