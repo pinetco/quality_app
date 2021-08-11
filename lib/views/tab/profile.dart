@@ -1,3 +1,4 @@
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
@@ -14,7 +15,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   AnimationController _animationController;
   bool isPlaying = false;
   var settingCtrl = Get.put(SettingController());
-  var storeCtrl = Get.find<HomeClientController>();
+  var bottomCtrl = Get.find<BottomNavigationController>();
 
   Widget profileEditIcon() {
     return InkWell(
@@ -72,7 +73,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   ],
                 ),
                 SizedBox(height: appScreenUtil.size(30)),
-                GetBuilder<HomeClientController>(
+                GetBuilder<BottomNavigationController>(
                   builder: (_dx) => _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
                       ? Container(
                           height: appScreenUtil.size(90),
@@ -100,7 +101,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 SizedBox(
                   height: appScreenUtil.size(30),
                 ),
-                GetBuilder<HomeClientController>(
+                GetBuilder<BottomNavigationController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? Container(
                             width: appScreenUtil.screenActualWidth(),
@@ -121,7 +122,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 SizedBox(
                   height: appScreenUtil.size(10),
                 ),
-                GetBuilder<HomeClientController>(
+                GetBuilder<BottomNavigationController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? InkWell(
                             onTap: () {
@@ -153,7 +154,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 SizedBox(
                   height: appScreenUtil.size(10),
                 ),
-                GetBuilder<HomeClientController>(
+                GetBuilder<BottomNavigationController>(
                     builder: (_dx) => _dx.userInfo != null
                         ? InkWell(
                             onTap: () {

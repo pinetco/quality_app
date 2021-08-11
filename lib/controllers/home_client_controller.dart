@@ -38,7 +38,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     // TODO: implement onInit
     // wait untill widget load
     // WidgetsBinding.instance.addPostFrameCallback((_) {
-    getUserInfo();
+    // getUserInfo();
     getData();
     getSurveyList();
     // checkVersion();
@@ -49,7 +49,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     super.onInit();
   }
 
-  getUserInfo() async {
+  /*getUserInfo() async {
     helper.showLoading();
     apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
       helper.hideLoading();
@@ -61,7 +61,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     }, onError: (e) {
       print('e');
     });
-  }
+  }*/
 
   // checkVersion() async {
   //   final checkVersion = CheckVersion(context: Get.context);

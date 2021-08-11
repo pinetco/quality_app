@@ -178,6 +178,7 @@ class FirebaseNotificationService {
   getToken() async {
     print('roken******************');
     String token = await FirebaseMessaging.instance.getToken();
+    await helper.writeStorage(session.fcmToken, token);
     print("token : $token");
   }
 

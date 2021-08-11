@@ -1,4 +1,3 @@
-import 'package:quality_app/controllers/forgot_password_controller.dart';
 import 'package:quality_app/controllers/otp_verification_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
@@ -8,7 +7,6 @@ import 'package:sms_autofill/sms_autofill.dart';
 // ignore: must_be_immutable
 class OTPVerification extends StatelessWidget {
   var otpVerificationCtrl = Get.put(OTPVerificationController());
-  var forgotPasswordCtrl = Get.find<ForgotPasswordController>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +66,11 @@ class OTPVerification extends StatelessWidget {
                         autofocus: true,
                         codeLength: 4,
                         decoration: UnderlineDecoration(
-                          textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                          textStyle: TextStyle(fontSize: appScreenUtil.size(20), color: Colors.black),
                           colorBuilder: FixedColorBuilder(appColor.primaryColor),
                         ),
                         currentCode: otpVerificationCtrl.code,
                         onCodeSubmitted: (code) {
-                          print('code submitted');
                           _dx.loginWithToken();
                         },
                         onCodeChanged: (code) {

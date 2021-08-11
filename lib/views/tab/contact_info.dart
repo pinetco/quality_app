@@ -1,3 +1,4 @@
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
@@ -11,7 +12,7 @@ class ContactInfo extends StatefulWidget {
 
 class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin {
   var settingCtrl = Get.put(SettingController());
-  var storeCtrl = Get.find<HomeClientController>();
+  var bottomCtrl = Get.find<BottomNavigationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
         child: LoadingComponent(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
-            child: GetBuilder<HomeClientController>(builder: (_dx) {
+            child: GetBuilder<BottomNavigationController>(builder: (_dx) {
               final phone = helper.jsonGet(_dx.userInfo, 'franchisee.phone', '');
               final contactName = helper.jsonGet(_dx.userInfo, 'franchisee.name', '');
               final email = helper.jsonGet(_dx.userInfo, 'franchisee.email', '');

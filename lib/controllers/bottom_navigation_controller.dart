@@ -16,11 +16,11 @@ class BottomNavigationController extends GetxController {
 
   int get currentTab => _currentTab;
   List widgetOptions = [
-    Home(),
-    CareGiversList(),
-    WishMessage(),
-    ContactInfo(),
-    Profile(),
+    // Home(),
+    // CareGiversList(),
+    // WishMessage(),
+    // ContactInfo(),
+    // Profile(),
   ];
 
   @override
@@ -44,6 +44,7 @@ class BottomNavigationController extends GetxController {
         ];
       }
       getTokenRegister();
+      getUserInfo();
       update();
     }
   }
@@ -64,10 +65,27 @@ class BottomNavigationController extends GetxController {
       'os_version': Platform.operatingSystemVersion,
       'name': name,
     };
+    print('formData***********************, $formData');
     apis.call(apiMethods.registerTokenAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       print(res.data);
       if (res.data != null && res.validation == false) {
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
+  }
+
+  getUserInfo() async {
+    helper.showLoading();
+    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        userInfo = data;
+        print(data);
+        await helper.writeStorage(session.userInfo, data);
         update();
       } else {}
     }, onError: (e) {

@@ -34,7 +34,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     // TODO: implement onInit
     // wait untill widget load
     // WidgetsBinding.instance.addPostFrameCallback((_) {
-    getUserInfo();
+    // getUserInfo();
     getData();
     // checkVersion();
     getAllQuestion();
@@ -44,21 +44,21 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     super.onInit();
   }
 
-  getUserInfo() async {
-    helper.showLoading();
-    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
-      helper.hideLoading();
-      if (res.data != null && res.validation == false) {
-        final data = res.data['data'];
-        userInfo = data;
-        print(data);
-        await helper.writeStorage(session.userInfo, data);
-        update();
-      } else {}
-    }, onError: (e) {
-      print('e');
-    });
-  }
+  // getUserInfo() async {
+  //   helper.showLoading();
+  //   apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
+  //     helper.hideLoading();
+  //     if (res.data != null && res.validation == false) {
+  //       final data = res.data['data'];
+  //       userInfo = data;
+  //       print(data);
+  //       await helper.writeStorage(session.userInfo, data);
+  //       update();
+  //     } else {}
+  //   }, onError: (e) {
+  //     print('e');
+  //   });
+  // }
 
   checkVersion() async {
     // final checkVersion = CheckVersion(context: Get.context);

@@ -14,17 +14,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   void initState() {
-    firebaseNotificationService.init(context);
-
     super.initState();
   }
-  // List<Widget> _widgetOptions = <Widget>[
-  //   Home(),
-  //   CareGiversList(),
-  //   WishMessage(),
-  //   ContactInfo(),
-  //   Profile(),
-  // ];
 
   CustomNavigationBarItem renderCustomTab(selected, unselected, title) {
     return CustomNavigationBarItem(
@@ -67,7 +58,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 currentFocus.unfocus();
               }
             },
-            child: GetBuilder<BottomNavigationController>(builder: (controller) => bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab))),
+            child: GetBuilder<BottomNavigationController>(
+                builder: (controller) => bottomCtrl.widgetOptions.length > 0 ? bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab) : Container())),
         bottomNavigationBar: GetBuilder<BottomNavigationController>(
           builder: (controller) => CustomNavigationBar(
             // borderRadius: Radius.circular(appScreenUtil.size(30)),
