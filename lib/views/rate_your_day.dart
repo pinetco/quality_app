@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/rate_your_day_controller.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
-import 'package:flutter/material.dart';
 
 class RateYourDay extends StatefulWidget {
   @override
@@ -12,7 +11,6 @@ class RateYourDay extends StatefulWidget {
 
 class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin {
   var rateYourDayCtrl = Get.put(RateYourDayController());
-  var storeCtrl = Get.find<HomeClientController>();
 
   AnimationController _animationController;
   bool isPlaying = false;
@@ -174,8 +172,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                 ),
                 SizedBox(height: appScreenUtil.size(10)),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                  decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: rateYourDayCtrl.txtSuggestion,

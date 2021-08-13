@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
-import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   var bottomCtrl = Get.put(BottomNavigationController());
-  var storeCtrl = Get.put(HomeClientController());
+  var homeClientCtrl = Get.put(HomeClientController());
 
   AnimationController _animationController;
   bool isPlaying = false;
@@ -49,10 +49,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-              child: Container(
-                  width: appScreenUtil.size(60.0),
-                  height: appScreenUtil.size(60.0),
-                  decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
             ),
             Expanded(
               child: Column(
@@ -95,8 +92,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage, visitId, date) {
-    Get.toNamed(routeName.reviewSubmission,
-        arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
+    Get.toNamed(routeName.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
   }
 
   @override
@@ -118,11 +114,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           Row(
                             children: [
                               GetBuilder<HomeClientController>(builder: (_dx) {
-                                if (storeCtrl.userInfo != null &&
-                                    storeCtrl.userInfo['franchisee'] != null &&
-                                    storeCtrl.userInfo['franchisee']['logo_url'] != null)
+                                if (homeClientCtrl.userInfo != null && homeClientCtrl.userInfo['franchisee'] != null && homeClientCtrl.userInfo['franchisee']['logo_url'] != null)
                                   return Image.network(
-                                    storeCtrl.userInfo['franchisee']['logo_url'],
+                                    homeClientCtrl.userInfo['franchisee']['logo_url'],
                                     height: appScreenUtil.size(50),
                                   );
                                 return Text(
@@ -153,7 +147,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       flex: 1,
                       child: SizedBox(
                         child: RefreshIndicator(
-                          onRefresh: storeCtrl.refreshList,
+                          onRefresh: homeClientCtrl.refreshList,
                           child: SingleChildScrollView(
                             physics: AlwaysScrollableScrollPhysics(),
                             child: Column(

@@ -7,14 +7,15 @@ class NotificationController extends GetxController {
   bool isRefreshing = false;
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
+    await Future.delayed(const Duration(seconds: 2));
     getNotificationList();
     super.onInit();
   }
 
   getNotificationList() async {
-    if (!isRefreshing) helper.showLoading();
+    helper.showLoading();
     apis.call(apiMethods.notificationsAPI, null, apiType.get).then((res) async {
       if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;

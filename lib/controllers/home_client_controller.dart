@@ -45,7 +45,6 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     getAllQuestion();
     // getAppInformation(); // Add Your Code here.
     // });
-
     super.onInit();
   }
 
@@ -165,6 +164,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
           helper.hideLoading();
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
+            update();
             questionList = data;
 
             update();
@@ -219,4 +219,10 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
       print('e');
     });
   }
+
+  // // Navigation to editProfile
+  // navigateEditProfile(item) {
+  //   print("@@@@@@@@@@@@@@@ $item");
+  //   Get.toNamed(routeName.editProfile, arguments: item);
+  // }
 }

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:quality_app/global/route/route_list.dart';
-// import 'package:quality_app/views/no_internet.dart';
 
 //app file
 import 'route_name.dart';
@@ -26,6 +25,7 @@ class AppRoute {
     GetPage(name: _routeName.patientsList, page: () => PatientsList()),
     GetPage(name: _routeName.loginTest, page: () => LoginTest()),
     GetPage(name: _routeName.rateYourDay, page: () => RateYourDay()),
+    GetPage(name: _routeName.editProfile, page: () => EditProfile()),
     GetPage(name: _routeName.changePassword, page: () => ChangePassword()),
     GetPage(name: _routeName.otpVerification, page: () => OTPVerification()),
   ];

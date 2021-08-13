@@ -1,9 +1,8 @@
 import 'dart:io';
+
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/common/loading_controller.dart';
-import 'package:quality_app/global/networking/api_methods.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/route/route_list.dart';
 
@@ -97,5 +96,10 @@ class BottomNavigationController extends GetxController {
     // box.write('darkmode', true);
     _currentTab = index;
     update();
+  }
+
+  navigateEditProfile(item) {
+    print("@@@@@@@@@@@@@@@ $item");
+    Get.toNamed(routeName.editProfile, arguments: item);
   }
 }
