@@ -1,12 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class RateYourDayController extends GetxController with SingleGetTickerProviderMixin {
-  var storeCtrl = Get.find<HomeClientController>();
-
   TextEditingController txtSuggestion = TextEditingController();
   TextEditingController txtWish = TextEditingController();
   RxBool _isLoading = false.obs;
@@ -79,7 +75,6 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    storeCtrl.getData();
                     Navigator.pop(Get.context);
                   },
                   child: Align(

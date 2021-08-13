@@ -83,6 +83,7 @@ class Notification extends StatelessWidget {
             child: Column(
               children: [
                 Align(alignment: Alignment.topLeft, child: Text('Notifications', style: appCss.h1)),
+
                 /*  Expanded(
                   child: Center(
                     child: Container(

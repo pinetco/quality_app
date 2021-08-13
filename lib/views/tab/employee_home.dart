@@ -60,7 +60,6 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
     dynamic isRunning = helper.jsonGet(item, 'client_visit.is_running', false);
     dynamic clientVisitId = helper.jsonGet(item, 'client_visit.id', false);
     String date = helper.jsonGet(item, 'client_visit.date', '');
-
     return Padding(
       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),
       child: Container(
@@ -98,12 +97,13 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
                 child: CustomButton(
                     title: 'Check in',
-                    enable: homeEmpCtrl.checkInDisabled,
+                    enable: !homeEmpCtrl.checkInDisabled,
                     width: appScreenUtil.size(80),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
                     style: appCss.bodyStyle6.copyWith(color: Colors.white),
                     onTap: () {
+                      print('checK ');
                       homeEmpCtrl.checkIn(id);
                     }),
               ),

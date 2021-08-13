@@ -131,6 +131,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   checkButtonDisable(pending) {
+    print('pending, $pending');
     final contain = pending.indexWhere((element) {
       final clientVisit = element['client_visit'];
       if (clientVisit != null && clientVisit['is_running'] == true) {
@@ -143,6 +144,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     } else {
       checkInDisabled = false;
     }
+    print('checkInDisabled, $checkInDisabled');
     update();
   }
 
@@ -224,10 +226,11 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   }
 
   checkIn(id) {
+    print('CheckIn');
     final formData = {'client_id': id};
 
     helper.showLoading();
-    apis.call(apiMethods.checkInAPI, null, apiType.post).then((res) async {
+    apis.call(apiMethods.checkInAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
 
       if (res.data != null && res.validation == false) {
