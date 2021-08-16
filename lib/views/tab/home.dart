@@ -106,7 +106,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage, visitId, date) {
-    Get.toNamed(routeName.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
+    Get.toNamed(routeName.reviewSubmission,
+        arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
   }
 
   @override
