@@ -99,7 +99,7 @@ class BottomNavigationController extends GetxController {
   }
 
   navigateEditProfile(item) {
-    print("@@@@@@@@@@@@@@@ $item");
+    print("Argument Data with item @@@@@@@@@@@@@@@ $item");
     Get.toNamed(routeName.editProfile, arguments: item);
   }
 }

@@ -23,4 +23,5 @@ class Session {
   final String isoCode = 'isoCode';
   final String userInfo = 'userInfo';
   final String fcmToken = 'fcmToken';
+  final String userImage = 'userImage';
 }

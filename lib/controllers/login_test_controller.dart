@@ -13,6 +13,7 @@ class LoginTestController extends GetxController with SingleGetTickerProviderMix
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
+        print('token : ' + data['token']);
         helper.writeStorage(session.authToken, data['token']);
 
         getUserInfo();

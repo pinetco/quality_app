@@ -17,17 +17,13 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   var bottomCtrl = Get.find<BottomNavigationController>();
 
   Widget profileEditIcon(item) {
-    // dynamic email = item['email'];
     dynamic imageName = item['profile_photo_url'];
-    // String name = item['name'].toString();
-    // String phone = item['phone'].toString();
     int id = item['id'];
-    print("@@@@@@@@@@@ $id");
-    print("############### $imageName");
+    print("Item Id @@@@@@@@@@@ $id");
+    print("Image Name ############# $imageName");
     return InkWell(
       onTap: () {
         bottomCtrl.navigateEditProfile(item);
-        // Get.toNamed(routeName.editProfile);
       },
       child: Container(
         height: appScreenUtil.size(20),
@@ -61,7 +57,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
-                // Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
                 Column(
                   children: [
                     SizedBox(height: 10),
@@ -86,20 +81,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           height: appScreenUtil.size(90),
                           width: appScreenUtil.size(90),
                           decoration: BoxDecoration(
-                            color: appColor.primaryColor,
+                            color: appColor.lightGreyColor.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                           ),
                           child: Center(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
-                              child: Image.network(
-                                _dx.userInfo['profile_photo_url'],
+                              child: helper.imageNetwork(
+                                url: _dx.userInfo['profile_photo_url'],
                                 width: appScreenUtil.size(90),
                                 height: appScreenUtil.size(90),
-                                fit: BoxFit.fill,
-                                errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
-                                  return Image.asset(imageAssets.userIcon);
-                                },
                               ),
                             ),
                           ))
