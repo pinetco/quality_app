@@ -74,4 +74,8 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
     getCareGivers('');
     return null;
   }
+
+  navigateOtherProfile(item) {
+    Get.toNamed(routeName.careGiverProfile, arguments: item);
+  }
 }

@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   var bottomCtrl = Get.put(BottomNavigationController());
-  var storeCtrl = Get.put(HomeClientController());
+  var homeClientCtrl = Get.put(HomeClientController());
 
   AnimationController _animationController;
   bool isPlaying = false;
@@ -49,19 +49,30 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-              child: Container(
-                  width: appScreenUtil.size(60.0),
-                  height: appScreenUtil.size(60.0),
-                  decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              child: InkWell(
+                onTap: () {
+                  homeClientCtrl.navigateOtherProfile(item);
+                  // homeClientCtrl.navigateReviewScreen(empId, name, email, phone, imageName);
+                },
+                child: Container(
+                    width: appScreenUtil.size(60.0),
+                    height: appScreenUtil.size(60.0),
+                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              ),
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Text(
-                    name,
-                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                  InkWell(
+                    onTap: () {
+                      homeClientCtrl.navigateReviewScreen(empId, name, email, phone, imageName);
+                    },
+                    child: Text(
+                      name,
+                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                    ),
                   ),
                   Text(
                     date,
@@ -118,11 +129,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           Row(
                             children: [
                               GetBuilder<HomeClientController>(builder: (_dx) {
-                                if (storeCtrl.userInfo != null &&
-                                    storeCtrl.userInfo['franchisee'] != null &&
-                                    storeCtrl.userInfo['franchisee']['logo_url'] != null)
+                                if (homeClientCtrl.userInfo != null &&
+                                    homeClientCtrl.userInfo['franchisee'] != null &&
+                                    homeClientCtrl.userInfo['franchisee']['logo_url'] != null)
                                   return Image.network(
-                                    storeCtrl.userInfo['franchisee']['logo_url'],
+                                    homeClientCtrl.userInfo['franchisee']['logo_url'],
                                     height: appScreenUtil.size(50),
                                   );
                                 return Text(
@@ -153,7 +164,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       flex: 1,
                       child: SizedBox(
                         child: RefreshIndicator(
-                          onRefresh: storeCtrl.refreshList,
+                          onRefresh: homeClientCtrl.refreshList,
                           child: SingleChildScrollView(
                             physics: AlwaysScrollableScrollPhysics(),
                             child: Column(
@@ -191,7 +202,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             width: appScreenUtil.size(20),
                                           ),
                                           onTap: () {
-                                            print(data['id']);
                                             Get.toNamed(routeName.surveyInfo, arguments: {'id': data['id']});
                                           },
                                         ),

@@ -219,4 +219,12 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
       print('e');
     });
   }
+
+  void navigateReviewScreen(empId, name, email, phone, userImage) {
+    Get.toNamed(routeName.careGiverProfile, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+  }
+
+  navigateOtherProfile(item) {
+    Get.toNamed(routeName.careGiverProfile, arguments: item['employee']);
+  }
 }

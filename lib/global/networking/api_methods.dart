@@ -28,4 +28,5 @@ class ApiMethods {
   final String surveysAPI = "/surveys";
   final String loginWithTokenAPI = "/auth/login/token";
   final String notificationsAPI = "/notifications";
+  final String settingsAPI = "/settings";
 }

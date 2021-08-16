@@ -15,42 +15,44 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
   var homeEmpCtrl = Get.put(HomeEmpController());
 
   Widget rateYourDay() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(20), horizontal: appScreenUtil.size(20)),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
-        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
-        child: Padding(
-          padding: EdgeInsets.all(appScreenUtil.size(10)),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Text(
-                      'Rate your day',
-                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-                    ),
-                  ],
+    if (bottomCtrl.appSettings != null && !bottomCtrl.appSettings['is_today_rated'])
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(20), horizontal: appScreenUtil.size(20)),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
+          decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+          child: Padding(
+            padding: EdgeInsets.all(appScreenUtil.size(10)),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Text(
+                        'Rate your day',
+                        style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              CustomButton(
-                  title: 'Rate',
-                  width: appScreenUtil.size(80),
-                  padding: appScreenUtil.size(5),
-                  radius: appScreenUtil.size(5),
-                  style: appCss.bodyStyle6.copyWith(color: Colors.white),
-                  onTap: () {
-                    homeEmpCtrl.navigateRateYourDay();
-                  }),
-            ],
+                CustomButton(
+                    title: 'Rate',
+                    width: appScreenUtil.size(80),
+                    padding: appScreenUtil.size(5),
+                    radius: appScreenUtil.size(5),
+                    style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                    onTap: () {
+                      homeEmpCtrl.navigateRateYourDay();
+                    }),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    return Container();
   }
 
   Widget personDetailCard(item, index, status) {
@@ -70,19 +72,29 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-              child: Container(
-                  width: appScreenUtil.size(60.0),
-                  height: appScreenUtil.size(60.0),
-                  decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              child: InkWell(
+                onTap: () {
+                  homeEmpCtrl.navigateOtherProfile(item);
+                },
+                child: Container(
+                    width: appScreenUtil.size(60.0),
+                    height: appScreenUtil.size(60.0),
+                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              ),
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Text(
-                    name,
-                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                  InkWell(
+                    onTap: () {
+                      homeEmpCtrl.navigateOtherProfile(item);
+                    },
+                    child: Text(
+                      name,
+                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                    ),
                   ),
                   if (date != '')
                     Text(
@@ -180,7 +192,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                rateYourDay(),
+                                GetBuilder<BottomNavigationController>(builder: (_dx) => rateYourDay()),
                                 GetBuilder<HomeEmpController>(builder: (_dx) {
                                   if (_dx.pendingList.length > 0)
                                     return Column(

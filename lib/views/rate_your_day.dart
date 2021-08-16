@@ -12,7 +12,6 @@ class RateYourDay extends StatefulWidget {
 
 class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin {
   var rateYourDayCtrl = Get.put(RateYourDayController());
-  var storeCtrl = Get.find<HomeClientController>();
 
   AnimationController _animationController;
   bool isPlaying = false;

@@ -262,4 +262,9 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   navigateRateYourDay() {
     Get.toNamed(routeName.rateYourDay);
   }
+
+  navigateOtherProfile(item) {
+    print('item,$item');
+    Get.toNamed(routeName.careGiverProfile, arguments: item);
+  }
 }

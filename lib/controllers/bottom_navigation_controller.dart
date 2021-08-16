@@ -15,13 +15,8 @@ class BottomNavigationController extends GetxController {
   // final box = GetStorage();
 
   int get currentTab => _currentTab;
-  List widgetOptions = [
-    // Home(),
-    // CareGiversList(),
-    // WishMessage(),
-    // ContactInfo(),
-    // Profile(),
-  ];
+  List widgetOptions = [];
+  dynamic appSettings;
 
   @override
   void onInit() async {
@@ -45,6 +40,7 @@ class BottomNavigationController extends GetxController {
       }
       getTokenRegister();
       getUserInfo();
+      getSettings();
       update();
     }
   }
@@ -97,5 +93,21 @@ class BottomNavigationController extends GetxController {
     // box.write('darkmode', true);
     _currentTab = index;
     update();
+  }
+
+  getSettings() {
+    helper.showLoading();
+    apis.call(apiMethods.settingsAPI, null, apiType.get).then((res) async {
+      helper.hideLoading();
+      print('res.data, ${res.data}');
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        appSettings = data;
+        update();
+      }
+    }, onError: (e) {
+      print('e');
+      helper.hideLoading();
+    });
   }
 }
