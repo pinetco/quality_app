@@ -1,9 +1,10 @@
-import 'package:quality_app/controllers/review_submission_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
+import 'package:quality_app/controllers/review_submission_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
-import 'package:flutter/material.dart';
 
 class ReviewSubmission extends StatefulWidget {
   @override
@@ -12,7 +13,8 @@ class ReviewSubmission extends StatefulWidget {
 
 class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProviderStateMixin {
   var reviewSubmissionCtrl = Get.put(ReviewSubmissionController());
-  var storeCtrl = Get.find<HomeClientController>();
+  var bottomCtrl = Get.find<BottomNavigationController>();
+  var homeClientCtrl = Get.find<HomeClientController>();
 
   AnimationController _animationController;
   bool isPlaying = false;
@@ -307,15 +309,15 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 //       ),
                 //     ))),
                 // SizedBox(height: appScreenUtil.size(size)(10)),
-                if (storeCtrl.questionList.length > 0)
+                if (homeClientCtrl.questionList.length > 0)
                   GetBuilder<ReviewSubmissionController>(
                       builder: (_) => ListView.builder(
-                            itemCount: storeCtrl.questionList.length,
+                            itemCount: homeClientCtrl.questionList.length,
                             padding: EdgeInsets.all(0),
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              dynamic item = storeCtrl.questionList[index];
+                              dynamic item = homeClientCtrl.questionList[index];
                               String title = item['title'] ?? '';
 
                               int id = item['id'] ?? '';
@@ -354,8 +356,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 ),
                 SizedBox(height: appScreenUtil.size(10)),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                  decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtComment,
@@ -377,8 +378,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 ),
                 SizedBox(height: appScreenUtil.size(10)),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                  decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtWish,

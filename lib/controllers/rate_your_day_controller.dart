@@ -30,9 +30,10 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
   dynamic questionListRateYourDay = [];
 
   @override
-  void onInit() {
+  void onReady() {
+    // TODO: implement onReady
     getQuestionRateYourDay();
-    super.onInit();
+    super.onReady();
   }
 
   @override

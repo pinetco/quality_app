@@ -1,11 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/global/packages/config_package.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:quality_app/controllers/common/loading_controller.dart';
+import 'package:quality_app/global/networking/server_config.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+
+ServerConfig _serverConfig = ServerConfig();
 
 final _storage = GetStorage();
 var loadingCtrl = Get.find<LoadingController>();
@@ -27,6 +32,20 @@ class Helper {
 
   clearStorage() {
     _storage.erase();
+  }
+
+  String getImagePath(dynamic url) {
+    if (url != null && url is String) {
+      if (url.contains('http') || url.contains('https'))
+        return url;
+      else {
+        return _serverConfig.baseUrl + url;
+      }
+    } else
+      return '';
+
+    //ex : helper.getImagePath('https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg');
+    //ex : helper.getImagePath('photos/1591447/pexels-photo-1591447.jpeg');
   }
 
   //#region Widget
@@ -53,6 +72,29 @@ class Helper {
     );
   }*/
   //#endregion
+
+  Widget imageNetwork({
+    String url,
+    double height,
+    double width,
+    BoxFit fit,
+    Widget placeholder,
+    String errorImageAsset,
+  }) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      width: width,
+      height: height,
+      fit: fit,
+      placeholder: (context, url) => placeholder ?? Center(child: CircularProgressIndicator()),
+      errorWidget: (context, url, error) => Image.asset(
+        errorImageAsset ?? imageAssets.noImageBanner,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
 
   //#region Dialog & Alert
   dialogMessage(String message, {String title = "App Name", onConfirm, onCancel}) {

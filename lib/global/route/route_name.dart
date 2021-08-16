@@ -18,6 +18,7 @@ class RouteName {
   final String noInternet = '/noInternet';
   final String bottomNavigationScreen = '/bottomNavigationScreen';
   final String loginTest = '/loginTest';
+  final String editProfile = '/editProfile';
   final String changePassword = '/changePassword';
   final String otpVerification = '/otpVerification';
 }

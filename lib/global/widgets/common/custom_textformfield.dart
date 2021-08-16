@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:quality_app/global/utility/index.dart';
 import 'package:quality_app/global/theme/index.dart';
+import 'package:quality_app/global/utility/index.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController container;
@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final FormFieldValidator<String> validator;
   final TextInputType keyboardType;
   final double padding;
+  final double width;
   final Color fillColor;
   final bool enabled;
   final int maxLines;
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.padding = 10,
+    this.width,
     this.fillColor,
     this.keyboardType,
     this.enabled = true,

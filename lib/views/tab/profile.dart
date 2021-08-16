@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/setting_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
@@ -17,10 +16,18 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   var settingCtrl = Get.put(SettingController());
   var bottomCtrl = Get.find<BottomNavigationController>();
 
-  Widget profileEditIcon() {
+  Widget profileEditIcon(item) {
+    // dynamic email = item['email'];
+    dynamic imageName = item['profile_photo_url'];
+    // String name = item['name'].toString();
+    // String phone = item['phone'].toString();
+    int id = item['id'];
+    print("@@@@@@@@@@@ $id");
+    print("############### $imageName");
     return InkWell(
       onTap: () {
-        //Get.toNamed(routeName.editProfile);
+        bottomCtrl.navigateEditProfile(item);
+        // Get.toNamed(routeName.editProfile);
       },
       child: Container(
         height: appScreenUtil.size(20),
@@ -65,7 +72,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           style: appCss.h1,
                         ),
                         Spacer(),
-                        profileEditIcon(),
+                        profileEditIcon(bottomCtrl.userInfo),
                         SizedBox(width: 15),
                         NotificationHeaderIcon(),
                       ],

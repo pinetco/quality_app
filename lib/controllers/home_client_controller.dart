@@ -45,7 +45,6 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     getAllQuestion();
     // getAppInformation(); // Add Your Code here.
     // });
-
     super.onInit();
   }
 
@@ -166,7 +165,6 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
             questionList = data;
-
             update();
           } else {}
         }, onError: (e) {
