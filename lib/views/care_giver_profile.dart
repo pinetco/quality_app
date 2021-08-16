@@ -57,65 +57,54 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
               Navigator.pop(context);
             }),
       ),
-      body: SafeArea(
-        child: LoadingComponent(
+      body: SafeArea(child: GetBuilder<OtherUserProfileController>(builder: (_dx) {
+        return LoadingComponent(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
-                // Align(alignment: Alignment.topLeft, child: Text('Profile', style: h1)),
-                Column(
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Profile',
-                          style: appCss.h1,
-                        ),
-                      ],
+                    Text(
+                      'Profile',
+                      style: appCss.h1,
                     ),
                   ],
                 ),
                 SizedBox(height: appScreenUtil.size(30)),
-                GetBuilder<OtherUserProfileController>(
-                  builder: (_dx) => _dx.userDetails != null && _dx.userDetails['profile_photo_url'] != null
-                      ? Container(
-                          height: appScreenUtil.size(90),
-                          width: appScreenUtil.size(90),
-                          decoration: BoxDecoration(
-                            color: appColor.primaryColor,
-                            borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
+                if (_dx.userDetails != null && _dx.userDetails['profile_photo_url'] != null)
+                  Container(
+                      height: appScreenUtil.size(90),
+                      width: appScreenUtil.size(90),
+                      decoration: BoxDecoration(
+                        color: appColor.primaryColor,
+                        borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
+                      ),
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
+                          child: Image.network(
+                            _dx.userDetails['profile_photo_url'],
+                            width: appScreenUtil.size(90),
+                            height: appScreenUtil.size(90),
+                            fit: BoxFit.fill,
                           ),
-                          child: Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
-                              child: Image.network(
-                                _dx.userDetails['profile_photo_url'],
-                                width: appScreenUtil.size(90),
-                                height: appScreenUtil.size(90),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ))
-                      : Container(),
-                ),
+                        ),
+                      )),
                 SizedBox(height: appScreenUtil.size(30)),
-                GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'name', imageAssets.userIcon, true) : Container()),
+                if (_dx.userDetails != null) renderComponent(_dx, 'name', imageAssets.userIcon, true),
                 SizedBox(height: appScreenUtil.size(10)),
-                GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'email', imageAssets.emailIcon, false) : Container()),
+                if (_dx.userDetails != null) renderComponent(_dx, 'email', imageAssets.emailIcon, false),
                 SizedBox(height: appScreenUtil.size(10)),
-                GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'phone', imageAssets.phoneIcon, false) : Container()),
+                if (_dx.userDetails != null) renderComponent(_dx, 'phone', imageAssets.phoneIcon, false),
                 SizedBox(height: appScreenUtil.size(10)),
-                GetBuilder<OtherUserProfileController>(
-                    builder: (_dx) => _dx.userDetails != null ? renderComponent(_dx, 'location.full_address', imageAssets.locationIcon, false) : Container()),
+                if (helper.jsonGet(_dx.userDetails, 'location.full_address', '') != '')
+                  renderComponent(_dx, 'location.full_address', imageAssets.locationIcon, false),
               ],
             ),
           ),
-        ),
-      ),
+        );
+      })),
     );
   }
 }

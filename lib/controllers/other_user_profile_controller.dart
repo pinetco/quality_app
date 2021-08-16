@@ -10,6 +10,7 @@ class OtherUserProfileController extends GetxController with SingleGetTickerProv
   void onInit() {
     // TODO: implement onInit
     var data = Get.arguments;
+    print('dta,$data');
     userDetails = data;
     print(userDetails);
     super.onInit();

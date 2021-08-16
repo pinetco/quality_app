@@ -164,9 +164,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
           helper.hideLoading();
           if (res.data != null && res.validation == false) {
             final data = res.data['data'];
-            update();
             questionList = data;
-
             update();
           } else {}
         }, onError: (e) {
@@ -220,9 +218,11 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     });
   }
 
-  // // Navigation to editProfile
-  // navigateEditProfile(item) {
-  //   print("@@@@@@@@@@@@@@@ $item");
-  //   Get.toNamed(routeName.editProfile, arguments: item);
-  // }
+  void navigateReviewScreen(empId, name, email, phone, userImage) {
+    Get.toNamed(routeName.careGiverProfile, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+  }
+
+  navigateOtherProfile(item) {
+    Get.toNamed(routeName.careGiverProfile, arguments: item['employee']);
+  }
 }

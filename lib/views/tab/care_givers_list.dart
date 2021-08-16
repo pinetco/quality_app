@@ -22,7 +22,8 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
     int empId = item['id'];
     return InkWell(
       onTap: () {
-        navigateReviewScreen(empId, name, email, phone, imageName);
+        careGiverCtrl.navigateOtherProfile(item);
+        // navigateReviewScreen(empId, name, email, phone, imageName);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),

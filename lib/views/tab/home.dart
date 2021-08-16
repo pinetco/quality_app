@@ -49,16 +49,30 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-              child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              child: InkWell(
+                onTap: () {
+                  homeClientCtrl.navigateOtherProfile(item);
+                  // homeClientCtrl.navigateReviewScreen(empId, name, email, phone, imageName);
+                },
+                child: Container(
+                    width: appScreenUtil.size(60.0),
+                    height: appScreenUtil.size(60.0),
+                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+              ),
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Text(
-                    name,
-                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                  InkWell(
+                    onTap: () {
+                      homeClientCtrl.navigateReviewScreen(empId, name, email, phone, imageName);
+                    },
+                    child: Text(
+                      name,
+                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                    ),
                   ),
                   Text(
                     date,
@@ -92,7 +106,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage, visitId, date) {
-    Get.toNamed(routeName.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
+    Get.toNamed(routeName.reviewSubmission,
+        arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
   }
 
   @override
@@ -114,7 +129,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           Row(
                             children: [
                               GetBuilder<HomeClientController>(builder: (_dx) {
-                                if (homeClientCtrl.userInfo != null && homeClientCtrl.userInfo['franchisee'] != null && homeClientCtrl.userInfo['franchisee']['logo_url'] != null)
+                                if (homeClientCtrl.userInfo != null &&
+                                    homeClientCtrl.userInfo['franchisee'] != null &&
+                                    homeClientCtrl.userInfo['franchisee']['logo_url'] != null)
                                   return Image.network(
                                     homeClientCtrl.userInfo['franchisee']['logo_url'],
                                     height: appScreenUtil.size(50),
@@ -185,7 +202,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             width: appScreenUtil.size(20),
                                           ),
                                           onTap: () {
-                                            print(data['id']);
                                             Get.toNamed(routeName.surveyInfo, arguments: {'id': data['id']});
                                           },
                                         ),

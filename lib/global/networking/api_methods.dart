@@ -29,4 +29,5 @@ class ApiMethods {
   final String loginWithTokenAPI = "/auth/login/token";
   final String notificationsAPI = "/notifications";
   final String updateProfileAPI = '/profile';
+  final String settingsAPI = "/settings";
 }

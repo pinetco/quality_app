@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class RateYourDayController extends GetxController with SingleGetTickerProviderMixin {
+  var bottomCtrl = Get.find<BottomNavigationController>();
+
   TextEditingController txtSuggestion = TextEditingController();
   TextEditingController txtWish = TextEditingController();
   RxBool _isLoading = false.obs;
@@ -130,6 +133,8 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
       helper.hideLoading();
 
       if (res.data != null && res.validation == false) {
+        bottomCtrl.appSettings['is_today_rated'] = true;
+        update();
         Get.back();
         _showMyDialog();
       } else {}
