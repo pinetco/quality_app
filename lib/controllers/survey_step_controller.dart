@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:quality_app/global/networking/api_methods.dart';
-
-import 'common/loading_controller.dart';
 
 class SurveyStepController extends GetxController with SingleGetTickerProviderMixin {
   Map selected = new Map();
@@ -36,9 +32,9 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   dynamic surveyAnswers = [];
 
   @override
-  void onInit() {
+  void onReady() {
     getQuestions();
-    super.onInit();
+    super.onReady();
   }
 
   tapOnquestions(val, questionId, index) {

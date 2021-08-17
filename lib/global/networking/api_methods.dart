@@ -19,7 +19,7 @@ class ApiMethods {
   String reviewDateWise(id, date) => "/employees/$id/review?date=$date";
 
   String patientsAPI(name) => '/clients?search=$name';
-  final String careGiverListAPI = '/employees';
+  String careGiverListAPI(name) => '/employees?search=$name';
   final String registerTokenAPI = '/devices';
 
   final String rateYourDayAPI = "/questions?type=rate_day";
