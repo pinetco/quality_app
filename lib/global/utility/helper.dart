@@ -85,7 +85,7 @@ class Helper {
       imageUrl: url,
       width: width,
       height: height,
-      fit: fit,
+      fit: fit ?? BoxFit.cover,
       placeholder: (context, url) => placeholder ?? Center(child: CircularProgressIndicator()),
       errorWidget: (context, url, error) => Image.asset(
         errorImageAsset ?? imageAssets.noImageBanner,
