@@ -26,8 +26,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         bottomCtrl.navigateEditProfile(item);
       },
       child: Container(
-        height: appScreenUtil.size(20),
-        width: appScreenUtil.size(20),
+        height: appScreenUtil.size(25),
+        width: appScreenUtil.size(25),
         decoration: BoxDecoration(
           // color: primaryColor,
           border: Border.all(
@@ -38,9 +38,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         ),
         child: Center(
           child: Icon(
-            MdiIcons.accountEditOutline,
-            size: appScreenUtil.size(20),
-            color: appColor.black22Color,
+            MdiIcons.squareEditOutline,
+            size: appScreenUtil.size(18),
+            // color: appColor.black22Color,
           ),
         ),
       ),
@@ -85,12 +85,18 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                           ),
                           child: Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
-                              child: helper.imageNetwork(
-                                url: _dx.userInfo['profile_photo_url'],
-                                width: appScreenUtil.size(90),
-                                height: appScreenUtil.size(90),
+                            child: ClipOval(
+                              child: Container(
+                                color: appColor.deactivateColor,
+                                padding: EdgeInsets.all(appScreenUtil.size(1)),
+                                child: ClipOval(
+                                  // borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
+                                  child: helper.imageNetwork(
+                                    url: _dx.userInfo['profile_photo_url'],
+                                    width: appScreenUtil.size(90),
+                                    height: appScreenUtil.size(90),
+                                  ),
+                                ),
                               ),
                             ),
                           ))
