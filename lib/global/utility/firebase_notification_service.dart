@@ -140,8 +140,6 @@ class FirebaseNotificationService {
     });
 
     requestPermissions();
-
-    getToken();
   }
 
   void _notificationNavigateToItemDetail(dynamic data) async {
@@ -189,7 +187,9 @@ class FirebaseNotificationService {
       carPlay: true,
       criticalAlert: true,
     );
-
+    //  if (settings.authorizationStatus == 'AuthorizationStatus.authorized') {
+    getToken();
+    //}
     print(settings.authorizationStatus);
   }
 }

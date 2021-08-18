@@ -8,13 +8,10 @@ import 'package:quality_app/controllers/splash_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await GetStorage.init();
-  WidgetsBinding.instance.addPostFrameCallback((_) async {
-    Get.put(LoadingController());
-    Get.put(SplashController());
-    await Firebase.initializeApp();
-  });
-
+  Get.put(LoadingController());
   runApp(MyApp());
 }
 
