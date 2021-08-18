@@ -7,8 +7,6 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-import 'common/loading_controller.dart';
-
 class HomeClientController extends GetxController with SingleGetTickerProviderMixin {
   TabController tabController;
 
@@ -34,7 +32,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   bool isRefreshing = false;
 
   @override
-  void onInit() {
+  void onReady() {
     // TODO: implement onInit
     // wait untill widget load
     // WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -45,7 +43,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     getAllQuestion();
     // getAppInformation(); // Add Your Code here.
     // });
-    super.onInit();
+    super.onReady();
   }
 
   /*getUserInfo() async {

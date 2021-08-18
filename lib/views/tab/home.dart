@@ -54,10 +54,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   homeClientCtrl.navigateOtherProfile(item);
                   // homeClientCtrl.navigateReviewScreen(empId, name, email, phone, imageName);
                 },
-                child: Container(
-                    width: appScreenUtil.size(60.0),
-                    height: appScreenUtil.size(60.0),
-                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
             ),
             Expanded(
@@ -106,8 +103,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage, visitId, date) {
-    Get.toNamed(routeName.reviewSubmission,
-        arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
+    Get.toNamed(routeName.reviewSubmission, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
   }
 
   @override
@@ -129,9 +125,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           Row(
                             children: [
                               GetBuilder<HomeClientController>(builder: (_dx) {
-                                if (homeClientCtrl.userInfo != null &&
-                                    homeClientCtrl.userInfo['franchisee'] != null &&
-                                    homeClientCtrl.userInfo['franchisee']['logo_url'] != null)
+                                if (homeClientCtrl.userInfo != null && homeClientCtrl.userInfo['franchisee'] != null && homeClientCtrl.userInfo['franchisee']['logo_url'] != null)
                                   return Image.network(
                                     homeClientCtrl.userInfo['franchisee']['logo_url'],
                                     height: appScreenUtil.size(50),
@@ -194,7 +188,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     itemBuilder: (context, index) {
                                       final data = _dx.surveysList[index];
                                       return Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
+                                        padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20), vertical: appScreenUtil.size(5)),
                                         child: CustomButton(
                                           title: data['name'],
                                           suffixIcon: Image.asset(

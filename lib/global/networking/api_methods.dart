@@ -8,11 +8,11 @@ class ApiMethods {
   final String questionsAPI = "/questions";
   final String appInformationAPI = "/app-information";
   final String userAPI = "/user";
-  String surveyQueAPI(id, page) => "/surveys/$id/survey-questions?page=$page";
+  String surveyQueAPI(page, id) => "/surveys/$id/survey-questions?page=$page";
   final String employeeHomeAPI = "/employee-home";
   final String checkInAPI = "/check-in";
   String checkOutAPI(id) => "/visits/$id/check-out";
-  final String validationAPI = "/survey-answers/validation";
+  final String validationAPI = "/validate/survey-answers";
   final String surveyAnswerAPI = "/survey-answers";
 
   String visitDateAPI(id) => "/options/employees/$id/visit-dates";

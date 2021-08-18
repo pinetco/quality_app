@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class SurveyStepController extends GetxController with SingleGetTickerProviderMixin {
@@ -33,6 +34,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
 
   @override
   void onReady() {
+    print('Data');
     getQuestions();
     super.onReady();
   }
@@ -43,7 +45,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   }
 
   manageProgressBar() {
-    final actualWidth = appScreenUtil.screenActualWidth() - appScreenUtil.size(48);
+    final actualWidth = appScreenUtil.screenActualWidth() - appScreenUtil.size(49);
     final pWidth = actualWidth / totalStep;
     final activeWidth = activeStep * pWidth;
     return activeWidth;
@@ -74,7 +76,6 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
           activeStep = activeStep + 1;
         } else {
           submitAnswers();
-          _showMyDialog();
         }
 
         surveyAnswers = new List.from(surveyAnswers)..addAll(currentStepQuestion);
@@ -89,11 +90,14 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
 
   submitAnswers() {
     final formData = {"page": activeStep, "survey_id": questions[0]['survey_id'], "survey_answers": surveyAnswers};
+    print("Print Data $formData");
     helper.showLoading();
     apis.call(apiMethods.surveyAnswerAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
         errors = [];
+        var homeClientCtrl = Get.find<HomeClientController>();
+        homeClientCtrl.getSurveyList();
         _showMyDialog();
       }
       update();
