@@ -103,40 +103,61 @@ class _EditProfileState extends State<EditProfile> {
                                     overflow: Overflow.visible,
                                     clipBehavior: Clip.none,
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
-                                        child: editProfileCtrl.selectedFile != null
-                                            ? Image.file(editProfileCtrl.selectedFile, fit: BoxFit.cover)
-                                            : Container(
-                                                child: helper.imageNetwork(
-                                                  url: bottomCtrl.userInfo['profile_photo_url'],
-                                                  width: appScreenUtil.size(90),
-                                                  height: appScreenUtil.size(90),
-
-                                                ),
-                                              ),
+                                      ClipOval(
+                                        // borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
+                                        child: Container(
+                                          color: appColor.deactivateColor,
+                                          padding: EdgeInsets.all(appScreenUtil.size(1)),
+                                          child: ClipOval(
+                                            child: editProfileCtrl.selectedFile != null
+                                                ? Image.file(editProfileCtrl.selectedFile, fit: BoxFit.cover)
+                                                : Container(
+                                                    child: helper.imageNetwork(
+                                                      url: bottomCtrl.userInfo['profile_photo_url'],
+                                                      width: appScreenUtil.size(90),
+                                                      height: appScreenUtil.size(90),
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
                                       ),
                                       Positioned(
-                                        right: -10,
-                                        bottom: 0,
-                                        child: SizedBox(
-                                          height: 40,
-                                          width: 40,
-                                          child: FlatButton(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(50),
-                                              side: BorderSide(color: appColor.bgColor),
-                                            ),
-                                            color: appColor.primaryColor,
-                                            onPressed: () {
-                                              showPicker(context);
-                                            },
-                                            child: Icon(
-                                              MdiIcons.pencil,
-                                              size: appScreenUtil.size(15),
-                                              color: appColor.bgColor,
+                                        bottom: appScreenUtil.size(0),
+                                        right: appScreenUtil.size(-5),
+                                        // right: -10,
+                                        // bottom: 0,
+                                        child: InkWell(
+                                          onTap: () => showPicker(context),
+                                          child: ClipOval(
+                                            child: Container(
+                                              padding: EdgeInsets.all(appScreenUtil.size(8)),
+                                              decoration: BoxDecoration(
+                                                color: appColor.whiteColor,
+                                                border: Border.all(color: appColor.deactivateColor, width: appScreenUtil.size(1)),
+                                                borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
+                                              ),
+                                              child: Icon(
+                                                Icons.edit,
+                                                size: appScreenUtil.size(15),
+                                                color: appColor.primaryDarkColor,
+                                              ),
                                             ),
                                           ),
+                                          // child: FlatButton(
+                                          //   shape: RoundedRectangleBorder(
+                                          //     borderRadius: BorderRadius.circular(50),
+                                          //     side: BorderSide(color: appColor.bgColor),
+                                          //   ),
+                                          //   color: appColor.primaryColor,
+                                          //   onPressed: () {
+                                          //     showPicker(context);
+                                          //   },
+                                          //   child: Icon(
+                                          //     MdiIcons.pencil,
+                                          //     size: appScreenUtil.size(15),
+                                          //     color: appColor.bgColor,
+                                          //   ),
+                                          // ),
                                         ),
                                       ),
                                     ],

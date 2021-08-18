@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/networking/index.dart';
@@ -40,6 +41,7 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
     searchOnStoppedTyping = new Timer(duration, () {
       String name = '';
       if (!isNumericUsingRegularExpression(query)) {
+        print("@@@@@@ $query");
         name = query;
       }
       getCareGivers(name);
@@ -54,7 +56,7 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
 
   getCareGivers(name) async {
     if (!isRefreshing) helper.showLoading();
-    apis.call(apiMethods.careGiverListAPI, null, apiType.get).then((res) async {
+    apis.call(apiMethods.careGiverListAPI(name), null, apiType.get).then((res) async {
       if (!isRefreshing) helper.hideLoading();
       isRefreshing = false;
 

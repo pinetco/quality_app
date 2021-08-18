@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -30,7 +31,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   bool checkInDisabled = false;
 
   @override
-  void onInit() {
+  void onReady() {
     // TODO: implement onInit
     // wait untill widget load
     // WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -41,7 +42,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     //getAppInformation(); // Add Your Code here.
     // });
 
-    super.onInit();
+    super.onReady();
   }
 
   // getUserInfo() async {
