@@ -7,46 +7,208 @@ class Notification extends StatelessWidget {
   var notificationsCtrl = Get.put(NotificationController());
   List notificationItem = [
     {
-      'title': 'has started work just now',
-      'name': 'Nitin Gadhiya',
-      'duration': 'just now',
-      'button': false,
-      'rated': false,
-      'status': 'Working',
+      "id": 34,
+      "title": "has request",
+      "body": "could you please bring me a cup of coffee??",
+      "actor_name": "Joey Hoppe",
+      "type": "clientRequest",
+      "data": {
+        "accepted_by": null,
+        "accepted_by_name": null,
+      },
+      "redirect_to_id": "38",
+      "redirect_to_type": "3",
+      "created_at": "2021-08-18",
+      "read_at": "2021-08-18"
     },
     {
-      'title': 'has finished with work',
-      'name': 'Pinal Patel',
-      'duration': '2 mins ago',
-      'button': true,
-      'rated': false,
-      'status': '',
+      "id": 30,
+      "title": "has request",
+      "body": "could you please bring me a cup of coffee??",
+      "actor_name": "Joey Hoppe",
+      "type": "checkIn",
+      "data": {
+        "is_running": true,
+      },
+      "redirect_to_id": "38",
+      "redirect_to_type": "3",
+      "created_at": "2021-08-18",
+      "read_at": "2021-08-18"
     },
     {
-      'title': 'has finished with work',
-      'name': 'Vishal M.',
-      'duration': '2 days ago',
-      'button': true,
-      'rated': false,
-      'status': '',
+      "id": 31,
+      "title": "has request",
+      "body": "could you please bring me a cup of coffee??",
+      "actor_name": "Joey Hoppe",
+      "type": "checkOut",
+      "data": {
+        "is_rated": false,
+      },
+      "redirect_to_id": "38",
+      "redirect_to_type": "3",
+      "created_at": "2021-08-18",
+      "read_at": "2021-08-18"
     },
     {
-      'title': 'has finished with work',
-      'name': 'RaviRaj',
-      'duration': '1 month ago',
-      'button': true,
-      'rated': true,
-      'status': '',
+      "id": 31,
+      "title": "has request",
+      "body": "could you please bring me a cup of coffee??",
+      "actor_name": "Joey Hoppe",
+      "type": "checkOut",
+      "data": {
+        "is_rated": true,
+      },
+      "redirect_to_id": "38",
+      "redirect_to_type": "3",
+      "created_at": "2021-08-18",
+      "read_at": "2021-08-18"
     },
     {
-      'title': 'has finished with work',
-      'name': 'Pooja Pinetco',
-      'duration': '8 months ago',
-      'button': true,
-      'rated': false,
-      'status': '',
-    }
+      "id": 34,
+      "title": "has request",
+      "body": "could you please bring me a cup of coffee??",
+      "actor_name": "Joey Hoppe",
+      "type": "clientRequest",
+      "data": {
+        "accepted_by": 1,
+        "accepted_by_name": 'Nitin',
+      },
+      "redirect_to_id": "38",
+      "redirect_to_type": "3",
+      "created_at": "2021-08-18",
+      "read_at": "2021-08-18"
+    },
   ];
+  // List notificationItem = [
+  //   {
+  //     'title': 'has started work just now',
+  //     'name': 'Nitin Gadhiya',
+  //     'duration': 'just now',
+  //     'button': false,
+  //     'rated': false,
+  //     'status': 'Working',
+  //   },
+  //   {
+  //     'title': 'has finished with work',
+  //     'name': 'Pinal Patel',
+  //     'duration': '2 mins ago',
+  //     'button': true,
+  //     'rated': false,
+  //     'status': '',
+  //   },
+  //   {
+  //     'title': 'has finished with work',
+  //     'name': 'Vishal M.',
+  //     'duration': '2 days ago',
+  //     'button': true,
+  //     'rated': false,
+  //     'status': '',
+  //   },
+  //   {
+  //     'title': 'has finished with work',
+  //     'name': 'RaviRaj',
+  //     'duration': '1 month ago',
+  //     'button': true,
+  //     'rated': true,
+  //     'status': '',
+  //   },
+  //   {
+  //     'title': 'has finished with work',
+  //     'name': 'Pooja Pinetco',
+  //     'duration': '8 months ago',
+  //     'button': true,
+  //     'rated': false,
+  //     'status': '',
+  //   },
+  //   {
+  //     "id": 34,
+  //     "title": "has request",
+  //     "body": "could you please bring me a cup of coffee??",
+  //     "actor_name": "Joey Hoppe",
+  //     "type": "clientRequest",
+  //     "data": {"accepted_by": 38, "accepted_by_name": "Prof. Chadd Reynolds"},
+  //     "redirect_to_id": "38",
+  //     "redirect_to_type": "3",
+  //     "created_at": "2021-08-18 05:28:28",
+  //     "read_at": "2021-08-18 07:34:57"
+  //   },
+  //   {
+  //     "id": 29,
+  //     "title": "has request",
+  //     "body": "could you please bring me a cup of coffee??",
+  //     "actor_name": "Joey Hoppe",
+  //     "type": "clientRequest",
+  //     "data": {"accepted_by": null, "accepted_by_name": null},
+  //     "redirect_to_id": "38",
+  //     "redirect_to_type": "3",
+  //     "created_at": "2021-08-18 05:25:48",
+  //     "read_at": "2021-08-18 07:34:57"
+  //   },
+  // ];
+
+  // dynamic notificationItem = {
+  //   "data": [
+  //     {
+  //       "id": 34,
+  //       "title": "has request",
+  //       "body": "could you please bring me a cup of coffee??",
+  //       "actor_name": "Joey Hoppe",
+  //       "type": "clientRequest",
+  //       "data": {
+  //         "accepted_by": 38,
+  //         "accepted_by_name": "Prof. Chadd Reynolds",
+  //       },
+  //       "redirect_to_id": "38",
+  //       "redirect_to_type": "3",
+  //       "created_at": "2021-08-18 05:28:28",
+  //       "read_at": "2021-08-18 07:34:57"
+  //     },
+  //     {
+  //       "id": 29,
+  //       "title": "has request",
+  //       "body": "could you please bring me a cup of coffee??",
+  //       "actor_name": "Joey Hoppe",
+  //       "type": "clientRequest",
+  //       "data": {"accepted_by": null, "accepted_by_name": null},
+  //       "redirect_to_id": "38",
+  //       "redirect_to_type": "3",
+  //       "created_at": "2021-08-18 05:25:48",
+  //       "read_at": "2021-08-18 07:34:57"
+  //     }
+  //   ],
+  //   "links": {
+  //     "first": "http://quality-control-web.test/api/notifications?page=1",
+  //     "last": "http://quality-control-web.test/api/notifications?page=1",
+  //     "prev": null,
+  //     "next": null,
+  //   },
+  //   "meta": {
+  //     "current_page": 1,
+  //     "from": 1,
+  //     "last_page": 1,
+  //     "links": [
+  //       {
+  //         "url": null,
+  //         "label": "&laquo; Previous",
+  //         "active": false,
+  //       },
+  //       {
+  //         "url": "http://quality-control-web.test/api/notifications?page=1",
+  //         "label": "1",
+  //         "active": true,
+  //       },
+  //       {
+  //         "url": null,
+  //         "label": "Next &raquo;",
+  //         "active": false,
+  //       }
+  //     ],
+  //     "path": "http://quality-control-web.test/api/notifications",
+  //     "per_page": 10,
+  //     "to": 2,
+  //     "total": 2
+  //   }
+  // };
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +290,7 @@ class Notification extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                     children: <TextSpan>[
-                                      TextSpan(text: '${item['name']} ', style: appCss.h5.copyWith(color: appColor.black22Color)),
+                                      TextSpan(text: '${item['actor_name']} ', style: appCss.h5.copyWith(color: appColor.black22Color)),
                                       TextSpan(text: item['title'], style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                                     ],
                                   ),
@@ -139,23 +301,24 @@ class Notification extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(item['duration'], style: appCss.bodyStyle6.copyWith(color: appColor.grayColor)),
-                                    if (item['status'] == 'Working')
+                                    Text(item['created_at'], style: appCss.bodyStyle6.copyWith(color: appColor.grayColor)),
+                                    if (item['type'] == "checkIn" && item['data']['is_running'] == true)
                                       Container(
                                         padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-                                        child: Text(item['status'], style: appCss.bodyStyle6.copyWith(color: Colors.green)),
+                                        child: Text("Working", style: appCss.bodyStyle6.copyWith(color: Colors.green)),
                                       ),
-                                    if (item['button'] && !item['rated'])
+                                    if (item['type'] == "checkOut" && item['data']['is_rated'] == false)
                                       CustomButton(
-                                          title: 'Rate',
-                                          width: appScreenUtil.size(80),
-                                          padding: appScreenUtil.size(5),
-                                          radius: appScreenUtil.size(5),
-                                          style: appCss.bodyStyle6.copyWith(color: Colors.white),
-                                          onTap: () {
-                                            //navigateReviewScreen(empId, name, email, phone, imageName);
-                                          }),
-                                    if (item['button'] && item['rated'])
+                                        title: 'Rate',
+                                        width: appScreenUtil.size(80),
+                                        padding: appScreenUtil.size(5),
+                                        radius: appScreenUtil.size(5),
+                                        style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                                        onTap: () {
+                                          //navigateReviewScreen(empId, name, email, phone, imageName);
+                                        },
+                                      ),
+                                    if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
                                       CustomButton(
                                         title: 'Rated',
                                         color: Colors.white,
@@ -165,6 +328,52 @@ class Notification extends StatelessWidget {
                                         radius: appScreenUtil.size(5),
                                         style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
                                       ),
+                                    if (item['type'] == "clientRequest" && item['data']['accepted_by'] == null && item['data']['accepted_by_name'] == null)
+                                      Row(
+                                        children: [
+                                          CustomButton(
+                                            title: 'Accepted',
+                                            color: Colors.white,
+                                            border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                                            width: appScreenUtil.size(80),
+                                            padding: appScreenUtil.size(5),
+                                            radius: appScreenUtil.size(5),
+                                            style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                                          ),
+                                          SizedBox(width: appScreenUtil.size(10)),
+                                          CustomButton(
+                                            title: 'Rejected',
+                                            width: appScreenUtil.size(80),
+                                            padding: appScreenUtil.size(5),
+                                            radius: appScreenUtil.size(5),
+                                            style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                                            onTap: () {
+                                              //navigateReviewScreen(empId, name, email, phone, imageName);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    if (item['type'] == "clientRequest" && item['data']['accepted_by'] != null && item['data']['accepted_by_name'] != null)
+                                      CustomButton(
+                                        title: 'Request accepted',
+                                        width: appScreenUtil.size(150),
+                                        padding: appScreenUtil.size(5),
+                                        radius: appScreenUtil.size(5),
+                                        style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                                        onTap: () {
+                                          //navigateReviewScreen(empId, name, email, phone, imageName);
+                                        },
+                                      ),
+                                    // if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
+                                    //   CustomButton(
+                                    //     title: 'Rejected',
+                                    //     color: Colors.white,
+                                    //     border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                                    //     width: appScreenUtil.size(80),
+                                    //     padding: appScreenUtil.size(5),
+                                    //     radius: appScreenUtil.size(5),
+                                    //     style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                                    //   ),
                                   ],
                                 )
                               ],

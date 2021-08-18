@@ -22,7 +22,7 @@ class NotificationController extends GetxController {
 
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
-        print('data,$data');
+        print('Data, $data');
         notificationList = data;
 
         update();
@@ -31,4 +31,6 @@ class NotificationController extends GetxController {
       print('e');
     });
   }
+
+  void TimeDuration() {}
 }
