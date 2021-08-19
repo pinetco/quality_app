@@ -271,78 +271,47 @@ class Notification extends StatelessWidget {
                   ),
                 ),*/
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: notificationItem.length,
-                    itemBuilder: (context, index) {
-                      final item = notificationItem[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(appScreenUtil.size(5)),
-                            border: Border.all(width: 1, color: appColor.deactivateColor),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(appScreenUtil.size(10)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(text: '${item['actor_name']} ', style: appCss.h5.copyWith(color: appColor.black22Color)),
-                                      TextSpan(text: item['title'], style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: appScreenUtil.size(5),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: GetBuilder<NotificationController>(
+                    builder: (_) {
+                      return ListView.builder(
+                        itemCount: notificationsCtrl.notificationList.length,
+                        itemBuilder: (context, index) {
+                          final item = notificationsCtrl.notificationList[index];
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(appScreenUtil.size(5)),
+                                border: Border.all(width: 1, color: appColor.deactivateColor),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(appScreenUtil.size(10)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(item['created_at'], style: appCss.bodyStyle6.copyWith(color: appColor.grayColor)),
-                                    if (item['type'] == "checkIn" && item['data']['is_running'] == true)
-                                      Container(
-                                        padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-                                        child: Text("Working", style: appCss.bodyStyle6.copyWith(color: Colors.green)),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: <TextSpan>[
+                                          TextSpan(text: '${item['actor_name']} ', style: appCss.h5.copyWith(color: appColor.black22Color)),
+                                          TextSpan(text: item['title'], style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
+                                        ],
                                       ),
-                                    if (item['type'] == "checkOut" && item['data']['is_rated'] == false)
-                                      CustomButton(
-                                        title: 'Rate',
-                                        width: appScreenUtil.size(80),
-                                        padding: appScreenUtil.size(5),
-                                        radius: appScreenUtil.size(5),
-                                        style: appCss.bodyStyle6.copyWith(color: Colors.white),
-                                        onTap: () {
-                                          //navigateReviewScreen(empId, name, email, phone, imageName);
-                                        },
-                                      ),
-                                    if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
-                                      CustomButton(
-                                        title: 'Rated',
-                                        color: Colors.white,
-                                        border: Border.all(width: 1, color: appColor.primaryDarkColor),
-                                        width: appScreenUtil.size(80),
-                                        padding: appScreenUtil.size(5),
-                                        radius: appScreenUtil.size(5),
-                                        style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
-                                      ),
-                                    if (item['type'] == "clientRequest" && item['data']['accepted_by'] == null && item['data']['accepted_by_name'] == null)
-                                      Row(
-                                        children: [
-                                          CustomButton(
-                                            title: 'Accepted',
-                                            color: Colors.white,
-                                            border: Border.all(width: 1, color: appColor.primaryDarkColor),
-                                            width: appScreenUtil.size(80),
-                                            padding: appScreenUtil.size(5),
-                                            radius: appScreenUtil.size(5),
-                                            style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                                    ),
+                                    SizedBox(
+                                      height: appScreenUtil.size(5),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(item['created_at'], style: appCss.bodyStyle6.copyWith(color: appColor.grayColor)),
+                                        if (item['type'] == "checkIn" && item['data']['is_running'] == true)
+                                          Container(
+                                            padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
+                                            child: Text("Working", style: appCss.bodyStyle6.copyWith(color: Colors.green)),
                                           ),
-                                          SizedBox(width: appScreenUtil.size(10)),
+                                        if (item['type'] == "checkOut" && item['data']['is_rated'] == false)
                                           CustomButton(
-                                            title: 'Rejected',
+                                            title: 'Rate',
                                             width: appScreenUtil.size(80),
                                             padding: appScreenUtil.size(5),
                                             radius: appScreenUtil.size(5),
@@ -351,37 +320,184 @@ class Notification extends StatelessWidget {
                                               //navigateReviewScreen(empId, name, email, phone, imageName);
                                             },
                                           ),
-                                        ],
-                                      ),
-                                    if (item['type'] == "clientRequest" && item['data']['accepted_by'] != null && item['data']['accepted_by_name'] != null)
-                                      CustomButton(
-                                        title: 'Request accepted',
-                                        width: appScreenUtil.size(150),
-                                        padding: appScreenUtil.size(5),
-                                        radius: appScreenUtil.size(5),
-                                        style: appCss.bodyStyle6.copyWith(color: Colors.white),
-                                        onTap: () {
-                                          //navigateReviewScreen(empId, name, email, phone, imageName);
-                                        },
-                                      ),
-                                    // if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
-                                    //   CustomButton(
-                                    //     title: 'Rejected',
-                                    //     color: Colors.white,
-                                    //     border: Border.all(width: 1, color: appColor.primaryDarkColor),
-                                    //     width: appScreenUtil.size(80),
-                                    //     padding: appScreenUtil.size(5),
-                                    //     radius: appScreenUtil.size(5),
-                                    //     style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
-                                    //   ),
+                                        if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
+                                          CustomButton(
+                                            title: 'Rated',
+                                            color: Colors.white,
+                                            border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                                            width: appScreenUtil.size(80),
+                                            padding: appScreenUtil.size(5),
+                                            radius: appScreenUtil.size(5),
+                                            style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                                          ),
+                                        if (item['type'] == "clientRequest" && item['data']['accepted_by'] == null && item['data']['accepted_by_name'] == null)
+                                          Row(
+                                            children: [
+                                              CustomButton(
+                                                title: 'Accepted',
+                                                color: Colors.white,
+                                                border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                                                width: appScreenUtil.size(80),
+                                                padding: appScreenUtil.size(5),
+                                                radius: appScreenUtil.size(5),
+                                                style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                                              ),
+                                              SizedBox(width: appScreenUtil.size(10)),
+                                              CustomButton(
+                                                title: 'Rejected',
+                                                width: appScreenUtil.size(80),
+                                                padding: appScreenUtil.size(5),
+                                                radius: appScreenUtil.size(5),
+                                                style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                                                onTap: () {
+                                                  //navigateReviewScreen(empId, name, email, phone, imageName);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        if (item['type'] == "clientRequest" && item['data']['accepted_by'] != null && item['data']['accepted_by_name'] != null)
+                                          CustomButton(
+                                            title: 'Request accepted',
+                                            width: appScreenUtil.size(150),
+                                            padding: appScreenUtil.size(5),
+                                            radius: appScreenUtil.size(5),
+                                            style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                                            onTap: () {
+                                              //navigateReviewScreen(empId, name, email, phone, imageName);
+                                            },
+                                          ),
+                                        // if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
+                                        //   CustomButton(
+                                        //     title: 'Rejected',
+                                        //     color: Colors.white,
+                                        //     border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                                        //     width: appScreenUtil.size(80),
+                                        //     padding: appScreenUtil.size(5),
+                                        //     radius: appScreenUtil.size(5),
+                                        //     style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                                        //   ),
+                                      ],
+                                    )
                                   ],
-                                )
-                              ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       );
                     },
+                    // child: ListView.builder(
+                    //   itemCount: notificationsCtrl.notificationList.length,
+                    //   itemBuilder: (context, index) {
+                    //     final item = notificationsCtrl.notificationList[index];
+                    //     return Padding(
+                    //       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
+                    //       child: Container(
+                    //         decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(appScreenUtil.size(5)),
+                    //           border: Border.all(width: 1, color: appColor.deactivateColor),
+                    //         ),
+                    //         child: Padding(
+                    //           padding: EdgeInsets.all(appScreenUtil.size(10)),
+                    //           child: Column(
+                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                    //             children: [
+                    //               RichText(
+                    //                 text: TextSpan(
+                    //                   children: <TextSpan>[
+                    //                     TextSpan(text: '${item['actor_name']} ', style: appCss.h5.copyWith(color: appColor.black22Color)),
+                    //                     TextSpan(text: item['title'], style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
+                    //                   ],
+                    //                 ),
+                    //               ),
+                    //               SizedBox(
+                    //                 height: appScreenUtil.size(5),
+                    //               ),
+                    //               Row(
+                    //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //                 children: [
+                    //                   Text(item['created_at'], style: appCss.bodyStyle6.copyWith(color: appColor.grayColor)),
+                    //                   if (item['type'] == "checkIn" && item['data']['is_running'] == true)
+                    //                     Container(
+                    //                       padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
+                    //                       child: Text("Working", style: appCss.bodyStyle6.copyWith(color: Colors.green)),
+                    //                     ),
+                    //                   if (item['type'] == "checkOut" && item['data']['is_rated'] == false)
+                    //                     CustomButton(
+                    //                       title: 'Rate',
+                    //                       width: appScreenUtil.size(80),
+                    //                       padding: appScreenUtil.size(5),
+                    //                       radius: appScreenUtil.size(5),
+                    //                       style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                    //                       onTap: () {
+                    //                         //navigateReviewScreen(empId, name, email, phone, imageName);
+                    //                       },
+                    //                     ),
+                    //                   if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
+                    //                     CustomButton(
+                    //                       title: 'Rated',
+                    //                       color: Colors.white,
+                    //                       border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                    //                       width: appScreenUtil.size(80),
+                    //                       padding: appScreenUtil.size(5),
+                    //                       radius: appScreenUtil.size(5),
+                    //                       style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                    //                     ),
+                    //                   if (item['type'] == "clientRequest" && item['data']['accepted_by'] == null && item['data']['accepted_by_name'] == null)
+                    //                     Row(
+                    //                       children: [
+                    //                         CustomButton(
+                    //                           title: 'Accepted',
+                    //                           color: Colors.white,
+                    //                           border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                    //                           width: appScreenUtil.size(80),
+                    //                           padding: appScreenUtil.size(5),
+                    //                           radius: appScreenUtil.size(5),
+                    //                           style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                    //                         ),
+                    //                         SizedBox(width: appScreenUtil.size(10)),
+                    //                         CustomButton(
+                    //                           title: 'Rejected',
+                    //                           width: appScreenUtil.size(80),
+                    //                           padding: appScreenUtil.size(5),
+                    //                           radius: appScreenUtil.size(5),
+                    //                           style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                    //                           onTap: () {
+                    //                             //navigateReviewScreen(empId, name, email, phone, imageName);
+                    //                           },
+                    //                         ),
+                    //                       ],
+                    //                     ),
+                    //                   if (item['type'] == "clientRequest" && item['data']['accepted_by'] != null && item['data']['accepted_by_name'] != null)
+                    //                     CustomButton(
+                    //                       title: 'Request accepted',
+                    //                       width: appScreenUtil.size(150),
+                    //                       padding: appScreenUtil.size(5),
+                    //                       radius: appScreenUtil.size(5),
+                    //                       style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                    //                       onTap: () {
+                    //                         //navigateReviewScreen(empId, name, email, phone, imageName);
+                    //                       },
+                    //                     ),
+                    //                   // if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
+                    //                   //   CustomButton(
+                    //                   //     title: 'Rejected',
+                    //                   //     color: Colors.white,
+                    //                   //     border: Border.all(width: 1, color: appColor.primaryDarkColor),
+                    //                   //     width: appScreenUtil.size(80),
+                    //                   //     padding: appScreenUtil.size(5),
+                    //                   //     radius: appScreenUtil.size(5),
+                    //                   //     style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
+                    //                   //   ),
+                    //                 ],
+                    //               )
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ),
                 ),
               ],
