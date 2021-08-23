@@ -6,6 +6,8 @@ class NotificationController extends GetxController {
   List notificationList = [];
   bool isRefreshing = false;
 
+  dynamic requestId;
+
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -34,21 +36,21 @@ class NotificationController extends GetxController {
 
   // working in progress
 
-  // acceptedNotification() async {
-  //   helper.showLoading();
-  //   apis.call(apiMethods.acceptedNotificationsAPI, null, apiType.get).then((res) async {
-  //     if (!isRefreshing) helper.hideLoading();
-  //     isRefreshing = false;
-  //
-  //     if (res.data != null && res.validation == false) {
-  //       final data = res.data['data'];
-  //       print('Data, $data');
-  //       notificationList = data;
-  //       print('notificationList, $notificationList');
-  //       update();
-  //     } else {}
-  //   }, onError: (e) {
-  //     print('e');
-  //   });
-  // }
+  void acceptedRequest() async {
+    helper.showLoading();
+    apis.call(apiMethods.acceptedRequestAPI(requestId), null, apiType.put).then((res) async {
+      if (!isRefreshing) helper.hideLoading();
+      isRefreshing = false;
+
+      if (res.data != null && res.validation == false) {
+        final data = res.data['data'];
+        print('Data, $data');
+        notificationList = data;
+        print('Accepted Data, $notificationList');
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
+  }
 }

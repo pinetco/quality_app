@@ -28,7 +28,8 @@ class ApiMethods {
   final String surveysAPI = "/surveys";
   final String loginWithTokenAPI = "/auth/login/token";
   final String notificationsAPI = "/notifications";
-  final String acceptedNotificationsAPI = "/notifications";
   final String updateProfileAPI = '/profile';
   final String settingsAPI = "/settings";
+
+  String acceptedRequestAPI(id) => "/request/$id/accept";
 }
