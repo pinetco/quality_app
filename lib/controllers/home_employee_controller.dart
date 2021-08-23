@@ -38,7 +38,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     // getUserInfo();
     getData();
     // checkVersion();
-    getAllQuestion();
+    // getAllQuestion();
     //getAppInformation(); // Add Your Code here.
     // });
 
@@ -179,27 +179,27 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     }
   }
 
-  getAllQuestion() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        helper.showLoading();
-        apis.call(apiMethods.questionsAPI, null, apiType.get).then((res) async {
-          helper.hideLoading();
-          if (res.data != null && res.validation == false) {
-            final data = res.data['data'];
-            questionList = data;
-
-            update();
-          } else {}
-        }, onError: (e) {
-          print('e');
-        });
-      }
-    } on SocketException catch (_) {
-      print('Socket');
-    }
-  }
+  // getAllQuestion() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       helper.showLoading();
+  //       apis.call(apiMethods.questionsAPI, null, apiType.get).then((res) async {
+  //         helper.hideLoading();
+  //         if (res.data != null && res.validation == false) {
+  //           final data = res.data['data'];
+  //           questionList = data;
+  //
+  //           update();
+  //         } else {}
+  //       }, onError: (e) {
+  //         print('e');
+  //       });
+  //     }
+  //   } on SocketException catch (_) {
+  //     print('Socket');
+  //   }
+  // }
 
   void getPhoneNumber() async {
     final SmsAutoFill _autoFill = SmsAutoFill();

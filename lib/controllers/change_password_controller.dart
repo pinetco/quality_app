@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 
 class ChangePasswordController extends GetxController with SingleGetTickerProviderMixin {
   var formKey = GlobalKey<FormState>();
@@ -34,7 +32,6 @@ class ChangePasswordController extends GetxController with SingleGetTickerProvid
     // txtPassword.clear();
     // txtConfirmPassword.clear();
 
-    return;
     final formData = {
       'password': txtPassword.text,
       'password_confirmation': txtConfirmPassword.text,

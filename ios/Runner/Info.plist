@@ -23,7 +23,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
+    <false/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) photos description.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) camera description.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>$(PRODUCT_NAME) videos to profile description.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

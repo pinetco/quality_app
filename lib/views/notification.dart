@@ -272,9 +272,9 @@ class Notification extends StatelessWidget {
                 ),*/
                 Expanded(
                   child: ListView.builder(
-                    itemCount: notificationItem.length,
+                    itemCount: notificationsCtrl.notificationList.length,
                     itemBuilder: (context, index) {
-                      final item = notificationItem[index];
+                      final item = notificationsCtrl.notificationList[index];
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                         child: Container(

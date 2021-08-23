@@ -32,5 +32,21 @@ class NotificationController extends GetxController {
     });
   }
 
-  void TimeDuration() {}
+  // acceptedNotification() async {
+  //   helper.showLoading();
+  //   apis.call(apiMethods.acceptedNotificationsAPI, null, apiType.get).then((res) async {
+  //     if (!isRefreshing) helper.hideLoading();
+  //     isRefreshing = false;
+  //
+  //     if (res.data != null && res.validation == false) {
+  //       final data = res.data['data'];
+  //       print('Data, $data');
+  //       notificationList = data;
+  //       print('notificationList, $notificationList');
+  //       update();
+  //     } else {}
+  //   }, onError: (e) {
+  //     print('e');
+  //   });
+  // }
 }

@@ -5,7 +5,7 @@ class ApiMethods {
   final String employeesAPI = "/employees";
   final String reviewsAPI = "/reviews";
   final String rateDaysAPI = "/rate-days";
-  final String questionsAPI = "/questions";
+  final String questionsAPI = "/questions?type=review";
   final String appInformationAPI = "/app-information";
   final String userAPI = "/user";
   String surveyQueAPI(page, id) => "/surveys/$id/survey-questions?page=$page";
@@ -28,6 +28,7 @@ class ApiMethods {
   final String surveysAPI = "/surveys";
   final String loginWithTokenAPI = "/auth/login/token";
   final String notificationsAPI = "/notifications";
+  final String acceptedNotificationsAPI = "/notifications";
   final String updateProfileAPI = '/profile';
   final String settingsAPI = "/settings";
 }

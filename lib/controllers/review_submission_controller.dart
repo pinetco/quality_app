@@ -1,11 +1,11 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:quality_app/global/networking/api_methods.dart';
 
 class ReviewSubmissionController extends GetxController with SingleGetTickerProviderMixin {
   var storeCtrl = Get.find<HomeClientController>();
@@ -115,7 +115,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       questions.add(questionObj);
     }
     update();
-    saveReview(false);
+    // saveReview(false);
   }
 
   int getReviewEmoji(id, count) {

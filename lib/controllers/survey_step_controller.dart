@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
@@ -146,7 +147,9 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
               child: Text('Ok'),
               onPressed: () {
                 Navigator.pop(Get.context);
-                Get.offAndToNamed(routeName.home);
+                var bottomCtrl = Get.find<BottomNavigationController>();
+                bottomCtrl.updateCurrentTab(0);
+                Get.toNamed(routeName.bottomNavigationScreen);
               },
             ),
           ],
