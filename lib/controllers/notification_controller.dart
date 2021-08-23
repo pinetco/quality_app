@@ -24,13 +24,15 @@ class NotificationController extends GetxController {
         final data = res.data['data'];
         print('Data, $data');
         notificationList = data;
-
+        print('notificationList, $notificationList');
         update();
       } else {}
     }, onError: (e) {
       print('e');
     });
   }
+
+  // working in progress
 
   // acceptedNotification() async {
   //   helper.showLoading();
