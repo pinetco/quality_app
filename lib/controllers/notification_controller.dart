@@ -6,14 +6,11 @@ class NotificationController extends GetxController {
   List notificationList = [];
   bool isRefreshing = false;
 
-  dynamic requestId;
-
   @override
-  void onInit() async {
+  void onReady() async {
     // TODO: implement onInit
-    await Future.delayed(const Duration(seconds: 2));
     getNotificationList();
-    super.onInit();
+    super.onReady();
   }
 
   getNotificationList() async {
@@ -34,23 +31,40 @@ class NotificationController extends GetxController {
     });
   }
 
-  // working in progress
-
-  void acceptedRequest() async {
+  // AcceptedRequestData function
+  void acceptedRequest(id) async {
     helper.showLoading();
-    apis.call(apiMethods.acceptedRequestAPI(requestId), null, apiType.put).then((res) async {
-      if (!isRefreshing) helper.hideLoading();
-      isRefreshing = false;
-
+    apis.call(apiMethods.acceptedRequestAPI(id), null, apiType.put).then((res) async {
+      helper.hideLoading();
       if (res.data != null && res.validation == false) {
-        final data = res.data['data'];
-        print('Data, $data');
-        notificationList = data;
-        print('Accepted Data, $notificationList');
+        print(res.data);
+        getNotificationList();
         update();
       } else {}
     }, onError: (e) {
       print('e');
     });
+  }
+
+  // RejectedRequest function
+  void rejectRequest(id) async {
+    print('id, $id');
+    helper.showLoading();
+    apis.call(apiMethods.rejectRequestAPI(id), null, apiType.put).then((res) async {
+      print("Rejected Function Fire, $res");
+      helper.hideLoading();
+      if (res.data != null && res.validation == false) {
+        print(res.data);
+        getNotificationList();
+        update();
+      } else {}
+    }, onError: (e) {
+      print('e');
+    });
+  }
+
+  // Rate buttton function
+  void rateReview() {
+    Get.toNamed(routeName.reviewSubmission);
   }
 }

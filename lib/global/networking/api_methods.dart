@@ -31,5 +31,7 @@ class ApiMethods {
   final String updateProfileAPI = '/profile';
   final String settingsAPI = "/settings";
 
-  String acceptedRequestAPI(id) => "/request/$id/accept";
+  String acceptedRequestAPI(id) => "/requests/$id/accept";
+
+  String rejectRequestAPI(id) => "/requests/reject/$id";
 }

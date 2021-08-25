@@ -81,7 +81,9 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
 
         surveyAnswers = new List.from(surveyAnswers)..addAll(currentStepQuestion);
         lastIndex = surveyAnswers.length;
-        getQuestions();
+        if (activeStep < totalStep) {
+          getQuestions();
+        }
       } else if (res.validation == true) {
         errors = res.data['errors'];
       }
