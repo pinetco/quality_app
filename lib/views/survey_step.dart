@@ -116,6 +116,7 @@ class SurveyStep extends StatelessWidget {
                   if (surveyCtrl.questions != null && surveyCtrl.questions.length > 0)
                     return Expanded(
                       child: ListView.builder(
+                        controller: surveyCtrl.scrollController,
                         itemCount: surveyCtrl.questions.length,
                         itemBuilder: (context, index) {
                           dynamic item = surveyCtrl.questions[index];
@@ -125,53 +126,13 @@ class SurveyStep extends StatelessWidget {
                     );
                   return Expanded(child: Container());
                 }),
-                /* Expanded(
-                  child: SizedBox(
-                    child: SingleChildScrollView(
-                      child: GetBuilder<SurveyStepController>(builder: (_) {
-                        return Column(
-                          children: [step1(), step2(), step3()],
-                        );
-                      }),
-                    ),
-                  ),
-                ),*/
 
-                /*   GetBuilder<SurveyStepController>(builder: (_) {
-                  return Column(
-                    children: [
-                      Container(
-                          child: Text(
-                        'The service I receive from FirstLight Home Care meets my expectations.',
-                        style: h5.copyWith(fontWeight: FontWeight.w500),
-                      )),
-                      myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
-                      myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
-                      myRadioButton('Not sure', 3, surveyCtrl.groupVal),
-                      myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
-                      myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
-                      SizedBox(
-                        height: appScreenUtil.size(size)(30),
-                      ),
-                      Container(
-                          child: Text(
-                        'The service I receive from FirstLight Home Care meets my expectations.',
-                        style: h5.copyWith(fontWeight: FontWeight.w500),
-                      )),
-                      myRadioButton('Disagree strongly', 1, surveyCtrl.groupVal),
-                      myRadioButton('Disagree somewhat', 2, surveyCtrl.groupVal),
-                      myRadioButton('Not sure', 3, surveyCtrl.groupVal),
-                      myRadioButton('Agree somewhat', 4, surveyCtrl.groupVal),
-                      myRadioButton('Agree strongly', 5, surveyCtrl.groupVal),
-                    ],
-                  );
-                }),*/
                 GetBuilder<SurveyStepController>(
                   builder: (_) => Padding(
                     padding: EdgeInsets.all(appScreenUtil.size(10)),
                     child: CustomButton(
                       title: surveyCtrl.activeStep == surveyCtrl.totalStep ? 'Submit' : "Next",
-                      onTap: () {
+                      onTap: () async {
                         surveyCtrl.nextStep();
                       },
                     ),

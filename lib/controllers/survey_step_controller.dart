@@ -9,20 +9,6 @@ import 'package:quality_app/global/packages/config_package.dart';
 class SurveyStepController extends GetxController with SingleGetTickerProviderMixin {
   Map selected = new Map();
 
-  int step1groupVal1 = 1;
-  int step1groupVal2 = 1;
-  int step1groupVal3 = 1;
-
-  int step2groupVal1 = 1;
-  int step2groupVal2 = 1;
-  int step2groupVal3 = 1;
-
-  int step3groupVal1 = 1;
-  int step3groupVal2 = 1;
-  int step3groupVal3 = 1;
-
-  int groupVal2 = 2;
-  int groupVal3 = 3;
   int totalStep = 3;
   int activeStep = 1;
   dynamic progressBarWidth;
@@ -32,6 +18,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
   dynamic radioGroup = {};
   dynamic errors = [];
   dynamic surveyAnswers = [];
+  ScrollController scrollController = ScrollController();
 
   @override
   void onReady() {
@@ -80,6 +67,13 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
         lastIndex = surveyAnswers.length;
         if (activeStep == totalStep) {
           submitAnswers();
+        } else {
+          await Future.delayed(const Duration(milliseconds: 300));
+          scrollController.animateTo(
+            0.0,
+            curve: Curves.easeOut,
+            duration: const Duration(milliseconds: 300),
+          );
         }
 
         if (activeStep < totalStep) {
