@@ -34,4 +34,6 @@ class ApiMethods {
   String acceptedRequestAPI(id) => "/requests/$id/accept";
 
   String rejectRequestAPI(id) => "/requests/reject/$id";
+
+  final String badgeCountAPI = "/notifications/count";
 }

@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 //app package
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/modal/api_data_class.dart';
-import 'package:dio/dio.dart';
 
 import 'server_config.dart';
 
@@ -51,6 +51,7 @@ class Apis {
       if (isInternet) {
         String authToken = helper.getStorage(session.authToken);
         dio.options.headers["Authorization"] = "Bearer $authToken";
+        print('authToken : $authToken');
         dynamic response;
         print('apiName : $apiName');
 

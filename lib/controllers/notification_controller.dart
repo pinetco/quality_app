@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class NotificationController extends GetxController {
@@ -10,6 +11,8 @@ class NotificationController extends GetxController {
   void onReady() async {
     // TODO: implement onInit
     getNotificationList();
+    var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+    notificationBadgeCtrl.getBadgeCount();
     super.onReady();
   }
 

@@ -10,6 +10,7 @@ class AppColor {
   final Color blackColor = const Color(0XFF000000);
   final Color whiteColor = const Color(0XFFFFFFFF);
   final Color darkGreyColor = const Color(0XFF808080);
+  final Color dangerColor = const Color(0xFFEF6F6F);
   final Color redColor = Colors.red;
   final Color lightGreyColor = const Color(0XFF6B7280);
   final Color dividerColor = const Color(0XFFF5F5F5);

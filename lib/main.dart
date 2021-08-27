@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quality_app/app_init.dart';
 import 'package:quality_app/controllers/common/loading_controller.dart';
-import 'package:quality_app/controllers/splash_controller.dart';
+import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 void main() async {
@@ -12,6 +12,7 @@ void main() async {
   await Firebase.initializeApp();
   await GetStorage.init();
   Get.put(LoadingController());
+  Get.put(NotificationBadgeController());
   runApp(MyApp());
 }
 

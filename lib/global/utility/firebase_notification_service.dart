@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:quality_app/global/utility/index.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/utility/index.dart';
 
 import 'index.dart';
 
@@ -164,7 +165,7 @@ class FirebaseNotificationService {
             newData = data['data'];
           }
 
-          Get.toNamed('/' + data['screen'], arguments: newData);
+          Get.toNamed(routeName.notification + data['screen'], arguments: newData);
         } else {
           print("2nd");
           Get.toNamed('/' + data['screen']);
