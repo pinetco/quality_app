@@ -150,7 +150,7 @@ class Notification extends StatelessWidget {
                                           Row(
                                             children: [
                                               CustomButton(
-                                                  title: 'Accepted',
+                                                  title: 'Accept',
                                                   color: Colors.white,
                                                   border: Border.all(width: 1, color: appColor.primaryDarkColor),
                                                   width: appScreenUtil.size(80),
@@ -163,7 +163,7 @@ class Notification extends StatelessWidget {
                                                   }),
                                               SizedBox(width: appScreenUtil.size(10)),
                                               CustomButton(
-                                                title: 'Rejected',
+                                                title: 'Reject',
                                                 width: appScreenUtil.size(80),
                                                 padding: appScreenUtil.size(5),
                                                 radius: appScreenUtil.size(5),
@@ -177,7 +177,10 @@ class Notification extends StatelessWidget {
                                         if (item['type'] == "clientRequest" && item['data']['accepted_by'] != null && item['data']['accepted_by_name'] != null)
                                           Container(
                                             padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-                                            child: Text("Accepted by ${item['data']['accepted_by_name']}", style: appCss.bodyStyle6.copyWith(color: appColor.primaryColor)),
+                                            child: Text(
+                                              "Accept by ${item['data']['accepted_by_name']}",
+                                              style: appCss.bodyStyle6.copyWith(color: appColor.primaryColor),
+                                            ),
                                           ),
                                       ],
                                     )
