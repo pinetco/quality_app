@@ -154,23 +154,16 @@ class FirebaseNotificationService {
     //dynamic data = message.data;
 
     if (!helper.isNullOrBlank(data)) {
-      if (!helper.isNullOrBlank(data["screen"])) {
-        if (!helper.isNullOrBlank(data['data'])) {
-          print("1st : ${data['data']}");
-          var newData;
-          if (data['data'] is String) {
-            print("Yes String");
-            newData = jsonDecode(data['data']);
-          } else {
-            newData = data['data'];
-          }
-
-          Get.toNamed(routeName.notification + data['screen'], arguments: newData);
-        } else {
-          print("2nd");
-          Get.toNamed('/' + data['screen']);
-        }
+      print("1st : ${data['data']}");
+      var newData;
+      if (data is String) {
+        print("Yes String");
+        newData = jsonDecode(data);
+      } else {
+        newData = data;
       }
+
+      Get.toNamed(routeName.notification, arguments: newData);
     }
   }
 
