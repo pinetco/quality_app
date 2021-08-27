@@ -64,26 +64,29 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
         "ratings": helper.jsonGet(questions[i], 'survey_answer', ''),
       });
     }
+    // print(currentStepQuestion);
     var useQuestion = new List.from(surveyAnswers)..addAll(currentStepQuestion);
 
     final formData = {"page": activeStep, "survey_id": questions[0]['survey_id'], "survey_answers": useQuestion};
+    print('formData, $formData');
 
     helper.showLoading();
     apis.call(apiMethods.validationAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
         errors = [];
-        if (activeStep < totalStep) {
-          activeStep = activeStep + 1;
-        } else {
-          submitAnswers();
-        }
 
         surveyAnswers = new List.from(surveyAnswers)..addAll(currentStepQuestion);
         lastIndex = surveyAnswers.length;
+        if (activeStep == totalStep) {
+          submitAnswers();
+        }
+
         if (activeStep < totalStep) {
+          activeStep = activeStep + 1;
           getQuestions();
         }
+        update();
       } else if (res.validation == true) {
         errors = res.data['errors'];
       }
