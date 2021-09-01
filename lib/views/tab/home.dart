@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/home_client_controller.dart';
+import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   var bottomCtrl = Get.put(BottomNavigationController());
   var homeClientCtrl = Get.put(HomeClientController());
+  var badgeNotificationCtrl = Get.put(NotificationBadgeController());
 
   AnimationController _animationController;
   bool isPlaying = false;
@@ -271,6 +273,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
+                    // CustomButton(
+                    //   title: "123",
+                    //   onTap: () {
+                    //     badgeNotificationCtrl.badgeCountData();
+                    //   },
+                    // ),
                   ],
                 ),
               ],

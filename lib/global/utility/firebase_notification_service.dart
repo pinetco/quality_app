@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/utility/index.dart';
 
@@ -109,6 +110,8 @@ class FirebaseNotificationService {
 
       AndroidNotification android = message.notification?.android;
       if (notification != null && android != null && !kIsWeb) {
+        var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+        notificationBadgeCtrl.getBadgeCount();
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
@@ -162,7 +165,6 @@ class FirebaseNotificationService {
       } else {
         newData = data;
       }
-
       Get.toNamed(routeName.notification, arguments: newData);
     }
   }

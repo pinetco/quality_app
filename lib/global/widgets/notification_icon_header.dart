@@ -11,29 +11,30 @@ class NotificationHeaderIcon extends StatelessWidget {
         Get.toNamed(routeName.notification);
       },
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
           Padding(
-            padding: const EdgeInsets.all(0),
+            padding: EdgeInsets.only(right: appScreenUtil.size(10)),
             child: Image.asset(
               notificationIcon,
               width: appScreenUtil.size(20),
             ),
           ),
           Positioned(
-            right: appScreenUtil.size(2),
+            right: appScreenUtil.size(4),
             top: appScreenUtil.size(-5),
             child: ClipOval(
               child: GetBuilder<NotificationBadgeController>(
                 builder: (_) {
-                  // if (_.badgeCount == 0) return Container();
+                  if (_.badgeCount == 0) return Container();
                   return Container(
                     child: Center(
-                      child: Text('${_.badgeCount}', style: appCss.bodyStyle5.copyWith(color: appColor.whiteColor, fontWeight: FontWeight.w600)),
+                      child: Text('${_.badgeCount}', style: appCss.bodyStyle5.copyWith(color: appColor.whiteColor, fontWeight: FontWeight.w600, fontSize: 12)),
                     ),
                     color: appColor.dangerColor,
                     constraints: BoxConstraints(
-                      minWidth: appScreenUtil.size(15),
-                      minHeight: appScreenUtil.size(15),
+                      minWidth: appScreenUtil.size(17),
+                      minHeight: appScreenUtil.size(17),
                     ),
                   );
                 },

@@ -87,8 +87,9 @@ class Notification extends StatelessWidget {
                         itemCount: notificationsCtrl.notificationList.length,
                         itemBuilder: (context, index) {
                           final item = notificationsCtrl.notificationList[index];
+                          final acceptedId = helper.getFromJson(item, 'data.id', null);
+                          // final acceptedId = item['data']['id'];
                           final rejectedId = item['id'];
-                          final acceptedId = item['data']['id'];
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                             child: Container(
@@ -112,6 +113,7 @@ class Notification extends StatelessWidget {
                                     SizedBox(
                                       height: appScreenUtil.size(5),
                                     ),
+                                    Text("${item['body']}", style: appCss.bodyStyle6.copyWith(color: appColor.primaryColor)),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
@@ -123,19 +125,15 @@ class Notification extends StatelessWidget {
                                           ),
                                         if (item['type'] == "checkOut" && item['data']['is_rated'] == false)
                                           CustomButton(
-                                              title: 'Rate',
-                                              width: appScreenUtil.size(80),
-                                              padding: appScreenUtil.size(5),
-                                              radius: appScreenUtil.size(5),
-                                              style: appCss.bodyStyle6.copyWith(color: Colors.white),
-                                              onTap: () {
-                                                navigateReviewScreenPage(item);
-                                              }
-
-                                              // onTap: () {
-                                              //   notificationsCtrl.rateReview();
-                                              // },
-                                              ),
+                                            title: 'Rate',
+                                            width: appScreenUtil.size(80),
+                                            padding: appScreenUtil.size(5),
+                                            radius: appScreenUtil.size(5),
+                                            style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                                            onTap: () {
+                                              navigateReviewScreenPage(item);
+                                            },
+                                          ),
                                         if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
                                           CustomButton(
                                             title: 'Rated',
@@ -146,7 +144,7 @@ class Notification extends StatelessWidget {
                                             radius: appScreenUtil.size(5),
                                             style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
                                           ),
-                                        if (item['type'] == "clientRequest" && item['data']['accepted_by'] == null && item['data']['accepted_by_name'] == null)
+                                        if (item['type'] == "clientRequest" && item['data']['accepted_by'] == null && item['data']['accepted_by_name'] == null && !helper.isNullOrBlank(acceptedId))
                                           Row(
                                             children: [
                                               CustomButton(
@@ -180,6 +178,14 @@ class Notification extends StatelessWidget {
                                             child: Text(
                                               "Accept by ${item['data']['accepted_by_name']}",
                                               style: appCss.bodyStyle6.copyWith(color: appColor.primaryColor),
+                                            ),
+                                          ),
+                                        if (item['type'] == "acceptedRequest")
+                                          Container(
+                                            padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
+                                            child: Text(
+                                              "${item['title']}",
+                                              style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
                                             ),
                                           ),
                                       ],
