@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/forgot_password_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
-import 'package:flutter/material.dart';
 import 'package:quality_app/global/widgets/phone_number_with_country.dart';
 
 // ignore: must_be_immutable

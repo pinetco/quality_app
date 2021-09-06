@@ -27,7 +27,25 @@ class Notification extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // automaticallyImplyLeading: false,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+        // leading: Center(
+        //   child: InkWell(
+        //     highlightColor: Colors.white,
+        //     splashColor: Colors.transparent,
+        //     onTap: () {
+        //       Get.back();
+        //       //bottomCtrl.updateCurrentTab(2);
+        //     },
+        //     child: Padding(
+        //         padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),
+        //         child: Image.asset(
+        //           imageAssets.backIcon,
+        //           width: appScreenUtil.size(20),
+        //         )),
+        //   ),
+        // ),
+        // title: Text('Notifications', style: appCss.h1.copyWith(color: appColor.blackColor)),
         actions: [
           Center(
             child: InkWell(
@@ -55,7 +73,6 @@ class Notification extends StatelessWidget {
             child: Column(
               children: [
                 Align(alignment: Alignment.topLeft, child: Text('Notifications', style: appCss.h1)),
-
                 /*  Expanded(
                   child: Center(
                     child: Container(
@@ -94,7 +111,7 @@ class Notification extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(appScreenUtil.size(5)),
+                                borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
                                 border: Border.all(width: 1, color: appColor.deactivateColor),
                               ),
                               child: Padding(
@@ -113,11 +130,11 @@ class Notification extends StatelessWidget {
                                     SizedBox(
                                       height: appScreenUtil.size(5),
                                     ),
-                                    Text("${item['body']}", style: appCss.bodyStyle6.copyWith(color: appColor.primaryColor)),
+                                    Text("${item['body']}", style: appCss.bodyStyle6.copyWith(color: appColor.black22Color)),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(timeago.format(DateTime.parse(item['created_at'])), style: appCss.bodyStyle6.copyWith(color: appColor.grayColor)),
+                                        Text(timeago.format(DateTime.parse(item['created_at'])), style: appCss.bodyStyle8.copyWith(color: appColor.grayColor)),
                                         if (item['type'] == "checkIn" && item['data']['is_running'] == true)
                                           Container(
                                             padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),

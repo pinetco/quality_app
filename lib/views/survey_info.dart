@@ -50,16 +50,14 @@ class SurveyInfo extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(appScreenUtil.size(10)),
-                  child: CustomButton(
-                    title: "Start",
-                    onTap: () {
-                      final data = Get.arguments;
-                      Get.toNamed(routeName.surveyStep, arguments: {'id': data['id']});
-                    },
-                  ),
+                CustomButton(
+                  title: "Start",
+                  onTap: () {
+                    final data = Get.arguments;
+                    Get.toNamed(routeName.surveyStep, arguments: {'id': data['id']});
+                  },
                 ),
+                SizedBox(height: appScreenUtil.size(15)),
               ],
             ),
           ),

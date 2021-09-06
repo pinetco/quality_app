@@ -133,6 +133,10 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
           title: Text('Thank You'),
           content: SingleChildScrollView(
             child: ListBody(

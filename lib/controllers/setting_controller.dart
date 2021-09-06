@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/networking/server_config.dart';
@@ -85,25 +84,37 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Are you sure you want to logout?', style: appCss.bodyStyle4.copyWith(color: appColor.black22Color)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          title: Text(
+            'Are you sure you want to logout?',
+            style: appCss.bodyStyle4.copyWith(color: appColor.black22Color),
+          ),
           actions: <Widget>[
-            TextButton(
-              child: Text('Cancel', style: appCss.bodyStyle6.copyWith(color: appColor.deactivateColor)),
-              onPressed: () {
-                Navigator.pop(Get.context);
-              },
-            ),
-            TextButton(
-              child: Text('Logout', style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor)),
-              onPressed: () {
-                helper.removeSpecificKeyStorage(session.authToken);
-                Navigator.pop(Get.context);
-                if (ServerConfig().apiType == 'development') {
-                  Get.offAllNamed(routeName.loginTest);
-                } else {
-                  Get.offAllNamed(routeName.login);
-                }
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                TextButton(
+                  child: Text('Cancel', style: appCss.bodyStyle6.copyWith(color: appColor.deactivateColor)),
+                  onPressed: () {
+                    Navigator.pop(Get.context);
+                  },
+                ),
+                TextButton(
+                  child: Text('Logout', style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor)),
+                  onPressed: () {
+                    helper.removeSpecificKeyStorage(session.authToken);
+                    Navigator.pop(Get.context);
+                    if (ServerConfig().apiType == 'development') {
+                      Get.offAllNamed(routeName.loginTest);
+                    } else {
+                      Get.offAllNamed(routeName.login);
+                    }
+                  },
+                ),
+              ],
             ),
           ],
         );

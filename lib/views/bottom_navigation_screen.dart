@@ -1,8 +1,8 @@
-import 'package:quality_app/controllers/bottom_navigation_controller.dart';
-import 'package:quality_app/global/packages/config_package.dart';
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:quality_app/controllers/bottom_navigation_controller.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -58,8 +58,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 currentFocus.unfocus();
               }
             },
-            child: GetBuilder<BottomNavigationController>(
-                builder: (controller) => bottomCtrl.widgetOptions.length > 0 ? bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab) : Container())),
+            child: GetBuilder<BottomNavigationController>(builder: (controller) => bottomCtrl.widgetOptions.length > 0 ? bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab) : Container())),
         bottomNavigationBar: GetBuilder<BottomNavigationController>(
           builder: (controller) => CustomNavigationBar(
             // borderRadius: Radius.circular(appScreenUtil.size(30)),
@@ -67,7 +66,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             currentIndex: bottomCtrl.currentTab,
             selectedColor: appColor.primaryColor,
             unSelectedColor: Color(0XFFCCCCCC),
-            strokeColor: appColor.primaryColor,
+            // strokeColor: appColor.primaryColor,
             onTap: (index) {
               bottomCtrl.updateCurrentTab(index);
             },

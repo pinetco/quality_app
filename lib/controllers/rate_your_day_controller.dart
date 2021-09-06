@@ -74,6 +74,11 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          contentPadding: EdgeInsets.all(15),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -98,7 +103,7 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
                       width: 50,
                       height: 50,
                     ),
-                    SizedBox(height: appScreenUtil.size(20)),
+                    SizedBox(height: appScreenUtil.size(10)),
                     Text('Thank You', style: appCss.bodyStyle3.copyWith(color: appColor.black22Color)),
                     Container(
                       width: appScreenUtil.screenActualWidth() - appScreenUtil.size(50),

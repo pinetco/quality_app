@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/login_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:quality_app/global/route/route_name.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/phone_number_with_country.dart';
-import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
   var loginController = Get.put(LoginController());
@@ -48,10 +47,10 @@ class Login extends StatelessWidget {
 
           SizedBox(height: appScreenUtil.size(15)),
           Container(
-            decoration:
-                BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
             child: CustomTextFormField(
               container: loginController.txtPassword,
+              cursorColor: appColor.primaryColor,
               hintText: "Password",
               prefixIcon: Icon(MdiIcons.lock),
               suffixIcon: IconButton(
@@ -79,6 +78,31 @@ class Login extends StatelessWidget {
     return GetBuilder<LoginController>(
       builder: (_) => Scaffold(
         backgroundColor: appColor.bgColor,
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        //   centerTitle: false,
+        //   automaticallyImplyLeading: false,
+        //   actions: [
+        //     Center(
+        //       child: InkWell(
+        //         highlightColor: Colors.white,
+        //         splashColor: Colors.transparent,
+        //         onTap: () {
+        //           Get.back();
+        //           //bottomCtrl.updateCurrentTab(2);
+        //         },
+        //         child: Padding(
+        //             padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),
+        //             child: Image.asset(
+        //               imageAssets.backIcon,
+        //               width: appScreenUtil.size(20),
+        //             )),
+        //       ),
+        //     ),
+        //     Spacer(),
+        //   ],
+        // ),
         body: LoadingComponent(
           //loading: loginController.isLoading,
           child: SingleChildScrollView(
@@ -150,8 +174,7 @@ class Login extends StatelessWidget {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
-                                          color: appColor.grayColor),
+                                      Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline, color: appColor.grayColor),
                                       Text(
                                         'Remember me',
                                         style: appCss.bodyStyle6,
@@ -179,6 +202,8 @@ class Login extends StatelessWidget {
                           padding: EdgeInsets.all(appScreenUtil.size(10)),
                           child: CustomButton(
                             title: "Login",
+                            // Working Progress not remove this line
+                            // enable: loginController.txtEmail.text != true ? true : false,
                             onTap: () {
                               loginController.login();
                             },

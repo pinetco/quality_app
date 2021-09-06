@@ -136,6 +136,11 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          contentPadding: EdgeInsets.all(15),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[

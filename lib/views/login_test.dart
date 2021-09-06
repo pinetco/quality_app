@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/login_test_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
-import 'package:flutter/material.dart';
 
 class LoginTest extends StatelessWidget {
   var loginTestController = Get.put(LoginTestController());
@@ -20,9 +20,17 @@ class LoginTest extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('Please Select User', style: appCss.bodyStyle3.copyWith(color: appColor.grayColor)),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Please', style: appCss.bodyStyle3.copyWith(color: appColor.grayColor)),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Select User Type', style: appCss.bodyStyle3.copyWith(color: appColor.blackColor, fontWeight: FontWeight.w500)),
+                ),
                 SizedBox(height: appScreenUtil.size(40)),
                 InkWell(
+                  borderRadius: BorderRadius.circular(appScreenUtil.size(100)),
                   onTap: () {
                     loginTestController.login('carePatient');
                   },
@@ -49,6 +57,7 @@ class LoginTest extends StatelessWidget {
                   height: appScreenUtil.size(70),
                 ),
                 InkWell(
+                  borderRadius: BorderRadius.circular(appScreenUtil.size(100)),
                   onTap: () {
                     loginTestController.login('careGiver');
                   },

@@ -26,20 +26,20 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         bottomCtrl.navigateEditProfile(item);
       },
       child: Container(
-        height: appScreenUtil.size(25),
-        width: appScreenUtil.size(25),
-        decoration: BoxDecoration(
-          // color: primaryColor,
-          border: Border.all(
-            color: appColor.black22Color,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(appScreenUtil.size(30)),
-        ),
+        // height: appScreenUtil.size(25),
+        // width: appScreenUtil.size(25),
+        // decoration: BoxDecoration(
+        //   // color: primaryColor,
+        //   border: Border.all(
+        //     color: appColor.black22Color,
+        //     width: 1,
+        //   ),
+        //   borderRadius: BorderRadius.circular(appScreenUtil.size(30)),
+        // ),
         child: Center(
           child: Icon(
             MdiIcons.squareEditOutline,
-            size: appScreenUtil.size(18),
+            size: appScreenUtil.size(21),
             // color: appColor.black22Color,
           ),
         ),
@@ -74,7 +74,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                SizedBox(height: appScreenUtil.size(30)),
+                SizedBox(height: appScreenUtil.size(20)),
                 GetBuilder<BottomNavigationController>(
                   builder: (_dx) => _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
                       ? Container(
@@ -110,7 +110,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         ? Container(
                             width: appScreenUtil.screenActualWidth(),
                             padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
                                 Image.asset(imageAssets.userIcon, width: appScreenUtil.size(20), color: appColor.primaryDarkColor),
@@ -136,7 +136,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             child: Container(
                               width: appScreenUtil.screenActualWidth(),
                               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 children: [
                                   Image.asset(
@@ -168,7 +168,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             child: Container(
                               width: appScreenUtil.screenActualWidth(),
                               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
+                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 children: [
                                   Image.asset(
@@ -186,27 +186,23 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           )
                         : Container()),
                 Spacer(),
-                Padding(
-                  padding: EdgeInsets.all(appScreenUtil.size(10)),
-                  child: CustomButton(
-                    title: "Change Password",
-                    style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
-                    border: Border.all(width: 1, color: appColor.primaryColor),
-                    onTap: () {
-                      settingCtrl.changePassword();
-                    },
-                    color: Colors.transparent,
-                  ),
+                CustomButton(
+                  title: "Change Password",
+                  style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+                  border: Border.all(width: 1, color: appColor.primaryColor),
+                  onTap: () {
+                    settingCtrl.changePassword();
+                  },
+                  color: Colors.transparent,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(appScreenUtil.size(10)),
-                  child: CustomButton(
-                    title: "Logout",
-                    onTap: () {
-                      settingCtrl.logout();
-                    },
-                  ),
+                SizedBox(height: appScreenUtil.size(15)),
+                CustomButton(
+                  title: "Logout",
+                  onTap: () {
+                    settingCtrl.logout();
+                  },
                 ),
+                SizedBox(height: appScreenUtil.size(15)),
               ],
             ),
           ),

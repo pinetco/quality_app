@@ -7,6 +7,7 @@ class NotificationHeaderIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      highlightColor: Colors.transparent,
       onTap: () {
         Get.toNamed(routeName.notification);
       },

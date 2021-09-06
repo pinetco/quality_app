@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/care_giver_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
-import 'package:flutter/material.dart';
 
 class CareGiversList extends StatefulWidget {
   @override
@@ -35,10 +35,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-                child: Container(
-                    width: appScreenUtil.size(60.0),
-                    height: appScreenUtil.size(60.0),
-                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
               Expanded(
                 child: Column(
@@ -81,7 +78,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                   children: [
                     SizedBox(height: 10),
                     Padding(
-                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(10)),
+                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(20)),
                       child: Column(
                         children: [
                           Row(
@@ -92,30 +89,32 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                               ),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              SizedBox(
-                                width: appScreenUtil.size(15),
-                              ),
+                              // SizedBox(
+                              //   width: appScreenUtil.size(15),
+                              // ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                       child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
-                        child: CustomTextFormField(
-                          container: careGiverCtrl.searchCareGiver,
-                          hintText: "What do you like to search care giver",
-                          prefixIcon: Icon(MdiIcons.magnify),
-                          style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-                          keyboardType: TextInputType.multiline,
-                          padding: appScreenUtil.size(13),
-                          onChanged: (text) {
-                            careGiverCtrl.onChangeText(text);
-                          },
+                        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+                        child: Center(
+                          child: CustomTextFormField(
+                            container: careGiverCtrl.searchCareGiver,
+                            cursorColor: appColor.primaryColor,
+                            hintText: "What do you like to search care giver",
+                            prefixIcon: Icon(MdiIcons.magnify),
+                            style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                            keyboardType: TextInputType.multiline,
+                            padding: appScreenUtil.size(13),
+                            onChanged: (text) {
+                              careGiverCtrl.onChangeText(text);
+                            },
+                          ),
                         ),
                       ),
                     ),

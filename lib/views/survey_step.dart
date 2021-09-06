@@ -92,8 +92,7 @@ class SurveyStep extends StatelessWidget {
               children: [
                 // Align(alignment: Alignment.topLeft, child: Text('Survey', style: h1)),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+                  decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
                   height: appScreenUtil.size(16),
                   width: appScreenUtil.screenActualWidth(),
                   child: Row(
@@ -128,16 +127,14 @@ class SurveyStep extends StatelessWidget {
                 }),
 
                 GetBuilder<SurveyStepController>(
-                  builder: (_) => Padding(
-                    padding: EdgeInsets.all(appScreenUtil.size(10)),
-                    child: CustomButton(
-                      title: surveyCtrl.activeStep == surveyCtrl.totalStep ? 'Submit' : "Next",
-                      onTap: () async {
-                        surveyCtrl.nextStep();
-                      },
-                    ),
+                  builder: (_) => CustomButton(
+                    title: surveyCtrl.activeStep == surveyCtrl.totalStep ? 'Submit' : "Next",
+                    onTap: () async {
+                      surveyCtrl.nextStep();
+                    },
                   ),
                 ),
+                SizedBox(height: appScreenUtil.size(15)),
               ],
             ),
           ),

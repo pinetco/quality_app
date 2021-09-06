@@ -64,6 +64,34 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+        leading: Center(
+          child: InkWell(
+            highlightColor: Colors.white,
+            splashColor: Colors.transparent,
+            onTap: () {
+              Get.back();
+              //bottomCtrl.updateCurrentTab(2);
+            },
+            child: Image.asset(
+              imageAssets.backIcon,
+              width: appScreenUtil.size(20),
+            ),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: appScreenUtil.size(10)),
+            child: Center(
+              child: NotificationHeaderIcon(),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: LoadingComponent(
             child: GetBuilder<EditProfileController>(
@@ -73,17 +101,13 @@ class _EditProfileState extends State<EditProfile> {
                         children: [
                           Column(
                             children: [
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Edit Profile',
-                                    style: appCss.h1,
-                                  ),
-                                  Spacer(),
-                                  SizedBox(width: 15),
-                                  NotificationHeaderIcon(),
-                                ],
+                              // SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Edit Profile',
+                                  style: appCss.h1,
+                                ),
                               ),
                             ],
                           ),
@@ -169,10 +193,11 @@ class _EditProfileState extends State<EditProfile> {
                           SizedBox(height: appScreenUtil.size(30)),
                           Container(
                             width: appScreenUtil.screenActualWidth(),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                             child: GetBuilder<EditProfileController>(
                               builder: (_) => CustomTextFormField(
                                 container: editProfileCtrl.txtEditUserName,
+                                cursorColor: appColor.primaryColor,
                                 hintText: "User names",
                                 prefixIcon: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -189,10 +214,11 @@ class _EditProfileState extends State<EditProfile> {
                           SizedBox(height: appScreenUtil.size(20)),
                           Container(
                             width: appScreenUtil.screenActualWidth(),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                             child: GetBuilder<EditProfileController>(
                               builder: (_) => CustomTextFormField(
                                 container: editProfileCtrl.txtEditEmail,
+                                cursorColor: appColor.primaryColor,
                                 hintText: "Email",
                                 prefixIcon: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -209,10 +235,11 @@ class _EditProfileState extends State<EditProfile> {
                           SizedBox(height: appScreenUtil.size(20)),
                           Container(
                             width: appScreenUtil.screenActualWidth(),
-                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                             child: GetBuilder<EditProfileController>(
                               builder: (_) => CustomTextFormField(
                                 container: editProfileCtrl.txtEditPhoneNumber,
+                                cursorColor: appColor.primaryColor,
                                 hintText: "Phone number",
                                 prefixIcon: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -227,15 +254,36 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                           ),
                           Spacer(),
-                          Padding(
-                            padding: EdgeInsets.all(appScreenUtil.size(10)),
-                            child: CustomButton(
+                          CustomButton(
                               title: "Save",
                               onTap: () {
                                 editProfileCtrl.updateProfileData();
-                              },
-                            ),
-                          ),
+                              }),
+                          SizedBox(height: appScreenUtil.size(15)),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //       child: CustomButton(
+                          //         title: "Cancel",
+                          //         style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+                          //         border: Border.all(width: 1, color: appColor.primaryColor),
+                          //         onTap: () {
+                          //           Get.back();
+                          //         },
+                          //         color: Colors.transparent,
+                          //       ),
+                          //     ),
+                          //     SizedBox(width: appScreenUtil.size(10)),
+                          //     Expanded(
+                          //       child: CustomButton(
+                          //         title: "Save",
+                          //         onTap: () {
+                          //           editProfileCtrl.updateProfileData();
+                          //         },
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ))),

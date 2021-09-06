@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/wish_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
-import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class WishMessage extends StatelessWidget {
@@ -52,12 +52,12 @@ class WishMessage extends StatelessWidget {
                       height: appScreenUtil.size(20),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                      decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
                       child: CustomTextFormField(
                         maxLines: 3,
                         container: wishCtrl.txtwishComment,
                         hintText: "What is your wish for next visit?",
+                        cursorColor: appColor.primaryColor,
                         // prefixIcon: Icon(MdiIcons.commentOutline),
                         obscureText: false,
                         style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
@@ -67,15 +67,13 @@ class WishMessage extends StatelessWidget {
                     ),
                     if (errorWishValidation != '') validationWidget(errorWishValidation),
                     Spacer(),
-                    Padding(
-                      padding: EdgeInsets.all(appScreenUtil.size(10)),
-                      child: CustomButton(
-                        title: "Send",
-                        onTap: () {
-                          wishCtrl.sendRequest();
-                        },
-                      ),
+                    CustomButton(
+                      title: "Send",
+                      onTap: () {
+                        wishCtrl.sendRequest();
+                      },
                     ),
+                    SizedBox(height: appScreenUtil.size(15)),
                   ],
                 ),
               ),

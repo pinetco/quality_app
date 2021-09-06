@@ -34,10 +34,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-                child: Container(
-                    width: appScreenUtil.size(60.0),
-                    height: appScreenUtil.size(60.0),
-                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
               Expanded(
                 child: Column(
@@ -97,7 +94,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                   children: [
                     SizedBox(height: 10),
                     Padding(
-                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(10)),
+                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(20)),
                       child: Column(
                         children: [
                           Row(
@@ -108,20 +105,19 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                               ),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              SizedBox(
-                                width: appScreenUtil.size(15),
-                              ),
+                              // SizedBox(
+                              //   width: appScreenUtil.size(15),
+                              // ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                       child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+                        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                         child: CustomTextFormField(
                           container: patientsCtrl.searchPatients,
                           hintText: "What do you like to search patients",
@@ -135,6 +131,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                         ),
                       ),
                     ),
+                    SizedBox(height: 10),
                     GetBuilder<PatientsController>(
                       builder: (_dx) => Expanded(
                         child: RefreshIndicator(

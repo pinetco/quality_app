@@ -95,10 +95,10 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                         style: appCss.h1,
                       ),
                     ),
-                    SizedBox(width: 5),
+                    // SizedBox(width: 5),
                   ],
                 ),
-                SizedBox(height: appScreenUtil.size(15)),
+                // SizedBox(height: appScreenUtil.size(15)),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
                   // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
@@ -176,6 +176,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: rateYourDayCtrl.txtSuggestion,
+                    cursorColor: appColor.primaryColor,
                     hintText: "Write here...",
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,

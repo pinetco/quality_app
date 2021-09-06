@@ -361,6 +361,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtComment,
                     hintText: "Write comment here...",
+                    cursorColor: appColor.primaryColor,
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
@@ -382,6 +383,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtWish,
+                    cursorColor: appColor.primaryColor,
                     hintText: "Write wish here...",
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,

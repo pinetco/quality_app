@@ -121,7 +121,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(10), top: appScreenUtil.size(10)),
+                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(20), top: appScreenUtil.size(10)),
                       child: Column(
                         children: [
                           Row(
@@ -139,9 +139,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               }),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              SizedBox(
-                                width: appScreenUtil.size(15),
-                              ),
+                              // SizedBox(
+                              //   width: appScreenUtil.size(15),
+                              // ),
                               // InkWell(
                               //   onTap: () {
                               //     Get.toNamed(AppRouter.profile);
@@ -220,7 +220,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         Padding(
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
-                                            'Working Care Giver',
+                                            'Working Caregiver',
                                             style: appCss.h5,
                                           ),
                                         ),

@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final double padding;
   final double width;
   final Color fillColor;
+  final Color cursorColor;
   final bool enabled;
   final int maxLines;
   final ValueChanged onChanged;
@@ -36,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
     this.padding = 10,
     this.width,
     this.fillColor,
+    this.cursorColor,
     this.keyboardType,
     this.enabled = true,
     this.maxLines = 1,
@@ -73,6 +75,7 @@ class CustomTextFormField extends StatelessWidget {
         labelText: labelText,
       ),
       style: style,
+      cursorColor: cursorColor,
       obscureText: obscureText,
       validator: validator,
       enabled: enabled,

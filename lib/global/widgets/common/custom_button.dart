@@ -39,14 +39,15 @@ class CustomButton extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(appScreenUtil.borderRadius(radius)),
       child: Container(
+        // color: enable ? appColor.primaryColor : color ?? appColor.primaryColor.withOpacity(6),
         color: color ?? appColor.primaryColor,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: enable == true ? onTap : null,
+            // onTap: disabled ? null : onTap,
             child: Container(
-              padding:
-                  EdgeInsets.all(appScreenUtil.size(padding)), //.symmetric(vertical: appScreenUtil.size(padding), horizontal: appScreenUtil.size(padding)),
+              padding: EdgeInsets.all(appScreenUtil.size(padding)), //.symmetric(vertical: appScreenUtil.size(padding), horizontal: appScreenUtil.size(padding)),
               width: width != null ? appScreenUtil.size(width) : MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 border: border,

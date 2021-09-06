@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
 import 'package:quality_app/controllers/setting_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
 
@@ -45,7 +44,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                     ],
                   ),
                   SizedBox(
-                    height: appScreenUtil.size(30),
+                    height: appScreenUtil.size(20),
                   ),
                   Container(
                       padding: EdgeInsets.all(8),
@@ -152,65 +151,76 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                   SizedBox(
                     height: appScreenUtil.size(30),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(appScreenUtil.size(15)),
-                    width: appScreenUtil.screenActualHeight(),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: appColor.deactivateColor, width: 1),
-                      borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            if (fbLink != '')
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5)),
-                                child: InkWell(
-                                  onTap: () {
-                                    settingCtrl.openURLContactInfo(fbLink, 'website');
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(MdiIcons.facebook, size: appScreenUtil.size(30), color: Color(0XFF4267B2)),
-                                    ],
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (fbLink != '')
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  settingCtrl.openURLContactInfo(fbLink, 'website');
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(appScreenUtil.size(15)),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: appColor.deactivateColor, width: 1),
+                                    borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
+                                  ),
+                                  child: Icon(
+                                    MdiIcons.facebook,
+                                    size: appScreenUtil.size(30),
+                                    color: Color(0XFF4267B2),
                                   ),
                                 ),
                               ),
-                            SizedBox(width: appScreenUtil.size(10)),
-                            if (twitterLink != '')
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5)),
-                                child: InkWell(
-                                  onTap: () {
-                                    settingCtrl.openURLContactInfo(twitterLink, 'website');
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(MdiIcons.twitter, size: appScreenUtil.size(30), color: Color(0XFF00ACEE)),
-                                    ],
+                            ),
+                          SizedBox(width: appScreenUtil.size(15)),
+                          if (twitterLink != '')
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  settingCtrl.openURLContactInfo(twitterLink, 'website');
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(appScreenUtil.size(15)),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: appColor.deactivateColor, width: 1),
+                                    borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
+                                  ),
+                                  child: Icon(
+                                    MdiIcons.twitter,
+                                    size: appScreenUtil.size(30),
+                                    color: Color(0XFF00ACEE),
                                   ),
                                 ),
                               ),
-                            SizedBox(width: appScreenUtil.size(10)),
-                            if (linkedinLink != '')
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5)),
-                                child: InkWell(
-                                  onTap: () {
-                                    settingCtrl.openURLContactInfo(linkedinLink, 'website');
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(MdiIcons.linkedin, size: appScreenUtil.size(30), color: Color(0XFF0077b5)),
-                                    ],
+                            ),
+                          SizedBox(width: appScreenUtil.size(15)),
+                          if (linkedinLink != '')
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  settingCtrl.openURLContactInfo(linkedinLink, 'website');
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(appScreenUtil.size(15)),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: appColor.deactivateColor, width: 1),
+                                    borderRadius: BorderRadius.circular(appScreenUtil.size(10)),
+                                  ),
+                                  child: Icon(
+                                    MdiIcons.linkedin,
+                                    size: appScreenUtil.size(30),
+                                    color: Color(0XFF0077b5),
                                   ),
                                 ),
                               ),
-                          ],
-                        ),
-                      ],
-                    ),
+                            ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               );
