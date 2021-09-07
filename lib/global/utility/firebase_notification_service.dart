@@ -98,39 +98,78 @@ class FirebaseNotificationService {
       }
     });
 
+    // var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+    // notificationBadgeCtrl.getBadgeCount();
+
     //when app in foreground
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   RemoteNotification notification = message.notification;
+    //   var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+    //   notificationBadgeCtrl.getBadgeCount();
+    //
+    //   //check for custom channel
+    //   String channelId = message.notification.android.channelId;
+    //   print('channelId : $channelId');
+    //   print('message data : ${message.data}');
+    //   //end check
+    //
+    //   AndroidNotification android = message.notification?.android;
+    //   if (notification != null && !kIsWeb) {
+    //     // var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+    //     // notificationBadgeCtrl.getBadgeCount();
+    //     flutterLocalNotificationsPlugin.show(
+    //       notification.hashCode,
+    //       notification.title,
+    //       notification.body,
+    //       NotificationDetails(
+    //         android: channelId != null
+    //             ? AndroidNotificationDetails(
+    //                 channelId,
+    //                 'custom notification title',
+    //                 'custom notification description',
+    //                 icon: android?.smallIcon,
+    //                 //sound: sound,
+    //               )
+    //             : AndroidNotificationDetails(
+    //                 channel.id,
+    //                 channel.name,
+    //                 channel.description,
+    //                 icon: android?.smallIcon,
+    //               ),
+    //       ),
+    //       payload: message.data != null ? jsonEncode(message.data) : null,
+    //     );
+    //   }
+    // });
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
-
-      //check for custom channel
-      String channelId = message.notification.android.channelId;
-      print('channelId : $channelId');
       print('message data : ${message.data}');
-      //end check
 
-      AndroidNotification android = message.notification?.android;
-      if (notification != null && android != null && !kIsWeb) {
-        var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
-        notificationBadgeCtrl.getBadgeCount();
+      var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+      notificationBadgeCtrl.getBadgeCount();
+
+      //if (notification != null && android != null && !kIsWeb) {
+      if (notification != null && !kIsWeb) {
+        String channelId;
+        AndroidNotification android = message.notification?.android;
+        if (android != null) {
+          channelId = message.notification.android.channelId;
+          print('channelId : $channelId');
+        }
+
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
           notification.body,
           NotificationDetails(
-            android: channelId != null
-                ? AndroidNotificationDetails(
-                    channelId,
-                    'custom notification title',
-                    'custom notification description',
-                    icon: android?.smallIcon,
-                    //sound: sound,
-                  )
-                : AndroidNotificationDetails(
-                    channel.id,
-                    channel.name,
-                    channel.description,
-                    icon: android?.smallIcon,
-                  ),
+            android: AndroidNotificationDetails(
+              channelId ?? channel.id,
+              channel.name,
+              channel.description,
+              icon: android?.smallIcon,
+            ),
+            iOS: IOSNotificationDetails(),
           ),
           payload: message.data != null ? jsonEncode(message.data) : null,
         );

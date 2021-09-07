@@ -11,12 +11,14 @@ class Notification extends StatelessWidget {
 
   void navigateReviewScreenPage(item) {
     dynamic employee = item['data']['employee'];
+    print("!!!!!!!!!!!!!!!  $employee");
     int empId = employee['id'];
     String name = employee['name'];
     String phone = employee['phone'];
     dynamic userImage = employee['profile_photo_url'];
     String date = item['data']['date'];
-    dynamic visitId = item['id'];
+    dynamic visitId = helper.jsonGet(item['data'], 'id', '');
+    print("^^^^^^^^^^^^^^^^^^^^ , $visitId");
     Get.toNamed(routeName.reviewSubmission, arguments: {'id': empId, 'name': name, 'phone': phone, 'userImage': userImage, 'visitId': visitId, "date": date});
   }
 

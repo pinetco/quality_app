@@ -64,7 +64,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             // borderRadius: Radius.circular(appScreenUtil.size(30)),
             items: renderTab(),
             currentIndex: bottomCtrl.currentTab,
-            selectedColor: appColor.primaryColor,
+            // selectedColor: appColor.primaryColor,
             unSelectedColor: Color(0XFFCCCCCC),
             // strokeColor: appColor.primaryColor,
             onTap: (index) {

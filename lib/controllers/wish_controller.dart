@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
@@ -34,7 +32,7 @@ class WishController extends GetxController with SingleGetTickerProviderMixin {
       if (res.data != null && res.validation == false) {
         final message = res.data['message'];
         txtwishComment.clear();
-        helper.successMessage(message.toUpperCase());
+        //helper.successMessage(message.toUpperCase());
 
         update();
       } else if (res.validation == true) {

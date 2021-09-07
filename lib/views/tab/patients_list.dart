@@ -121,6 +121,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                         child: CustomTextFormField(
                           container: patientsCtrl.searchPatients,
                           hintText: "What do you like to search patients",
+                          cursorColor: appColor.primaryColor,
                           prefixIcon: Icon(MdiIcons.magnify),
                           style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                           keyboardType: TextInputType.multiline,

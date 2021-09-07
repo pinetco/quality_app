@@ -134,6 +134,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   Future<Null> refreshList() async {
     isRefreshing = true;
     getData();
+    getSurveyList();
     return null;
   }
 
