@@ -141,10 +141,9 @@ class FirebaseNotificationService {
     //     );
     //   }
     // });
-
+    //when app in foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
-      print('message data : ${message.data}');
 
       var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
       notificationBadgeCtrl.getBadgeCount();
