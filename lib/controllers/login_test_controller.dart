@@ -4,7 +4,7 @@ import 'package:quality_app/global/packages/config_package.dart';
 class LoginTestController extends GetxController with SingleGetTickerProviderMixin {
   void login(type) async {
     final formData = {
-      'phone': type == 'careGiver' ? '+16517454392' : '+19035766609',
+      'phone': type == 'careGiver' ? '+14134178145' : '+13015080789',
       'password': 'password',
     };
     print(formData);

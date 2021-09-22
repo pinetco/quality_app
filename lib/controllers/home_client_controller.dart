@@ -18,6 +18,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   String _loginOption;
   int _currentIndex = 0;
   String _isoCode;
+  String description;
 
   bool get isLoading => _isLoading.value;
 
@@ -210,6 +211,7 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
         final data = res.data['data'];
         print('data: $data');
         surveysList = data;
+        print("surveysList, $surveysList");
         update();
       } else {}
     }, onError: (e) {

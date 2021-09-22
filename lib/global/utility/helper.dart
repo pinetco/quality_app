@@ -226,6 +226,15 @@ class Helper {
 
   //#endregion
 
+  double toDouble(dynamic val) {
+    if (val != null)
+      return double.parse(val.toString());
+    else
+      return 0;
+
+    //ex : helper.toDouble('12');
+  }
+
   //#region Success, Alert, Error Message
 
   messageContainer(message, icon) => Row(children: [

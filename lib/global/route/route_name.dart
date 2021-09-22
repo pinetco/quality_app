@@ -21,4 +21,7 @@ class RouteName {
   final String editProfile = '/editProfile';
   final String changePassword = '/changePassword';
   final String otpVerification = '/otpVerification';
+
+  final String requestList = '/requestList';
+  final String ratingList = '/ratingList';
 }

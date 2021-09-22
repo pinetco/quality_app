@@ -11,15 +11,33 @@ class WishMessage extends StatelessWidget {
 
   Widget validationWidget(errorValidation) {
     return Container(
-        padding: EdgeInsets.only(top: appScreenUtil.size(8)),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Text(
-            errorValidation,
-            style: appCss.validationTextStyle,
-          ),
-        ));
+      padding: EdgeInsets.only(top: appScreenUtil.size(8)),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          errorValidation,
+          style: appCss.validationTextStyle,
+        ),
+      ),
+    );
   }
+
+  // Widget requestListViewWidget() {
+  //   return InkWell(
+  //     highlightColor: Colors.transparent,
+  //     onTap: () {
+  //       Get.toNamed(routeName.requestList);
+  //     },
+  //     child: Padding(
+  //       padding: EdgeInsets.only(right: appScreenUtil.size(10)),
+  //       child: Icon(Icons.view_list_outlined, size: appScreenUtil.size(25), color: Colors.black),
+  //       // child: Image.asset(
+  //       //   notificationIcon,
+  //       //   width: appScreenUtil.size(20),
+  //       // ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +63,8 @@ class WishMessage extends StatelessWidget {
                           style: appCss.h1,
                         ),
                         Spacer(),
-                        NotificationHeaderIcon()
+                        NotificationHeaderIcon(),
+                        // requestListViewWidget()
                       ],
                     ),
                     SizedBox(
@@ -67,6 +86,16 @@ class WishMessage extends StatelessWidget {
                     ),
                     if (errorWishValidation != '') validationWidget(errorWishValidation),
                     Spacer(),
+                    CustomButton(
+                      title: "Your All Request",
+                      color: appColor.whiteColor,
+                      border: Border.all(color: appColor.primaryColor),
+                      style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+                      onTap: () {
+                        Get.toNamed(routeName.requestList);
+                      },
+                    ),
+                    SizedBox(height: appScreenUtil.size(15)),
                     CustomButton(
                       title: "Send",
                       onTap: () {

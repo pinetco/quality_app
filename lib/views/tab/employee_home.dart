@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
+import 'package:quality_app/controllers/home_employee_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/notification_icon_header.dart';
-import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/home_employee_controller.dart';
 
 class EmployeeHome extends StatefulWidget {
   @override
@@ -15,43 +15,76 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
   var homeEmpCtrl = Get.put(HomeEmpController());
 
   Widget rateYourDay() {
-    if (bottomCtrl.appSettings != null && !bottomCtrl.appSettings['is_today_rated'])
-      return Padding(
-        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(20), horizontal: appScreenUtil.size(20)),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
-          decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
-          child: Padding(
-            padding: EdgeInsets.all(appScreenUtil.size(10)),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    // if (bottomCtrl.appSettings != null && !bottomCtrl.appSettings['is_today_rated'])
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(20), horizontal: appScreenUtil.size(20)),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(5.0)),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
+        child: Padding(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            children: [
+              if (bottomCtrl.appSettings != null && !bottomCtrl.appSettings['is_today_rated'])
+                Padding(
+                  padding: EdgeInsets.all(appScreenUtil.size(10)),
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Text(
-                        'Rate your day',
-                        style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Text(
+                              'Rate your day',
+                              style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                            ),
+                          ],
+                        ),
+                      ),
+                      CustomButton(
+                        title: 'Rate',
+                        width: appScreenUtil.size(80),
+                        padding: appScreenUtil.size(5),
+                        radius: appScreenUtil.size(5),
+                        style: appCss.bodyStyle6.copyWith(color: Colors.white),
+                        onTap: () {
+                          homeEmpCtrl.navigateRateYourDay();
+                        },
                       ),
                     ],
+                    // Column(),
                   ),
                 ),
-                CustomButton(
-                    title: 'Rate',
-                    width: appScreenUtil.size(80),
-                    padding: appScreenUtil.size(5),
-                    radius: appScreenUtil.size(5),
-                    style: appCss.bodyStyle6.copyWith(color: Colors.white),
-                    onTap: () {
-                      homeEmpCtrl.navigateRateYourDay();
-                    }),
-              ],
-            ),
+              if (bottomCtrl.appSettings != null && !bottomCtrl.appSettings['is_today_rated'])
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20), vertical: appScreenUtil.size(5)),
+                  child: Divider(thickness: 0.7, color: appColor.darkGreyColor),
+                ),
+              Padding(
+                padding: EdgeInsets.all(0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
+                      onPressed: () {
+                        Get.toNamed(routeName.ratingList);
+                      },
+                      child: Text(
+                        'Your All Ratings',
+                        style: appCss.bodyStyle5.copyWith(color: appColor.primaryColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
     return Container();
   }
 
@@ -76,10 +109,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                 onTap: () {
                   homeEmpCtrl.navigateOtherProfile(item);
                 },
-                child: Container(
-                    width: appScreenUtil.size(60.0),
-                    height: appScreenUtil.size(60.0),
-                    decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
             ),
             Expanded(
@@ -155,15 +185,13 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(10), top: appScreenUtil.size(10)),
+                      padding: EdgeInsets.only(left: appScreenUtil.size(20), right: appScreenUtil.size(20), top: appScreenUtil.size(10)),
                       child: Column(
                         children: [
                           Row(
                             children: [
                               GetBuilder<HomeEmpController>(builder: (_dx) {
-                                if (homeEmpCtrl.userInfo != null &&
-                                    homeEmpCtrl.userInfo['franchisee'] != null &&
-                                    homeEmpCtrl.userInfo['franchisee']['logo_url'] != null)
+                                if (homeEmpCtrl.userInfo != null && homeEmpCtrl.userInfo['franchisee'] != null && homeEmpCtrl.userInfo['franchisee']['logo_url'] != null)
                                   return Image.network(
                                     homeEmpCtrl.userInfo['franchisee']['logo_url'],
                                     height: appScreenUtil.size(50),
@@ -175,9 +203,6 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                               }),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              SizedBox(
-                                width: appScreenUtil.size(15),
-                              ),
                             ],
                           ),
                         ],

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
@@ -10,6 +11,8 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   // TextEditingController
   TextEditingController searchPatients = TextEditingController();
   Timer searchOnStoppedTyping;
+
+  bool checkInDisabled = false;
 
   @override
   void onInit() {
@@ -62,6 +65,24 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
     }, onError: (e) {
       print('e');
     });
+  }
+
+  checkButtonDisable(client_visit) {
+    print('pending, $client_visit');
+    final contain = client_visit.indexWhere((element) {
+      final clientVisit = element['client_visit'];
+      if (clientVisit != null && clientVisit['is_running'] == true) {
+        return clientVisit['is_running'] == true;
+      }
+      return false;
+    });
+    if (contain > -1) {
+      checkInDisabled = true;
+    } else {
+      checkInDisabled = false;
+    }
+    print('checkInDisabled, $checkInDisabled');
+    update();
   }
 
   Future<Null> refreshList() async {

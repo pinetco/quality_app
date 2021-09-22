@@ -1,6 +1,6 @@
-import 'package:quality_app/global/packages/config_package.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class PhoneNumberWithCountry extends StatelessWidget {
   final TextEditingController txtMobile;
@@ -32,7 +32,6 @@ class PhoneNumberWithCountry extends StatelessWidget {
           selectorConfig: SelectorConfig(
             selectorType: PhoneInputSelectorType.DIALOG,
           ),
-          inputBorder: OutlineInputBorder(borderSide: BorderSide.none),
           locale: 'en',
           ignoreBlank: true,
           autoValidateMode: AutovalidateMode.disabled,
@@ -40,13 +39,16 @@ class PhoneNumberWithCountry extends StatelessWidget {
           initialValue: PhoneNumber(isoCode: isoCode ?? 'en'), //PhoneNumber(isoCode: Platform.localeName.split('_').last)
           textFieldController: txtMobile,
           formatInput: false,
-          // keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
           spaceBetweenSelectorAndTextField: 0.01,
           textStyle: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-          // inputBorder: OutlineInputBorder(),
           onSaved: (PhoneNumber number) {
             print('On Saved: $number');
           },
+          inputDecoration: InputDecoration(
+            border: OutlineInputBorder(borderSide: BorderSide.none),
+            hintText: "Phone Number",
+            hintStyle: appCss.bodyStyle5.copyWith(color: appColor.deactivateColor),
+          ),
         ),
       ),
     );

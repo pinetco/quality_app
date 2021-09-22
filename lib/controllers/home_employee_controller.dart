@@ -238,6 +238,7 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
         print(res.data);
         //  final data = res.data['data'];
         getData();
+
         update();
       } else {}
     }, onError: (e) {

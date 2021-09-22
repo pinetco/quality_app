@@ -28,5 +28,7 @@ class AppRoute {
     GetPage(name: _routeName.editProfile, page: () => EditProfile()),
     GetPage(name: _routeName.changePassword, page: () => ChangePassword()),
     GetPage(name: _routeName.otpVerification, page: () => OTPVerification()),
+    GetPage(name: _routeName.requestList, page: () => RequestList()),
+    GetPage(name: _routeName.ratingList, page: () => RatingList()),
   ];
 }

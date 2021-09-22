@@ -198,7 +198,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             width: appScreenUtil.size(20),
                                           ),
                                           onTap: () {
-                                            Get.toNamed(routeName.surveyInfo, arguments: {'id': data['id']});
+                                            Get.toNamed(routeName.surveyInfo, arguments: {'id': data['id'], 'description': data['description']});
                                           },
                                         ),
                                       );

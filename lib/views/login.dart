@@ -50,7 +50,7 @@ class Login extends StatelessWidget {
             decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
             child: CustomTextFormField(
               container: loginController.txtPassword,
-              cursorColor: appColor.primaryColor,
+              // cursorColor: appColor.primaryColor,
               hintText: "Password",
               prefixIcon: Icon(MdiIcons.lock),
               suffixIcon: IconButton(

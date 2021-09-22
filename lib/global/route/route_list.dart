@@ -17,6 +17,8 @@ export 'package:quality_app/views/login_test.dart';
 export 'package:quality_app/views/notification.dart';
 export 'package:quality_app/views/otp_verification.dart';
 export 'package:quality_app/views/rate_your_day.dart';
+export 'package:quality_app/views/rating_list.dart';
+export 'package:quality_app/views/request_list.dart';
 export 'package:quality_app/views/review_submission.dart';
 export 'package:quality_app/views/survey_info.dart';
 export 'package:quality_app/views/survey_step.dart';

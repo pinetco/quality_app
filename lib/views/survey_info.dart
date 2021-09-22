@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/home_client_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 
 class SurveyInfo extends StatelessWidget {
+  var homeClientCtrl = Get.put(HomeClientController());
+
   @override
   Widget build(BuildContext context) {
+    var argumentData = Get.arguments;
+    homeClientCtrl.description = argumentData['description'];
+
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
       appBar: AppBar(
@@ -42,10 +48,15 @@ class SurveyInfo extends StatelessWidget {
                   child: Center(
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
-                      child: Text(
-                        'The following questions relate to specific aspects of the in-home services you receive from FirstLight Home Care.',
-                        style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-                        textAlign: TextAlign.center,
+                      child: GetBuilder<HomeClientController>(
+                        builder: (_) {
+                          return Text(
+                            '${homeClientCtrl.description}',
+                            // 'The following questions relate to specific aspects of the in-home services you receive from FirstLight Home Care.',
+                            style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                            textAlign: TextAlign.center,
+                          );
+                        },
                       ),
                     ),
                   ),

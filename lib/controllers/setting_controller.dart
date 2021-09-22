@@ -108,8 +108,10 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
                     helper.removeSpecificKeyStorage(session.authToken);
                     Navigator.pop(Get.context);
                     if (ServerConfig().apiType == 'development') {
-                      Get.offAllNamed(routeName.loginTest);
+                      Get.offAllNamed(routeName.login);
+                      // Get.offAllNamed(routeName.loginTest);
                     } else {
+                      // Get.offAllNamed(routeName.loginTest);
                       Get.offAllNamed(routeName.login);
                     }
                   },
