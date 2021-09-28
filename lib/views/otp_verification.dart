@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/otp_verification_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
-import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 // ignore: must_be_immutable

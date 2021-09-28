@@ -229,6 +229,15 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                           ),
                           SizedBox(height: appScreenUtil.size(20)),
+                          // do not remove this code
+                          // PhoneNumberWithCountry(
+                          //   onInputChanged: (val) async {
+                          //     editProfileCtrl.updateIsoCode(val.isoCode, val.dialCode);
+                          //   },
+                          //   txtMobile: editProfileCtrl.txtEditPhoneNumber,
+                          //   isoCode: editProfileCtrl.isoCode,
+                          // ),
+                          // if (errorPhoneValidation != '') validationWidget(errorPhoneValidation),
                           Container(
                             width: appScreenUtil.screenActualWidth(),
                             decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),

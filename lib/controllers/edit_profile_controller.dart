@@ -18,11 +18,27 @@ class EditProfileController extends GetxController {
   TextEditingController txtEditUserName = TextEditingController();
   TextEditingController txtEditEmail = TextEditingController();
   TextEditingController txtEditPhoneNumber = TextEditingController();
+
+  /* do not remove this code
+  String _isoCode;
+  String _dialCode;
+  String get isoCode => _isoCode;
+  String get dialCode => _dialCode;
+  */
   dynamic imageUrl;
   File selectedFile;
 
   @override
   void onInit() {
+    /* do not remove this code
+    final jsonDecode = helper.getStorage(session.loginCredential);
+    if (!helper.isNullOrBlank(jsonDecode)) {
+      print(jsonDecode);
+      _isoCode = jsonDecode['iso_code'];
+      _dialCode = jsonDecode['dial_code'];
+    }
+    update();
+    */
     super.onInit();
   }
 
@@ -69,6 +85,7 @@ class EditProfileController extends GetxController {
     dynamic data = {
       "name": txtEditUserName.text,
       "email": txtEditEmail.text,
+      // "phone": (dialCode ?? '+49') + txtEditPhoneNumber.text,
       "phone": txtEditPhoneNumber.text,
       "_method": 'PUT',
       if (selectedFile != null) 'profile_picture': await dio.MultipartFile.fromFile(selectedFile.path, filename: fileName),
@@ -103,6 +120,12 @@ class EditProfileController extends GetxController {
     imageUrl = arguments['profile_photo_url'];
     update();
   }
+  // do not remove this code
+  // void updateIsoCode(String isoCode, String dialCode) {
+  //   _isoCode = isoCode;
+  //   _dialCode = dialCode;
+  //   update();
+  // }
 
   navigationBack() {
     Get.back();

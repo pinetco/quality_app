@@ -2,7 +2,7 @@
     package="com.quality.quality_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="quality_app"
+        android:label="Quality App"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
        <meta-data

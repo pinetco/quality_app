@@ -21,9 +21,10 @@ class ForgotPasswordController extends GetxController {
   }
 
   void otpSent() async {
-    final phoneNumber = '+13015080789';
+    // final phoneNumber = '+911234567890';
     final formData = {
-      'phone': phoneNumber, //txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
+      // 'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
+      'phone': (dialCode ?? '+49') + txtMobile.text,
     };
     print('formData, $formData');
     helper.showLoading();
@@ -31,7 +32,7 @@ class ForgotPasswordController extends GetxController {
     apis.call(apiMethods.forgotPasswordAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
-        Get.toNamed(routeName.otpVerification, arguments: {'phone': phoneNumber});
+        Get.toNamed(routeName.otpVerification, arguments: {'phone': (dialCode ?? '+49') + txtMobile.text});
       } else if (res.validation == true) {
         final data = res.data;
         final errors = data['errors'];

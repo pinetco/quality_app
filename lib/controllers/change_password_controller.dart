@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quality_app/controllers/login_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class ChangePasswordController extends GetxController with SingleGetTickerProviderMixin {
   var formKey = GlobalKey<FormState>();
+  // var loginCtrl = Get.find<LoginController>();
+  var loginCtrl = Get.put(LoginController());
 
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtConfirmPassword = TextEditingController();
@@ -36,7 +39,6 @@ class ChangePasswordController extends GetxController with SingleGetTickerProvid
       'password': txtPassword.text,
       'password_confirmation': txtConfirmPassword.text,
     };
-    print(formData);
     passwordFieldError = '';
     cPasswordFieldError = '';
     update();
@@ -52,7 +54,7 @@ class ChangePasswordController extends GetxController with SingleGetTickerProvid
         FocusScope.of(Get.context).unfocus();
         txtPassword.clear();
         txtConfirmPassword.clear();
-
+        loginCtrl.getUserInfo();
         // await Future.delayed(const Duration(seconds: 2));
         // Get.back();
       } else if (res.validation == true) {

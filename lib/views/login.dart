@@ -209,6 +209,18 @@ class Login extends StatelessWidget {
                             },
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(appScreenUtil.size(10)),
+                          child: CustomButton(
+                            title: "Activate account",
+                            color: appColor.whiteColor,
+                            border: Border.all(color: appColor.primaryColor),
+                            style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+                            onTap: () {
+                              Get.toNamed(routeName.forgotPassword);
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

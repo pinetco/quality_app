@@ -37,9 +37,10 @@ class OTPVerificationController extends GetxController {
     tokenError = '';
     update();
     final formData = {
-      'phone': phone, //txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
+      // 'phone': phone != '' ? '$dialCode${phone}' : '',
+      'phone': phone,
       "token": code,
-      "device": "mobile"
+      "device": "mobile",
     };
     print('formData, $formData');
     helper.showLoading();
@@ -49,7 +50,8 @@ class OTPVerificationController extends GetxController {
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         helper.writeStorage(session.authToken, data['token']);
-        loginCtrl.getUserInfo();
+        Get.toNamed(routeName.changePassword);
+        // loginCtrl.getUserInfo();
       } else if (res.validation == true) {
         final data = res.data;
         final errors = data['errors'];
