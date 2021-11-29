@@ -72,7 +72,7 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       elevation: 0,
       leading: InkWell(
           child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),

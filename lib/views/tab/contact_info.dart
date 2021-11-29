@@ -16,7 +16,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFF7F8FA),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: LoadingComponent(
           child: Container(

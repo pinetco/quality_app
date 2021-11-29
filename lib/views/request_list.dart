@@ -54,9 +54,9 @@ class RequestList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RequestListController>(builder: (_) {
       return Scaffold(
-        backgroundColor: Color(0XFFF7F8FA),
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: false,
           automaticallyImplyLeading: false,

@@ -90,7 +90,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         //title: Text("Review"),
         //automaticallyImplyLeading: false,

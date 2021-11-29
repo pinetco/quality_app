@@ -71,7 +71,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: InkWell(
             child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),

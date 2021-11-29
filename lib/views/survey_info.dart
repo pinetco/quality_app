@@ -14,7 +14,7 @@ class SurveyInfo extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0XFFF7F8FA),
         elevation: 0,
         // automaticallyImplyLeading: false,
         actions: [

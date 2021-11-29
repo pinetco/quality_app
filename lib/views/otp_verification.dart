@@ -63,7 +63,7 @@ class OTPVerification extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(30)),
                       child: PinFieldAutoFill(
-                        autofocus: true,
+                        autoFocus: true,
                         codeLength: 4,
                         decoration: UnderlineDecoration(
                           textStyle: TextStyle(fontSize: appScreenUtil.size(20), color: Colors.black),

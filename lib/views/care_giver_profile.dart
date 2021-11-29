@@ -1,5 +1,5 @@
-import 'package:quality_app/controllers/other_user_profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/controllers/other_user_profile_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class CareGiverProfile extends StatefulWidget {
@@ -49,7 +49,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0XFFF7F8FA),
         elevation: 0,
         leading: InkWell(
             child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
@@ -98,8 +98,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
                 SizedBox(height: appScreenUtil.size(10)),
                 if (_dx.userDetails != null) renderComponent(_dx, 'phone', imageAssets.phoneIcon, false),
                 SizedBox(height: appScreenUtil.size(10)),
-                if (helper.jsonGet(_dx.userDetails, 'location.full_address', '') != '')
-                  renderComponent(_dx, 'location.full_address', imageAssets.locationIcon, false),
+                if (helper.jsonGet(_dx.userDetails, 'location.full_address', '') != '') renderComponent(_dx, 'location.full_address', imageAssets.locationIcon, false),
               ],
             ),
           ),

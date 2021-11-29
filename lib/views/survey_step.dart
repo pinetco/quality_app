@@ -38,8 +38,8 @@ class SurveyStep extends StatelessWidget {
         myRadioButton('Agree strongly', 1, group, index),
         myRadioButton('Agree somewhat', 2, group, index),
         myRadioButton('Not sure', 3, group, index),
-        myRadioButton('Disagree strongly', 4, group, index),
-        myRadioButton('Disagree somewhat', 5, group, index),
+        myRadioButton('Disagree somewhat', 4, group, index),
+        myRadioButton('Disagree strongly', 5, group, index),
         SizedBox(
           height: appScreenUtil.size(10),
         ),
@@ -57,7 +57,7 @@ class SurveyStep extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0XFFF7F8FA),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0XFFF7F8FA),
         elevation: 0,
         centerTitle: false,
         title: Text(
