@@ -33,8 +33,8 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     //helper.showLoading();
     // await Future.delayed(Duration(seconds: 5));
     //helper.hideLoading();
-    // _isoCode = 'PR';
-    // _dialCode = '+51';
+    _isoCode = 'US';
+    _dialCode = '+1';
     // txtMobile.text = '54021928690';
     // txtPassword.text = 'password';
 
@@ -63,6 +63,8 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   void updateIsoCode(String isoCode, String dialCode) {
     _isoCode = isoCode;
     _dialCode = dialCode;
+    print('$_isoCode, code');
+    print('$_dialCode, dialCode');
     update();
   }
 
