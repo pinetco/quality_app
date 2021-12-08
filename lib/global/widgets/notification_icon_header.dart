@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:quality_app/global/theme/image_.dart';
 
 class NotificationHeaderIcon extends StatelessWidget {
   @override
@@ -17,7 +16,7 @@ class NotificationHeaderIcon extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: appScreenUtil.size(10)),
             child: Image.asset(
-              notificationIcon,
+              imageAssets.notificationIcon,
               width: appScreenUtil.size(20),
             ),
           ),
