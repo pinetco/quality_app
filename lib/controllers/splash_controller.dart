@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
@@ -14,12 +16,18 @@ class SplashController extends GetxController {
     } else {
       checkLogin();
     }
+    final String defaultLocale = Platform.localeName; // Not tested yet
+    print('defaultLocale, $defaultLocale');
 
     String languageCode = helper.getStorage(session.languageCode);
     String code = helper.getStorage(session.countryCode);
+    if (helper.isNullOrBlank(languageCode)) {
+      languageCode = defaultLocale; // Not tested yet
+      code = defaultLocale; // Not tested yet
+    }
+    print('languageCode, $languageCode');
     this.languageCode = languageCode;
     changeLanguage(languageCode, code);
-    print('languageCode, $languageCode');
     update();
     super.onReady();
   }
@@ -31,6 +39,8 @@ class SplashController extends GetxController {
   }
 
   void changeLanguage(language, code) {
+    print('language, $language');
+    print('code,$code');
     var locale = Locale(language, code);
     Get.updateLocale(locale);
 
