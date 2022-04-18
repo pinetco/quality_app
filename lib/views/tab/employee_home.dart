@@ -37,15 +37,15 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Text(
-                              'Rate your day',
+                              helper.trans('rate_your_day'),
                               style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                             ),
                           ],
                         ),
                       ),
                       CustomButton(
-                        title: 'Rate',
-                        width: appScreenUtil.size(80),
+                        title: helper.trans('rate'),
+                        width: appScreenUtil.size(100),
                         padding: appScreenUtil.size(5),
                         radius: appScreenUtil.size(5),
                         style: appCss.bodyStyle6.copyWith(color: Colors.white),
@@ -73,7 +73,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                         Get.toNamed(routeName.ratingList);
                       },
                       child: Text(
-                        'Your All Ratings',
+                        helper.trans('your_all_ratings'),
                         style: appCss.bodyStyle5.copyWith(color: appColor.primaryColor),
                       ),
                     ),
@@ -138,9 +138,9 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
               Container(
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
                 child: CustomButton(
-                    title: 'Check in',
+                    title: helper.trans('check_in'),
                     enable: !homeEmpCtrl.checkInDisabled,
-                    width: appScreenUtil.size(80),
+                    width: appScreenUtil.size(100),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
                     style: appCss.bodyStyle6.copyWith(color: Colors.white),
@@ -153,8 +153,8 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
               Container(
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
                 child: CustomButton(
-                    title: 'Check out',
-                    width: appScreenUtil.size(80),
+                    title: helper.trans('check_out'),
+                    width: appScreenUtil.size(100),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
                     style: appCss.bodyStyle6.copyWith(color: Colors.white),
@@ -197,7 +197,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                     height: appScreenUtil.size(50),
                                   );
                                 return Text(
-                                  'Quality Control',
+                                  helper.trans('quality_control'),
                                   style: appCss.h1,
                                 );
                               }),
@@ -227,7 +227,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                         Padding(
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
-                                            'Care Patient',
+                                            helper.trans('care_patient'),
                                             style: appCss.h5,
                                           ),
                                         ),
@@ -260,7 +260,7 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                                             return Padding(
                                               padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                               child: Text(
-                                                'Finished Visit',
+                                                helper.trans('finished_visit'),
                                                 style: appCss.h5,
                                               ),
                                             );

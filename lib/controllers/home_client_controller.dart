@@ -86,19 +86,19 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = FlatButton(
-      child: Text("Update Now"),
+      child: Text(helper.trans("update_now")),
       onPressed: () {},
     );
 
     Widget cancelButton = FlatButton(
-      child: Text("Later"),
+      child: Text(helper.trans('later')),
       onPressed: () {},
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Update Available"),
-      content: Text("You can now update this app from store."),
+      title: Text(helper.trans('update_available')),
+      content: Text(helper.trans('update_app_from_store')),
       actions: [cancelButton, okButton],
     );
 

@@ -84,7 +84,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                           Row(
                             children: [
                               Text(
-                                'Care Givers',
+                                helper.trans('care_givers'),
                                 style: appCss.h1,
                               ),
                               Spacer(),
@@ -106,7 +106,7 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                           child: CustomTextFormField(
                             container: careGiverCtrl.searchCareGiver,
                             cursorColor: appColor.primaryColor,
-                            hintText: "What do you like to search care giver",
+                            hintText: helper.trans('what_search_care_giver'),
                             prefixIcon: Icon(MdiIcons.magnify),
                             style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                             keyboardType: TextInputType.multiline,
@@ -136,13 +136,13 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                                     child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text('No Care Givers Found.', style: appCss.bodyStyle5),
+                                      Text(helper.trans('no_care_givers_found'), style: appCss.bodyStyle5),
                                       TextButton(
                                           onPressed: () {
                                             careGiverCtrl.getCareGivers('');
                                           },
                                           child: Text(
-                                            'Refresh',
+                                            helper.trans('refresh'),
                                             style: appCss.bodyStyle5,
                                           ))
                                     ],

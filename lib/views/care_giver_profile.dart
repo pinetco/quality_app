@@ -66,7 +66,7 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
                 Row(
                   children: [
                     Text(
-                      'Profile',
+                      helper.trans('profile'),
                       style: appCss.h1,
                     ),
                   ],

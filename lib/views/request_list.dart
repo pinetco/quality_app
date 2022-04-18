@@ -93,7 +93,7 @@ class RequestList extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Request List',
+                          helper.trans('request_list'),
                           style: appCss.h1,
                         ),
                       ],

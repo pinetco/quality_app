@@ -2,8 +2,8 @@ class ConstValue {
   final String rupeeSymbol = "₹";
   final String checkSymbol = '✓';
   final int totalSignUpStep = 8;
-  final String noInternet = "No Internet Connection";
-  final String wentWrong = "something went wrong. Try again after some time";
+  final String noInternet = "noInternet";
+  final String wentWrong = "something_went_wrong";
 }
 
 class ApiType {
@@ -24,4 +24,7 @@ class Session {
   final String userInfo = 'userInfo';
   final String fcmToken = 'fcmToken';
   final String userImage = 'userImage';
+  //for language change
+  final String languageCode = 'languageCode';
+  final String countryCode = 'countryCode';
 }

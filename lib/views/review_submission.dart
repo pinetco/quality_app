@@ -112,7 +112,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Rate the visit',
+                        helper.trans('rate_the_visit'),
                         style: appCss.h1,
                       ),
                     ),
@@ -350,7 +350,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Do you have any comments?',
+                    helper.trans('do_you_have_any_comments'),
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                 ),
@@ -360,7 +360,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                   child: CustomTextFormField(
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtComment,
-                    hintText: "Write comment here...",
+                    hintText: helper.trans('write_comment_here'),
                     cursorColor: appColor.primaryColor,
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
@@ -373,7 +373,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Do you have any wishes?',
+                    helper.trans('do_you_have_any_wishes'),
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                 ),
@@ -384,7 +384,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                     maxLines: 3,
                     container: reviewSubmissionCtrl.txtWish,
                     cursorColor: appColor.primaryColor,
-                    hintText: "Write wish here...",
+                    hintText: helper.trans('write_wish_here'),
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
@@ -396,7 +396,7 @@ class _ReviewSubmissionState extends State<ReviewSubmission> with TickerProvider
                 GetBuilder<ReviewSubmissionController>(builder: (_) {
                   // if (reviewSubmissionCtrl.existingReview == null || reviewSubmissionCtrl.questions.length == 0)
                   return CustomButton(
-                    title: 'Submit',
+                    title: helper.trans('submit'),
                     onTap: () {
                       reviewSubmissionCtrl.saveReview(true);
                     },

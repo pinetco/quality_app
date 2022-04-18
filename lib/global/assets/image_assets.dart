@@ -41,4 +41,7 @@ class ImageAssets {
   final String careGiver = 'assets/images/care-giver.png';
   final String locationIcon = 'assets/images/location-icon.png';
   final String otpImage = 'assets/images/otp.gif';
+
+  final String englishFlag = 'assets/images/englishFlag.png';
+  final String germanFlag = 'assets/images/germanFlag.png';
 }

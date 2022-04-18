@@ -115,15 +115,15 @@ class Helper {
   void deleteConfirmation({context, title, message, onConfirm}) {
     // set up the buttons
     Widget cancelButton = TextButton(
-        child: Text("Cancel", style: appCss.bodyStyle5),
+        child: Text(helper.trans('cancel'), style: appCss.bodyStyle5),
         onPressed: () {
           Get.back();
         });
-    Widget continueButton = TextButton(child: Text("Continue"), onPressed: onConfirm);
+    Widget continueButton = TextButton(child: Text(helper.trans('continue')), onPressed: onConfirm);
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text(title ?? "Delete Confirmation", style: appCss.h3),
-      content: Text(message ?? "Are you sure you want to delete this?", style: appCss.bodyStyle4),
+      title: Text(title ?? helper.trans('delete_confirmation'), style: appCss.h3),
+      content: Text(message ?? helper.trans("confirm_delete"), style: appCss.bodyStyle4),
       actions: [cancelButton, continueButton],
     );
     // show the dialog
@@ -411,7 +411,7 @@ class Helper {
 
   apiExceptionMethod(controllerName, e) {
     hideLoading();
-    snackBar('something went wrong. Try again after some time');
+    snackBar(helper.trans('something_wrong_error_msg'));
     print("Exception : on $controllerName");
     print(e.toString());
   }
@@ -427,6 +427,15 @@ class Helper {
       else
         return false;
     }
+  }
+
+  String trans(String val) {
+    if (!isNullOrBlank(val)) {
+      return val.tr;
+    }
+    return val;
+
+    //ex : helper.trans('settings');
   }
 
   goToNoInternetScreen() {

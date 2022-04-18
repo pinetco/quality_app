@@ -51,7 +51,7 @@ class Login extends StatelessWidget {
             child: CustomTextFormField(
               container: loginController.txtPassword,
               // cursorColor: appColor.primaryColor,
-              hintText: "Password",
+              hintText: helper.trans('password'),
               prefixIcon: Icon(MdiIcons.lock),
               suffixIcon: IconButton(
                 icon: Icon(loginController.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: appColor.deactivateColor),
@@ -114,10 +114,10 @@ class Login extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Welcome to', style: appCss.bodyStyle3.copyWith(color: appColor.grayColor)),
+                  Text(helper.trans('welcome_to'), style: appCss.bodyStyle3.copyWith(color: appColor.grayColor)),
                   SizedBox(height: appScreenUtil.size(5)),
                   Text(
-                    'Quality Control!',
+                    helper.trans('quality_control'),
                     style: appCss.h1,
                   ),
                   SizedBox(height: appScreenUtil.size(60)),
@@ -176,7 +176,7 @@ class Login extends StatelessWidget {
                                     children: [
                                       Icon(loginController.isRememberLogin == true ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline, color: appColor.grayColor),
                                       Text(
-                                        'Remember me',
+                                        helper.trans('remember_me'),
                                         style: appCss.bodyStyle6,
                                       ),
                                     ],
@@ -186,7 +186,7 @@ class Login extends StatelessWidget {
                                   }),
                               InkWell(
                                 child: Text(
-                                  'Forgot Password?',
+                                  helper.trans('forgot_password') + '?',
                                   style: appCss.bodyStyle6,
                                 ),
                                 onTap: () {
@@ -201,7 +201,7 @@ class Login extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(appScreenUtil.size(10)),
                           child: CustomButton(
-                            title: "Login",
+                            title: helper.trans('login'),
                             // Working Progress not remove this line
                             // enable: loginController.txtEmail.text != true ? true : false,
                             onTap: () {
@@ -212,7 +212,7 @@ class Login extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(appScreenUtil.size(10)),
                           child: CustomButton(
-                            title: "Activate account",
+                            title: helper.trans('activate_account'),
                             color: appColor.whiteColor,
                             border: Border.all(color: appColor.primaryColor),
                             style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),

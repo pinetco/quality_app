@@ -22,7 +22,7 @@ class NoInternetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        helper.dialogMessage("Are you sure you want to exit?", onConfirm: () {
+        helper.dialogMessage(helper.trans('exit_confirmation'), onConfirm: () {
           SystemNavigator.pop();
         }, onCancel: () {});
         return false;
@@ -37,7 +37,7 @@ class NoInternetScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Couldn't connect to internet. \nPlease check your network settings.",
+                      helper.trans('check_internet_setting'),
                       textAlign: TextAlign.center,
                       style: appCss.h1,
                     ),
@@ -48,7 +48,7 @@ class NoInternetScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(30)),
                       ),
                       onPressed: () => onRetry(),
-                      child: Text('Try Again', style: appCss.h2.copyWith(color: appColor.primaryColor)),
+                      child: Text(helper.trans('try_again'), style: appCss.h2.copyWith(color: appColor.primaryColor)),
                     ),
                   ],
                 ),

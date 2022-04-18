@@ -7,7 +7,7 @@ import 'package:quality_app/global/packages/config_package.dart';
 class PatientsController extends GetxController with SingleGetTickerProviderMixin {
   List patientsList = [];
   bool isRefreshing = false;
-  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  var refreshPatientsKey = GlobalKey<RefreshIndicatorState>();
   // TextEditingController
   TextEditingController searchPatients = TextEditingController();
   Timer searchOnStoppedTyping;

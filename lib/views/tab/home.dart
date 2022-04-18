@@ -84,7 +84,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               Container(
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
                 child: CustomButton(
-                    title: 'Rate',
+                    title: helper.trans('rate'),
                     width: appScreenUtil.size(80),
                     padding: appScreenUtil.size(5),
                     radius: appScreenUtil.size(5),
@@ -96,7 +96,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             if (status == 'working')
               Container(
                 padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-                child: Text('Working', style: appCss.bodyStyle6.copyWith(color: Colors.green)),
+                child: Text(helper.trans('working'), style: appCss.bodyStyle6.copyWith(color: Colors.green)),
               ),
           ],
         ),
@@ -133,7 +133,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     height: appScreenUtil.size(50),
                                   );
                                 return Text(
-                                  'Quality Control',
+                                  helper.trans('quality_control'),
                                   style: appCss.h1,
                                 );
                               }),
@@ -174,7 +174,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       Align(alignment: Alignment.topLeft, child: Text('Survey', style: appCss.h4)),
                                       SizedBox(height: appScreenUtil.size(4)),
                                       Text(
-                                        'Thank you for being our loyal customer. As you know quality and customer satisfaction is our top priority. It would be awesome if you could fill out our quarterly survey.',
+                                        helper.trans('customer_satisfaction_message'),
                                         style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                                       ),
                                       SizedBox(height: appScreenUtil.size(15)),
@@ -220,7 +220,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         Padding(
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
-                                            'Working Caregiver',
+                                            helper.trans('working_caregiver'),
                                             style: appCss.h5,
                                           ),
                                         ),
@@ -251,7 +251,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         Padding(
                                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                                           child: Text(
-                                            'Finished Visit',
+                                            helper.trans('finished_visit'),
                                             style: appCss.h5,
                                           ),
                                         ),

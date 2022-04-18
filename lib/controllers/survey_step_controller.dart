@@ -137,17 +137,17 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
             borderRadius: BorderRadius.circular(10),
           ),
           insetPadding: EdgeInsets.symmetric(horizontal: 20),
-          title: Text('Thank You'),
+          title: Text(helper.trans('thank_you')),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Your survey has been successfully submitted'),
+                Text(helper.trans('survey_successfully_submitted')),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok'),
+              child: Text(helper.trans('ok')),
               onPressed: () {
                 Navigator.pop(Get.context);
                 var bottomCtrl = Get.find<BottomNavigationController>();

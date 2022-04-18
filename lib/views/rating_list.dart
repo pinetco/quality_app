@@ -110,9 +110,11 @@ class RatingList extends StatelessWidget {
                   SizedBox(height: 0),
                   Row(
                     children: [
-                      Text(
-                        'Rating List View',
-                        style: appCss.h1,
+                      Expanded(
+                        child: Text(
+                          helper.trans('rating_list_view'),
+                          style: appCss.h1,
+                        ),
                       ),
                     ],
                   ),

@@ -114,8 +114,8 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
       return Container(
         padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
         child: CustomButton(
-            title: 'Check out',
-            width: appScreenUtil.size(80),
+            title: helper.trans('check_out'),
+            width: appScreenUtil.size(100),
             padding: appScreenUtil.size(5),
             radius: appScreenUtil.size(5),
             style: appCss.bodyStyle6.copyWith(color: Colors.white),
@@ -131,14 +131,13 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
       return Container(
         padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
         child: CustomButton(
-            title: 'Check in',
+            title: helper.trans('check_in'),
             enable: !patientsCtrl.checkInDisabled,
-            width: appScreenUtil.size(80),
+            width: appScreenUtil.size(100),
             padding: appScreenUtil.size(5),
             radius: appScreenUtil.size(5),
             style: appCss.bodyStyle6.copyWith(color: Colors.white),
             onTap: () async {
-              print('checK ');
               homeEmpCtrl.checkIn(id);
               await Future.delayed(Duration(seconds: 3));
               patientsCtrl.getPatientsList(''); //TODO
@@ -171,7 +170,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                           Row(
                             children: [
                               Text(
-                                'Patients',
+                                helper.trans('patients'),
                                 style: appCss.h1,
                               ),
                               Spacer(),
@@ -191,7 +190,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                         decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(5))),
                         child: CustomTextFormField(
                           container: patientsCtrl.searchPatients,
-                          hintText: "What do you like to search patients",
+                          hintText: helper.trans('what_search_patients'),
                           cursorColor: appColor.primaryColor,
                           prefixIcon: Icon(MdiIcons.magnify),
                           style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
@@ -207,7 +206,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                     GetBuilder<PatientsController>(
                       builder: (_dx) => Expanded(
                         child: RefreshIndicator(
-                          key: patientsCtrl.refreshKey,
+                          key: patientsCtrl.refreshPatientsKey,
                           onRefresh: patientsCtrl.refreshList,
                           child: _dx.patientsList.length > 0
                               ? ListView.builder(
@@ -220,13 +219,13 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                                   child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('No Patients Found.', style: appCss.bodyStyle5),
+                                    Text(helper.trans('no_patients_found'), style: appCss.bodyStyle5),
                                     TextButton(
                                         onPressed: () {
                                           patientsCtrl.getPatientsList('');
                                         },
                                         child: Text(
-                                          'Refresh',
+                                          helper.trans('refresh'),
                                           style: appCss.bodyStyle5,
                                         ))
                                   ],

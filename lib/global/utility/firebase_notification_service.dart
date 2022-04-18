@@ -71,7 +71,7 @@ class FirebaseNotificationService {
           actions: [
             CupertinoDialogAction(
               isDefaultAction: true,
-              child: Text('Ok'),
+              child: Text(helper.trans('ok')),
               onPressed: () async {
                 print("IOS Ok Notification Click");
               },

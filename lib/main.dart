@@ -7,6 +7,8 @@ import 'package:quality_app/controllers/common/loading_controller.dart';
 import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
+import 'global/utility/language_list.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           );
         },
         debugShowCheckedModeBanner: false,
-        // translations: Language(),
+        translations: Language(),
         locale: Locale('en', 'US'),
         fallbackLocale: Locale('en', 'US'), // tran
         title: "My App",

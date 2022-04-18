@@ -105,7 +105,7 @@ class Apis {
         data: response.data,
       );
     else if (response.statusCode == 401) {
-      helper.snackBar('unauthorized access please login');
+      helper.snackBar(helper.trans('unauthorized_login'));
       helper.removeSpecificKeyStorage(session.authToken);
       Get.offAllNamed(routeName.login);
 

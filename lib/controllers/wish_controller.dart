@@ -58,12 +58,12 @@ class WishController extends GetxController with SingleGetTickerProviderMixin {
                       height: 50,
                     ),
                     SizedBox(height: appScreenUtil.size(10)),
-                    Text('Thank You', style: appCss.bodyStyle3.copyWith(color: appColor.black22Color)),
+                    Text(helper.trans('thank_you'), style: appCss.bodyStyle3.copyWith(color: appColor.black22Color)),
                     Container(
                       width: appScreenUtil.screenActualWidth() - appScreenUtil.size(50),
                       padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
                       child: Text(
-                        'Your request has been send successfully',
+                        helper.trans('request_successfully_send'),
                         style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                         textAlign: TextAlign.center,
                       ),

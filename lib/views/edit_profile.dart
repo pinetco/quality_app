@@ -27,14 +27,14 @@ class _EditProfileState extends State<EditProfile> {
                 children: <Widget>[
                   ListTile(
                       leading: Icon(Icons.photo_camera, color: appColor.primaryColor),
-                      title: Text('Camera', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
+                      title: Text(helper.trans('camera'), style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                       onTap: () {
                         editProfileCtrl.cameraImageUpload();
                         Navigator.of(context).pop();
                       }),
                   ListTile(
                       leading: Icon(Icons.photo_library, color: appColor.primaryColor),
-                      title: Text('Gallery', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
+                      title: Text(helper.trans('gallery'), style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
                       onTap: () {
                         editProfileCtrl.galleryImageUpload();
                         Navigator.of(context).pop();
@@ -96,7 +96,7 @@ class _EditProfileState extends State<EditProfile> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
               child: Text(
-                'Edit Profile',
+                helper.trans('edit_profile'),
                 style: appCss.h1,
               ),
             ),
@@ -197,7 +197,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: CustomTextFormField(
                               container: editProfileCtrl.txtEditUserName,
                               cursorColor: appColor.primaryColor,
-                              hintText: "User names",
+                              hintText: helper.trans('user_names'),
                               prefixIcon: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -216,7 +216,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: CustomTextFormField(
                               container: editProfileCtrl.txtEditEmail,
                               cursorColor: appColor.primaryColor,
-                              hintText: "Email",
+                              hintText: helper.trans('email'),
                               prefixIcon: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -244,7 +244,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: CustomTextFormField(
                               container: editProfileCtrl.txtEditPhoneNumber,
                               cursorColor: appColor.primaryColor,
-                              hintText: "Phone number",
+                              hintText: helper.trans('phone_number'),
                               prefixIcon: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -264,7 +264,7 @@ class _EditProfileState extends State<EditProfile> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                   child: CustomButton(
-                    title: "Save",
+                    title: helper.trans('save'),
                     onTap: () {
                       editProfileCtrl.updateProfileData();
                     },

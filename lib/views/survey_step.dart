@@ -35,11 +35,11 @@ class SurveyStep extends StatelessWidget {
           title,
           style: appCss.h5.copyWith(fontWeight: FontWeight.w500),
         )),
-        myRadioButton('Agree strongly', 5, group, index),
-        myRadioButton('Agree somewhat', 4, group, index),
-        myRadioButton('Not sure', 3, group, index),
-        myRadioButton('Disagree somewhat', 2, group, index),
-        myRadioButton('Disagree strongly', 1, group, index),
+        myRadioButton(helper.trans('agree_strongly'), 5, group, index),
+        myRadioButton(helper.trans('agree_somewhat'), 4, group, index),
+        myRadioButton(helper.trans('not_sure'), 3, group, index),
+        myRadioButton(helper.trans('disagree_somewhat'), 2, group, index),
+        myRadioButton(helper.trans('disagree_strongly'), 1, group, index),
         SizedBox(
           height: appScreenUtil.size(10),
         ),
@@ -61,7 +61,7 @@ class SurveyStep extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          'Survey',
+          helper.trans('survey'),
           style: appCss.h1.copyWith(color: appColor.textPrimaryColor),
         ),
         automaticallyImplyLeading: false,
@@ -128,7 +128,7 @@ class SurveyStep extends StatelessWidget {
 
                 GetBuilder<SurveyStepController>(
                   builder: (_) => CustomButton(
-                    title: surveyCtrl.activeStep == surveyCtrl.totalStep ? 'Submit' : "Next",
+                    title: surveyCtrl.activeStep == surveyCtrl.totalStep ? helper.trans('submit') : helper.trans("next"),
                     onTap: () async {
                       surveyCtrl.nextStep();
                     },

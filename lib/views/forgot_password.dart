@@ -48,7 +48,7 @@ class ForgotPassword extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            'Forgot Password',
+                            helper.trans('forgot_password'),
                             style: appCss.h1,
                           ),
                         ),
@@ -75,7 +75,7 @@ class ForgotPassword extends StatelessWidget {
                     ),
                     SizedBox(height: appScreenUtil.size(30)),
                     CustomButton(
-                      title: 'Submit',
+                      title: helper.trans('submit'),
                       onTap: () {
                         forgotPasswordCtrl.otpSent();
                       },

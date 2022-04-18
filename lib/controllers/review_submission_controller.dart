@@ -167,12 +167,12 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
                       height: 50,
                     ),
                     SizedBox(height: appScreenUtil.size(20)),
-                    Text('Thank You', style: appCss.bodyStyle3.copyWith(color: appColor.black22Color)),
+                    Text(helper.trans('thank_you'), style: appCss.bodyStyle3.copyWith(color: appColor.black22Color)),
                     Container(
                       width: appScreenUtil.screenActualWidth() - appScreenUtil.size(50),
                       padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
                       child: Text(
-                        'Your review has been successfully submitted',
+                        helper.trans('review_successfully_submitted'),
                         style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                         textAlign: TextAlign.center,
                       ),

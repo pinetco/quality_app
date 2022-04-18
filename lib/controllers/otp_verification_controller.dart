@@ -74,7 +74,7 @@ class OTPVerificationController extends GetxController {
     apis.call(apiMethods.forgotPasswordAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
-        helper.successMessage('OTP Sent Successfully');
+        helper.successMessage(helper.trans('otp_sent_successfully'));
       }
     }, onError: (e) {
       helper.hideLoading();

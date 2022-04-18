@@ -46,7 +46,7 @@ class PhoneNumberWithCountry extends StatelessWidget {
           },
           inputDecoration: InputDecoration(
             border: OutlineInputBorder(borderSide: BorderSide.none),
-            hintText: "Phone Number",
+            hintText: helper.trans('phone_number'),
             hintStyle: appCss.bodyStyle5.copyWith(color: appColor.deactivateColor),
           ),
         ),

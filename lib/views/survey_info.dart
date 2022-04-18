@@ -43,7 +43,7 @@ class SurveyInfo extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
-                Align(alignment: Alignment.topLeft, child: Text('Survey', style: appCss.h1)),
+                Align(alignment: Alignment.topLeft, child: Text(helper.trans('survey'), style: appCss.h1)),
                 Expanded(
                   child: Center(
                     child: Container(
@@ -62,7 +62,7 @@ class SurveyInfo extends StatelessWidget {
                   ),
                 ),
                 CustomButton(
-                  title: "Start",
+                  title: helper.trans('start'),
                   onTap: () {
                     final data = Get.arguments;
                     Get.toNamed(routeName.surveyStep, arguments: {'id': data['id']});

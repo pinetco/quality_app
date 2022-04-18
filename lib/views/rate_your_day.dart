@@ -91,7 +91,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Rate your Day',
+                        helper.trans('rate_your_day'),
                         style: appCss.h1,
                       ),
                     ),
@@ -166,7 +166,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'What can we do for you to feel better?',
+                    helper.trans('what_feel_better'),
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                   ),
                 ),
@@ -177,7 +177,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                     maxLines: 3,
                     container: rateYourDayCtrl.txtSuggestion,
                     cursorColor: appColor.primaryColor,
-                    hintText: "Write here...",
+                    hintText: helper.trans('write_here'),
                     // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
@@ -197,14 +197,14 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                                 rateYourDayCtrl.anonymousUser ? MdiIcons.checkboxMarked : MdiIcons.checkboxBlankOutline,
                                 color: rateYourDayCtrl.anonymousUser ? appColor.primaryColor : appColor.borderLineColor,
                               ),
-                              Text('Send anonymous feedback', style: appCss.bodyStyle5),
+                              Text(helper.trans('send_anonymous_feedback'), style: appCss.bodyStyle5),
                             ],
                           ),
                         )),
                 SizedBox(height: appScreenUtil.size(30)),
                 GetBuilder<RateYourDayController>(builder: (_) {
                   return CustomButton(
-                    title: 'Submit',
+                    title: helper.trans('submit'),
                     onTap: () {
                       rateYourDayCtrl.saveReview(true);
                     },

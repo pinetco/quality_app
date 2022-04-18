@@ -32,18 +32,18 @@ class _BottomNavigationState extends State<BottomNavigation> {
   renderTab() {
     if (bottomCtrl.userInfo != null && bottomCtrl.userInfo['role'] != 'client') {
       return [
-        renderCustomTab(imageAssets.tab4A, imageAssets.tab4, 'Home'),
-        renderCustomTab(imageAssets.tabPatientsA, imageAssets.tabPatients, 'Patients'),
-        renderCustomTab(imageAssets.tab1A, imageAssets.tab1, 'Contacts'),
-        renderCustomTab(imageAssets.tab2A, imageAssets.tab2, 'Profile'),
+        renderCustomTab(imageAssets.tab4A, imageAssets.tab4, helper.trans('home')),
+        renderCustomTab(imageAssets.tabPatientsA, imageAssets.tabPatients, helper.trans('patients')),
+        renderCustomTab(imageAssets.tab1A, imageAssets.tab1, helper.trans('contacts')),
+        renderCustomTab(imageAssets.tab2A, imageAssets.tab2, helper.trans('profile')),
       ];
     }
     return [
-      renderCustomTab(imageAssets.tab4A, imageAssets.tab4, 'Home'),
-      renderCustomTab(imageAssets.tab5A, imageAssets.tab5, 'Care Givers'),
-      renderCustomTab(imageAssets.tab3A, imageAssets.tab3, 'Request'),
-      renderCustomTab(imageAssets.tab1A, imageAssets.tab1, 'Contacts'),
-      renderCustomTab(imageAssets.tab2A, imageAssets.tab2, 'Profile'),
+      renderCustomTab(imageAssets.tab4A, imageAssets.tab4, helper.trans('home')),
+      renderCustomTab(imageAssets.tab5A, imageAssets.tab5, helper.trans('care_givers')),
+      renderCustomTab(imageAssets.tab3A, imageAssets.tab3, helper.trans('request')),
+      renderCustomTab(imageAssets.tab1A, imageAssets.tab1, helper.trans('contacts')),
+      renderCustomTab(imageAssets.tab2A, imageAssets.tab2, helper.trans('profile')),
     ];
   }
 

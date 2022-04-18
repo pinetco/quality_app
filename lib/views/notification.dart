@@ -72,7 +72,7 @@ class Notification extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
-                Align(alignment: Alignment.topLeft, child: Text('Notifications', style: appCss.h1)),
+                Align(alignment: Alignment.topLeft, child: Text(helper.trans('notifications'), style: appCss.h1)),
                 /*  Expanded(
                   child: Center(
                     child: Container(
@@ -138,12 +138,12 @@ class Notification extends StatelessWidget {
                                         if (item['type'] == "checkIn" && item['data']['is_running'] == true)
                                           Container(
                                             padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-                                            child: Text("Working", style: appCss.bodyStyle6.copyWith(color: Colors.green)),
+                                            child: Text(helper.trans('working'), style: appCss.bodyStyle6.copyWith(color: Colors.green)),
                                           ),
                                         if (item['type'] == "checkOut" && item['data']['is_rated'] == false)
                                           CustomButton(
-                                            title: 'Rate',
-                                            width: appScreenUtil.size(80),
+                                            title: helper.trans('rate'),
+                                            width: appScreenUtil.size(100),
                                             padding: appScreenUtil.size(5),
                                             radius: appScreenUtil.size(5),
                                             style: appCss.bodyStyle6.copyWith(color: Colors.white),
@@ -153,10 +153,10 @@ class Notification extends StatelessWidget {
                                           ),
                                         if (item['type'] == "checkOut" && item['data']['is_rated'] == true)
                                           CustomButton(
-                                            title: 'Rated',
+                                            title: helper.trans('rated'),
                                             color: Colors.white,
                                             border: Border.all(width: 1, color: appColor.primaryDarkColor),
-                                            width: appScreenUtil.size(80),
+                                            width: appScreenUtil.size(100),
                                             padding: appScreenUtil.size(5),
                                             radius: appScreenUtil.size(5),
                                             style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
@@ -165,10 +165,10 @@ class Notification extends StatelessWidget {
                                           Row(
                                             children: [
                                               CustomButton(
-                                                  title: 'Accept',
+                                                  title: helper.trans('accept'),
                                                   color: Colors.white,
                                                   border: Border.all(width: 1, color: appColor.primaryDarkColor),
-                                                  width: appScreenUtil.size(80),
+                                                  width: appScreenUtil.size(100),
                                                   padding: appScreenUtil.size(5),
                                                   radius: appScreenUtil.size(5),
                                                   style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor),
@@ -178,8 +178,8 @@ class Notification extends StatelessWidget {
                                                   }),
                                               SizedBox(width: appScreenUtil.size(10)),
                                               CustomButton(
-                                                title: 'Reject',
-                                                width: appScreenUtil.size(80),
+                                                title: helper.trans('reject'),
+                                                width: appScreenUtil.size(100),
                                                 padding: appScreenUtil.size(5),
                                                 radius: appScreenUtil.size(5),
                                                 style: appCss.bodyStyle6.copyWith(color: Colors.white),

@@ -44,7 +44,7 @@ class OTPVerification extends StatelessWidget {
                     Align(
                       alignment: Alignment.topCenter,
                       child: Text(
-                        'Phone Number Verification',
+                        helper.trans('phone_number_verification'),
                         style: appCss.h5,
                       ),
                     ),
@@ -52,7 +52,7 @@ class OTPVerification extends StatelessWidget {
                     SizedBox(height: appScreenUtil.size(15)),
                     RichText(
                       text: TextSpan(
-                        text: 'Enter the code sent to ',
+                        text: helper.trans('enter_code'),
                         style: appCss.bodyStyle6,
                         children: <TextSpan>[
                           TextSpan(text: _dx.phone, style: TextStyle(fontWeight: FontWeight.bold)),
@@ -86,7 +86,7 @@ class OTPVerification extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Didn't receive the code?",
+                          helper.trans('not_receive_code'),
                           style: appCss.bodyStyle6,
                         ),
                         SizedBox(
@@ -97,8 +97,8 @@ class OTPVerification extends StatelessWidget {
                             otpVerificationCtrl.otpSent();
                           },
                           child: Text(
-                            'RESEND',
-                            style: appCss.h5.copyWith(color: appColor.primaryColor),
+                            helper.trans('resend'),
+                            style: appCss.h6.copyWith(color: appColor.primaryColor),
                           ),
                         ),
                       ],
@@ -106,7 +106,7 @@ class OTPVerification extends StatelessWidget {
                     SizedBox(height: appScreenUtil.size(30)),
                     CustomButton(
                       width: appScreenUtil.size(150),
-                      title: 'VERIFY',
+                      title: helper.trans('verify'),
                       onTap: () {
                         otpVerificationCtrl.loginWithToken();
                       },

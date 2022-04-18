@@ -59,7 +59,7 @@ class WishMessage extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Request',
+                          helper.trans('request'),
                           style: appCss.h1,
                         ),
                         Spacer(),
@@ -75,7 +75,7 @@ class WishMessage extends StatelessWidget {
                       child: CustomTextFormField(
                         maxLines: 3,
                         container: wishCtrl.txtwishComment,
-                        hintText: "What is your wish for next visit?",
+                        hintText: helper.trans("your_next_wish" + "?"),
                         cursorColor: appColor.primaryColor,
                         // prefixIcon: Icon(MdiIcons.commentOutline),
                         obscureText: false,
@@ -87,7 +87,7 @@ class WishMessage extends StatelessWidget {
                     if (errorWishValidation != '') validationWidget(errorWishValidation),
                     Spacer(),
                     CustomButton(
-                      title: "Your All Request",
+                      title: helper.trans('your_all_request'),
                       color: appColor.whiteColor,
                       border: Border.all(color: appColor.primaryColor),
                       style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
@@ -97,7 +97,7 @@ class WishMessage extends StatelessWidget {
                     ),
                     SizedBox(height: appScreenUtil.size(15)),
                     CustomButton(
-                      title: "Send",
+                      title: helper.trans('send'),
                       onTap: () {
                         wishCtrl.sendRequest();
                       },

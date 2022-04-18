@@ -17,7 +17,7 @@ class ChangePassword extends StatelessWidget {
           decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
           child: CustomTextFormField(
             container: changePasswordCtrl.txtPassword,
-            hintText: "Password",
+            hintText: helper.trans('password'),
             prefixIcon: Icon(MdiIcons.lock),
             // suffixIcon: IconButton(
             //   icon: Icon(changePasswordCtrl.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: appColor.deactivateColor),
@@ -37,7 +37,7 @@ class ChangePassword extends StatelessWidget {
           decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
           child: CustomTextFormField(
             container: changePasswordCtrl.txtConfirmPassword,
-            hintText: "Confirm Password",
+            hintText: helper.trans('confirm_password'),
             prefixIcon: Icon(MdiIcons.lock),
             // suffixIcon: IconButton(
             //   icon: Icon(changePasswordCtrl.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: appColor.deactivateColor),
@@ -104,7 +104,7 @@ class ChangePassword extends StatelessWidget {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Change Password',
+                          helper.trans('change_password'),
                           style: appCss.h1,
                         ),
                       ),
@@ -116,7 +116,7 @@ class ChangePassword extends StatelessWidget {
                   SizedBox(height: appScreenUtil.size(20)),
                   Spacer(),
                   CustomButton(
-                    title: "Update",
+                    title: helper.trans('update'),
                     onTap: () {
                       changePasswordCtrl.changePassword();
                     },

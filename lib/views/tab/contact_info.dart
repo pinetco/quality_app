@@ -36,7 +36,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                   Row(
                     children: [
                       Text(
-                        'Contact Info',
+                        helper.trans('contact_info'),
                         style: appCss.h1,
                       ),
                       Spacer(),

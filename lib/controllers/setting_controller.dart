@@ -89,7 +89,7 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
           ),
           insetPadding: EdgeInsets.symmetric(horizontal: 20),
           title: Text(
-            'Are you sure you want to logout?',
+            helper.trans('confirm_logout'),
             style: appCss.bodyStyle4.copyWith(color: appColor.black22Color),
           ),
           actions: <Widget>[
@@ -97,13 +97,13 @@ class SettingController extends GetxController with SingleGetTickerProviderMixin
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 TextButton(
-                  child: Text('Cancel', style: appCss.bodyStyle6.copyWith(color: appColor.deactivateColor)),
+                  child: Text(helper.trans('cancel'), style: appCss.bodyStyle6.copyWith(color: appColor.deactivateColor)),
                   onPressed: () {
                     Navigator.pop(Get.context);
                   },
                 ),
                 TextButton(
-                  child: Text('Logout', style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor)),
+                  child: Text(helper.trans('logout'), style: appCss.bodyStyle6.copyWith(color: appColor.primaryDarkColor)),
                   onPressed: () {
                     helper.removeSpecificKeyStorage(session.authToken);
                     Navigator.pop(Get.context);

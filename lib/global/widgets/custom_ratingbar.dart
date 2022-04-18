@@ -9,7 +9,14 @@ class CustomRatingBar extends StatelessWidget {
   final double itemSize;
   final double horizontalSpace;
 
-  const CustomRatingBar({Key key, this.initialRating = 0, this.allowHalfRating = false, this.onRatingUpdate, this.itemSize = 20, this.horizontalSpace = 4}) : super(key: key);
+  const CustomRatingBar(
+      {Key key,
+      this.initialRating = 0,
+      this.allowHalfRating = false,
+      this.onRatingUpdate,
+      this.itemSize = 20,
+      this.horizontalSpace = 4})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,8 @@ class CustomRatingBar extends StatelessWidget {
       itemSize: appScreenUtil.size(itemSize),
       direction: Axis.horizontal,
       allowHalfRating: allowHalfRating,
-      itemPadding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(horizontalSpace)),
+      itemPadding:
+          EdgeInsets.symmetric(horizontal: appScreenUtil.size(horizontalSpace)),
       itemBuilder: (context, _) => Icon(
         Icons.star,
         color: Colors.amber,
