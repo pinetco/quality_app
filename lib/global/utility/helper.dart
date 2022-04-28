@@ -416,6 +416,69 @@ class Helper {
     print(e.toString());
   }
 
+  // add the widget and used getx defaultDialog box // by krushant //
+  appUpdateDialog(String message, {VoidCallback onConfirm, VoidCallback onCancel, bool forceUpdate = false}) {
+    print("forceUpdate, $forceUpdate");
+    return Get.defaultDialog(
+      title: 'App Update',
+      middleText: "Welcome to Quality Control",
+      titleStyle: appCss.h4.copyWith(fontSize: appScreenUtil.size(19), fontWeight: FontWeight.w500),
+      // titleStyle: h3,
+      barrierDismissible: false,
+      middleTextStyle: appCss.bodyStyle1,
+      contentPadding: EdgeInsets.only(top: appScreenUtil.size(30), bottom: appScreenUtil.size(0), left: appScreenUtil.size(5), right: appScreenUtil.size(5)),
+      titlePadding: EdgeInsets.only(top: appScreenUtil.size(15)),
+      onWillPop: forceUpdate == true ? () async => false : null,
+      actions: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (!forceUpdate)
+              ElevatedButton(
+                onPressed: onCancel,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  elevation: MaterialStateProperty.resolveWith<double>(
+                    // As you said you dont need elevation. I'm returning 0 in both case
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.disabled)) {
+                        return 0;
+                      }
+                      return 0; // Defer to the widget's default.
+                    },
+                  ),
+                ),
+                child: Text(
+                  'Abbrechen',
+                  style: appCss.bodyStyle4.copyWith(color: Colors.red.withOpacity(0.7)),
+                ),
+              ),
+            ElevatedButton(
+              onPressed: onConfirm,
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                elevation: MaterialStateProperty.resolveWith<double>(
+                  // As you said you dont need elevation. I'm returning 0 in both case
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return 0;
+                    }
+                    return 0; // Defer to the widget's default.
+                  },
+                ),
+              ),
+              child: Text(
+                'Aktualisieren',
+                style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   Future<bool> isNetworkConnection() async {
     var connectivityResult = await Connectivity().checkConnectivity(); //Check For Wifi or Mobile data is ON/OFF
     if (connectivityResult == ConnectivityResult.none) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class ApiMethods {
   final String loginAPI = "/auth/login";
   final String forgotPasswordAPI = "/auth/token";
@@ -39,4 +41,7 @@ class ApiMethods {
 
   final String ratedDaysAPI = "/rated-days";
   final String requestsAPI = "/requests";
+
+  // Add the api method // By Krushant //
+  final String appUpdate = "/application/information/${Platform.isAndroid ? 'android' : 'ios'}";
 }

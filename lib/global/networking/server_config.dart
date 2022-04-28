@@ -15,4 +15,8 @@ class ServerConfig {
   /* staging */
   // final String apiUrl = "https://quality.libu.app/api";
   // final String apiType = 'staging';
+
+  // added play and apps store url change // By krushant //
+  final String playStoreUrl = 'https://play.google.com/store/apps/details?id=com.gmbh.arasco';
+  final String appStoreUrl = 'https://apps.apple.com/us/app/itunes-connect/id1594363300';
 }

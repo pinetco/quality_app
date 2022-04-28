@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
+import 'package:quality_app/global/utility/app_update_service.dart';
 
 class SplashController extends GetxController {
   String languageCode = '';
@@ -11,6 +12,7 @@ class SplashController extends GetxController {
     await Future.delayed(Duration(seconds: 3));
     firebaseNotificationService.init(Get.context);
     final authToken = helper.getStorage('authToken');
+    AppUpdateService().init(); // added function and call  // By krushant //
     if (!helper.isNullOrBlank(authToken)) {
       Get.offAllNamed(routeName.bottomNavigationScreen);
     } else {
