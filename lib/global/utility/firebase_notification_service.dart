@@ -1,24 +1,23 @@
 import 'dart:convert';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/notification_badge_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/utility/index.dart';
 
 import 'index.dart';
 
 //when app in background
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('Handling a background message ${message.messageId}');
-  print(message.data);
-}
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//   print('Handling a background message ${message.messageId}');
+//   print(message.data);
+// }
 
 /// Create a [AndroidNotificationChannel] for heads up notifications
 AndroidNotificationChannel channel;
@@ -35,7 +34,7 @@ class FirebaseNotificationService {
   Future<void> initNotification(context) async {
     print('OWII');
     //when app in background
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     if (!kIsWeb) {
       channel = const AndroidNotificationChannel(
@@ -53,12 +52,12 @@ class FirebaseNotificationService {
     }
 
     //when app is [closed | killed | terminated]
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
-      if (message != null) {
-        print("Notification -> closed | killed | terminated");
-        _notificationNavigateToItemDetail(message.data);
-      }
-    });
+    // FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
+    //   if (message != null) {
+    //     print("Notification -> closed | killed | terminated");
+    //     _notificationNavigateToItemDetail(message.data);
+    //   }
+    // });
 
     //for IOS
     Future onDidReceiveLocalNotification(int id, String title, String body, String payload) async {
@@ -142,46 +141,46 @@ class FirebaseNotificationService {
     //   }
     // });
     //when app in foreground
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification notification = message.notification;
-
-      var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
-      notificationBadgeCtrl.getBadgeCount();
-
-      //if (notification != null && android != null && !kIsWeb) {
-      if (notification != null && !kIsWeb) {
-        String channelId;
-        AndroidNotification android = message.notification?.android;
-        if (android != null) {
-          channelId = message.notification.android.channelId;
-          print('channelId : $channelId');
-        }
-
-        flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channelId ?? channel.id,
-              channel.name,
-              channel.description,
-              icon: android?.smallIcon,
-            ),
-            iOS: IOSNotificationDetails(),
-          ),
-          payload: message.data != null ? jsonEncode(message.data) : null,
-        );
-      }
-    });
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   RemoteNotification notification = message.notification;
+    //
+    //   var notificationBadgeCtrl = Get.find<NotificationBadgeController>();
+    //   notificationBadgeCtrl.getBadgeCount();
+    //
+    //   //if (notification != null && android != null && !kIsWeb) {
+    //   if (notification != null && !kIsWeb) {
+    //     String channelId;
+    //     AndroidNotification android = message.notification?.android;
+    //     if (android != null) {
+    //       channelId = message.notification.android.channelId;
+    //       print('channelId : $channelId');
+    //     }
+    //
+    //     flutterLocalNotificationsPlugin.show(
+    //       notification.hashCode,
+    //       notification.title,
+    //       notification.body,
+    //       NotificationDetails(
+    //         android: AndroidNotificationDetails(
+    //           channelId ?? channel.id,
+    //           channel.name,
+    //           channel.description,
+    //           icon: android?.smallIcon,
+    //         ),
+    //         iOS: IOSNotificationDetails(),
+    //       ),
+    //       payload: message.data != null ? jsonEncode(message.data) : null,
+    //     );
+    //   }
+    // });
 
     //when app in background
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Notification -> background");
-      _notificationNavigateToItemDetail(message.data);
-    });
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   print("Notification -> background");
+    //   _notificationNavigateToItemDetail(message.data);
+    // });
 
-    requestPermissions();
+    // requestPermissions();
   }
 
   void _notificationNavigateToItemDetail(dynamic data) async {
@@ -207,23 +206,23 @@ class FirebaseNotificationService {
     }
   }
 
-  getToken() async {
-    print('roken******************');
-    String token = await FirebaseMessaging.instance.getToken();
-    await helper.writeStorage(session.fcmToken, token);
-    print("token : $token");
-  }
+  // getToken() async {
+  //   print('roken******************');
+  //   String token = await FirebaseMessaging.instance.getToken();
+  //   await helper.writeStorage(session.fcmToken, token);
+  //   print("token : $token");
+  // }
 
-  requestPermissions() async {
-    print('Permission');
-    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
-      announcement: true,
-      carPlay: true,
-      criticalAlert: true,
-    );
-    //  if (settings.authorizationStatus == 'AuthorizationStatus.authorized') {
-    getToken();
-    //}
-    print(settings.authorizationStatus);
-  }
+  // requestPermissions() async {
+  //   print('Permission');
+  //   NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+  //     announcement: true,
+  //     carPlay: true,
+  //     criticalAlert: true,
+  //   );
+  //   //  if (settings.authorizationStatus == 'AuthorizationStatus.authorized') {
+  //   getToken();
+  //   //}
+  //   print(settings.authorizationStatus);
+  // }
 }

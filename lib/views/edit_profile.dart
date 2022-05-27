@@ -126,7 +126,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: Center(
                               child: Stack(
                                 fit: StackFit.expand,
-                                overflow: Overflow.visible,
+                                // overflow: Overflow.visible,
                                 clipBehavior: Clip.none,
                                 children: [
                                   ClipOval(
