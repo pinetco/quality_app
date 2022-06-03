@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quality_app/controllers/login_controller.dart';
+import 'package:quality_app/controllers/login/login_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class OTPVerificationController extends GetxController {
@@ -8,16 +8,16 @@ class OTPVerificationController extends GetxController {
   var formForgotKey = GlobalKey<FormState>();
 
   TextEditingController txtMobile = TextEditingController();
-  String _isoCode;
-  String _dialCode;
+  String? _isoCode;
+  String? _dialCode;
 
-  String get isoCode => _isoCode;
-  String get dialCode => _dialCode;
+  String get isoCode => _isoCode!;
+  String get dialCode => _dialCode!;
 
   String phoneFieldError = '';
   String tokenError = '';
-  String code;
-  String phone;
+  String? code;
+  String? phone;
 
   @override
   void onInit() async {
@@ -37,7 +37,7 @@ class OTPVerificationController extends GetxController {
     tokenError = '';
     update();
     final formData = {
-      // 'phone': phone != '' ? '$dialCode${phone}' : '',
+      // 'phone': phone != '' ? '$dialCode${phone}' : '', // Do Not Remove
       'phone': phone,
       "token": code,
       "device": "mobile",
@@ -51,7 +51,6 @@ class OTPVerificationController extends GetxController {
         final data = res.data['data'];
         helper.writeStorage(session.authToken, data['token']);
         Get.toNamed(routeName.changePassword);
-        // loginCtrl.getUserInfo();
       } else if (res.validation == true) {
         final data = res.data;
         final errors = data['errors'];

@@ -58,7 +58,7 @@ class _ContactInfoState extends State<ContactInfo> with TickerProviderStateMixin
                         child: Image.network(
                           logoUrl,
                           height: appScreenUtil.size(150),
-                          errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
+                          errorBuilder: (context, Object exception, stackTrace) {
                             return Image.asset(
                               imageAssets.noImageBanner,
                               fit: BoxFit.fill,

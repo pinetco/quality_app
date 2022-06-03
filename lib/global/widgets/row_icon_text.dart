@@ -1,17 +1,17 @@
-import 'package:quality_app/global/packages/config_package.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class RowIconText extends StatelessWidget {
-  final Widget icon;
-  final double spacing;
-  final String text;
-  final TextStyle textStyle;
+  final Widget? icon;
+  final double? spacing;
+  final String? text;
+  final TextStyle? textStyle;
   final bool textFirst;
   final CrossAxisAlignment crossAxisAlignment;
   final MainAxisAlignment mainAxisAlignment;
 
   const RowIconText({
-    Key key,
+    Key? key,
     this.icon,
     this.spacing = 5,
     this.text,
@@ -29,20 +29,20 @@ class RowIconText extends StatelessWidget {
             mainAxisAlignment: mainAxisAlignment,
             children: [
               Expanded(
-                child: Text(text, style: textStyle),
+                child: Text(text!, style: textStyle),
               ),
               SizedBox(width: appScreenUtil.size(spacing)),
-              icon,
+              icon!,
             ],
           )
         : Row(
             crossAxisAlignment: crossAxisAlignment,
             mainAxisAlignment: mainAxisAlignment,
             children: [
-              icon,
+              icon!,
               SizedBox(width: appScreenUtil.size(spacing)),
               Expanded(
-                child: Text(text, style: textStyle),
+                child: Text(text!, style: textStyle),
               ),
             ],
           );

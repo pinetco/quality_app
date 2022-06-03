@@ -4,27 +4,27 @@ import 'package:quality_app/global/theme/index.dart';
 import 'package:quality_app/global/utility/index.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final TextEditingController container;
-  final String hint;
-  final String hintText;
-  final String labelText;
+  final TextEditingController? container;
+  final String? hint;
+  final String? hintText;
+  final String? labelText;
   final double radius;
-  final Widget prefixIcon;
-  final Widget suffixIcon;
-  final TextStyle style;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final TextStyle? style;
   final bool obscureText;
-  final FormFieldValidator<String> validator;
-  final TextInputType keyboardType;
+  final FormFieldValidator<String>? validator;
+  final TextInputType? keyboardType;
   final double padding;
-  final double width;
-  final Color fillColor;
-  final Color cursorColor;
+  final double? width;
+  final Color? fillColor;
+  final Color? cursorColor;
   final bool enabled;
   final int maxLines;
-  final ValueChanged onChanged;
+  final ValueChanged? onChanged;
 
   const CustomTextFormField({
-    Key key,
+    Key? key,
     this.container,
     this.hint,
     this.hintText,

@@ -8,18 +8,18 @@ import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class HomeEmpController extends GetxController with SingleGetTickerProviderMixin {
-  TabController tabController;
+  TabController? tabController;
 
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtMobile = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
 
   RxBool _isLoading = false.obs;
-  String _isoCode;
+  String? _isoCode;
 
   bool get isLoading => _isLoading.value;
 
-  String get isoCode => _isoCode;
+  String get isoCode => _isoCode!;
 
   List pendingList = [];
   List finishedList = [];
@@ -33,53 +33,15 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
   @override
   void onReady() {
     // TODO: implement onInit
-    // wait untill widget load
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    // getUserInfo();
     getData();
-    // checkVersion();
-    // getAllQuestion();
-    //getAppInformation(); // Add Your Code here.
-    // });
-
     super.onReady();
-  }
-
-  // getUserInfo() async {
-  //   helper.showLoading();
-  //   apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
-  //     helper.hideLoading();
-  //     if (res.data != null && res.validation == false) {
-  //       final data = res.data['data'];
-  //       userInfo = data;
-  //       print(data);
-  //       await helper.writeStorage(session.userInfo, data);
-  //       update();
-  //     } else {}
-  //   }, onError: (e) {
-  //     print('e');
-  //   });
-  // }
-
-  checkVersion() async {
-    // final checkVersion = CheckVersion(context: Get.context);
-    // final appStatus = await checkVersion.getVersionStatus();
-    // print("appStatus :");
-    // print(appStatus);
-    // if (appStatus.canUpdate) {
-    //   checkVersion.showUpdateDialog("com.quality_app", 'com.quality_app');
-    // }
-    // print("canUpdate ${appStatus.canUpdate}");
-    // print("localVersion ${appStatus.localVersion}");
-    // print("appStoreLink ${appStatus.appStoreUrl}");
-    // print("storeVersion ${appStatus.storeVersion}");
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    tabController.dispose();
-    txtMobile?.dispose();
+    tabController!.dispose();
+    txtMobile.dispose();
     super.dispose();
   }
 
@@ -179,28 +141,6 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     }
   }
 
-  // getAllQuestion() async {
-  //   try {
-  //     final result = await InternetAddress.lookup('google.com');
-  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //       helper.showLoading();
-  //       apis.call(apiMethods.questionsAPI, null, apiType.get).then((res) async {
-  //         helper.hideLoading();
-  //         if (res.data != null && res.validation == false) {
-  //           final data = res.data['data'];
-  //           questionList = data;
-  //
-  //           update();
-  //         } else {}
-  //       }, onError: (e) {
-  //         print('e');
-  //       });
-  //     }
-  //   } on SocketException catch (_) {
-  //     print('Socket');
-  //   }
-  // }
-
   void getPhoneNumber() async {
     final SmsAutoFill _autoFill = SmsAutoFill();
     final completePhoneNumber = await _autoFill.hint;
@@ -236,7 +176,6 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
 
       if (res.data != null && res.validation == false) {
         print(res.data);
-        //  final data = res.data['data'];
         getData();
 
         update();
@@ -253,7 +192,6 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
 
       if (res.data != null && res.validation == false) {
         print(res.data);
-        //  final data = res.data['data'];
         getData();
       } else {}
     }, onError: (e) {

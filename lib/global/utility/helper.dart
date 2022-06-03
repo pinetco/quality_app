@@ -43,46 +43,18 @@ class Helper {
       }
     } else
       return '';
-
-    //ex : helper.getImagePath('https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg');
-    //ex : helper.getImagePath('photos/1591447/pexels-photo-1591447.jpeg');
   }
 
-  //#region Widget
-  /*Widget imageNetwork({
-    String url,
-    double height,
-    double width,
-    BoxFit fit,
-    Widget placeholder,
-    String errorImageAsset,
-  }) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      width: width,
-      height: height,
-      fit: fit,
-      placeholder: (context, url) => placeholder ?? Center(child: CircularProgressIndicator()),
-      errorWidget: (context, url, error) => Image.asset(
-        errorImageAsset ?? imageAssets.noImageBanner,
-        width: width,
-        height: height,
-        fit: BoxFit.cover,
-      ),
-    );
-  }*/
-  //#endregion
-
   Widget imageNetwork({
-    String url,
-    double height,
-    double width,
-    BoxFit fit,
-    Widget placeholder,
-    String errorImageAsset,
+    String? url,
+    double? height,
+    double? width,
+    BoxFit? fit,
+    Widget? placeholder,
+    String? errorImageAsset,
   }) {
     return CachedNetworkImage(
-      imageUrl: url,
+      imageUrl: url!,
       width: width,
       height: height,
       fit: fit ?? BoxFit.cover,
@@ -108,8 +80,6 @@ class Helper {
       buttonColor: appColor.primaryColor,
       onCancel: onCancel,
     );
-
-    //ex : helper.dialogMessage('dialog message', (){});
   }
 
   void deleteConfirmation({context, title, message, onConfirm}) {
@@ -132,8 +102,6 @@ class Helper {
         builder: (BuildContext context) {
           return alert;
         });
-
-    // ex: helper.deleteConfirmation(context, (){ print('clicked'); });
   }
   //#endregion
 
@@ -197,31 +165,20 @@ class Helper {
       // TODO
       return defaultValue;
     }
-
-    //ex : helper.getFromJson(jobDetailCtrl.jobData, "salary_range", null);
-    //ex : helper.getFromJson(jobDetailCtrl.jobData, "salary_range.from", '');
-    //ex : helper.getFromJson(jobDetailCtrl.jobData, "salary_range.from.amount_gross", 0);
-    //ex : helper.getFromJson(jobDetailCtrl.jobData, "salary_range[0].from.amount_gross", 'null');
-    //ex : helper.getFromJson(jobDetailCtrl.jobData, "salary_range[0].from[1].amount_gross", null);
   }
 
   dynamic filter(dynamic items, dynamic key, value) {
     return items.where((u) => (u['$key'].toString() != null ? u['$key'].toString().toLowerCase().contains(value.toLowerCase()) : false)).toList();
-    //ex : helper.filter(items, 'title', 'ab')
   }
   //#endregion
 
   //#region Loading
   void showLoading() {
     return loadingCtrl.showLoading();
-
-    //ex : helper.showLoading();
   }
 
   void hideLoading() {
     return loadingCtrl.hideLoading();
-
-    //ex : helper.hideLoading();
   }
 
   //#endregion
@@ -231,8 +188,6 @@ class Helper {
       return double.parse(val.toString());
     else
       return 0;
-
-    //ex : helper.toDouble('12');
   }
 
   //#region Success, Alert, Error Message
@@ -264,10 +219,10 @@ class Helper {
       );
 
   flashMessage({
-    String message,
-    Color bgColor,
-    SnackPosition position,
-    IconData icon,
+    String? message,
+    Color? bgColor,
+    SnackPosition? position,
+    IconData? icon,
   }) =>
       Get.snackbar(
         '',
@@ -350,7 +305,7 @@ class Helper {
       else
         return false;
     } else {
-      if (val == null || val == '' || val.toString().isEmpty || val.toString().isBlank)
+      if (val == null || val == '' || val.toString().isEmpty || val.toString().isBlank!)
         return true;
       else
         return false;
@@ -385,8 +340,6 @@ class Helper {
 
     ScaffoldMessenger.of(context ?? Get.context).clearSnackBars();
     ScaffoldMessenger.of(context ?? Get.context).showSnackBar(snackBar);
-
-    //ex : helper.snackBar('alert message');
   }
 
   checkApiValidationError(data) {
@@ -417,7 +370,7 @@ class Helper {
   }
 
   // add the widget and used getx defaultDialog box // by krushant //
-  appUpdateDialog(String message, {VoidCallback onConfirm, VoidCallback onCancel, bool forceUpdate = false}) {
+  appUpdateDialog(String message, {VoidCallback? onConfirm, VoidCallback? onCancel, bool forceUpdate = false}) {
     print("forceUpdate, $forceUpdate");
     return Get.defaultDialog(
       title: 'App Update',
@@ -497,8 +450,6 @@ class Helper {
       return val.tr;
     }
     return val;
-
-    //ex : helper.trans('settings');
   }
 
   goToNoInternetScreen() {

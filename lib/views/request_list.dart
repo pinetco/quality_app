@@ -9,7 +9,6 @@ class RequestList extends StatelessWidget {
   Widget requestListCard(item, index) {
     int id = item['id'];
     dynamic description = helper.jsonGet(item, 'description', '');
-    // String description = item['description'].toString();
     String date = item['date'];
     return Padding(
       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(0)),
@@ -27,7 +26,6 @@ class RequestList extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               // if (description != '')
               SizedBox(height: 10),
@@ -42,7 +40,6 @@ class RequestList extends StatelessWidget {
                   style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
                 ),
               SizedBox(height: 10),
-              // if (date != '')
             ],
           ),
         ),
@@ -60,7 +57,6 @@ class RequestList extends StatelessWidget {
           elevation: 0,
           centerTitle: false,
           automaticallyImplyLeading: false,
-          // title: Text('Notifications', style: appCss.h1.copyWith(color: appColor.blackColor)),
           actions: [
             Center(
               child: InkWell(
@@ -68,7 +64,6 @@ class RequestList extends StatelessWidget {
                 splashColor: Colors.transparent,
                 onTap: () {
                   Get.back();
-                  //bottomCtrl.updateCurrentTab(2);
                 },
                 child: Padding(
                     padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),
@@ -112,7 +107,6 @@ class RequestList extends StatelessWidget {
                                 builder: (_) {
                                   return ListView.builder(
                                     shrinkWrap: true,
-                                    // physics: NeverScrollableScrollPhysics(),
                                     itemCount: requestCtrl.requestList.length,
                                     itemBuilder: (context, index) {
                                       return requestListCard(requestCtrl.requestList[index], index);

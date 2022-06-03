@@ -9,7 +9,7 @@ class SurveyStep extends StatelessWidget {
   Widget myRadioButton(label, value, group, index) {
     return SizedBox(
       height: appScreenUtil.size(40),
-      child: RadioListTile(
+      child: RadioListTile<int>(
           contentPadding: EdgeInsets.all(0),
           title: Text(label, style: appCss.bodyStyle5.copyWith(color: appColor.grayColor)),
           value: value,
@@ -49,7 +49,6 @@ class SurveyStep extends StatelessWidget {
         ),
       ],
     );
-    return Container();
   }
 
   @override
@@ -72,7 +71,6 @@ class SurveyStep extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: () {
                 Get.back();
-                //bottomCtrl.updateCurrentTab(2);
               },
               child: Padding(
                   padding: EdgeInsets.only(right: appScreenUtil.size(20.0)),
@@ -90,7 +88,6 @@ class SurveyStep extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
             child: Column(
               children: [
-                // Align(alignment: Alignment.topLeft, child: Text('Survey', style: h1)),
                 Container(
                   decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
                   height: appScreenUtil.size(16),
@@ -100,10 +97,11 @@ class SurveyStep extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(appScreenUtil.size(3)),
                         child: GetBuilder<SurveyStepController>(
-                            builder: (_) => Container(
-                                  width: surveyCtrl.manageProgressBar(),
-                                  decoration: BoxDecoration(color: appColor.primaryDarkColor, borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
-                                )),
+                          builder: (_) => Container(
+                            width: surveyCtrl.manageProgressBar(),
+                            decoration: BoxDecoration(color: appColor.primaryDarkColor, borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -125,7 +123,6 @@ class SurveyStep extends StatelessWidget {
                     );
                   return Expanded(child: Container());
                 }),
-
                 GetBuilder<SurveyStepController>(
                   builder: (_) => CustomButton(
                     title: surveyCtrl.activeStep == surveyCtrl.totalStep ? helper.trans('submit') : helper.trans("next"),

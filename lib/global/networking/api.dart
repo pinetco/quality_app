@@ -18,8 +18,8 @@ class Apis {
     //options
     dio.options
       ..baseUrl = _serverConfig.apiUrl
-      ..validateStatus = (int status) {
-        return status > 0; //this will always redirect to onResponse method
+      ..validateStatus = (int? status) {
+        return status! > 0; //this will always redirect to onResponse method/Users/krushantvaghani/code/carerockets-app/lib/networking/api.dart
       }
       ..headers = {
         'Accept': 'application/json',
@@ -83,6 +83,7 @@ class Apis {
       onException(e);
       return apiData;
     }
+    return apiData;
   }
 
   //#region functions
@@ -90,21 +91,21 @@ class Apis {
     print("response : ${response.toString()}");
     print("statusCode : ${response.statusCode}");
 
-    if (response.statusCode == 200 || response.statusCode == 201)
+    if (response.statusCode == 200 || response.statusCode == 201) {
       return APIDataClass(
         isSuccess: true,
         validation: false,
         message: 'Success',
         data: response.data,
       );
-    else if (response.statusCode == 422)
+    } else if (response.statusCode == 422 || response.statusCode == 404) {
       return APIDataClass(
         isSuccess: false,
         validation: true,
         message: 'validation failed',
         data: response.data,
       );
-    else if (response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       helper.snackBar(helper.trans('unauthorized_login'));
       helper.removeSpecificKeyStorage(session.authToken);
       Get.offAllNamed(routeName.login);

@@ -3,22 +3,22 @@ import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/utility/index.dart';
 
 class CustomButton extends StatelessWidget {
-  final String title;
+  final String? title;
   final double padding;
   final double radius;
-  final Function() onTap;
-  final TextStyle style;
-  final Color color;
-  final Color iconColor;
-  final double iconSize;
-  final IconData icon;
-  final double width;
-  final Border border;
-  final bool enable;
-  final Widget suffixIcon;
+  final Function()? onTap;
+  final TextStyle? style;
+  final Color? color;
+  final Color? iconColor;
+  final double? iconSize;
+  final IconData? icon;
+  final double? width;
+  final Border? border;
+  final bool? enable;
+  final Widget? suffixIcon;
 
   const CustomButton({
-    Key key,
+    Key? key,
     this.title,
     this.padding = 15,
     this.radius = 10,
@@ -39,13 +39,13 @@ class CustomButton extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(appScreenUtil.borderRadius(radius)),
       child: Container(
-        // color: enable ? appColor.primaryColor : color ?? appColor.primaryColor.withOpacity(6),
+        // color: enable ? appColor.primaryColor : color ?? appColor.primaryColor.withOpacity(6), // do not remove
         color: color ?? appColor.primaryColor,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: enable == true ? onTap : null,
-            // onTap: disabled ? null : onTap,
+            // onTap: disabled ? null : onTap, // do not remove
             child: Container(
               padding: EdgeInsets.all(appScreenUtil.size(padding)), //.symmetric(vertical: appScreenUtil.size(padding), horizontal: appScreenUtil.size(padding)),
               width: width != null ? appScreenUtil.size(width) : MediaQuery.of(context).size.width,
@@ -64,7 +64,7 @@ class CustomButton extends StatelessWidget {
                       ],
                     ),
                   Text(
-                    title,
+                    title!,
                     style: style ?? appCss.bodyStyle4.copyWith(color: appColor.whiteColor),
                     textAlign: TextAlign.center,
                   ),
@@ -73,7 +73,7 @@ class CustomButton extends StatelessWidget {
                       child: Row(
                         children: [
                           Spacer(),
-                          suffixIcon,
+                          suffixIcon!,
                         ],
                       ),
                     )

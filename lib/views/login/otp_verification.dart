@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/otp_verification_controller.dart';
+import 'package:quality_app/controllers/login/otp_verification_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:sms_autofill/sms_autofill.dart';
@@ -11,17 +11,18 @@ class OTPVerification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: InkWell(
-              child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
-              onTap: () {
-                Navigator.pop(context);
-              }),
-        ),
-        body: GetBuilder<OTPVerificationController>(builder: (_dx) {
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: InkWell(
+            child: Icon(MdiIcons.arrowLeft, color: appColor.black22Color),
+            onTap: () {
+              Navigator.pop(context);
+            }),
+      ),
+      body: GetBuilder<OTPVerificationController>(
+        builder: (_dx) {
           return LoadingComponent(
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
@@ -75,7 +76,7 @@ class OTPVerification extends StatelessWidget {
                         },
                         onCodeChanged: (code) {
                           otpVerificationCtrl.code = code;
-                          if (code.length == 4) {
+                          if (code!.length == 4) {
                             _dx.loginWithToken();
                           }
                         },
@@ -114,6 +115,8 @@ class OTPVerification extends StatelessWidget {
                   ]),
                 )),
           );
-        }));
+        },
+      ),
+    );
   }
 }

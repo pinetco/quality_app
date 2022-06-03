@@ -3,12 +3,12 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class PhoneNumberWithCountry extends StatelessWidget {
-  final TextEditingController txtMobile;
+  final TextEditingController? txtMobile;
 
-  final Function onInputChanged;
-  final String isoCode;
+  final Function(PhoneNumber)? onInputChanged;
+  final String? isoCode;
 
-  const PhoneNumberWithCountry({Key key, this.onInputChanged, this.txtMobile, this.isoCode}) : super(key: key);
+  const PhoneNumberWithCountry({Key? key, this.onInputChanged, this.txtMobile, this.isoCode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,6 @@ class PhoneNumberWithCountry extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
         child: InternationalPhoneNumberInput(
           onInputChanged: onInputChanged,
-          //     (PhoneNumber number) {
-          //   print(number.phoneNumber);
-          // },
-
           onInputValidated: (bool value) {
             print(value);
           },
@@ -55,19 +51,10 @@ class PhoneNumberWithCountry extends StatelessWidget {
   }
 
   void getPhoneNumber(String phoneNumber) async {
-    // PhoneNumber number = await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'DE');
-    // print(number);
-    //
-    // String phoneNumber1 = '+234 500 500 5005';
-    // PhoneNumber number1 = await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber1);
-    // print(number1);
-    // String parsableNumber = number1.parseNumber();
-    // print(parsableNumber);
-
     String originalPhoneNumber = '+499162255887';
     PhoneNumber numberRegionInfo = await PhoneNumber.getRegionInfoFromPhoneNumber(originalPhoneNumber);
     print(numberRegionInfo.isoCode); //Get country code
     print(numberRegionInfo.dialCode); //Get Country digital code
-    print(txtMobile.text); // Text input value;
+    print(txtMobile!.text); // Text input value;
   }
 }

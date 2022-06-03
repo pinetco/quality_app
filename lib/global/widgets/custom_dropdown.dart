@@ -1,29 +1,18 @@
-import 'package:quality_app/global/packages/config_package.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class CustomDropDown extends StatelessWidget {
   final dynamic dropdownValue;
-  final ValueChanged<dynamic> onChangedValue;
-  final List dropDownOptions;
-  final String displayKey;
-  final Widget prefixIcon;
-  final String hint;
-  final String hintText;
+  final ValueChanged<dynamic>? onChangedValue;
+  final List? dropDownOptions;
+  final String? displayKey;
+  final Widget? prefixIcon;
+  final String? hint;
+  final String? hintText;
   final double padding;
   final double radius;
 
-  const CustomDropDown(
-      {Key key,
-      @required this.dropdownValue,
-      this.onChangedValue,
-      this.dropDownOptions,
-      this.prefixIcon,
-      this.displayKey,
-      this.hint,
-      this.hintText,
-      this.padding = 10,
-      this.radius = 10})
-      : super(key: key);
+  const CustomDropDown({Key? key, @required this.dropdownValue, this.onChangedValue, this.dropDownOptions, this.prefixIcon, this.displayKey, this.hint, this.hintText, this.padding = 10, this.radius = 10}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +44,7 @@ class CustomDropDown extends StatelessWidget {
         color: Colors.deepPurpleAccent,
       ),*/
       onChanged: onChangedValue,
-      items: dropDownOptions.map<DropdownMenuItem<dynamic>>((dynamic val) {
+      items: dropDownOptions!.map<DropdownMenuItem<dynamic>>((dynamic val) {
         return DropdownMenuItem<dynamic>(
           value: val,
           child: Text(val[displayKey], style: appCss.bodyStyle4, overflow: TextOverflow.ellipsis),

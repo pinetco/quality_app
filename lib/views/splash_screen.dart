@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/splash_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
-import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
-  //this will call Splash Controller
   var splashController = Get.put(SplashController());
 
   @override

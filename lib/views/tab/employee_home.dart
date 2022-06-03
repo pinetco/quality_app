@@ -11,11 +11,10 @@ class EmployeeHome extends StatefulWidget {
 }
 
 class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMixin {
-  var bottomCtrl = Get.put(BottomNavigationController());
   var homeEmpCtrl = Get.put(HomeEmpController());
+  var bottomCtrl = Get.find<BottomNavigationController>();
 
   Widget rateYourDay() {
-    // if (bottomCtrl.appSettings != null && !bottomCtrl.appSettings['is_today_rated'])
     return Padding(
       padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(20), horizontal: appScreenUtil.size(20)),
       child: Container(
@@ -109,7 +108,17 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                 onTap: () {
                   homeEmpCtrl.navigateOtherProfile(item);
                 },
-                child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                child: Container(
+                  width: appScreenUtil.size(60.0),
+                  height: appScreenUtil.size(60.0),
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: new DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(imageName),
+                    ),
+                  ),
+                ),
               ),
             ),
             Expanded(
@@ -145,7 +154,6 @@ class _EmployeeHomeState extends State<EmployeeHome> with TickerProviderStateMix
                     radius: appScreenUtil.size(5),
                     style: appCss.bodyStyle6.copyWith(color: Colors.white),
                     onTap: () {
-                      print('checK ');
                       homeEmpCtrl.checkIn(id);
                     }),
               ),

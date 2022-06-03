@@ -5,7 +5,7 @@ import 'package:quality_app/global/packages/config_package.dart';
 
 class WishController extends GetxController with SingleGetTickerProviderMixin {
   TextEditingController txtwishComment = TextEditingController();
-  String wishFieldError;
+  String? wishFieldError;
 
   @override
   void onInit() async {
@@ -24,7 +24,7 @@ class WishController extends GetxController with SingleGetTickerProviderMixin {
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
-      context: Get.context,
+      context: Get.context!,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
@@ -38,7 +38,7 @@ class WishController extends GetxController with SingleGetTickerProviderMixin {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    Navigator.pop(Get.context);
+                    Navigator.pop(Get.context!);
                   },
                   child: Align(
                     alignment: Alignment.topRight,

@@ -26,7 +26,7 @@ class EditProfileController extends GetxController {
   String get dialCode => _dialCode;
   */
   dynamic imageUrl;
-  File selectedFile;
+  File? selectedFile;
 
   @override
   void onInit() {
@@ -78,8 +78,8 @@ class EditProfileController extends GetxController {
     helper.showLoading();
     String fileName = '';
 
-    if (selectedFile != null && !helper.isNullOrBlank(selectedFile.path)) {
-      fileName = selectedFile.path.split('/').last;
+    if (selectedFile != null && !helper.isNullOrBlank(selectedFile!.path)) {
+      fileName = selectedFile!.path.split('/').last;
     }
 
     dynamic data = {
@@ -88,7 +88,7 @@ class EditProfileController extends GetxController {
       // "phone": (dialCode ?? '+49') + txtEditPhoneNumber.text,
       "phone": txtEditPhoneNumber.text,
       "_method": 'PUT',
-      if (selectedFile != null) 'profile_picture': await dio.MultipartFile.fromFile(selectedFile.path, filename: fileName),
+      if (selectedFile != null) 'profile_picture': await dio.MultipartFile.fromFile(selectedFile!.path, filename: fileName),
     };
 
     print("Form Data : " + data.toString()); //do not delete
@@ -96,16 +96,14 @@ class EditProfileController extends GetxController {
 
     await apis.call(apiMethods.updateProfileAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
-      if (res?.isSuccess == true) {
-        var data = res?.data['data'] ?? null;
+      if (res.isSuccess == true) {
+        var data = res.data['data'] ?? null;
 
-        var bottomCtrl = Get.find<BottomNavigationController>();
-        bottomCtrl.userInfo = data;
-        update();
+        bottomCtrl.updateUserProfile(data);
         Get.back();
-      } else if (res?.validation == true) {
+      } else if (res.validation == true) {
         print("Error Section");
-        helper.checkApiValidationError(res?.data);
+        helper.checkApiValidationError(res.data);
       }
       update();
     });

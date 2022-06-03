@@ -6,13 +6,13 @@ class ForgotPasswordController extends GetxController {
   var formForgotKey = GlobalKey<FormState>();
 
   TextEditingController txtMobile = TextEditingController();
-  String _isoCode;
-  String _dialCode;
+  String? _isoCode;
+  String? _dialCode = '+49';
 
-  String get isoCode => _isoCode;
-  String get dialCode => _dialCode;
+  String? get isoCode => _isoCode;
+  String? get dialCode => _dialCode;
 
-  String phoneFieldError;
+  String? phoneFieldError;
 
   void updateIsoCode(String isoCode, String dialCode) {
     _isoCode = isoCode;
@@ -21,10 +21,9 @@ class ForgotPasswordController extends GetxController {
   }
 
   void otpSent() async {
-    // final phoneNumber = '+911234567890';
     final formData = {
-      // 'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '',
-      'phone': (dialCode ?? '+49') + txtMobile.text,
+      // 'phone': txtMobile.text != '' ? '$dialCode${txtMobile.text}' : '', // Do Not Remove
+      'phone': dialCode! + txtMobile.text,
     };
     print('formData, $formData');
     helper.showLoading();
@@ -32,7 +31,7 @@ class ForgotPasswordController extends GetxController {
     apis.call(apiMethods.forgotPasswordAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
       if (res.data != null && res.validation == false) {
-        Get.toNamed(routeName.otpVerification, arguments: {'phone': (dialCode ?? '+49') + txtMobile.text});
+        Get.toNamed(routeName.otpVerification, arguments: {'phone': dialCode! + txtMobile.text});
       } else if (res.validation == true) {
         final data = res.data;
         final errors = data['errors'];

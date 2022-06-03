@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-// import 'package:quality_app/packages/config_package.dart';
-// import 'package:quality_app/networking/api_methods.dart';
 
 class OtherUserProfileController extends GetxController with SingleGetTickerProviderMixin {
   List patientsList = [];

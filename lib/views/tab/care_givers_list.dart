@@ -11,19 +11,15 @@ class CareGiversList extends StatefulWidget {
 }
 
 class _CareGiversListState extends State<CareGiversList> with TickerProviderStateMixin {
-  var bottomCtrl = Get.put(BottomNavigationController());
+  var bottomCtrl = Get.find<BottomNavigationController>();
   var careGiverCtrl = Get.put(CareGiverController());
 
   Widget personDetailCard(item, index, status) {
-    dynamic email = item['email'];
     dynamic imageName = item['profile_photo_url'];
     String name = item['name'].toString();
-    String phone = item['phone'].toString();
-    int empId = item['id'];
     return InkWell(
       onTap: () {
         careGiverCtrl.navigateOtherProfile(item);
-        // navigateReviewScreen(empId, name, email, phone, imageName);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(20)),
@@ -34,8 +30,21 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(8), horizontal: appScreenUtil.size(10)),
-                child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
+                padding: EdgeInsets.symmetric(
+                  vertical: appScreenUtil.size(8),
+                  horizontal: appScreenUtil.size(10),
+                ),
+                child: Container(
+                  width: appScreenUtil.size(60.0),
+                  height: appScreenUtil.size(60.0),
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: new DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(imageName),
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 child: Column(
@@ -46,10 +55,6 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                       name,
                       style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     ),
-                    // Text(
-                    //   phone,
-                    //   style: bodyStyle6.copyWith(color: grayColor),
-                    // ),
                   ],
                 ),
               ),
@@ -89,9 +94,6 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                               ),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              // SizedBox(
-                              //   width: appScreenUtil.size(15),
-                              // ),
                             ],
                           ),
                         ],
@@ -134,19 +136,20 @@ class _CareGiversListState extends State<CareGiversList> with TickerProviderStat
                                   )
                                 : Center(
                                     child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(helper.trans('no_care_givers_found'), style: appCss.bodyStyle5),
-                                      TextButton(
-                                          onPressed: () {
-                                            careGiverCtrl.getCareGivers('');
-                                          },
-                                          child: Text(
-                                            helper.trans('refresh'),
-                                            style: appCss.bodyStyle5,
-                                          ))
-                                    ],
-                                  )),
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(helper.trans('no_care_givers_found'), style: appCss.bodyStyle5),
+                                        TextButton(
+                                            onPressed: () {
+                                              careGiverCtrl.getCareGivers('');
+                                            },
+                                            child: Text(
+                                              helper.trans('refresh'),
+                                              style: appCss.bodyStyle5,
+                                            ))
+                                      ],
+                                    ),
+                                  ),
                           ),
                         ),
                       ),

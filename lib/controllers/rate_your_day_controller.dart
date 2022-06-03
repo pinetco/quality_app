@@ -11,14 +11,14 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
   RxBool _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
   dynamic empId;
-  String name;
-  String email;
-  String phone;
-  String userImage;
-  String date;
+  String? name;
+  String? email;
+  String? phone;
+  String? userImage;
+  String? date;
   dynamic visitId;
   dynamic questions = [];
-  Map questionObj;
+  Map? questionObj;
   DateTime selectedDate = DateTime.now();
 
   RxString _ratingText = 'Very Good'.obs;
@@ -70,7 +70,7 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
-      context: Get.context,
+      context: Get.context!,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
@@ -84,7 +84,7 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    Navigator.pop(Get.context);
+                    Navigator.pop(Get.context!);
                   },
                   child: Align(
                     alignment: Alignment.topRight,
@@ -136,13 +136,15 @@ class RateYourDayController extends GetxController with SingleGetTickerProviderM
 
     apis.call(apiMethods.rateDaysAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
-
       if (res.data != null && res.validation == false) {
         bottomCtrl.appSettings['is_today_rated'] = true;
         update();
         Get.back();
         _showMyDialog();
-      } else {}
+      } else {
+        final data = res.data;
+        helper.snackBar("${res.data['errors']['questions'][0]}");
+      }
     }, onError: (e) {
       helper.hideLoading();
     });

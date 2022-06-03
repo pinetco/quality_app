@@ -12,11 +12,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-  var bottomCtrl = Get.put(BottomNavigationController());
   var homeClientCtrl = Get.put(HomeClientController());
-  var badgeNotificationCtrl = Get.put(NotificationBadgeController());
+  var bottomCtrl = Get.find<BottomNavigationController>();
+  var badgeNotificationCtrl = Get.find<NotificationBadgeController>();
 
-  AnimationController _animationController;
+  AnimationController? _animationController;
   bool isPlaying = false;
 
   @override
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -54,7 +54,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               child: InkWell(
                 onTap: () {
                   homeClientCtrl.navigateOtherProfile(item);
-                  // homeClientCtrl.navigateReviewScreen(empId, name, email, phone, imageName);
                 },
                 child: Container(width: appScreenUtil.size(60.0), height: appScreenUtil.size(60.0), decoration: new BoxDecoration(shape: BoxShape.circle, image: new DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageName)))),
               ),
@@ -139,18 +138,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               }),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              // SizedBox(
-                              //   width: appScreenUtil.size(15),
-                              // ),
-                              // InkWell(
-                              //   onTap: () {
-                              //     Get.toNamed(AppRouter.profile);
-                              //   },
-                              //   child: Image.asset(
-                              //     userIcon,
-                              //     width: appScreenUtil.size(20),
-                              //   ),
-                              // ),
                             ],
                           ),
                         ],
@@ -273,12 +260,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    // CustomButton(
-                    //   title: "123",
-                    //   onTap: () {
-                    //     badgeNotificationCtrl.badgeCountData();
-                    //   },
-                    // ),
                   ],
                 ),
               ],

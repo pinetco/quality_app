@@ -1,21 +1,12 @@
-// export 'package:quality_app/views/styling_screen.dart';
-// export 'package:quality_app/views/paging_screen.dart';
-// export 'package:quality_app/views/builder_screen.dart';
-// export 'package:quality_app/views/paging/page1.dart';
-// export 'package:quality_app/views/builders/getbuilder_screen.dart';
-// export 'package:quality_app/views/builders/obx_getx_screen.dart';
-// export 'package:quality_app/views/language.dart';
-// export 'package:quality_app/views/bottom_navigation_screen.dart';
-
 export 'package:quality_app/views/bottom_navigation_screen.dart';
 export 'package:quality_app/views/care_giver_profile.dart';
-export 'package:quality_app/views/change_password.dart';
-export 'package:quality_app/views/edit_profile.dart';
-export 'package:quality_app/views/forgot_password.dart';
-export 'package:quality_app/views/login.dart';
+export 'package:quality_app/views/login/change_password.dart';
+export 'package:quality_app/views/login/forgot_password.dart';
+export 'package:quality_app/views/login/login.dart';
+export 'package:quality_app/views/login/otp_verification.dart';
 export 'package:quality_app/views/login_test.dart';
 export 'package:quality_app/views/notification.dart';
-export 'package:quality_app/views/otp_verification.dart';
+export 'package:quality_app/views/profile/edit_profile.dart';
 export 'package:quality_app/views/rate_your_day.dart';
 export 'package:quality_app/views/rating_list.dart';
 export 'package:quality_app/views/request_list.dart';

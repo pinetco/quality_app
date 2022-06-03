@@ -75,7 +75,7 @@ class WishMessage extends StatelessWidget {
                       child: CustomTextFormField(
                         maxLines: 3,
                         container: wishCtrl.txtwishComment,
-                        hintText: helper.trans("your_next_wish" + "?"),
+                        hintText: helper.trans("your_next_wish") + (" ?"),
                         cursorColor: appColor.primaryColor,
                         // prefixIcon: Icon(MdiIcons.commentOutline),
                         obscureText: false,

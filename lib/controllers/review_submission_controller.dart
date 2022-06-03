@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ReviewSubmissionController extends GetxController with SingleGetTickerProviderMixin {
   var storeCtrl = Get.find<HomeClientController>();
 
-  // TextEditingController txtDateTime = TextEditingController();
+  // TextEditingController txtDateTime = TextEditingController(); // do not remove
   TextEditingController txtComment = TextEditingController();
   TextEditingController txtWish = TextEditingController();
 
@@ -18,11 +18,11 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
   bool get isLoading => _isLoading.value;
   dynamic empId;
-  String name;
-  String email;
-  String phone;
-  String userImage;
-  String date;
+  String? name;
+  String? email;
+  String? phone;
+  String? userImage;
+  String? date;
   dynamic visitId;
   dynamic questions = [];
   DateTime selectedDate = DateTime.now();
@@ -31,11 +31,11 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
   RxString _ratingText = 'Very Good'.obs;
 
   String get isRatingText => _ratingText.value;
-  Map questionObj;
-  String txtDateTime;
+  Map? questionObj;
+  String? txtDateTime;
   List dateList = [];
 
-  String pickDate;
+  String? pickDate;
   dynamic existingReview;
 
   dynamic selectedDateArray = ['2021-03-03', '2021-03-06', '2021-03-10', '2021-03-12', '2021-03-15'];
@@ -53,7 +53,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-    // txtDateTime.text = formattedDate;
+    // txtDateTime.text = formattedDate; // do not remove
     txtDateTime = formattedDate;
 
     // getReviewDateList();
@@ -67,25 +67,6 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
     super.dispose();
   }
 
-/*  getReviewDateList() async {
-   helper.showLoading();
-    apis.getApi(visitDateAPI(visitId), []).then((res) async {
-     helper.hideLoading();
-      if (res.data != null && res.validation == false) {
-        final data = res.data['data'];
-        dateList = data ?? [];
-        if (dateList.length > 0) {
-          final date = dateList[0];
-          pickDate = "${date['year']}-${date['month']}-${date['day']}";
-        }
-        getReview();
-        update();
-      } else {}
-    }, onError: (e) {
-     helper.hideLoading();
-    });
-  }*/
-
   openURL(val, type) {
     if (type == 'phone') {
       launch("tel://$val");
@@ -98,7 +79,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
   updateDate(val) {
     var date = DateFormat('yyyy-MM-dd').format(val).toString();
-    // txtDateTime.text = date;
+    // txtDateTime.text = date; // do not remove
     txtDateTime = date;
     selectedDate = val;
     update();
@@ -132,7 +113,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
-      context: Get.context,
+      context: Get.context!,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
@@ -147,7 +128,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
                 InkWell(
                   onTap: () {
                     storeCtrl.getData();
-                    Navigator.pop(Get.context);
+                    Navigator.pop(Get.context!);
                   },
                   child: Align(
                     alignment: Alignment.topRight,
@@ -197,7 +178,7 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
           'employee_id': empId,
           'date': txtDateTime,
           'visit_id': visitId,
-          // "ratings": ratingCount,
+          // "ratings": ratingCount, // do not remove may be futur added
           'questions': questions,
           "comment": txtComment.text,
           "wish": txtWish.text,
@@ -211,7 +192,6 @@ class ReviewSubmissionController extends GetxController with SingleGetTickerProv
             if (isNavigation) {
               Get.back();
               _showMyDialog();
-              //  Get.offAndToNamed(AppRouter.home);
             }
           } else {}
         }, onError: (e) {

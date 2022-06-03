@@ -8,10 +8,8 @@ import 'package:quality_app/global/packages/config_package.dart';
 class CareGiverController extends GetxController with SingleGetTickerProviderMixin {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
-  // TextEditingController
   TextEditingController searchCareGiver = TextEditingController();
-  // Stop search typing
-  Timer searchOnStoppedTyping;
+  Timer? searchOnStoppedTyping;
 
   List careGiverList = [];
   bool isRefreshing = false;
@@ -35,7 +33,7 @@ class CareGiverController extends GetxController with SingleGetTickerProviderMix
   onChangeText(query) async {
     const duration = Duration(milliseconds: 400); // set the duration that you want call search() after that.
     if (searchOnStoppedTyping != null) {
-      searchOnStoppedTyping.cancel();
+      searchOnStoppedTyping!.cancel();
       update(); // clear timer
     }
     searchOnStoppedTyping = new Timer(duration, () {

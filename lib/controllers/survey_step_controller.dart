@@ -113,12 +113,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         totalStep = res.data['meta']['last_page'];
-        // if (questions.length > 0) {
-        //   var list = new List.from(questions)..addAll(data);
-        //   questions = list;
-        // } else {
         questions = data;
-        //}
 
         update();
       } else {}
@@ -129,7 +124,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
-      context: Get.context,
+      context: Get.context!,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
@@ -149,7 +144,7 @@ class SurveyStepController extends GetxController with SingleGetTickerProviderMi
             TextButton(
               child: Text(helper.trans('ok')),
               onPressed: () {
-                Navigator.pop(Get.context);
+                Navigator.pop(Get.context!);
                 var bottomCtrl = Get.find<BottomNavigationController>();
                 bottomCtrl.updateCurrentTab(0);
                 Get.toNamed(routeName.bottomNavigationScreen);

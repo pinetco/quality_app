@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/change_password_controller.dart';
+import 'package:quality_app/controllers/login/change_password_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
@@ -19,12 +19,6 @@ class ChangePassword extends StatelessWidget {
             container: changePasswordCtrl.txtPassword,
             hintText: helper.trans('password'),
             prefixIcon: Icon(MdiIcons.lock),
-            // suffixIcon: IconButton(
-            //   icon: Icon(changePasswordCtrl.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: appColor.deactivateColor),
-            //   onPressed: () {
-            //     changePasswordCtrl.togglePassword();
-            //   },
-            // ),
             obscureText: true, //changePasswordCtrl.isObscureText,
             style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
             keyboardType: TextInputType.text,
@@ -39,12 +33,6 @@ class ChangePassword extends StatelessWidget {
             container: changePasswordCtrl.txtConfirmPassword,
             hintText: helper.trans('confirm_password'),
             prefixIcon: Icon(MdiIcons.lock),
-            // suffixIcon: IconButton(
-            //   icon: Icon(changePasswordCtrl.isObscureText == true ? MdiIcons.eye : MdiIcons.eyeOff, color: appColor.deactivateColor),
-            //   onPressed: () {
-            //     changePasswordCtrl.togglePassword();
-            //   },
-            // ),
             obscureText: false, //changePasswordCtrl.isObscureText,
             style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
             keyboardType: TextInputType.text,
@@ -122,28 +110,6 @@ class ChangePassword extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: appScreenUtil.size(15)),
-                  /*Container(
-                    padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
-                    // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        passwordCustomWidget(),
-                        SizedBox(height: appScreenUtil.size(20)),
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.all(appScreenUtil.size(10)),
-                          child: CustomButton(
-                            title: "Update",
-                            onTap: () {
-                              changePasswordCtrl.changePassword();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),*/
                 ],
               ),
             ),

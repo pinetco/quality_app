@@ -7,8 +7,8 @@ class NotificationBadgeController extends GetxController {
     helper.showLoading();
     apis.call(apiMethods.badgeCountAPI, null, apiType.get).then((res) async {
       helper.hideLoading();
-      if (res?.isSuccess == true) {
-        badgeCount = res?.data['data']['count'];
+      if (res.isSuccess == true) {
+        badgeCount = res.data['data']['count'];
         update();
       }
     });

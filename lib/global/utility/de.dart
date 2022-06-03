@@ -56,8 +56,8 @@ final dynamic de = {
   'gallery': 'Galerie',
   'edit_profile': 'Profil bearbeiten',
   'save': 'Speichern Sie',
-  'user_names"': 'Benutzer-Namen',
-  'email"': 'E-Mail',
+  'user_name': 'Benutzer-Name',
+  'email': 'E-Mail',
 
   // Popup logout
   'confirm_logout': 'Sind Sie sicher, dass Sie sich abmelden möchten?',

@@ -12,37 +12,22 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> with TickerProviderStateMixin {
-  AnimationController _animationController;
+  AnimationController? _animationController;
   bool isPlaying = false;
   var settingCtrl = Get.put(SettingController());
   var splashCtrl = Get.find<SplashController>();
   var bottomCtrl = Get.find<BottomNavigationController>();
 
-  Widget profileEditIcon(item) {
-    dynamic imageName = item['profile_photo_url'];
-    int id = item['id'];
-    print("Item Id @@@@@@@@@@@ $id");
-    print("Image Name ############# $imageName");
+  Widget profileEditIcon() {
     return InkWell(
       onTap: () {
-        bottomCtrl.navigateEditProfile(item);
+        bottomCtrl.navigateEditProfile(bottomCtrl.userInfo);
       },
       child: Container(
-        // height: appScreenUtil.size(25),
-        // width: appScreenUtil.size(25),
-        // decoration: BoxDecoration(
-        //   // color: primaryColor,
-        //   border: Border.all(
-        //     color: appColor.black22Color,
-        //     width: 1,
-        //   ),
-        //   borderRadius: BorderRadius.circular(appScreenUtil.size(30)),
-        // ),
         child: Center(
           child: Icon(
             MdiIcons.squareEditOutline,
             size: appScreenUtil.size(21),
-            // color: appColor.black22Color,
           ),
         ),
       ),
@@ -56,18 +41,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       },
       child: Container(
         child: Center(
-          // child: Image.asset(imageAssets.germanFlag),
           child: Icon(
             MdiIcons.web,
             size: appScreenUtil.size(21),
-            // color: appColor.black22Color,
           ),
         ),
       ),
     );
   }
 
-  Widget languageOption(context) {
+  Widget? languageOption(context) {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -123,6 +106,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         );
       },
     );
+    return null;
   }
 
   @override
@@ -133,30 +117,30 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         child: LoadingComponent(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text(
-                          helper.trans('profile'),
-                          style: appCss.h1,
-                        ),
-                        Spacer(),
-                        languageCode(),
-                        SizedBox(width: 15),
-                        profileEditIcon(bottomCtrl.userInfo),
-                        SizedBox(width: 15),
-                        NotificationHeaderIcon(),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: appScreenUtil.size(20)),
-                GetBuilder<BottomNavigationController>(
-                  builder: (_dx) => _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
+            child: GetBuilder<BottomNavigationController>(builder: (_dx) {
+              return Column(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text(
+                            helper.trans('profile'),
+                            style: appCss.h1,
+                          ),
+                          Spacer(),
+                          languageCode(),
+                          SizedBox(width: 15),
+                          profileEditIcon(),
+                          SizedBox(width: 15),
+                          NotificationHeaderIcon(),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: appScreenUtil.size(20)),
+                  _dx.userInfo != null && _dx.userInfo['profile_photo_url'] != null
                       ? Container(
                           height: appScreenUtil.size(90),
                           width: appScreenUtil.size(90),
@@ -170,7 +154,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                 color: appColor.deactivateColor,
                                 padding: EdgeInsets.all(appScreenUtil.size(1)),
                                 child: ClipOval(
-                                  // borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                                   child: helper.imageNetwork(
                                     url: _dx.userInfo['profile_photo_url'],
                                     width: appScreenUtil.size(90),
@@ -181,110 +164,101 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             ),
                           ))
                       : Container(),
-                ),
-                SizedBox(
-                  height: appScreenUtil.size(30),
-                ),
-                GetBuilder<BottomNavigationController>(
-                    builder: (_dx) => _dx.userInfo != null
-                        ? Container(
+                  SizedBox(height: appScreenUtil.size(30)),
+                  _dx.userInfo != null
+                      ? Container(
+                          width: appScreenUtil.screenActualWidth(),
+                          padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
+                          decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            children: [
+                              Image.asset(imageAssets.userIcon, width: appScreenUtil.size(20), color: appColor.primaryDarkColor),
+                              SizedBox(width: appScreenUtil.size(10)),
+                              Text(
+                                _dx.userInfo['name'].toString(),
+                                style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                              )
+                            ],
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: appScreenUtil.size(10)),
+                  _dx.userInfo != null
+                      ? InkWell(
+                          onTap: () {
+                            final email = _dx.userInfo['email'].toString();
+                            settingCtrl.openURL(email, 'email');
+                          },
+                          child: Container(
                             width: appScreenUtil.screenActualWidth(),
                             padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
                             decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
-                                Image.asset(imageAssets.userIcon, width: appScreenUtil.size(20), color: appColor.primaryDarkColor),
+                                Image.asset(
+                                  imageAssets.emailIcon,
+                                  width: appScreenUtil.size(20),
+                                ),
                                 SizedBox(width: appScreenUtil.size(10)),
-                                Text(
-                                  _dx.userInfo['name'].toString(),
-                                  style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                                Expanded(
+                                  child: Text(
+                                    _dx.userInfo['email'].toString(),
+                                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                                  ),
                                 )
                               ],
                             ),
-                          )
-                        : Container()),
-                SizedBox(
-                  height: appScreenUtil.size(10),
-                ),
-                GetBuilder<BottomNavigationController>(
-                    builder: (_dx) => _dx.userInfo != null
-                        ? InkWell(
-                            onTap: () {
-                              final email = _dx.userInfo['email'].toString();
-                              settingCtrl.openURL(email, 'email');
-                            },
-                            child: Container(
-                              width: appScreenUtil.screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    imageAssets.emailIcon,
-                                    width: appScreenUtil.size(20),
-                                  ),
-                                  SizedBox(width: appScreenUtil.size(10)),
-                                  Expanded(
-                                    child: Text(
-                                      _dx.userInfo['email'].toString(),
-                                      style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-                                    ),
-                                  )
-                                ],
-                              ),
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: appScreenUtil.size(10)),
+                  _dx.userInfo != null
+                      ? InkWell(
+                          onTap: () {
+                            final phone = _dx.userInfo['phone'].toString();
+                            settingCtrl.openURL(phone, 'phone');
+                          },
+                          child: Container(
+                            width: appScreenUtil.screenActualWidth(),
+                            padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  imageAssets.phoneIcon,
+                                  width: appScreenUtil.size(20),
+                                ),
+                                SizedBox(width: appScreenUtil.size(10)),
+                                Text(
+                                  _dx.userInfo['phone'].toString(),
+                                  style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
+                                ),
+                              ],
                             ),
-                          )
-                        : Container()),
-                SizedBox(
-                  height: appScreenUtil.size(10),
-                ),
-                GetBuilder<BottomNavigationController>(
-                    builder: (_dx) => _dx.userInfo != null
-                        ? InkWell(
-                            onTap: () {
-                              final phone = _dx.userInfo['phone'].toString();
-                              settingCtrl.openURL(phone, 'phone');
-                            },
-                            child: Container(
-                              width: appScreenUtil.screenActualWidth(),
-                              padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(15), horizontal: appScreenUtil.size(15)),
-                              decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    imageAssets.phoneIcon,
-                                    width: appScreenUtil.size(20),
-                                  ),
-                                  SizedBox(width: appScreenUtil.size(10)),
-                                  Text(
-                                    _dx.userInfo['phone'].toString(),
-                                    style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        : Container()),
-                Spacer(),
-                CustomButton(
-                  title: helper.trans('change_password'),
-                  style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
-                  border: Border.all(width: 1, color: appColor.primaryColor),
-                  onTap: () {
-                    settingCtrl.changePassword();
-                  },
-                  color: Colors.transparent,
-                ),
-                SizedBox(height: appScreenUtil.size(15)),
-                CustomButton(
-                  title: helper.trans('logout'),
-                  onTap: () {
-                    settingCtrl.logout();
-                  },
-                ),
-                SizedBox(height: appScreenUtil.size(15)),
-              ],
-            ),
+                          ),
+                        )
+                      : Container(),
+                  Spacer(),
+                  CustomButton(
+                    title: helper.trans('change_password'),
+                    style: appCss.bodyStyle4.copyWith(color: appColor.primaryColor),
+                    border: Border.all(width: 1, color: appColor.primaryColor),
+                    onTap: () {
+                      settingCtrl.changePassword();
+                    },
+                    color: Colors.transparent,
+                  ),
+                  SizedBox(height: appScreenUtil.size(15)),
+                  CustomButton(
+                    title: helper.trans('logout'),
+                    onTap: () {
+                      settingCtrl.logout();
+                    },
+                  ),
+                  SizedBox(height: appScreenUtil.size(15)),
+                ],
+              );
+            }),
           ),
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quality_app/controllers/bottom_navigation_controller.dart';
-import 'package:quality_app/controllers/edit_profile_controller.dart';
+import 'package:quality_app/controllers/profile/edit_profile_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
@@ -15,7 +15,7 @@ class _EditProfileState extends State<EditProfile> {
   var editProfileCtrl = Get.put(EditProfileController());
   var bottomCtrl = Get.find<BottomNavigationController>();
 
-  Widget showPicker(context) {
+  Widget? showPicker(context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
@@ -46,17 +46,18 @@ class _EditProfileState extends State<EditProfile> {
         );
       },
     );
+    return null;
   }
 
   Widget renderImage(profileImageFile) {
     if (profileImageFile['profile_image'] != null && profileImageFile['profile_image'] is String) {
       return Container(
-        child: Image.network(profileImageFile['profile_image'], errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
+        child: Image.network(profileImageFile['profile_image'], errorBuilder: (context, Object exception, stackTrace) {
           return Image.asset(imageAssets.noImageBanner);
         }),
       );
     } else
-      return Image.file(editProfileCtrl.selectedFile);
+      return Image.file(editProfileCtrl.selectedFile!);
   }
 
   @override
@@ -74,7 +75,6 @@ class _EditProfileState extends State<EditProfile> {
             splashColor: Colors.transparent,
             onTap: () {
               Get.back();
-              //bottomCtrl.updateCurrentTab(2);
             },
             child: Image.asset(
               imageAssets.backIcon,
@@ -130,13 +130,12 @@ class _EditProfileState extends State<EditProfile> {
                                 clipBehavior: Clip.none,
                                 children: [
                                   ClipOval(
-                                    // borderRadius: BorderRadius.circular(appScreenUtil.size(90)),
                                     child: Container(
                                       color: appColor.deactivateColor,
                                       padding: EdgeInsets.all(appScreenUtil.size(1)),
                                       child: ClipOval(
                                         child: editProfileCtrl.selectedFile != null
-                                            ? Image.file(editProfileCtrl.selectedFile, fit: BoxFit.cover)
+                                            ? Image.file(editProfileCtrl.selectedFile!, fit: BoxFit.cover)
                                             : Container(
                                                 child: helper.imageNetwork(
                                                   url: bottomCtrl.userInfo['profile_photo_url'],
@@ -150,8 +149,6 @@ class _EditProfileState extends State<EditProfile> {
                                   Positioned(
                                     bottom: appScreenUtil.size(0),
                                     right: appScreenUtil.size(-5),
-                                    // right: -10,
-                                    // bottom: 0,
                                     child: InkWell(
                                       onTap: () => showPicker(context),
                                       child: ClipOval(
@@ -169,21 +166,6 @@ class _EditProfileState extends State<EditProfile> {
                                           ),
                                         ),
                                       ),
-                                      // child: FlatButton(
-                                      //   shape: RoundedRectangleBorder(
-                                      //     borderRadius: BorderRadius.circular(50),
-                                      //     side: BorderSide(color: appColor.bgColor),
-                                      //   ),
-                                      //   color: appColor.primaryColor,
-                                      //   onPressed: () {
-                                      //     showPicker(context);
-                                      //   },
-                                      //   child: Icon(
-                                      //     MdiIcons.pencil,
-                                      //     size: appScreenUtil.size(15),
-                                      //     color: appColor.bgColor,
-                                      //   ),
-                                      // ),
                                     ),
                                   ),
                                 ],
@@ -197,7 +179,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: CustomTextFormField(
                               container: editProfileCtrl.txtEditUserName,
                               cursorColor: appColor.primaryColor,
-                              hintText: helper.trans('user_names'),
+                              hintText: helper.trans('user_name'),
                               prefixIcon: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -261,6 +243,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                 ),
+                SizedBox(height: appScreenUtil.size(10)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(20)),
                   child: CustomButton(

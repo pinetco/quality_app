@@ -1,5 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/screenutil_init.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quality_app/app_init.dart';
 import 'package:quality_app/controllers/common/loading_controller.dart';
@@ -10,7 +11,7 @@ import 'global/utility/language_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   await GetStorage.init();
   Get.put(LoadingController());
   Get.put(NotificationBadgeController());
@@ -22,12 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      allowFontScaling: false,
-      builder: () => GetMaterialApp(
+      // allowFontScaling: false,
+      builder: (context, child) => GetMaterialApp(
         builder: (context, widget) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: widget,
+            child: widget!,
           );
         },
         debugShowCheckedModeBanner: false,

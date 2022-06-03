@@ -4,7 +4,7 @@ import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 
 class SurveyInfo extends StatelessWidget {
-  var homeClientCtrl = Get.put(HomeClientController());
+  var homeClientCtrl = Get.find<HomeClientController>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,6 @@ class SurveyInfo extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0XFFF7F8FA),
         elevation: 0,
-        // automaticallyImplyLeading: false,
         actions: [
           Center(
             child: InkWell(
@@ -24,7 +23,6 @@ class SurveyInfo extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: () {
                 Get.back();
-                //bottomCtrl.updateCurrentTab(2);
               },
               child: Padding(
                   padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),

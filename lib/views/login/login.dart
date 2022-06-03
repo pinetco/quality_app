@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quality_app/controllers/login_controller.dart';
+import 'package:quality_app/controllers/login/login_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:quality_app/global/widgets/common/custom_button.dart';
 import 'package:quality_app/global/widgets/common/custom_textformfield.dart';
@@ -15,36 +15,15 @@ class Login extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          // if (loginOption == "email")
-          //   CustomTextFormField(
-          //     container: loginController.txtEmail,
-          //     hintText: "Email address",
-          //     prefixIcon: Icon(MdiIcons.email),
-          //     style: h4,
-          //     keyboardType: TextInputType.emailAddress,
-          //     padding: 20,
-          //     validator: (val) {
-          //       if (val.isEmpty)
-          //         return 'Please enter some value';
-          //       else
-          //         return null;
-          //     },
-          //   ),
           if (loginOption == "mobile")
             PhoneNumberWithCountry(
               onInputChanged: (val) async {
-                // print(val.phoneNumber);
-                // print(val.dialCode);
-                // print(val.isoCode);
-
-                // print(loginController.txtMobile.text); // Text input value;
-                loginController.updateIsoCode(val.isoCode, val.dialCode);
+                loginController.updateIsoCode(val.isoCode!, val.dialCode!);
               },
               txtMobile: loginController.txtMobile,
               isoCode: loginController.isoCode,
             ),
           if (errorPhoneValidation != '') validationWidget(errorValidation: errorPhoneValidation),
-
           SizedBox(height: appScreenUtil.size(15)),
           Container(
             decoration: BoxDecoration(border: Border.all(width: 1, color: appColor.deactivateColor), borderRadius: BorderRadius.circular(appScreenUtil.size(10))),
@@ -66,7 +45,6 @@ class Login extends StatelessWidget {
             ),
           ),
           if (errorPasswordValidation != '') validationWidget(errorValidation: errorPasswordValidation),
-
           SizedBox(height: appScreenUtil.size(5)),
         ],
       ),
@@ -78,31 +56,6 @@ class Login extends StatelessWidget {
     return GetBuilder<LoginController>(
       builder: (_) => Scaffold(
         backgroundColor: appColor.bgColor,
-        // appBar: AppBar(
-        //   backgroundColor: Colors.transparent,
-        //   elevation: 0,
-        //   centerTitle: false,
-        //   automaticallyImplyLeading: false,
-        //   actions: [
-        //     Center(
-        //       child: InkWell(
-        //         highlightColor: Colors.white,
-        //         splashColor: Colors.transparent,
-        //         onTap: () {
-        //           Get.back();
-        //           //bottomCtrl.updateCurrentTab(2);
-        //         },
-        //         child: Padding(
-        //             padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),
-        //             child: Image.asset(
-        //               imageAssets.backIcon,
-        //               width: appScreenUtil.size(20),
-        //             )),
-        //       ),
-        //     ),
-        //     Spacer(),
-        //   ],
-        // ),
         body: LoadingComponent(
           //loading: loginController.isLoading,
           child: SingleChildScrollView(
@@ -126,44 +79,9 @@ class Login extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Container(
-                        //   padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(size)(10)),
-                        //   child: TabBar(
-                        //     controller: loginController.tabController,
-                        //     indicatorColor: primaryColor,
-                        //     labelColor: primaryColor,
-                        //     unselectedLabelColor: Colors.black54,
-                        //     onTap: (val) {
-                        //       FocusScopeNode currentFocus = FocusScope.of(context);
-                        //
-                        //       if (!currentFocus.hasPrimaryFocus) {
-                        //         currentFocus.unfocus();
-                        //       }
-                        //     },
-                        //     // isScrollable: true,
-                        //     tabs: <Widget>[
-                        //       Tab(
-                        //         text: "Mobile",
-                        //       ),
-                        //       Tab(
-                        //         text: "Email",
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                         Padding(
                           padding: EdgeInsets.only(top: appScreenUtil.size(8.0)),
                           child: emailMobileWidget('mobile'),
-
-                          // TabBarView(controller: loginController.tabController,
-                          //     // Restrict scroll by user
-                          //     // physics: const NeverScrollableScrollPhysics(),
-                          //     children: [
-                          //       // Sign In View
-                          //       emailMobileWidget('mobile'),
-                          //       // Sign Up View
-                          //       emailMobileWidget('email'),
-                          //     ]),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: appScreenUtil.size(10)),
@@ -191,7 +109,6 @@ class Login extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   Get.toNamed(routeName.forgotPassword);
-                                  // Navigator.pushNamed(context, AppRouter.forgotPassword);
                                 },
                               ),
                             ],
@@ -236,11 +153,11 @@ class Login extends StatelessWidget {
 
 class validationWidget extends StatelessWidget {
   const validationWidget({
-    Key key,
+    Key? key,
     @required this.errorValidation,
   }) : super(key: key);
 
-  final String errorValidation;
+  final String? errorValidation;
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +166,7 @@ class validationWidget extends StatelessWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
-            errorValidation,
+            errorValidation!,
             style: appCss.validationTextStyle,
           ),
         ));

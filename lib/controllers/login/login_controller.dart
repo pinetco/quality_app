@@ -11,17 +11,17 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   TextEditingController txtMobile = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
 
-  String _isoCode;
-  String _dialCode;
-  String phoneFieldError;
-  String passwordFieldError;
+  String? _isoCode;
+  String? _dialCode;
+  String? phoneFieldError;
+  String? passwordFieldError;
   bool obscureText = true;
 
   bool _rememberLogin = false;
 
-  String get isoCode => _isoCode;
+  String get isoCode => _isoCode!;
 
-  String get dialCode => _dialCode;
+  String get dialCode => _dialCode!;
 
   bool get isRememberLogin => _rememberLogin;
 
@@ -30,13 +30,8 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   @override
   void onInit() async {
     // TODO: implement onInit
-    //helper.showLoading();
-    // await Future.delayed(Duration(seconds: 5));
-    //helper.hideLoading();
     _isoCode = 'US';
     _dialCode = '+1';
-    // txtMobile.text = '54021928690';
-    // txtPassword.text = 'password';
 
     final jsonDecode = helper.getStorage(session.loginCredential);
     if (!helper.isNullOrBlank(jsonDecode)) {
@@ -49,14 +44,13 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     }
 
     update();
-    // getPhoneNumber();
     super.onInit();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    txtMobile?.dispose();
+    txtMobile.dispose();
     super.dispose();
   }
 

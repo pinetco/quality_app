@@ -2,12 +2,6 @@ import 'package:get/get.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class RequestListController extends GetxController {
-  // List requestList = [
-  //   {'name': 'Joe Belfiore', 'date': '21-9-2021'},
-  //   {'name': 'Bill Gates', 'date': '21-9-2021'},
-  //   {'name': 'Marissa Mayer', 'date': '21-9-2021'},
-  // ];
-
   List requestList = [];
 
   @override

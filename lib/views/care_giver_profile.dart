@@ -17,7 +17,6 @@ class _CareGiverProfileState extends State<CareGiverProfile> with TickerProvider
       onTap: disabled
           ? null
           : () {
-              //_dx.userDetails[type].toString();
               otherUserProfileCtrl.openURLContactInfo(value, type);
             },
       child: Container(

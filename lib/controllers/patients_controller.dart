@@ -10,7 +10,7 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   var refreshPatientsKey = GlobalKey<RefreshIndicatorState>();
   // TextEditingController
   TextEditingController searchPatients = TextEditingController();
-  Timer searchOnStoppedTyping;
+  Timer? searchOnStoppedTyping;
 
   bool checkInDisabled = false;
 
@@ -31,7 +31,7 @@ class PatientsController extends GetxController with SingleGetTickerProviderMixi
   onChangeText(query) async {
     const duration = Duration(milliseconds: 400); // set the duration that you want call search() after that.
     if (searchOnStoppedTyping != null) {
-      searchOnStoppedTyping.cancel();
+      searchOnStoppedTyping!.cancel();
       update(); // clear timer
     }
     searchOnStoppedTyping = new Timer(duration, () {

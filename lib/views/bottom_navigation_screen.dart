@@ -61,12 +61,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
             child: GetBuilder<BottomNavigationController>(builder: (controller) => bottomCtrl.widgetOptions.length > 0 ? bottomCtrl.widgetOptions.elementAt(bottomCtrl.currentTab) : Container())),
         bottomNavigationBar: GetBuilder<BottomNavigationController>(
           builder: (controller) => CustomNavigationBar(
-            // borderRadius: Radius.circular(appScreenUtil.size(30)),
             items: renderTab(),
             currentIndex: bottomCtrl.currentTab,
-            // selectedColor: appColor.primaryColor,
             unSelectedColor: Color(0XFFCCCCCC),
-            // strokeColor: appColor.primaryColor,
             onTap: (index) {
               bottomCtrl.updateCurrentTab(index);
             },

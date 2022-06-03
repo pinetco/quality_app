@@ -42,10 +42,11 @@ class BottomNavigationController extends GetxController {
       getSettings();
       update();
     }
+    super.onInit();
   }
 
   getTokenRegister() async {
-    String name;
+    String? name;
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       name = androidInfo.model;
@@ -63,7 +64,6 @@ class BottomNavigationController extends GetxController {
     print('formData***********************, $formData');
     apis.call(apiMethods.registerTokenAPI, formData, apiType.post).then((res) async {
       helper.hideLoading();
-      print(res.data);
       if (res.data != null && res.validation == false) {
         update();
       } else {}
@@ -79,7 +79,7 @@ class BottomNavigationController extends GetxController {
       if (res.data != null && res.validation == false) {
         final data = res.data['data'];
         userInfo = data;
-        print(data);
+        print("DATA ::::, $data");
         await helper.writeStorage(session.userInfo, data);
         update();
       } else {}
@@ -89,8 +89,13 @@ class BottomNavigationController extends GetxController {
   }
 
   updateCurrentTab(int index) {
-    // box.write('darkmode', true);
+    // box.write('darkmode', true); // do not remove
     _currentTab = index;
+    update();
+  }
+
+  updateUserProfile(data) {
+    userInfo = data;
     update();
   }
 

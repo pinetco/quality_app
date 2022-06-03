@@ -8,21 +8,19 @@ import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class HomeClientController extends GetxController with SingleGetTickerProviderMixin {
-  TabController tabController;
+  TabController? tabController;
 
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtMobile = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
 
   RxBool _isLoading = false.obs;
-  String _loginOption;
-  int _currentIndex = 0;
-  String _isoCode;
-  String description;
+  String? _isoCode;
+  String? description;
 
   bool get isLoading => _isLoading.value;
 
-  String get isoCode => _isoCode;
+  String get isoCode => _isoCode!;
 
   List workingList = [];
   List finishedList = [];
@@ -35,51 +33,17 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   @override
   void onReady() {
     // TODO: implement onInit
-    // wait untill widget load
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    // getUserInfo();
     getData();
     getSurveyList();
-    // checkVersion();
     getAllQuestion();
-    // getAppInformation(); // Add Your Code here.
-    // });
     super.onReady();
   }
-
-  /*getUserInfo() async {
-    helper.showLoading();
-    apis.call(apiMethods.userAPI, null, apiType.get).then((res) async {
-      helper.hideLoading();
-      if (res.data != null && res.validation == false) {
-        final data = res.data['data'];
-        userInfo = data;
-        update();
-      } else {}
-    }, onError: (e) {
-      print('e');
-    });
-  }*/
-
-  // checkVersion() async {
-  //   final checkVersion = CheckVersion(context: Get.context);
-  //   final appStatus = await checkVersion.getVersionStatus();
-  //   print("appStatus :");
-  //   print(appStatus);
-  //   if (appStatus.canUpdate) {
-  //     checkVersion.showUpdateDialog("com.quality_app", 'com.quality_app');
-  //   }
-  //   print("canUpdate ${appStatus.canUpdate}");
-  //   print("localVersion ${appStatus.localVersion}");
-  //   print("appStoreLink ${appStatus.appStoreUrl}");
-  //   print("storeVersion ${appStatus.storeVersion}");
-  // }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    tabController.dispose();
-    txtMobile?.dispose();
+    tabController!.dispose();
+    txtMobile.dispose();
     super.dispose();
   }
 
@@ -138,22 +102,6 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     getSurveyList();
     return null;
   }
-
-  // showAlertDialog(Get.context);
-  /*getAppInformation() async {
-    helper.showLoading();
-    apis.call(apiMethods.appInformationAPI, null, apiType.get).then((res) async {
-      helper.hideLoading();
-
-      if (res.data != null && res.validation == false) {
-        final data = res.data['data'];
-        print('data: $data');
-        update();
-      } else {}
-    }, onError: (e) {
-      print('e');
-    });
-  }*/
 
   getAllQuestion() async {
     try {

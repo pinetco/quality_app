@@ -1,21 +1,21 @@
-import 'package:quality_app/global/packages/config_package.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_app/global/packages/config_package.dart';
 
 class CustomIconButton extends StatelessWidget {
-  final String title;
+  final String? title;
   final double padding;
   final double radius;
-  final Function onTap;
-  final TextStyle style;
-  final Color color;
-  final Color iconColor;
+  final Function()? onTap;
+  final TextStyle? style;
+  final Color? color;
+  final Color? iconColor;
   final double iconSize;
-  final IconData icon;
-  final double width;
-  final Border border;
+  final IconData? icon;
+  final double? width;
+  final Border? border;
 
   const CustomIconButton({
-    Key key,
+    Key? key,
     @required this.title,
     this.padding = 15,
     this.radius = 10,
@@ -58,7 +58,7 @@ class CustomIconButton extends StatelessWidget {
                       ],
                     ),
                   Text(
-                    title,
+                    title!,
                     style: style ?? appCss.h4.copyWith(color: appColor.whiteColor),
                     textAlign: TextAlign.center,
                   ),

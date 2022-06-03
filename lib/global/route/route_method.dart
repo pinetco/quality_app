@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-import 'package:quality_app/global/route/route_list.dart';
 
-//app file
+import 'route_list.dart';
 import 'route_name.dart';
 
 RouteName _routeName = RouteName();

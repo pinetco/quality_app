@@ -1,10 +1,10 @@
 class APIDataClass {
-  String message;
-  bool isSuccess;
+  String? message;
+  bool? isSuccess;
   dynamic data;
-  int statusCode;
-  bool validation;
-  bool isInternetConnected;
+  int? statusCode;
+  bool? validation;
+  bool? isInternetConnected;
 
   APIDataClass({this.message, this.isSuccess, this.data, this.statusCode, this.validation = false, this.isInternetConnected});
 

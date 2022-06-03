@@ -13,20 +13,13 @@ class PatientsList extends StatefulWidget {
 }
 
 class _PatientsListState extends State<PatientsList> with TickerProviderStateMixin {
-  var bottomCtrl = Get.put(BottomNavigationController());
+  var bottomCtrl = Get.find<BottomNavigationController>();
   var patientsCtrl = Get.put(PatientsController());
-  // var homeEmpCtrl = Get.put(HomeEmpController());
   var homeEmpCtrl = Get.find<HomeEmpController>();
 
   Widget personDetailCard(item, index, status) {
-    dynamic email = item['email'];
     dynamic imageName = item['profile_photo_url'];
     String name = item['name'].toString();
-    String phone = item['phone'].toString();
-    int id = item['id'];
-    dynamic isRunning = helper.jsonGet(item, 'client_visit.is_running', false);
-    dynamic clientVisitId = helper.jsonGet(item, 'client_visit.id', false);
-    print("@@@@@@@@@!!!!!!!!!!!!!!!!!!, $clientVisitId");
     String date = helper.jsonGet(item, 'client_visit.date', '');
 
     return Padding(
@@ -68,35 +61,7 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                 ],
               ),
             ),
-            checkActiveButton(item, index),
-            // if (clientVisitId != null)
-            //   Container(
-            //     padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-            //     child: CustomButton(
-            //         title: 'Check in',
-            //         enable: !patientsCtrl.checkInDisabled,
-            //         width: appScreenUtil.size(80),
-            //         padding: appScreenUtil.size(5),
-            //         radius: appScreenUtil.size(5),
-            //         style: appCss.bodyStyle6.copyWith(color: Colors.white),
-            //         onTap: () {
-            //           print('checK ');
-            //           homeEmpCtrl.checkIn(id);
-            //         }),
-            //   ),
-            // if (clientVisitId != null && isRunning)
-            //   Container(
-            //     padding: EdgeInsets.only(right: appScreenUtil.size(10.0)),
-            //     child: CustomButton(
-            //         title: 'Check out',
-            //         width: appScreenUtil.size(80),
-            //         padding: appScreenUtil.size(5),
-            //         radius: appScreenUtil.size(5),
-            //         style: appCss.bodyStyle6.copyWith(color: Colors.white),
-            //         onTap: () {
-            //           homeEmpCtrl.checkOut(clientVisitId);
-            //         }),
-            //   ),
+            checkActiveButton(item, index)
           ],
         ),
       ),
@@ -107,8 +72,6 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
     int id = item['id'];
     dynamic isRunning = helper.jsonGet(item, 'client_visit.is_running', false);
     dynamic clientVisitId = helper.jsonGet(item, 'client_visit.id', null);
-    print("@@@@@@@@@, $clientVisitId");
-    String date = helper.jsonGet(item, 'client_visit.date', '');
 
     if (clientVisitId != null && isRunning) {
       return Container(
@@ -143,6 +106,8 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
               patientsCtrl.getPatientsList(''); //TODO
             }),
       );
+    } else {
+      return Container();
     }
   }
 
@@ -175,9 +140,6 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                               ),
                               Spacer(),
                               NotificationHeaderIcon(),
-                              // SizedBox(
-                              //   width: appScreenUtil.size(15),
-                              // ),
                             ],
                           ),
                         ],
@@ -217,19 +179,21 @@ class _PatientsListState extends State<PatientsList> with TickerProviderStateMix
                                 )
                               : Center(
                                   child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(helper.trans('no_patients_found'), style: appCss.bodyStyle5),
-                                    TextButton(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(helper.trans('no_patients_found'), style: appCss.bodyStyle5),
+                                      TextButton(
                                         onPressed: () {
                                           patientsCtrl.getPatientsList('');
                                         },
                                         child: Text(
                                           helper.trans('refresh'),
                                           style: appCss.bodyStyle5,
-                                        ))
-                                  ],
-                                )),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                         ),
                       ),
                     ),

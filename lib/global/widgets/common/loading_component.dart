@@ -4,7 +4,7 @@ import 'package:quality_app/controllers/common/loading_controller.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 
 class LoadingComponent extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   LoadingComponent({key, this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class LoadingComponent extends StatelessWidget {
       },
       child: Stack(
         children: [
-          child,
+          child!,
           GetBuilder<LoadingController>(
             builder: (ctrl) {
               return ctrl.isLoading == true

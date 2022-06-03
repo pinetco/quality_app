@@ -9,8 +9,6 @@ class RatingList extends StatelessWidget {
 
   Widget ratingListCard(item, index) {
     dynamic comment = helper.jsonGet(item, 'comment', '');
-
-    print(comment);
     String date = item['date'];
     int ratings = item['ratings'];
     return Padding(
@@ -44,6 +42,8 @@ class RatingList extends StatelessWidget {
                     itemSize: 20,
                     horizontalSpace: 0,
                     allowHalfRating: true,
+                    ignoreGestures: true,
+                    onRatingUpdate: (val) {},
                   ),
                   Text(
                     date,
@@ -51,16 +51,6 @@ class RatingList extends StatelessWidget {
                   ),
                 ],
               ),
-              // SizedBox(height: 10),
-              // CustomRatingBar(
-              //   initialRating: helper.toDouble(ratings),
-              //   itemSize: 20,
-              //   horizontalSpace: 0,
-              // ),
-              // Text(
-              //   '$ratings',
-              //   style: appCss.bodyStyle6.copyWith(color: appColor.grayColor),
-              // ),
               SizedBox(height: 10),
             ],
           ),
@@ -78,7 +68,6 @@ class RatingList extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         automaticallyImplyLeading: false,
-        // title: Text('Notifications', style: appCss.h1.copyWith(color: appColor.blackColor)),
         actions: [
           Center(
             child: InkWell(
@@ -86,7 +75,6 @@ class RatingList extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: () {
                 Get.back();
-                //bottomCtrl.updateCurrentTab(2);
               },
               child: Padding(
                   padding: EdgeInsets.only(left: appScreenUtil.size(20.0)),
@@ -132,7 +120,6 @@ class RatingList extends StatelessWidget {
                               builder: (_) {
                                 return ListView.builder(
                                   shrinkWrap: true,
-                                  // physics: NeverScrollableScrollPhysics(),
                                   itemCount: ratingListCtrl.ratingList.length,
                                   itemBuilder: (context, index) {
                                     return ratingListCard(ratingListCtrl.ratingList[index], index);

@@ -55,9 +55,9 @@ final dynamic en = {
   'camera': 'Camera',
   'gallery': 'Gallery',
   'edit_profile': 'Edit Profile',
-  'save"': 'Save',
-  'user_names"': 'User names',
-  'email"': 'Email',
+  'save': 'Save',
+  'user_name': 'User name',
+  'email': 'Email',
 
   // Popup logout
   'confirm_logout': 'Are you sure you want to logout?',

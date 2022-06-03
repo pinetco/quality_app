@@ -12,7 +12,7 @@ class RateYourDay extends StatefulWidget {
 class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin {
   var rateYourDayCtrl = Get.put(RateYourDayController());
 
-  AnimationController _animationController;
+  AnimationController? _animationController;
   bool isPlaying = false;
 
   final emojiWidth = 40;
@@ -26,7 +26,7 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -95,13 +95,10 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                         style: appCss.h1,
                       ),
                     ),
-                    // SizedBox(width: 5),
                   ],
                 ),
-                // SizedBox(height: appScreenUtil.size(15)),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
-                  // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -120,7 +117,6 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                             int id = item['id'] ?? '';
                             return Container(
                               padding: EdgeInsets.symmetric(vertical: appScreenUtil.size(10)),
-                              // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: borderLineColor, width: 0.2))),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -144,22 +140,6 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                           },
                         );
                       }),
-                      /*Container(
-                        child: Text('How was your day?', style: appCss.bodyStyle5.copyWith(color: appColor.black22Color)),
-                      ),
-                      SizedBox(height: appScreenUtil.size(10)),
-                      GetBuilder<RateYourDayController>(builder: (_) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ratingWidget(Icons.sentiment_very_dissatisfied, 1, 1, Colors.red),
-                            ratingWidget(Icons.sentiment_dissatisfied, 1, 2, Colors.red[500]),
-                            ratingWidget(Icons.sentiment_neutral, 1, 3, Color(0XFFFFD70D)),
-                            ratingWidget(Icons.sentiment_satisfied, 1, 4, Colors.green[500]),
-                            ratingWidget(Icons.sentiment_very_satisfied, 1, 5, Colors.green),
-                          ],
-                        );
-                      }),*/
                     ],
                   ),
                 ),
@@ -178,7 +158,6 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                     container: rateYourDayCtrl.txtSuggestion,
                     cursorColor: appColor.primaryColor,
                     hintText: helper.trans('write_here'),
-                    // prefixIcon: Icon(MdiIcons.commentOutline),
                     obscureText: false,
                     style: appCss.bodyStyle5.copyWith(color: appColor.black22Color),
                     keyboardType: TextInputType.multiline,
@@ -209,7 +188,6 @@ class _RateYourDayState extends State<RateYourDay> with TickerProviderStateMixin
                       rateYourDayCtrl.saveReview(true);
                     },
                   );
-                  // return Container();
                 }),
               ],
             ),
