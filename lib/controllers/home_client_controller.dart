@@ -7,7 +7,8 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-class HomeClientController extends GetxController with SingleGetTickerProviderMixin {
+class HomeClientController extends GetxController
+    with SingleGetTickerProviderMixin {
   TabController? tabController;
 
   TextEditingController txtEmail = TextEditingController();
@@ -49,30 +50,30 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
 
   showAlertDialog(BuildContext context) {
     // set up the button
-    Widget okButton = FlatButton(
-      child: Text(helper.trans("update_now")),
-      onPressed: () {},
-    );
+    // Widget okButton = FlatButton(
+    //   child: Text(helper.trans("update_now")),
+    //   onPressed: () {},
+    // );
 
-    Widget cancelButton = FlatButton(
-      child: Text(helper.trans('later')),
-      onPressed: () {},
-    );
+    // Widget cancelButton = FlatButton(
+    //   child: Text(helper.trans('later')),
+    //   onPressed: () {},
+    // );
 
     // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(helper.trans('update_available')),
-      content: Text(helper.trans('update_app_from_store')),
-      actions: [cancelButton, okButton],
-    );
+    // AlertDialog alert = AlertDialog(
+    //   title: Text(helper.trans('update_available')),
+    //   content: Text(helper.trans('update_app_from_store')),
+    //   actions: [cancelButton, okButton],
+    // );
 
     // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return alert;
+    //   },
+    // );
   }
 
   getData() async {
@@ -129,7 +130,8 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
     final completePhoneNumber = await _autoFill.hint;
 
     if (completePhoneNumber != null) {
-      PhoneNumber numberRegionInfo = await PhoneNumber.getRegionInfoFromPhoneNumber(completePhoneNumber);
+      PhoneNumber numberRegionInfo =
+          await PhoneNumber.getRegionInfoFromPhoneNumber(completePhoneNumber);
       txtMobile.text = int.parse(numberRegionInfo.parseNumber()).toString();
       _isoCode = numberRegionInfo.isoCode;
       update();
@@ -168,7 +170,13 @@ class HomeClientController extends GetxController with SingleGetTickerProviderMi
   }
 
   void navigateReviewScreen(empId, name, email, phone, userImage) {
-    Get.toNamed(routeName.careGiverProfile, arguments: {'id': empId, 'name': name, 'email': email, 'phone': phone, 'userImage': userImage});
+    Get.toNamed(routeName.careGiverProfile, arguments: {
+      'id': empId,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'userImage': userImage
+    });
   }
 
   navigateOtherProfile(item) {

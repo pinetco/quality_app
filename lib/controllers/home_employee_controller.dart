@@ -7,7 +7,8 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:quality_app/global/packages/config_package.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-class HomeEmpController extends GetxController with SingleGetTickerProviderMixin {
+class HomeEmpController extends GetxController
+    with SingleGetTickerProviderMixin {
   TabController? tabController;
 
   TextEditingController txtEmail = TextEditingController();
@@ -47,30 +48,30 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
 
   showAlertDialog(BuildContext context) {
     // set up the button
-    Widget okButton = FlatButton(
-      child: Text(helper.trans('update_now')),
-      onPressed: () {},
-    );
+    // Widget okButton = FlatButton(
+    //   child: Text(helper.trans('update_now')),
+    //   onPressed: () {},
+    // );
 
-    Widget cancelButton = FlatButton(
-      child: Text(helper.trans('later')),
-      onPressed: () {},
-    );
+    // Widget cancelButton = FlatButton(
+    //   child: Text(helper.trans('later')),
+    //   onPressed: () {},
+    // );
 
     // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(helper.trans('update_available')),
-      content: Text(helper.trans('update_app_from_store')),
-      actions: [cancelButton, okButton],
-    );
+    // AlertDialog alert = AlertDialog(
+    //   title: Text(helper.trans('update_available')),
+    //   content: Text(helper.trans('update_app_from_store')),
+    //   actions: [cancelButton, okButton],
+    // );
 
     // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return alert;
+    //   },
+    // );
   }
 
   getData() async {
@@ -124,7 +125,8 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         helper.showLoading();
-        apis.call(apiMethods.appInformationAPI, null, apiType.get).then((res) async {
+        apis.call(apiMethods.appInformationAPI, null, apiType.get).then(
+            (res) async {
           helper.hideLoading();
 
           if (res.data != null && res.validation == false) {
@@ -146,7 +148,8 @@ class HomeEmpController extends GetxController with SingleGetTickerProviderMixin
     final completePhoneNumber = await _autoFill.hint;
 
     if (completePhoneNumber != null) {
-      PhoneNumber numberRegionInfo = await PhoneNumber.getRegionInfoFromPhoneNumber(completePhoneNumber);
+      PhoneNumber numberRegionInfo =
+          await PhoneNumber.getRegionInfoFromPhoneNumber(completePhoneNumber);
       txtMobile.text = int.parse(numberRegionInfo.parseNumber()).toString();
       _isoCode = numberRegionInfo.isoCode;
       update();
